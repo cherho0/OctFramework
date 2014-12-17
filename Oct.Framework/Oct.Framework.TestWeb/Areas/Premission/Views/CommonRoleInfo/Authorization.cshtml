@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "角色授权";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+@using System.Linq
+@using System.Collections.Generic
+@using System.Web.UI.WebControls
+@using Oct.Framework.Entities.Entities
+
+@{
+    this.ViewBag.Title = "管理角色信息-角色授权";
+}
+
+<style>
+    .checkbox-inline + .checkbox-inline {
+        margin-left: 0px;
+    }
+</style>
+
+
+@using (this.Html.BeginForm("Authorization", "CommonRoleInfo", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Hidden("roleId", (Guid)ViewBag.roleId);
+                                                var actions = (List<CommonMenuActions>)ViewBag.actionRoles;
+                                                var roles = (List<CommonRoleAction>)ViewBag.roles;
+                                                if (roles == null)
+                                                {
+                                                    roles = new List<CommonRoleAction>();
+                                                }
+                                                var memuns = actions.Select(p => p.MenuName).Distinct();
+                                                foreach (var menu in memuns)
+                                                {
+                   
+    <div class="panel panel-primary">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">@menu</h3>
+        </div>
+
+        <div class="panel-body">
+            @{
+                                                    var groups = actions.Where(p => p.MenuName == menu).Select(p => p.CategoryName).Distinct();
+            }
+            @foreach (var group in groups)
+            {
+                <div class="form-group">
+
+                    <div class="pull-left" style="width: 130px;">
+                        <label class="checkbox-inline">@group</label>
+                        <div class="col-xs-12">
+                            <input type="button" value="全选" data-target=".j-group[data-name='@menu@group']" class="btn btn-link btn-xs j-checkall" />
+                            <input type="button" value="反选" data-target=".j-group[data-name='@menu@group']" class="btn btn-link btn-xs j-checkreverse" />
+                        </div>
+                    </div>
+
+                    <div class="pull-left j-group" data-name="@menu@group">
+
+                        @{
+                var cactions = actions.Where(p => p.MenuName == menu && p.CategoryName == group).OrderBy(p => p.Sort);
+                        }
+                        @foreach (var action in cactions)
+                        {
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="actions" value="@action.Id" id="@action.Id" @(roles.Any(p => p.ActionId == action.Id) ? "checked" : string.Empty)>
+                                @action.Name
+                            </label>
+                        }
+                    </div>
+
+                </div>
+            }
+        </div>
+
+    </div>
+                                                }
+            
+    <div class="row">
+        <div class="col-md-6 col-md-offset-1">
+            <button class="btn blue" type="submit" onclick="Save()" id="btnSave"><i class="fa fa-save"></i>&nbsp;保存</button>
+            @*<a href="javascript:self.close()" class="btn default"><i class="fa fa-undo"></i>&nbsp;返回</a>*@
+        </div>
+    </div>          
+}
+
+
+
+

@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "_Modal";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="@Url.Content("~/assets/global/plugins/font-awesome/css/font-awesome.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/assets/global/plugins/simple-line-icons/simple-line-icons.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/assets/global/plugins/bootstrap/css/bootstrap.min.css?modal")" rel="stylesheet" />
+    <link href="@Url.Content("~/assets/global/plugins/uniform/css/uniform.default.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/assets/global/plugins/bootstrap-datepicker/css/datepicker3.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/assets/global/plugins/bootstrap-toastr/toastr.min.css")" rel="stylesheet" />
+    @RenderSection("PluginsCss", false)
+    <!-- BEGIN THEME STYLES -->
+    <link href="@Url.Content("~/assets/global/css/components.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/global/css/plugins.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/admin/layout/css/layout.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/admin/layout/css/themes/default.css")" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="@Url.Content("~/assets/octopus/css/octopus.css")" rel="stylesheet" type="text/css" />
+    <!-- END THEME STYLES -->
+    <style>
+    body {background:#fff;}
+    </style>
+    @RenderSection("CustomCss", false)
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
+</head>
+
+<body>
+    @RenderBody()
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <!--[if lt IE 9]>
+    <script src="@Url.Content("~/assets/global/plugins/excanvas.min.js")"></script>
+    <script src="@Url.Content("~/assets/global/plugins/respond.min.js")"></script>
+    <![endif]-->
+    <script src="@Url.Content("~/assets/global/plugins/jquery-1.11.0.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bootstrap/js/bootstrap.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/global/plugins/uniform/jquery.uniform.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js")"></script>
+    <script src="@Url.Content("~/assets/global/plugins/jquery-bootpag/jquery.bootpag.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/global/plugins/artTemplate.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bootstrap-toastr/toastr.min.js")" type="text/javascript"></script>
+        
+    <!-- END CORE PLUGINS -->
+    @RenderSection("PluginsJS", false)
+    <script src="@Url.Content("~/assets/global/scripts/metronic.js")"></script>
+    <script src="@Url.Content("~/assets/admin/layout/scripts/layout.js")"></script>
+    <script src="@Url.Content("~/assets/octopus/js/common.js")"></script>
+
+    @RenderSection("CustomJS", false)
+    <script>
+        jQuery(document).ready(function () {
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+        });
+    </script>
+</body>
+</html>
+

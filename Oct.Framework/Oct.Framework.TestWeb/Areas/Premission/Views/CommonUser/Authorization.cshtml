@@ -1,0 +1,49 @@
+﻿@using Oct.Framework.Entities.Entities
+@{
+    ViewBag.Title = "用户授权";
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+<div class="container">
+    @using (this.Html.BeginForm("Authorization", "CommonUser", FormMethod.Post, new { @class = "J_FormValidate form-horizontal" }))
+    {
+        @Html.Hidden("UserID", (Guid)ViewBag.userId)
+        var roles = (List<CommonRoleInfo>)ViewBag.roles;
+        if (roles == null)
+        {
+            roles = new List<CommonRoleInfo>();
+        }
+        var urs = (List<CommonUserRole>)ViewBag.urs;
+        if (urs == null)
+        {
+            urs = new List<CommonUserRole>();
+        }
+        foreach (var role in roles)
+        {
+        <label class="col-xs-3 control-label checkbox-list">@Html.Raw(role.Name)</label>
+        <div class="col-xs-3 checkbox-list">
+            <label class="checkbox-inline">
+                <input type="checkbox" name="roles" value="@role.Id" id="@role.Id" @( urs.Any(p => p.RoleId == role.Id) ? "checked" : string.Empty)>
+            </label>
+        </div>
+        }
+        
+        <div class="clearfix"></div>
+
+        <div class="container margin-top-20">
+            <div class="form-group">
+                <input type="button" value="全选" data-target=".checkbox-list" class="btn btn-link btn-xs j-checkall" />
+                <input type="button" value="反选" data-target=".checkbox-list" class="btn btn-link btn-xs j-checkreverse" />
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <button class="btn blue" type="submit" id="btnSave">
+                        <i class="fa fa-save"></i>&nbsp;保存
+                    </button>
+                    <a href="/User/Home" class="btn default J_CloseModal"><i class="fa fa-undo"></i>&nbsp;返  回</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

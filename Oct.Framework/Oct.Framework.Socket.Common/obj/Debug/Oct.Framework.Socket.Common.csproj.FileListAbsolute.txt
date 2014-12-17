@@ -1,0 +1,7 @@
+D:\project\Oct.Frame\Oct.Framework\Oct.Framework.Socket.Common\bin\Debug\Oct.Framework.Socket.Common.dll
+D:\project\Oct.Frame\Oct.Framework\Oct.Framework.Socket.Common\bin\Debug\Oct.Framework.Socket.Common.pdb
+D:\project\Oct.Frame\Oct.Framework\Oct.Framework.Socket.Common\bin\Debug\log4net.dll
+D:\project\Oct.Frame\Oct.Framework\Oct.Framework.Socket.Common\bin\Debug\log4net.xml
+D:\project\Oct.Frame\Oct.Framework\Oct.Framework.Socket.Common\obj\Debug\Oct.Framework.Socket.Common.csprojResolveAssemblyReference.cache
+D:\project\Oct.Frame\Oct.Framework\Oct.Framework.Socket.Common\obj\Debug\Oct.Framework.Socket.Common.dll
+D:\project\Oct.Frame\Oct.Framework\Oct.Framework.Socket.Common\obj\Debug\Oct.Framework.Socket.Common.pdb

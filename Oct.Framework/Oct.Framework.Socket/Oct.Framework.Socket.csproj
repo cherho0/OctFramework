@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6AB7FD8A-679C-4627-927E-998B8283FB42}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Oct.Framework.Socket</RootNamespace>
+    <AssemblyName>Oct.Framework.Socket</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\ref\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="ParallelExtensionsExtras">
+      <HintPath>..\ref\ParallelExtensionsExtras.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>..\ref\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Facility">
+      <HintPath>..\ref\SuperSocket.Facility.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketBase">
+      <HintPath>..\ref\SuperSocket.SocketBase.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketEngine">
+      <HintPath>..\ref\SuperSocket.SocketEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseDef\I32Gen.cs" />
+    <Compile Include="BaseDef\I64Gen.cs" />
+    <Compile Include="BaseDef\IVal.cs" />
+    <Compile Include="BaseDef\IValGetter.cs" />
+    <Compile Include="BaseDef\IValSetter.cs" />
+    <Compile Include="BaseDef\ObjId.cs" />
+    <Compile Include="BaseDef\ObjIdHelper.cs" />
+    <Compile Include="BaseDef\Val.cs" />
+    <Compile Include="BaseDef\ValTypeHelper.cs" />
+    <Compile Include="BaseDef\VarType.cs" />
+    <Compile Include="Buffer\ArrayBuffer.cs" />
+    <Compile Include="Buffer\BufferManager.cs" />
+    <Compile Include="Buffer\BufferSegment.cs" />
+    <Compile Include="Buffer\ObjectPoolMgr.cs" />
+    <Compile Include="Buffer\SegmentStream.cs" />
+    <Compile Include="Collections\BaseImmutableDictionary.cs" />
+    <Compile Include="Collections\IdQueue.cs" />
+    <Compile Include="Collections\ImmutableDictionary.cs" />
+    <Compile Include="Collections\ImmutableList.cs" />
+    <Compile Include="Collections\LockfreeQueue.cs" />
+    <Compile Include="Collections\LockfreeStack.cs" />
+    <Compile Include="Collections\PriorityQueue.cs" />
+    <Compile Include="Collections\SingleLinkNode.cs" />
+    <Compile Include="Collections\SynchronizedDictionary.cs" />
+    <Compile Include="Collections\SynchronizedList.cs" />
+    <Compile Include="Collections\SynchronizedQueue.cs" />
+    <Compile Include="Common\Csl.cs" />
+    <Compile Include="Common\DataEventArgs!1.cs" />
+    <Compile Include="Common\DataEventArgs!2.cs" />
+    <Compile Include="Common\DataEventArgs!3.cs" />
+    <Compile Include="Common\DataEventArgs!4.cs" />
+    <Compile Include="Common\DataEventArgs!5.cs" />
+    <Compile Include="Common\DataEventArgs.cs" />
+    <Compile Include="Common\Win32.cs" />
+    <Compile Include="Core\IKernel.cs" />
+    <Compile Include="Core\Kernel.cs" />
+    <Compile Include="ObjectPools\IObjectPool.cs" />
+    <Compile Include="ObjectPools\IPooledObject.cs" />
+    <Compile Include="ObjectPools\ObjectPool.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocal\DataBuffer.cs" />
+    <Compile Include="Protocal\DataBufferPool.cs" />
+    <Compile Include="Protocal\VarList.cs" />
+    <Compile Include="Protocal\VarListPool.cs" />
+    <Compile Include="Socket\ClientBase.cs" />
+    <Compile Include="Socket\IMClient.cs" />
+    <Compile Include="Socket\IClient.cs" />
+    <Compile Include="Socket\IContextHandler.cs" />
+    <Compile Include="Socket\InvalidEndpointException.cs" />
+    <Compile Include="Socket\ITcpClient.cs" />
+    <Compile Include="Socket\Message.cs" />
+    <Compile Include="Socket\NoAvailableInterfacesException.cs" />
+    <Compile Include="Socket\PackageHead.cs" />
+    <Compile Include="Socket\PackageHeadPool.cs" />
+    <Compile Include="Socket\ServerApp.cs" />
+    <Compile Include="Socket\ServerBase.cs" />
+    <Compile Include="Socket\SocketAsyncEventArgsPool.cs" />
+    <Compile Include="Socket\SocketHelper.cs" />
+    <Compile Include="Socket\SocketHelpers.cs" />
+    <Compile Include="Socket\TaskFactoryExtensions.cs" />
+    <Compile Include="Socket\TaskSchedulerExtensions.cs" />
+    <Compile Include="Socket\TcpServer.cs" />
+    <Compile Include="Timer\IUpdatable.cs" />
+    <Compile Include="Timer\TaskFactoryHelper.cs" />
+    <Compile Include="Timer\TickTimer.cs" />
+    <Compile Include="Timer\TimerEntry.cs" />
+    <Compile Include="Timer\TimerEnum.cs" />
+    <Compile Include="Timer\TimerHelper.cs" />
+    <Compile Include="Timer\TimerMgr.cs" />
+    <Compile Include="Timer\TimerPriority.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Oct.Framework.Socket.Common\Oct.Framework.Socket.Common.csproj">
+      <Project>{27c7688b-1805-4362-90a0-809fb5fb43dc}</Project>
+      <Name>Oct.Framework.Socket.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

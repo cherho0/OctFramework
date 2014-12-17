@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Oct.Framework.Core.Common
+@using Oct.Framework.MvcExt.Base
+@using Oct.Framework.MvcExt.Extisions
+@using Oct.Framework.TestWeb.Areas.Premission.Models;
+
+@model List<CommonRoleInfoDTO>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Index</h3>
+    </div>
+
+    <div class="panel-body">
+        @Html.AuthedLink("<i class=\"fa fa-plus\"></i>&nbsp;新增", "Create", "CommonRoleInfo", "btn green btn-sm j-modal")
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>角色名称</th>
+                    <th>编号</th>
+                    <th>启用</th>
+                    <th>是否系统默认角色</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model)
+                {
+                    <tr>
+                        <td>@m.Name</td>
+                        <td>@m.Code</td>
+                        <td>@m.IsEnable.ToBoolString()</td>
+                        <td>@m.IsSysDefault.ToBoolString()</td>
+                        <td>
+                            @Html.AuthedLink("修改", "Edit", "CommonRoleInfo", "btn btn-sm link j-modal", null, new { id = m.Id })
+                            @Html.AuthedLink("删除", "Delete", "CommonRoleInfo", "", new { onclick = "return confirm('确认删除吗？')" }, new { id = m.Id })
+                            
+                               @Html.AuthedLink("角色授权", "Authorization", "CommonRoleInfo", "",  new { roleid = m.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="panel-footer">
+
+        @{
+            var pageModel = (PageModel)ViewBag.PM;
+        }
+
+        @Html.Pager("page", pageModel.CurrentPage, pageModel.PageSize, pageModel.Total, PageMode.Numeric)
+
+    </div>
+</div>
+

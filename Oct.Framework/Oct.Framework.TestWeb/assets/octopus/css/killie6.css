@@ -1,0 +1,41 @@
+/****************************************************
+ * IE6、IE7检测提示
+ *
+ * @author Xiaozj { bladecamper (at) GMAIL (dot) com }
+ * @Copyright 888ly.CN
+ ****************************************************/
+
+
+html, body {height:100%; overflow: hidden;}
+
+.bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #222D3A;
+    z-index: 99998;
+}
+
+.killie6 {
+    width: 400px;
+    height: 150px;
+    padding: 10px;
+    background: #16A085;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -85px 0 0 -210px;
+    z-index: 99999;
+}
+.killie6 a {
+    margin-right: .5em;
+    color: #F2DEDE;
+    text-decoration: underline;
+}
+.killie6 a:hover {
+    text-decoration: none;
+    color: #fff;
+}

@@ -1,0 +1,119 @@
+﻿@using System.Web.UI.WebControls
+@{
+    ViewBag.Title = "Index";
+    //var cur = @Model.Account;
+}
+
+@section scripts
+{
+    <script src=@Url.Content("~/Scripts/jquery-1.8.2.min.js")></script>
+    <script src="~/Scripts/json2.js"></script>
+    <script src="@Url.Content("~/Scripts/jquery.signalR-1.0.1.min.js")"></script>
+    <script src="@Url.Content("~/signalr/hubs")"></script>
+    <script type="text/javascript">
+
+        $(function() {
+
+            // Proxy created on the fly
+            var chat = $.connection.pushHub;
+            // Declare a function on the chat hub so the server can invoke it
+            //chat.client.showMessage = function (message) {
+            //    writeEvent('<b>ny</b> 对大家说: ' + message, 'event-message');
+            //};
+
+            chat.client.addNewMessage = function(name, message) {
+                $('#messages').prepend('<li>对' + name + '说:' + message + '</li>');
+            };
+
+            chat.client.allUsers = function(data) {
+                //alert(1111);
+                var json = $.parseJSON(data);
+                $('#onlineName').empty();
+                $(json).each(function(i, d) {
+                    //console.log(d);
+                    //alert(d.Account);
+
+                    $('#onlineName').prepend('<li>' + d.Account + '</li>');
+                });
+            };
+
+            //$("#broadcast").click(function () {
+            //    // Call the chat method on the server
+            //    chat.server.sendAll($('#msg').val())
+            //                    .done(function () {
+            //                        console.log('Sent message success!');
+
+            //                    })
+            //                    .fail(function (e) {
+            //                        console.warn(e);
+            //                    });
+
+            //});
+
+            chat.client.sendMessage = function (name, message) {
+                $('#messages').prepend('<li>'+name+'对你说:' + message + '</li>');
+            };
+
+            $("#sendcast").click(function() {
+                chat.server.send($('#displayName').val(), $('#tomsg').val());
+            });
+
+            // Start the connection
+            $.connection.hub.start().done(function() {
+                //绑定
+                //chat.server.bind("wo");
+
+            });
+
+            //A function to write events to the page
+            //function writeEvent(eventLog, logClass) {
+            //    var now = new Date();
+            //    var nowStr = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+            //    $('#messages').prepend('<li class="' + logClass + '"><b>' + nowStr + '</b> ' + eventLog + '.</li>');
+            //}
+            $('#sending').click(function() {
+                chat.server.sendPrivateBroadcast($('#toSend').val(), $('#msg').val());
+            });
+
+            $("#exit").click(function() {
+                var acc = '@ViewBag.cur';
+                $.post('@Url.Action("Exit")', { account: acc }, function() {
+                    alert('成功退出');
+                    window.location.href = '/Home/Login';
+                });
+            });
+        });
+    </script>
+}
+<h2>聊天界面</h2>
+
+
+
+
+<div>
+    @*<input type="text" id="Placeholder" value="ny" hidden="true" />
+    <input type="text" id="msg" />
+    <input type="button" id="broadcast" value="广播" />*@
+    <p>我是:@ViewBag.cur</p>
+    说的话：<input type="text" id="tomsg" />
+    对谁说：<input type="text" id="displayName"/>
+    <input type="button" id="sendcast" value="发送" />
+    <br/>
+    消息:<input type="text" id="msg" />
+    对谁说：<input type="text" id="toSend"/>
+    <input type="button" id="sending" value="发送" />
+    <input type="button" id="exit" value="退出" />
+    <div>
+        <h3>在线列表</h3>
+        <ul id="onlineName">
+            @foreach (var item in @ViewBag.AllUsers)
+            {
+                <li>@item.Account</li>
+            }
+        </ul>
+    </div>
+    <br />
+    <br />
+    <ul id="messages">
+    </ul>
+</div>

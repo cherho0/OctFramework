@@ -1,0 +1,24 @@
+﻿@{
+    this.Layout = null;
+}
+
+<script>
+
+    var url = '@ViewBag.Url';
+    if (window.parent && window.parent != window) {
+        if (url == '') {
+            window.parent.location.reload();
+        } else {
+            window.parent.location.href = url;
+        }
+
+    } else {
+
+        if (url == '') {
+            window.location.reload();
+        } else {
+            window.location.href = url;
+        }
+    }
+
+</script>

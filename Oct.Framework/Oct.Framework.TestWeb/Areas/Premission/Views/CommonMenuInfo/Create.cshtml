@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+@section PluginsJS {
+    <script src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+    <script src="~/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
+}
+
+@using Oct.Framework.TestWeb.Areas.Premission.Models;
+
+@model CommonMenuInfoDTO
+
+<div class="container">
+    @using (Html.BeginForm("Create", "CommonMenuInfo", FormMethod.Post, new { @class = "J_FormValidate" }))
+    {
+        <div class="form form-horizontal">
+            
+            <div class="form-group">
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk "></i>
+                    模块名称</label>
+                <div class="col-xs-5">
+                    @Html.TextBoxFor(p => p.Name, new { @class = "form-control required" })
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+              <div class="form-group">
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk "></i>
+                    排序</label>
+                <div class="col-xs-5">
+                    @Html.TextBoxFor(p => p.Sort, new { @class = "form-control required" })
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+            <div class="form-group">
+
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk"></i>
+                    是否匿名访问</label>
+                <div class="col-xs-5">
+
+                    @Html.CheckBoxFor(model => model.IsAllowAnonymousAccess)
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk "></i>
+                    启用</label>
+                <div class="col-xs-5">
+                    @Html.CheckBoxFor(model => model.IsEnable)
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+          
+           
+
+            <div class="form-group">
+                <div class="col-xs-9 col-xs-offset-3">
+                    <button type="submit" value="新增" class="btn blue"><i class="fa fa-plus"></i>&nbsp;新增</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

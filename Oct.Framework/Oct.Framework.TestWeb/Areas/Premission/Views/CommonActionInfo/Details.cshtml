@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+@using Oct.Framework.TestWeb.Areas.Premission.Models;
+
+@model CommonActionInfoDTO
+
+<div class="container">
+    <div class="form form-horizontal">
+        @Html.HiddenFor(d => d.Id)		 
+
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>分类名称</label>
+            <div class="col-xs-5 control-label">
+                @Model.CategoryName
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>Name</label>
+            <div class="col-xs-5 control-label">
+                @Model.Name
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>Url</label>
+            <div class="col-xs-5 control-label">
+                @Model.Url
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>IsEnable</label>
+            <div class="col-xs-5 control-label">
+                @Model.IsEnable
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>IsVisible</label>
+            <div class="col-xs-5 control-label">
+                @Model.IsVisible
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>IsLog</label>
+            <div class="col-xs-5 control-label">
+                @Model.IsLog
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>//浏览        View =1,        //更新        Update =2,        //删除        Delete =3,        //增加        Add =4,        //导出        Export =5,        //导入        Import = 6,</label>
+            <div class="col-xs-5 control-label">
+                @Model.Operation
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>Sort</label>
+            <div class="col-xs-5 control-label">
+                @Model.Sort
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>CreateDate</label>
+            <div class="col-xs-5 control-label">
+                @Model.CreateDate
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>ModifyDate</label>
+            <div class="col-xs-5 control-label">
+                @Model.ModifyDate
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>MenuId</label>
+            <div class="col-xs-5 control-label">
+                @Model.MenuId
+            </div>
+        </div>
+    </div>
+</div>

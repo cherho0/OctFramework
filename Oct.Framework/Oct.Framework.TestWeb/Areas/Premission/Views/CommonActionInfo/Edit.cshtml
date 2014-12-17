@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+@section PluginsJS {
+    <script src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+    <script src="~/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
+}
+
+@using Oct.Framework.MvcExt.HtmlInput
+@using Oct.Framework.TestWeb.Areas.Premission.Models;
+@using Oct.Framework.TestWeb.Code
+
+@model CommonActionInfoDTO
+
+<div class="container">
+    @using (Html.BeginForm("Edit", "CommonActionInfo", FormMethod.Post, new { @class = "J_FormValidate" }))
+    {
+        <div class="form form-horizontal">
+            @Html.HiddenFor(d => d.Id)		 
+
+           <div class="form-group">
+
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk required"></i>
+                    分类名称</label>
+                <div class="col-xs-5">
+
+                    @Html.TextBoxFor(p => p.CategoryName, new { @class = "form-control" })
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk "></i>
+                    名称</label>
+                <div class="col-xs-5">
+                    @Html.TextBoxFor(p => p.Name, new { @class = "form-control required" })
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk "></i>
+                    Url</label>
+                <div class="col-xs-5">
+                    @Html.TextBoxFor(p => p.Url, new { @class = "form-control required" })
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk "></i>
+                    启用</label>
+                <div class="col-xs-5">
+                    @Html.CheckBoxFor(p => p.IsEnable, new { @class = "form-control " })
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk "></i>
+                    可视</label>
+                <div class="col-xs-5">
+                    @Html.CheckBoxFor(p => p.IsVisible, new { @class = "form-control " })
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk "></i>
+                    记录日志</label>
+                <div class="col-xs-5">
+                    @Html.CheckBoxFor(p => p.IsLog, new { @class = "form-control " })
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk "></i>
+                    操作</label>
+                <div class="col-xs-5">
+                    @(Html.DropDownListFor(p => p.Operation, EnumDropDownList.GetEnumValuesAndDsc<OperationEnum>(false), new { @class = "form-control required" }))
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk "></i>
+                    排序</label>
+                <div class="col-xs-5">
+                    @Html.TextBoxFor(p => p.Sort, new { @class = "form-control required" })
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-9 col-xs-offset-3">
+                    <button type="submit" value="新增" class="btn blue"><i class="fa fa-plus"></i>&nbsp;编辑</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

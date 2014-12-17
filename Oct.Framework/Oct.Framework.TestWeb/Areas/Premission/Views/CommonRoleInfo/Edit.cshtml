@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+@section PluginsJS {
+    <script src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+    <script src="~/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
+}
+
+@using Oct.Framework.TestWeb.Areas.Premission.Models;
+
+@model CommonRoleInfoDTO
+
+<div class="container">
+    @using (Html.BeginForm("Edit", "CommonRoleInfo", FormMethod.Post, new { @class = "J_FormValidate" }))
+    {
+        <div class="form form-horizontal">
+            @Html.HiddenFor(d => d.Id)
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk "></i>
+                    名称</label>
+                <div class="col-xs-5">
+                    @Html.TextBoxFor(p => p.Name, new { @class = "form-control required" })
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk "></i>
+                    编码</label>
+                <div class="col-xs-5">
+                    @Html.TextBoxFor(p => p.Code, new { @class = "form-control required" })
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk "></i>
+                    是否启用</label>
+                <div class="col-xs-5">
+                    @Html.CheckBoxFor(p => p.IsEnable, new { @class = "form-control " })
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">
+                    <i class="fa fa-asterisk "></i>
+                    是否系统默认角色</label>
+                <div class="col-xs-5">
+                    @Html.CheckBoxFor(p => p.IsSysDefault, new { @class = "form-control " })
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-9 col-xs-offset-3">
+                    <button type="submit" value="新增" class="btn blue"><i class="fa fa-plus"></i>&nbsp;编辑</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Oct.Framework.Core.Common
+@using Oct.Framework.MvcExt.Base
+@using Oct.Framework.MvcExt.Extisions
+@using Oct.Framework.TestWeb.Areas.Premission.Models;
+@using Oct.Framework.TestWeb.Code
+
+@model List<CommonActionInfoDTO>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Index</h3>
+    </div>
+
+    <div class="panel-body">
+        @Html.AuthedLink("<i class=\"fa fa-plus\"></i>&nbsp;新增", "Create", "CommonActionInfo", "btn green btn-sm j-modal", new { modelId = ViewBag.modelId.ToString() })
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>分类名称</th>
+                    <th>名称</th>
+                    <th>Url</th>
+                    <th>是否启用</th>
+                    <th>是否显示</th>
+                    <th>是否记录日志</th>
+                    <th>操作</th>
+                    <th>排序</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model)
+                {
+                    <tr>
+                        <td>@m.CategoryName</td>
+                        <td>@m.Name</td>
+                        <td>@m.Url</td>
+                        <td>@m.IsEnable.ToBoolString()</td>
+                        <td>@m.IsVisible.ToBoolString()</td>
+                        <td>@m.IsLog.ToBoolString()</td>
+                        <td>@m.Operation.ToEnumString()</td>
+                        <td>@m.Sort</td>
+                        <td>
+                            @Html.AuthedLink("修改", "Edit", "CommonActionInfo", "btn btn-sm link j-modal", null, new { id = m.Id })
+                            @Html.AuthedLink("删除", "Delete", "CommonActionInfo", "", new { onclick = "return confirm('确认删除吗？')" }, new { id = m.Id, modelId = (Guid)ViewBag.modelId })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="panel-footer">
+
+        @{
+            var pageModel = (PageModel)ViewBag.PM;
+        }
+
+        @Html.Pager("page", pageModel.CurrentPage, pageModel.PageSize, pageModel.Total, PageMode.Numeric)
+
+    </div>
+</div>
+

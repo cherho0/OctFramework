@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="gb2312"?>
+<root>
+  <version>1.0.2.0</version>
+  <servers>
+    <ArrayOfServer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Server>
+    <ServerName>192.168.2.236</ServerName>
+    <UseImpersonation>false</UseImpersonation>
+    <UserName />
+    <Password>4E7hdCLe+wZ/LjMdjM/hOQ==</Password>
+    <BinaryPath>C:\Program Files\MemCacheD\memcached.exe</BinaryPath>
+    <Instances>
+      <Instance>
+        <DisplayName>Otc.Frame</DisplayName>
+        <ServiceName>MemCacheD_1</ServiceName>
+        <ImageBasePath>C:\Program Files\MemCacheD\memcached.exe</ImageBasePath>
+        <TcpPort>11211</TcpPort>
+        <UdpPort>0</UdpPort>
+        <MaximizeCoreFile>false</MaximizeCoreFile>
+        <MemoryLimit>64</MemoryLimit>
+        <MaximumConnections>1024</MaximumConnections>
+        <UseManagedInstance>false</UseManagedInstance>
+        <ChunkSizeGrowthFactor>1.25</ChunkSizeGrowthFactor>
+        <DefaultKeySize>48</DefaultKeySize>
+      </Instance>
+    </Instances>
+  </Server>
+</ArrayOfServer>
+  </servers>
+</root>

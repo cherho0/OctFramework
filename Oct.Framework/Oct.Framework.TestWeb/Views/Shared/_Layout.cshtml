@@ -1,0 +1,320 @@
+﻿@using Oct.Framework.MvcExt.User
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    @* <meta charset="utf-8" />*@
+    <title>欢迎使用-Oct.Framework框架</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" />
+    <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" />
+    <link href="/assets/global/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+    <link href="/assets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" />
+
+    <!-- BEGIN THEME STYLES -->
+    <link href="/assets/global/css/components.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="/assets/octopus/css/octopus.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME STYLES -->
+
+    <style type="text/css">
+        .page-content {
+            background: #fff url(/assets/octopus/img/home.jpg) no-repeat center center;
+        }
+    </style>
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+</head>
+
+<body class="page-header-fixed page-quick-sidebar-over-content page-full-width page-footer-fixed">
+
+    <!-- BEGIN HEADER -->
+    <div class="page-header navbar navbar-fixed-top">
+        <!-- BEGIN HEADER INNER -->
+        <div class="page-header-inner">
+            <!-- BEGIN LOGO -->
+            <div class="page-logo">
+                <a href="/">
+                    <img src="/assets/octopus/img/logo.png" alt="logo" height="60" />
+                </a>
+            </div>
+            <!-- END LOGO -->
+            <!-- BEGIN HORIZANTAL MENU -->
+            <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
+            <!-- DOC: This is desktop version of the horizontal menu. The mobile version is defined(duplicated) sidebar menu below. So the horizontal menu has 2 seperate versions -->
+            <div class="hor-menu hidden-sm hidden-xs">
+                <ul class="nav navbar-nav">
+
+                    <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the horizontal opening on mouse hover -->
+
+                    <li class="classic-menu-dropdown" id="MenuItem_">
+                        <a data-hover="dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">工作台 <span class="selected"></span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-left">
+                            <li>
+                                <a href="../home/index.html">
+                                    <i class="fa fa-angle-right"></i>工作台
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../home/inbox.html">
+                                    <i class="fa fa-angle-right"></i>我的消息
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    @{
+                        var menu = LoginHelper.Instance.GetLoginUserMenus();
+                        if (menu != null)
+                        {
+                            foreach (var m in menu.MeunItem)
+                            {
+                        <li class="classic-menu-dropdown " id="MenuItem_ccd93761-efd9-4467-897f-c6dd708cc556">
+                            <a data-hover="dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">@m.Key
+                                <span class="selected"></span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu pull-left">
+                                @foreach (var a in m.Value)
+                                {
+                                    <li>
+                                        <a href="@(a.Url)">
+                                            <i class="fa fa-angle-right"></i>@a.Name
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                            }
+                        }
+                    }
+
+
+                </ul>
+            </div>
+            <!-- END HORIZANTAL MENU -->
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <div class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+            </div>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown">
+                        <a href="/home/inbox/" class="dropdown-toggle" style="padding-left: 10px; padding-right: 10px;">
+                            <i class="fa fa-envelope"></i>
+                            <span class="badge badge-default" id="msgcount"></span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" style="padding-left: 10px; padding-right: 10px;">
+                            <i class="fa fa-tasks"></i>
+                            <span class="badge badge-default"></span>
+                        </a>
+                    </li>
+
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+                    <li class="dropdown dropdown-user">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <img alt="" class="img-circle" src="/uploadfiles/user/header/images/mina05b7453-cd25-4353-a80b-ca357d213208.png" height="29" width="29" />
+                            <span class="username">超级无敌管理员
+                            </span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="/Home/MyProfile">
+                                    <i class="fa fa-user"></i>&nbsp;个人资料
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Home/MyCompany">
+                                    <i class="fa fa-copy"></i>&nbsp;我的公司
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Pay/Recharge">
+                                    <i class="fa fa-money"></i>&nbsp;充值
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Home/ChangePwd">
+                                    <i class="fa fa-key"></i>&nbsp;修改密码
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Home/LogOut">
+                                    <i class="fa fa-sign-out"></i>&nbsp;退出
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END USER LOGIN DROPDOWN -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+        <!-- END HEADER INNER -->
+    </div>
+    <!-- END HEADER -->
+    <div class="clearfix">
+    </div>
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar-wrapper">
+            <!-- BEGIN HORIZONTAL RESPONSIVE MENU -->
+            <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+            <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+            <div class="page-sidebar navbar-collapse collapse">
+                <ul class="page-sidebar-menu" data-slide-speed="200" data-auto-scroll="true">
+                    <li class="active">
+                        <a href="/Home">工作台 <span class="selected"></span>
+                        </a>
+                    </li>
+                    @{
+                        if (menu != null)
+                        {
+                            foreach (var m in menu.MeunItem)
+                            {
+                        <li>
+                            <a href="#">@m.Key <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                @foreach (var a in m.Value)
+                                {
+                                    <li>
+                                        <a href="@(a.Url)">
+                                            <i class="fa fa-angle-right"></i>@a.Name
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                            }
+                        }
+                    }
+
+                </ul>
+            </div>
+            <!-- END HORIZONTAL RESPONSIVE MENU -->
+        </div>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <!--面包屑导航条-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="page-title">欢迎使用-Oct.Framework框架</h3>
+                        <ul class="page-breadcrumb breadcrumb">
+                            <li><i class="fa fa-home"></i><a href="/home">首页</a><i class="fa fa-angle-right"></i></li>
+                            <li><a href="http://localhost:9999/home/">工作台</a><i class="fa fa-angle-right"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                @RenderBody()
+            </div>
+        </div>
+        <!-- END CONTENT -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer">
+        <div class="page-footer-inner">
+            2014 &copy; 苏州八爪鱼在线旅游发展有限公司.
+        </div>
+        <div class="page-footer-tools">
+            <span class="go-top">
+                <i class="fa fa-angle-up"></i>
+            </span>
+        </div>
+    </div>
+    <!-- 弹出层 -->
+    <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" id="float-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <!--[if lt IE 9]>
+        <script src="/assets/global/plugins/excanvas.min.js"></script>
+        <script src="/assets/global/plugins/respond.min.js"></script>
+    <![endif]-->
+    <script src="/assets/global/plugins/jquery-1.11.0.min.js"></script>
+    <script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+    <script src="/assets/global/plugins/uniform/jquery.uniform.min.js"></script>
+    <script src="/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="/assets/global/plugins/jquery-bootpag/jquery.bootpag.min.js"></script>
+    <script src="/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
+    <script src="/assets/global/plugins/artTemplate.js"></script>
+    <script src="/assets/global/plugins/json2.js"></script>
+
+    <!-- END CORE PLUGINS -->
+
+    <script src="/assets/global/scripts/metronic.js"></script>
+    <script src="/assets/admin/layout/scripts/layout.js"></script>
+    <script src="/assets/octopus/js/common.js"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+
+            // 高亮导航
+            $('#MenuItem_').addClass('active');
+        });
+    </script>
+
+    <script type="text/javascript">
+        var ref = '' == '' ? '' : '';
+        if (ref == '1') {
+            RefreshParentWindow();
+        }
+        $(function () {
+            toastr.options = {
+                "closeButton": true,
+                "positionClass": "toast-top-center",
+                "showDuration": "1000",
+                "timeOut": "10000",
+                "extendedTimeOut": "1000",
+            }
+
+            var smsg = '' == '' ? '' : '';
+            var emsg = '' == '' ? '' : '';
+            //成功提示
+            if (smsg != '') {
+                toastr.success(smsg);
+            }
+            //失败提示
+            if (emsg != '') {
+                toastr.error(emsg);
+            }
+
+
+
+        });
+    </script>
+    @RenderSection("CustomJS", false)
+
+
+</body>
+</html>

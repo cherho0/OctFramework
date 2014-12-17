@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+
+@model Oct.Framework.TestWeb.Areas.Premission.Models.CommonUserDTO
+
+<div class="container">
+    <div class="form form-horizontal">
+        @Html.HiddenFor(d => d.Id)		 
+
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>用户名</label>
+            <div class="col-xs-5 control-label">
+                @Model.Account
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>姓名</label>
+            <div class="col-xs-5 control-label">
+                @Model.UserName
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>密码</label>
+            <div class="col-xs-5 control-label">
+                @Model.Password
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>状态</label>
+            <div class="col-xs-5 control-label">
+                @Model.Status
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>创建时间</label>
+            <div class="col-xs-5 control-label">
+                @Model.CreateDate
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>创建人ID</label>
+            <div class="col-xs-5 control-label">
+                @Model.CreateUserId
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>修改人ID</label>
+            <div class="col-xs-5 control-label">
+                @Model.ModifyUserId
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>最后修改时间</label>
+            <div class="col-xs-5 control-label">
+                @Model.ModifyDate
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>电话</label>
+            <div class="col-xs-5 control-label">
+                @Model.Phone
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>邮箱</label>
+            <div class="col-xs-5 control-label">
+                @Model.Email
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>传真</label>
+            <div class="col-xs-5 control-label">
+                @Model.Fax
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>QQ</label>
+            <div class="col-xs-5 control-label">
+                @Model.QQ
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>地址</label>
+            <div class="col-xs-5 control-label">
+                @Model.Address
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>性别</label>
+            <div class="col-xs-5 control-label">
+                @Model.Gander
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>手机</label>
+            <div class="col-xs-5 control-label">
+                @Model.Mobile
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>身份证号码</label>
+            <div class="col-xs-5 control-label">
+                @Model.IDNumber
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>头像</label>
+            <div class="col-xs-5 control-label">
+                @Model.Avatar
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>最后登录时间</label>
+            <div class="col-xs-5 control-label">
+                @Model.LastLoginDate
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>登录次数</label>
+            <div class="col-xs-5 control-label">
+                @Model.LoginCount
+            </div>
+        </div>
+    </div>
+</div>

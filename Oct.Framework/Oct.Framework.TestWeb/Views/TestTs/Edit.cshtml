@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+@using Oct.Framework.TestWeb.Models
+
+@model TestTsDTO
+
+<div class="container">
+    @using (Html.BeginForm("Edit", "TestTs", FormMethod.Post, new { @class = "J_FormValidate" }))
+    {
+        @Html.HiddenFor(p => p.Id)
+
+        <div class="form form-horizontal">
+            <div class="form-group">
+                <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>名称</label>
+                <div class="col-xs-5">
+                    @Html.TextBoxFor(p => p.DD)
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-9 col-xs-offset-3">
+                    <button type="submit" value="新增" class="btn blue"><i class="fa fa-plus"></i>&nbsp;编辑</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

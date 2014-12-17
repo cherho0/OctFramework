@@ -1,0 +1,6 @@
+D:\project\Oct.Frame\Oct.Framework\Oct.Framework.MQDemo\bin\Debug\Oct.Framework.MQDemo.exe.config
+D:\project\Oct.Frame\Oct.Framework\Oct.Framework.MQDemo\bin\Debug\Oct.Framework.MQDemo.exe
+D:\project\Oct.Frame\Oct.Framework\Oct.Framework.MQDemo\bin\Debug\Oct.Framework.MQDemo.pdb
+D:\project\Oct.Frame\Oct.Framework\Oct.Framework.MQDemo\obj\Debug\Oct.Framework.MQDemo.csprojResolveAssemblyReference.cache
+D:\project\Oct.Frame\Oct.Framework\Oct.Framework.MQDemo\obj\Debug\Oct.Framework.MQDemo.exe
+D:\project\Oct.Frame\Oct.Framework\Oct.Framework.MQDemo\obj\Debug\Oct.Framework.MQDemo.pdb

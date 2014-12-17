@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+@using Oct.Framework.TestWeb.Models
+
+@model TestTsDTO
+
+<div class="container">
+    <div class="form form-horizontal">
+        @Html.HiddenFor(p => p.Id)
+
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>@Html.LabelFor(p => p.DD)</label>
+            <div class="col-xs-5 control-label">
+                @Model.DD
+            </div>
+            <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+        </div>
+    </div>
+</div>

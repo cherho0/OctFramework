@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BasicCfg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <WatchConnectAndDisconnect>true</WatchConnectAndDisconnect>
+  <WatchData>true</WatchData>
+  <WatchThreads>true</WatchThreads>
+  <MaxNumberOfConnections>3000</MaxNumberOfConnections>
+  <IP>192.168.2.236</IP>
+  <LogService>http://wgs:8084/LogService.asmx</LogService>
+  <Port>9999</Port>
+  <BufferSize>8192</BufferSize>
+  <HeadSize>0</HeadSize>
+  <MaxSimultaneousAcceptOps>100</MaxSimultaneousAcceptOps>
+  <Backlog>600</Backlog>
+  <OpsToPreAlloc>2</OpsToPreAlloc>
+  <ExcessSaeaObjectsInPool>1</ExcessSaeaObjectsInPool>
+  <ReceivePrefixLength>4</ReceivePrefixLength>
+  <SendPrefixLength>4</SendPrefixLength>
+  <MSDelayAfterGettingMessage>-1</MSDelayAfterGettingMessage>
+  <UpdateFrequency>100</UpdateFrequency>  
+  <ConnHost>wgs</ConnHost>
+  <ConnPort>27017</ConnPort>
+  <DBName>Game</DBName>
+  <BigBufferCount>100</BigBufferCount>
+  <BigArgsCount>100</BigArgsCount>
+  <SendDelayCount>10</SendDelayCount> 
+</BasicCfg>

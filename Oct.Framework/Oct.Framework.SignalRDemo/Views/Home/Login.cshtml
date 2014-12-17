@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+@model Oct.Framework.SignalRDemo.Models.LoginModel
+@section scripts
+{
+    <script src=@Url.Content("~/Scripts/jquery-1.8.2.min.js")></script>
+    <script src="~/Scripts/json2.js"></script>
+    <script src="@Url.Content("~/Scripts/jquery.signalR-1.0.1.min.js")"></script>
+    <script src="@Url.Content("~/signalr/hubs")"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("#loginOn").click(function () {
+                $('#loginSub').submit();
+            });
+
+           
+
+        });
+</script>
+}
+
+<h2>Login</h2>
+
+    @using (Html.BeginForm("Login","Home",FormMethod.Post,new{@id= "loginSub"}))
+    {
+        <div>
+            账号:@Html.TextBoxFor(p => p.Account)
+            <input type = "button" value = "登录" id="loginOn"/>
+        </div>
+    }

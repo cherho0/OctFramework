@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+@using Oct.Framework.TestWeb.Areas.Premission.Models;
+
+@model CommonUserRoleDTO
+
+<div class="container">
+    <div class="form form-horizontal">
+        @Html.HiddenFor(d => d.Id)		 
+
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>UserId</label>
+            <div class="col-xs-5 control-label">
+                @Model.UserId
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>RoleId</label>
+            <div class="col-xs-5 control-label">
+                @Model.RoleId
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>CreateDate</label>
+            <div class="col-xs-5 control-label">
+                @Model.CreateDate
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>ModifyDate</label>
+            <div class="col-xs-5 control-label">
+                @Model.ModifyDate
+            </div>
+        </div>
+    </div>
+</div>

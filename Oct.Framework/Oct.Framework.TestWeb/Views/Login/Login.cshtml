@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+<h2>登录</h2>
+@using (Html.BeginForm())
+{
+    
+    <input type="text" name="acc"/>
+    <input type="submit" value="login"/>
+}

@@ -1,0 +1,84 @@
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2014-12-01 14:53:41,643 [5] ERROR Oct.Framework - Resolution of the dependency failed, type = "Oct.Framework.Core.Log.IDbLog", name = "(none)".
+Exception occurred while: while resolving.
+Exception is: InvalidOperationException - The type IDbLog does not have an accessible constructor.
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving Oct.Framework.Core.Log.IDbLog,(none)
+
+Microsoft.Practices.Unity.ResolutionFailedException: Resolution of the dependency failed, type = "Oct.Framework.Core.Log.IDbLog", name = "(none)".
+Exception occurred while: while resolving.
+Exception is: InvalidOperationException - The type IDbLog does not have an accessible constructor.
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving Oct.Framework.Core.Log.IDbLog,(none)
+ ---> System.InvalidOperationException: The type IDbLog does not have an accessible constructor.
+   在 Microsoft.Practices.ObjectBuilder2.DynamicMethodConstructorStrategy.ThrowForNullExistingObject(IBuilderContext context)
+   在 lambda_method(Closure , IBuilderContext )
+   在 Microsoft.Practices.ObjectBuilder2.DynamicBuildPlanGenerationContext.<>c__DisplayClass1.<GetBuildMethod>b__0(IBuilderContext context)
+   在 Microsoft.Practices.ObjectBuilder2.DynamicMethodBuildPlan.BuildUp(IBuilderContext context)
+   在 Microsoft.Practices.ObjectBuilder2.BuildPlanStrategy.PreBuildUp(IBuilderContext context)
+   在 Microsoft.Practices.ObjectBuilder2.StrategyChain.ExecuteBuildUp(IBuilderContext context)
+   在 Microsoft.Practices.Unity.UnityContainer.DoBuildUp(Type t, Object existing, String name, IEnumerable`1 resolverOverrides)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Microsoft.Practices.Unity.UnityContainer.DoBuildUp(Type t, Object existing, String name, IEnumerable`1 resolverOverrides)
+   在 Microsoft.Practices.Unity.UnityContainer.DoBuildUp(Type t, String name, IEnumerable`1 resolverOverrides)
+   在 Microsoft.Practices.Unity.UnityContainer.Resolve(Type t, String name, ResolverOverride[] resolverOverrides)
+   在 Microsoft.Practices.Unity.UnityContainerExtensions.Resolve[T](IUnityContainer container, ResolverOverride[] overrides)
+   在 Oct.Framework.Core.IOC.Bootstrapper.GetRepository[T]() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\IOC\Bootstrapper.cs:行号 28
+   在 Oct.Framework.DB.Core.DBSession.Commit(Boolean transCommit) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBSession.cs:行号 95
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2014-12-01 14:59:58,417 [5] ERROR Oct.Framework - Resolution of the dependency failed, type = "Oct.Framework.Core.Log.IDbLog", name = "(none)".
+Exception occurred while: while resolving.
+Exception is: InvalidOperationException - The type IDbLog does not have an accessible constructor.
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving Oct.Framework.Core.Log.IDbLog,(none)
+
+Microsoft.Practices.Unity.ResolutionFailedException: Resolution of the dependency failed, type = "Oct.Framework.Core.Log.IDbLog", name = "(none)".
+Exception occurred while: while resolving.
+Exception is: InvalidOperationException - The type IDbLog does not have an accessible constructor.
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving Oct.Framework.Core.Log.IDbLog,(none)
+ ---> System.InvalidOperationException: The type IDbLog does not have an accessible constructor.
+   在 Microsoft.Practices.ObjectBuilder2.DynamicMethodConstructorStrategy.ThrowForNullExistingObject(IBuilderContext context)
+   在 lambda_method(Closure , IBuilderContext )
+   在 Microsoft.Practices.ObjectBuilder2.DynamicBuildPlanGenerationContext.<>c__DisplayClass1.<GetBuildMethod>b__0(IBuilderContext context)
+   在 Microsoft.Practices.ObjectBuilder2.DynamicMethodBuildPlan.BuildUp(IBuilderContext context)
+   在 Microsoft.Practices.ObjectBuilder2.BuildPlanStrategy.PreBuildUp(IBuilderContext context)
+   在 Microsoft.Practices.ObjectBuilder2.StrategyChain.ExecuteBuildUp(IBuilderContext context)
+   在 Microsoft.Practices.Unity.UnityContainer.DoBuildUp(Type t, Object existing, String name, IEnumerable`1 resolverOverrides)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Microsoft.Practices.Unity.UnityContainer.DoBuildUp(Type t, Object existing, String name, IEnumerable`1 resolverOverrides)
+   在 Microsoft.Practices.Unity.UnityContainer.DoBuildUp(Type t, String name, IEnumerable`1 resolverOverrides)
+   在 Microsoft.Practices.Unity.UnityContainer.Resolve(Type t, String name, ResolverOverride[] resolverOverrides)
+   在 Microsoft.Practices.Unity.UnityContainerExtensions.Resolve[T](IUnityContainer container, ResolverOverride[] overrides)
+   在 Oct.Framework.Core.IOC.Bootstrapper.GetRepository[T]() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\IOC\Bootstrapper.cs:行号 28
+   在 Oct.Framework.DB.Core.DBSession.Commit(Boolean transCommit) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBSession.cs:行号 95
+
+----------------------footer--------------------------

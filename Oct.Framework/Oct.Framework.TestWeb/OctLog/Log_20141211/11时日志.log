@@ -1,0 +1,64 @@
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2014-12-11 11:17:42,074 [15] ERROR Oct.Framework - 未将对象引用设置到对象的实例。
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Oct.Framework.DB.Implementation.SQLContext.ExecuteQuery(String sql) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLContext.cs:行号 172
+   在 Oct.Framework.DB.Implementation.SQLDBContext`1.Query(String where) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLDBContext.cs:行号 169
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.GetLists() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 61
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.OneDoWork() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 109
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2014-12-11 11:17:44,441 [6] ERROR Oct.Framework - 未将对象引用设置到对象的实例。
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Oct.Framework.DB.Implementation.SQLContext.ExecuteQuery(String sql) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLContext.cs:行号 172
+   在 Oct.Framework.DB.Implementation.SQLDBContext`1.Query(String where) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLDBContext.cs:行号 169
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.GetLists() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 61
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.OneDoWork() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 109
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2014-12-11 11:18:22,126 [5] ERROR Oct.Framework - 未将对象引用设置到对象的实例。
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Oct.Framework.DB.Implementation.SQLContext.ExecuteQuery(String sql) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLContext.cs:行号 172
+   在 Oct.Framework.DB.Implementation.SQLDBContext`1.Query(String where) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLDBContext.cs:行号 169
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.GetLists() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 61
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.OneDoWork() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 109
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2014-12-11 11:18:47,267 [5] ERROR Oct.Framework - 未将对象引用设置到对象的实例。
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Oct.Framework.DB.Implementation.SQLContext.ExecuteQuery(String sql) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLContext.cs:行号 172
+   在 Oct.Framework.DB.Implementation.SQLDBContext`1.Query(String where) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLDBContext.cs:行号 169
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.GetLists() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 61
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.OneDoWork() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 109
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------

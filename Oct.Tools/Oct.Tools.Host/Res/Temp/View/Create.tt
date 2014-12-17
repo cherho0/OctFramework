@@ -1,0 +1,54 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="Oct.Tools.Plugin.CodeGenerator.Entity" #>
+<#@ parameter type="Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo" name="dt" #>
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+@section PluginsJS {
+    <script src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+    <script src="~/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
+}
+
+@using <#= dt.NameSpace #>.Models;
+
+@model <#= dt.ClassName #>DTO
+
+<div class="container">
+    @using (Html.BeginForm("Create", "<#= dt.ClassName #>", FormMethod.Post, new { @class = "J_FormValidate" }))
+    {
+        <div class="form form-horizontal">
+<#
+	foreach(FiledInfo filed in dt.FiledList) 
+	{		
+#>
+            <div class="form-group">
+			<# if (filed.IsAllowNull) { #>	
+                <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>
+				<# } else { #>
+				 <label class="col-xs-3 control-label">
+				 <# } #>
+				<#= string.IsNullOrEmpty(filed.Description) ? filed.Name : filed.Description #></label>
+                <div class="col-xs-5">
+<# if (filed.IsAllowNull) { #>	 
+                    @Html.TextBoxFor(p => p.<#= filed.Name #>, new { @class = "form-control" })
+<# } else { #>
+                    @Html.TextBoxFor(p => p.<#= filed.Name #>, new { @class = "form-control required" })
+<# } #>
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+<# } #>
+
+            <div class="form-group">
+                <div class="col-xs-9 col-xs-offset-3">
+                    <button type="submit" value="新增" class="btn blue"><i class="fa fa-plus"></i>&nbsp;新增</button>
+					 <a href="/User/Home" class="btn default J_CloseModal"><i class="fa fa-undo"></i>&nbsp;返  回</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

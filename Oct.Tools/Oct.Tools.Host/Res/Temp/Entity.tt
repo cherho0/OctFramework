@@ -1,0 +1,268 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="Oct.Tools.Plugin.CodeGenerator.Entity" #>
+<#@ parameter type="Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo" name="dt" #>
+using Oct.Framework.DB.Base;
+using Oct.Framework.DB.Core;
+using Oct.Framework.DB.Interface;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
+using System.Text;
+
+namespace <#= dt.NameSpace #>
+{
+	[Serializable]
+	public partial class <#= dt.ClassName #><#= dt.ClassNameExtend #> : BaseEntity<<#= dt.ClassName #><#= dt.ClassNameExtend #>>
+	{ 
+		#region	属性
+		<#
+			var pkName = string.Empty;
+			var pkFileds = dt.FiledList.Where(d => d.IsPk);
+
+			if (pkFileds.Count() > 0)
+				pkName = pkFileds.First().Name;	 
+
+			var identifyFileds = dt.FiledList.Where(d => d.IsIdentify);	
+
+			foreach(FiledInfo filed in dt.FiledList) 
+			{		
+			var nullFlag = filed.CommonType.IsValueType && filed.IsAllowNull ? "?": string.Empty;
+			var temp = "_" + filed.Name.Substring(0, 1).ToLower() + filed.Name.Substring(1, filed.Name.Length - 1); 
+		#>
+
+		private <#= filed.CSharpType + nullFlag + " " + temp #>;
+
+		/// <summary>
+		/// <#= string.IsNullOrEmpty(filed.Description) ? filed.Name : filed.Description #>
+		/// </summary>
+		public <#= filed.CSharpType + nullFlag + " " + filed.Name #>
+		{
+			get
+			{
+				return this.<#= temp #>;
+			}
+			set
+			{
+				this.PropChanged("<#= filed.Name #>", this.<#= temp #>, value);
+
+				this.<#= temp #> = value;
+			}
+		}
+		<# } #>
+
+		#endregion
+
+		#region 重载
+
+		public override object PkValue
+		{
+			get
+			{
+				return this.<#= pkName #>; 
+			}
+		}
+
+		public override string PkName
+		{
+			get
+			{
+				return "<#= pkName #>"; 
+			}
+		}
+
+		public override bool IsIdentityPk
+		{
+			get 
+			{
+				return <#=  (identifyFileds.Count() > 0).ToString().ToLower()  #>; 
+			}
+		}
+
+		<# if (identifyFileds.Count() > 0) { #>
+public override void SetIdentity(object v)
+		{
+			this.<#= identifyFileds.First().Name  #> = int.Parse(v.ToString());
+		}
+		<# } #>
+
+		public override List<string> Props
+		{
+			get
+			{
+				return new List<string>();
+			}
+		}
+
+		public override <#= dt.ClassName #> GetEntityFromDataRow(DataRow row)
+		{
+			<#		
+				var code = new StringBuilder();
+
+				for (int i = 0; i < dt.FiledList.Count; i++)
+				{
+					var filed = dt.FiledList[i];
+					var type = filed.CSharpType.ToLower();		
+				
+					if (type == "bool")
+					{
+						code.AppendFormat("{0}if (row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tif ((row[\"{0}\"].ToString() == \"1\") || (row[\"{0}\"].ToString().ToLower() == \"true\"))\r\n", filed.Name);
+						code.Append("\t\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\t\tthis.{0} = true;\r\n", filed.Name);
+						code.Append("\t\t\t\t}\r\n");
+						code.Append("\t\t\t\telse\r\n");
+						code.Append("\t\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\t\tthis.{0} = false;\r\n", filed.Name);
+						code.Append("\t\t\t\t}\r\n");	
+						code.Append("\t\t\t}\r\n");	
+					}
+					else if (type == "byte[]")
+					{
+						code.AppendFormat("{0}if (row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tthis.{0} = (byte[])row[\"{0}\"];\r\n", filed.Name);	
+						code.Append("\t\t\t}\r\n");	
+					}
+					else if (type == "datetime")
+					{
+						code.AppendFormat("{0}if (row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tthis.{0} = DateTime.Parse(row[\"{0}\"].ToString());\r\n", filed.Name);	
+						code.Append("\t\t\t}\r\n");	
+					}
+					else if (type == "guid")
+					{
+						code.AppendFormat("{0}if (row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tthis.{0} = new Guid(row[\"{0}\"].ToString());\r\n", filed.Name);	
+						code.Append("\t\t\t}\r\n");	
+					}
+					else if (type == "string")
+					{
+						code.AppendFormat("{0}if (row[\"{1}\"] != null)\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tthis.{0} = row[\"{0}\"].ToString();\r\n", filed.Name);	
+						code.Append("\t\t\t}\r\n");	
+					}
+					else if (type == "decimal" || type == "double" || type == "float" || type == "int" || type == "long")
+					{
+						code.AppendFormat("{0}if (row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tthis.{0} = {1}.Parse(row[\"{0}\"].ToString());\r\n", filed.Name, type);	
+						code.Append("\t\t\t}\r\n");	
+					}
+				}
+			#>
+<#= code.ToString() #>
+			return this;
+		}
+
+		public override string TableName
+		{
+			get
+			{
+				return "<#= dt.TableName #>";
+			}
+		}
+
+		public override IOctDbCommand GetInsertCmd()
+		{
+			<#			
+				var sql1 = new StringBuilder(string.Format("\r\n\t\t\t\tINSERT INTO {0} (\r\n", dt.TableName));
+				var sql2 = new StringBuilder("\r\n\t\t\t\tVALUES (\r\n");
+				var paramStr = new StringBuilder("\t\t\tvar parameters = new Dictionary<string, object> {\r\n");	 
+			
+				var list = dt.FiledList.Where(d => !d.IsIdentify).ToList(); //排除标识列
+				var count = list.Count;
+			
+				for (int i = 0; i < count; i++)
+				{
+					var isLast = i == count - 1;
+					var filed = list[i];
+				
+					sql1.AppendFormat("\t\t\t\t\t{0}{1}", filed.Name, isLast ? ")" : ",\r\n");
+					sql2.AppendFormat("\t\t\t\t\t@{0}{1}", filed.Name, isLast ? ")" : ",\r\n");
+				
+					paramStr.AppendFormat("\t\t\t\t{0}\"@{1}\", this.{1}{2}{3}", "{", filed.Name, "}", isLast ? "};" : ",\r\n");	 
+				}
+			#>
+var sql = @"<#= sql1.ToString() + sql2.ToString() #>";
+			
+			DbCommand cmd = new SqlCommand();
+<#= paramStr.ToString() #>
+
+			return new OctDbCommand(sql, parameters);
+		}
+
+		public override IOctDbCommand GetUpdateCmd(string @where = "", IDictionary<string, object> paras = null)
+		{
+			var sb = new StringBuilder();
+			var parameters = new Dictionary<string, object>();
+          
+			sb.Append("update " + this.TableName + " set ");
+         
+			foreach (var changedProp in this.ChangedProps)
+			{
+				sb.Append(string.Format("{0} = @{0},", changedProp.Key));
+
+				parameters.Add("@" + changedProp.Key, changedProp.Value);
+			}
+
+			var sql = sb.ToString().Remove(sb.Length - 1);
+			sql += string.Format(" where {0} = '{1}'", this.PkName, this.PkValue);
+
+			if (!string.IsNullOrEmpty(@where))
+				sql += " and " + @where;
+
+			if (paras != null)
+			{
+				foreach (var p in paras)
+				{
+					parameters.Add(p.Key, p.Value);
+				}
+			}
+
+			return new OctDbCommand(sql, parameters);
+		}
+
+		public override string GetDelSQL()
+		{
+			return string.Format("delete from {0} where {1} = '{2}'", this.TableName, this.PkName, this.PkValue);
+		}
+
+		public override string GetDelSQL(object v, string @where = "")
+		{
+			string sql = string.Format("delete from {0} where 1 = 1 ", this.TableName);
+         
+			if (v != null)
+				sql += "and " + this.PkName + " = '" + v + "'";
+         
+			if (!string.IsNullOrEmpty(@where))
+				sql += "and " + @where;
+
+			return sql;
+		}
+
+		public override string GetModelSQL(object v)
+		{
+			return string.Format("select * from {0} where {1} = '{2}'", this.TableName, this.PkName, v);
+		}
+
+		public override string GetQuerySQL(string @where = "")
+		{
+			var sql = string.Format("select * from {0} where 1 = 1 ", this.TableName);
+           
+			if (!string.IsNullOrEmpty(@where))
+				sql += "and " + @where;
+
+			return sql;
+		}
+
+		#endregion
+	}
+}

@@ -1,0 +1,133 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="Oct.Tools.Plugin.CodeGenerator.Entity" #>
+<#@ parameter type="Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo" name="dt" #>
+using Oct.Framework.DB.Base;
+using Oct.Framework.DB.Core;
+using Oct.Framework.DB.Interface;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
+using System.Text;
+
+namespace <#= dt.NameSpace #>
+{
+	[Serializable]
+	public partial class <#= dt.ClassName #><#= dt.ClassNameExtend #> : BaseEntity<<#= dt.ClassName #><#= dt.ClassNameExtend #>>
+	{ 
+		#region	属性
+		<#
+			foreach(FiledInfo filed in dt.FiledList) 
+			{		
+		#>
+
+		public <#= filed.CSharpType + " " + filed.Name #>
+		{
+			get;
+			set;
+		}
+		<# } #>
+
+		#endregion
+
+		#region 重载
+
+		public override <#= dt.ClassName #> GetEntityFromDataRow(DataRow row)
+		{
+			<#		
+				var code = new StringBuilder();
+
+				for (int i = 0; i < dt.FiledList.Count; i++)
+				{
+					var filed = dt.FiledList[i];
+					var type = filed.CSharpType.ToLower();		
+				
+					if (type == "bool")
+					{
+						code.AppendFormat("{0}if (row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tif ((row[\"{0}\"].ToString() == \"1\") || (row[\"{0}\"].ToString().ToLower() == \"true\"))\r\n", filed.Name);
+						code.Append("\t\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\t\tthis.{0} = true;\r\n", filed.Name);
+						code.Append("\t\t\t\t}\r\n");
+						code.Append("\t\t\t\telse\r\n");
+						code.Append("\t\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\t\tthis.{0} = false;\r\n", filed.Name);
+						code.Append("\t\t\t\t}\r\n");	
+						code.Append("\t\t\t}\r\n");	
+					}
+					else if (type == "byte[]")
+					{
+						code.AppendFormat("{0}if (row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tthis.{0} = (byte[])row[\"{0}\"];\r\n", filed.Name);	
+						code.Append("\t\t\t}\r\n");	
+					}
+					else if (type == "datetime")
+					{
+						code.AppendFormat("{0}if (row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tthis.{0} = DateTime.Parse(row[\"{0}\"].ToString());\r\n", filed.Name);	
+						code.Append("\t\t\t}\r\n");	
+					}
+					else if (type == "guid")
+					{
+						code.AppendFormat("{0}if (row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tthis.{0} = new Guid(row[\"{0}\"].ToString());\r\n", filed.Name);	
+						code.Append("\t\t\t}\r\n");	
+					}
+					else if (type == "string")
+					{
+						code.AppendFormat("{0}if (row[\"{1}\"] != null)\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tthis.{0} = row[\"{0}\"].ToString();\r\n", filed.Name);	
+						code.Append("\t\t\t}\r\n");	
+					}
+					else if (type == "decimal" || type == "double" || type == "float" || type == "int" || type == "long")
+					{
+						code.AppendFormat("{0}if (row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tthis.{0} = {1}.Parse(row[\"{0}\"].ToString());\r\n", filed.Name, type);	
+						code.Append("\t\t\t}\r\n");	
+					}
+				}
+			#>
+<#= code.ToString() #>
+			return this;
+		}
+
+		public override string TableName
+		{
+			get
+			{
+				return "<#= dt.ClassName #>";
+			}
+		}
+
+		 public override bool IsIdentityPk
+        {
+            get { return false; }
+        }
+
+        public override List<string> Props
+        {
+            get { return null; }
+        }
+
+		public override string GetQuerySQL(string @where = "")
+		{
+			var sql = @"<#=  dt.Sql #>  where 1=1";
+           
+			if (!string.IsNullOrEmpty(@where))
+				sql += "and " + @where;
+
+			return sql;
+		}
+
+		#endregion
+	}
+}

@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C29CAECA-E4E3-4442-A8CB-9B4D76038BF9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Oct.Tools.Plugin.CodeGenerator</RootNamespace>
+    <AssemblyName>Oct.Tools.Plugin.CodeGenerator</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bll\IUCCommunication.cs" />
+    <Compile Include="Section\SectionMgr.cs" />
+    <Compile Include="Section\TempElement.cs" />
+    <Compile Include="Section\TempElements.cs" />
+    <Compile Include="Section\TempSection.cs" />
+    <Compile Include="View\UCBathCodeGenerator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\UCBathCodeGenerator.Designer.cs">
+      <DependentUpon>UCBathCodeGenerator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BathCodeGeneratorResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BathCodeGeneratorResult.Designer.cs">
+      <DependentUpon>BathCodeGeneratorResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bll\TableBll.cs" />
+    <Compile Include="Dal\TableDal.cs" />
+    <Compile Include="Entity\DBInfo.cs" />
+    <Compile Include="View\CompositeQueryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CompositeQueryForm.Designer.cs">
+      <DependentUpon>CompositeQueryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\DBLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DBLoginForm.Designer.cs">
+      <DependentUpon>DBLoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\CodeBaseInfo.cs" />
+    <Compile Include="View\UCMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\UCMain.Designer.cs">
+      <DependentUpon>UCMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\UCTempList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\UCTempList.Designer.cs">
+      <DependentUpon>UCTempList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UCCodeGenerator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\UCCodeGenerator.Designer.cs">
+      <DependentUpon>UCCodeGenerator.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="View\UCBathCodeGenerator.resx">
+      <DependentUpon>UCBathCodeGenerator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BathCodeGeneratorResult.resx">
+      <DependentUpon>BathCodeGeneratorResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CompositeQueryForm.resx">
+      <DependentUpon>CompositeQueryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DBLoginForm.resx">
+      <DependentUpon>DBLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UCMain.resx">
+      <DependentUpon>UCMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="View\UCTempList.resx">
+      <DependentUpon>UCTempList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UCCodeGenerator.resx">
+      <DependentUpon>UCCodeGenerator.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Oct.Tools.Core\Oct.Tools.Core.csproj">
+      <Project>{2220bead-48e0-425f-ac75-dc005308ca60}</Project>
+      <Name>Oct.Tools.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

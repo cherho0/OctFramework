@@ -1,6 +1,0 @@
-D:\project\Oct.Frame\Oct.Framework\Oct.Framework.MQ\bin\Debug\Oct.Framework.MQ.dll
-D:\project\Oct.Frame\Oct.Framework\Oct.Framework.MQ\bin\Debug\Oct.Framework.MQ.pdb
-D:\project\Oct.Frame\Oct.Framework\Oct.Framework.MQ\bin\Debug\NetMQ.dll
-D:\project\Oct.Frame\Oct.Framework\Oct.Framework.MQ\obj\Debug\Oct.Framework.MQ.csprojResolveAssemblyReference.cache
-D:\project\Oct.Frame\Oct.Framework\Oct.Framework.MQ\obj\Debug\Oct.Framework.MQ.dll
-D:\project\Oct.Frame\Oct.Framework\Oct.Framework.MQ\obj\Debug\Oct.Framework.MQ.pdb

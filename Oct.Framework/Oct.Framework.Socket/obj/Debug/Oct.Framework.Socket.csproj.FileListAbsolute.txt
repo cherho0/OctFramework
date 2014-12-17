@@ -1,5 +1,0 @@
-D:\project\Oct.Frame\Oct.Framework\Oct.Framework.Socket\obj\Debug\Oct.Framework.Socket.csprojResolveAssemblyReference.cache
-D:\project\Oct.Frame\Oct.Framework\bin\Debug\Oct.Framework.Socket.dll
-D:\project\Oct.Frame\Oct.Framework\bin\Debug\Oct.Framework.Socket.pdb
-D:\project\Oct.Frame\Oct.Framework\Oct.Framework.Socket\obj\Debug\Oct.Framework.Socket.dll
-D:\project\Oct.Frame\Oct.Framework\Oct.Framework.Socket\obj\Debug\Oct.Framework.Socket.pdb

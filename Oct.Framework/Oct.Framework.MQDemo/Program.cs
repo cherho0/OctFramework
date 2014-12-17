@@ -11,6 +11,7 @@ namespace Oct.Framework.MQDemo
         static void Main(string[] args)
         {
             //todo
+
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Oct.Framework.MQ
     /// <summary>
     /// MQ客户端
     /// </summary>
-    public class OctMQClient
+    public class OctMQClient:IDisposable
     {
         public event EventHandler<DataEventArgs<NetMQSocket, NetMQMessage>> OnReceive;
 
@@ -27,6 +27,7 @@ namespace Oct.Framework.MQ
         private ClientType _type;
         private NetMQContext _context;
         private string _ip;
+        private Task task;
         public void Init(string ip, int port, ClientType type)
         {
             _type = type;
@@ -60,8 +61,9 @@ namespace Oct.Framework.MQ
 
         public void StartAsyncReceive()
         {
-            Task.Factory.StartNew(() =>
+            task = Task.Factory.StartNew(() =>
          AsyncRead(_clientSocket), TaskCreationOptions.LongRunning);
+           
         }
 
         private void AsyncRead(NetMQSocket cSocket)
@@ -96,6 +98,16 @@ namespace Oct.Framework.MQ
         public NetMQMessage ReceiveMessage()
         {
             return _clientSocket.ReceiveMessage();
+        }
+
+        public void Dispose()
+        {
+            _clientSocket.Dispose();
+            _context.Dispose();
+            if (task != null)
+            {
+                task.Dispose();
+            }
         }
     }
 }

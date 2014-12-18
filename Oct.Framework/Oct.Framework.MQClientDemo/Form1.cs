@@ -18,10 +18,19 @@ namespace Oct.Framework.MQClientDemo
         public Form1()
         {
             InitializeComponent();
+            Csl.Init();
         }
 
+        /// <summary>
+        /// mq客户端
+        /// </summary>
         private OctMQClient _client;
 
+        /// <summary>
+        /// 订阅者模式连接
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnConn_Click(object sender, EventArgs e)
         {
             _client = new OctMQClient();
@@ -29,29 +38,55 @@ namespace Oct.Framework.MQClientDemo
 
             _client.Init(txtip.Text,int.Parse(txtport.Text),ClientType.Sub);
             var sub = (SubscriberSocket) _client.Client;
-            sub.Subscribe("ww");
+            sub.Subscribe(txtTop.Text);
             _client.StartAsyncReceive();
-            Csl.Init();
+            
         }
 
+        /// <summary>
+        /// 订阅者模式受到消息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void _client_OnReceive(object sender, Core.Args.DataEventArgs<NetMQ.NetMQSocket, NetMQ.NetMQMessage> e)
         {
-            Csl.Wl("sss");
+            var msg = e.Arg2;
+            Csl.Wl("主题："+msg.Pop().ConvertToString(Encoding.UTF8));
+            Csl.Wl("内容：" + msg.Pop().ConvertToString(Encoding.UTF8));
         }
 
+        /// <summary>
+        /// 发送响应消息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSend_Click(object sender, EventArgs e)
         {
-            if (_client == null)
+            using (_client = new OctMQClient())
             {
-                MessageBox.Show("please connect");return;
+                _client.Init(txtip.Text, int.Parse(txtport.Text), ClientType.Request);
+                var content = txtContent.Text;
+                var msg = _client.CreateMessage();
+                msg.Append(content, Encoding.UTF8);
+                _client.Send(msg);
+                var rmsg = _client.ReceiveMessage();
+                var reqStr = rmsg.Pop().ConvertToString(Encoding.UTF8);
+                Csl.Wl(reqStr);
             }
-            var content = txtContent.Text;
-            var msg = _client.CreateMessage();
-            msg.Append(content);
-            _client.Send(msg);
-            var rmsg = _client.ReceiveMessage();
-            var call = rmsg.Pop().ConvertToString();
-            Csl.Wl(call);
+            
+        }
+
+        /// <summary>
+        /// 释放资源
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            if (_client != null)
+            {
+                _client.Dispose();                
+            }
         }
     }
 }

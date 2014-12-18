@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using Oct.Framework.Core.Common;
 using Oct.Framework.Core.Log;
 using Oct.Framework.WinServiceKernel.Common;
 using Oct.Framework.WinServiceKernel.Core;

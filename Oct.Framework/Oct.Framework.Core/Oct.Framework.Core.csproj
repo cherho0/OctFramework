@@ -103,7 +103,12 @@
     <Compile Include="Args\DataEventArgs!5.cs" />
     <Compile Include="Args\DataEventArgs.cs" />
     <Compile Include="Common\IpHelper.cs" />
+    <Compile Include="Common\Win32.cs" />
     <Compile Include="Cookie\CookieHelper.cs" />
+    <Compile Include="Common\Csl.cs">
+      <SubType>
+      </SubType>
+    </Compile>
     <Compile Include="Export\ExportExcel.cs" />
     <Compile Include="Common\ExpressionHelper.cs" />
     <Compile Include="Image\ImageHelper.cs" />

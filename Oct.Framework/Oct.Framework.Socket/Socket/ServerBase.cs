@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Threading;
 using NyMQ.Core.Socket;
+using Oct.Framework.Core.Common;
 using Oct.Framework.Socket.Common;
 
 namespace Oct.Framework.Socket.Socket

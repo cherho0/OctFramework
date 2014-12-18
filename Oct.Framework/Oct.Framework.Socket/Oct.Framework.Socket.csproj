@@ -85,14 +85,12 @@
     <Compile Include="Collections\SynchronizedDictionary.cs" />
     <Compile Include="Collections\SynchronizedList.cs" />
     <Compile Include="Collections\SynchronizedQueue.cs" />
-    <Compile Include="Common\Csl.cs" />
     <Compile Include="Common\DataEventArgs!1.cs" />
     <Compile Include="Common\DataEventArgs!2.cs" />
     <Compile Include="Common\DataEventArgs!3.cs" />
     <Compile Include="Common\DataEventArgs!4.cs" />
     <Compile Include="Common\DataEventArgs!5.cs" />
     <Compile Include="Common\DataEventArgs.cs" />
-    <Compile Include="Common\Win32.cs" />
     <Compile Include="Core\IKernel.cs" />
     <Compile Include="Core\Kernel.cs" />
     <Compile Include="ObjectPools\IObjectPool.cs" />
@@ -131,6 +129,10 @@
     <Compile Include="Timer\TimerPriority.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Oct.Framework.Core\Oct.Framework.Core.csproj">
+      <Project>{61839D66-763D-4B91-9C3C-687B8AD40FD6}</Project>
+      <Name>Oct.Framework.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Oct.Framework.Socket.Common\Oct.Framework.Socket.Common.csproj">
       <Project>{27c7688b-1805-4362-90a0-809fb5fb43dc}</Project>
       <Name>Oct.Framework.Socket.Common</Name>

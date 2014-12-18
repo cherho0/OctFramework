@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Oct.Framework.Core.Common;
 using Oct.Framework.Core.Log;
 using Oct.Framework.WinServiceKernel.Util;
 

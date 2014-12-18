@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using NyMQ.Core.Socket;
+using Oct.Framework.Core.Common;
 using Oct.Framework.Socket.Common;
 using Oct.Framework.Socket.Protocal;
 

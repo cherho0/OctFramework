@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using NyMQ.Core.Socket;
+using Oct.Framework.Core.Common;
 using Oct.Framework.Socket.Common;
 using Oct.Framework.Socket.Timer;
 

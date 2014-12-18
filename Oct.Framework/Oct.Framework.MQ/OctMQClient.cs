@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NetMQ;
+using NetMQ.Sockets;
 using Oct.Framework.Core.Args;
 
 namespace Oct.Framework.MQ
@@ -14,6 +15,12 @@ namespace Oct.Framework.MQ
     public class OctMQClient
     {
         public event EventHandler<DataEventArgs<NetMQSocket, NetMQMessage>> OnReceive;
+
+        protected virtual void OnOnReceive(DataEventArgs<NetMQSocket, NetMQMessage> e)
+        {
+            EventHandler<DataEventArgs<NetMQSocket, NetMQMessage>> handler = OnReceive;
+            if (handler != null) handler(this, e);
+        }
 
         private int _port;
         private NetMQSocket _clientSocket;
@@ -48,20 +55,32 @@ namespace Oct.Framework.MQ
                 default:
                     _clientSocket = _context.CreateRequestSocket(); break;
             }
-            _clientSocket.ReceiveReady += _clientSocket_ReceiveReady;
             _clientSocket.Connect("tcp://" + _ip + ":" + _port);
         }
 
-        void _clientSocket_ReceiveReady(object sender, NetMQSocketEventArgs e)
+        public void StartAsyncReceive()
         {
-            EventHandler<DataEventArgs<NetMQSocket, NetMQMessage>> handler = OnReceive;
-            if (handler != null) handler(this, new DataEventArgs<NetMQSocket, NetMQMessage>
-                (e.Socket, e.Socket.ReceiveMessage()));
+            Task.Factory.StartNew(() =>
+         AsyncRead(_clientSocket), TaskCreationOptions.LongRunning);
+        }
+
+        private void AsyncRead(NetMQSocket cSocket)
+        {
+            while (true)
+            {
+                var msg = cSocket.ReceiveMessage();
+                OnOnReceive(new DataEventArgs<NetMQSocket, NetMQMessage>(cSocket, msg));
+            }
         }
 
         public NetMQSocket Client
         {
             get { return _clientSocket; }
+        }
+
+        public T GetClient<T>() where T : NetMQSocket
+        {
+            return (T)_clientSocket;
         }
 
         public void Send(NetMQMessage msg)

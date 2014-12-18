@@ -56,16 +56,20 @@ namespace Oct.Framework.MQ
                 default:
                     _serverSocket = _context.CreateResponseSocket(); break;
             }
-            _serverSocket.ReceiveReady += _serverSocket_ReceiveReady;
             _serverSocket.Bind("tcp://*:" + _port);
-
+            Task.Factory.StartNew(() =>
+            AsyncRead(_serverSocket), TaskCreationOptions.LongRunning);
         }
 
-        void _serverSocket_ReceiveReady(object sender, NetMQSocketEventArgs e)
+        private void AsyncRead(NetMQSocket serverSocket)
         {
-            var msg = e.Socket.ReceiveMessage();
-            OnOnReceive(new DataEventArgs<NetMQSocket, NetMQMessage>(e.Socket, msg));
+            while (true)
+            {
+                var msg = serverSocket.ReceiveMessage();
+                OnOnReceive(new DataEventArgs<NetMQSocket, NetMQMessage>(serverSocket, msg));
+            }
         }
+
 
         public NetMQSocket Server
         {

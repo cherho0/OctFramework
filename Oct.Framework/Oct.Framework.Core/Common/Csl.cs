@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Oct.Framework.Socket.Common
+namespace Oct.Framework.Core.Common
 {
     public class Csl
     {

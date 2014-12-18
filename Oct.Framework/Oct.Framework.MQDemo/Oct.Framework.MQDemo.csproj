@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NetMQ">
+      <HintPath>..\ref\NetMQ.3.3.0.11\lib\net40\NetMQ.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +49,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Oct.Framework.Core\Oct.Framework.Core.csproj">
+      <Project>{61839d66-763d-4b91-9c3c-687b8ad40fd6}</Project>
+      <Name>Oct.Framework.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Oct.Framework.MQ\Oct.Framework.MQ.csproj">
+      <Project>{59252327-8B9D-48B2-89BD-74887085585B}</Project>
+      <Name>Oct.Framework.MQ</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

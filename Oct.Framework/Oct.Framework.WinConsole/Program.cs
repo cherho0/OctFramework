@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using Oct.Framework.Core.Common;
 using Oct.Framework.Core.Log;
 using Oct.Framework.WinServiceKernel;
-using Oct.Framework.WinServiceKernel.Common;
 using Oct.Framework.WinServiceKernel.Util;
+using Win32 = Oct.Framework.WinServiceKernel.Common.Win32;
 
 namespace Oct.Framework.WinConsole
 {

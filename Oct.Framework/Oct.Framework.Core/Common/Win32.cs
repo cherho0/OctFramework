@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace Oct.Framework.Socket.Common
+namespace Oct.Framework.Core.Common
 {
     public static class Win32
     {

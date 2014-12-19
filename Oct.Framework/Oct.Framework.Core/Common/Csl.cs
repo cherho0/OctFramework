@@ -59,6 +59,16 @@ namespace Oct.Framework.Core.Common
             Console.WriteLine(msg);
         }
 
+        public static void WlInLine(ConsoleColor red, string msg)
+        {
+            Console.ForegroundColor = red;
+            Console.Write(msg);
+        }
+        public static void WlInLine(string msg)
+        {
+            Console.Write(msg);
+        }
+
         public static void Wl(Exception ex)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;

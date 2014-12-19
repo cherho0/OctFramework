@@ -4,3 +4,5 @@ http://news.cnblogs.com/n/154000/  zeromq
 http://www.cnblogs.com/wangiqngpei557/archive/2011/12/22/2298500.html 分布式事务
 
 http://somdoron.com/page/2/  牛逼的博客 netmq
+
+http://www.codeproject.com/search.aspx?q=netmq&x=0&y=0&sbo=kw netmq

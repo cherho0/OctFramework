@@ -36,11 +36,11 @@ namespace Oct.Framework.MQClientDemo
             _client = new OctMQClient();
             _client.OnReceive += _client_OnReceive;
 
-            _client.Init(txtip.Text,int.Parse(txtport.Text),ClientType.Sub);
-            var sub = (SubscriberSocket) _client.Client;
+            _client.Init(txtip.Text, int.Parse(txtport.Text), ClientType.Sub);
+            var sub = (SubscriberSocket)_client.Client;
             sub.Subscribe(txtTop.Text);
             _client.StartAsyncReceive();
-            
+
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Oct.Framework.MQClientDemo
         void _client_OnReceive(object sender, Core.Args.DataEventArgs<NetMQ.NetMQSocket, NetMQ.NetMQMessage> e)
         {
             var msg = e.Arg2;
-            Csl.Wl("主题："+msg.Pop().ConvertToString(Encoding.UTF8));
+            Csl.Wl("主题：" + msg.Pop().ConvertToString(Encoding.UTF8));
             Csl.Wl("内容：" + msg.Pop().ConvertToString(Encoding.UTF8));
         }
 
@@ -70,10 +70,10 @@ namespace Oct.Framework.MQClientDemo
                 msg.Append(content, Encoding.UTF8);
                 _client.Send(msg);
                 var rmsg = _client.ReceiveMessage();
-                var reqStr = rmsg.Pop().ConvertToString(Encoding.UTF8);
+                var reqStr =  rmsg.Pop().ConvertToString(Encoding.UTF8);
                 Csl.Wl(reqStr);
             }
-            
+
         }
 
         /// <summary>
@@ -85,8 +85,53 @@ namespace Oct.Framework.MQClientDemo
             base.OnClosed(e);
             if (_client != null)
             {
-                _client.Dispose();                
+                _client.Dispose();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (_client = new OctMQClient())
+            {
+                _client.Init(txtip.Text, int.Parse(txtport.Text), ClientType.Request);
+                var msg = _client.CreateMessage();
+                msg.Append(int.Parse(txtSeat.Text));
+                msg.Append(txtName.Text, Encoding.UTF8);
+                _client.Send(msg);
+                var rmsg = _client.ReceiveMessage();
+                var ret = rmsg.Pop().ConvertToInt32();
+                var reqStr = rmsg.Pop().ConvertToString(Encoding.UTF8);
+                Csl.Wl(string.Format("判断值：{0}，结果：{1}", ret, reqStr));
+            }
+        }
+
+        private void btnAsync_Click(object sender, EventArgs e)
+        {
+            var count = int.Parse(txtCount.Text);
+            Csl.Wl("----------------------------------------------");
+            Parallel.For(0, count, (x) =>
+            {
+                try
+                {
+                    using ( var sclient = new OctMQClient())
+                    {
+                        sclient.Init(txtip.Text, int.Parse(txtport.Text), ClientType.Request);
+                        var msg = sclient.CreateMessage();
+                        msg.Append(int.Parse(txtSeat.Text));
+                        msg.Append(txtName.Text, Encoding.UTF8);
+                        sclient.Send(msg);
+                        var rmsg = sclient.ReceiveMessage();
+                        var ret = rmsg.Pop().ConvertToInt32();
+                        var reqStr = rmsg.Pop().ConvertToString(Encoding.UTF8);
+                        Csl.Wl(string.Format("判断值：{0}，结果：{1},第几个进程:{2}", ret, reqStr,x));
+                    }
+                }
+                catch (Exception)
+                {
+                }
+                
+            });
+            Csl.Wl("----------------------------------------------");
         }
     }
 }

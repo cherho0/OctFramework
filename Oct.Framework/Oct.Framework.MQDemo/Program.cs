@@ -4,16 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Practices.Unity;
 using NetMQ;
 using NetMQ.Sockets;
 using NetMQ.zmq;
 using Oct.Framework.Core.Args;
 using Oct.Framework.Core.Common;
+using Oct.Framework.Core.IOC;
 using Oct.Framework.MQ;
+using Oct.Framework.MQDemo.Base;
+using Oct.Framework.MQDemo.Commands;
+using Oct.Framework.MQDemo.Queues;
 
 namespace Oct.Framework.MQDemo
 {
-    class Program
+   public  class Program
     {
         private static OctMQServer _server;
         static ServerType _type;
@@ -32,7 +37,7 @@ namespace Oct.Framework.MQDemo
             _server = new OctMQServer();
             _server.OnReceive += server_OnReceive;
             _server.Init(5555, _type);
-           
+            // _server.Server.Options.
         }
 
         /// <summary>
@@ -56,12 +61,14 @@ namespace Oct.Framework.MQDemo
                 case "2":
                     _type = ServerType.Response;
                     Create();
+                    InitQueue();
                     Cmd();
+
                     break;
                 default:
                     {
                         CreateCmd();
-                       
+
                     }
                     break;
             }
@@ -98,7 +105,7 @@ namespace Oct.Framework.MQDemo
                     {
                         var str = cmd.Split(' ');
                         var msg = _server.CreateMessage();
-                        msg.Append(str[0],Encoding.UTF8);
+                        msg.Append(str[0], Encoding.UTF8);
                         msg.Append(str[1], Encoding.UTF8);
                         _server.Send(msg);
                         Cmd();
@@ -112,8 +119,30 @@ namespace Oct.Framework.MQDemo
         {
             var msg = e.Arg2;
             var server = e.Arg1;
-            Csl.Wl(msg.Pop().ConvertToString(Encoding.UTF8));
-            server.Send("你好,您的请求已处理，并返回消息及处理结果", Encoding.UTF8);
+            if (msg.FrameCount != 2)
+            {
+                Csl.Wl(msg.Pop().ConvertToString(Encoding.UTF8));
+                server.Send("你好,您的请求已处理，并返回消息及处理结果", Encoding.UTF8);
+
+                return;
+            }
+            SeatCommand cmd = new SeatCommand();
+            var back = cmd.Exec(msg);
+            server.SendMessage(back);
+        }
+
+        static void InitCmd()
+        {
+            var container = Bootstrapper.CreateContainer();
+
+        }
+
+        public static SeatQueue queue;
+        static void InitQueue()
+        {
+            queue = new SeatQueue();
+            queue.Init(20);
+            Csl.Wl("初始化队列完成");
         }
     }
 }

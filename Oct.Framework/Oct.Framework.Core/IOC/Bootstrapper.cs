@@ -8,6 +8,12 @@ namespace Oct.Framework.Core.IOC
     {
         public static IUnityContainer Container;
 
+        public static IUnityContainer CreateContainer()
+        {
+            Container =   new UnityContainer();
+            return Container;
+        }
+
         /// <summary>
         /// ÒÀÀµ×¢ÈëÆô¶¯
         /// </summary>

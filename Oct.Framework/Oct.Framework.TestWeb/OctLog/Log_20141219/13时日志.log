@@ -1,0 +1,111 @@
+
+----------------------header--------------------------
+2014-12-19 13:19:26,756 [34] ERROR Oct.Framework - 用户 'Octopus_Framework' 登录失败。
+System.Exception: 用户 'Octopus_Framework' 登录失败。
+   在 Oct.Framework.DB.Implementation.SQLContext.ExecuteQuery(String sql) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLContext.cs:行号 183
+   在 Oct.Framework.DB.Implementation.SQLDBContext`1.Query(String where, String order) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLDBContext.cs:行号 182
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.GetLists() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 63
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.OneDoWork() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 112
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2014-12-19 13:19:58,745 [6] ERROR Oct.Framework - 无法打开登录所请求的数据库 "Oct_Framework"。登录失败。
+用户 'Octopus_Framework' 登录失败。
+System.Exception: 无法打开登录所请求的数据库 "Oct_Framework"。登录失败。
+用户 'Octopus_Framework' 登录失败。
+   在 Oct.Framework.DB.Implementation.SQLContext.ExecuteQuery(String sql) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLContext.cs:行号 183
+   在 Oct.Framework.DB.Implementation.SQLDBContext`1.Query(String where, String order) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLDBContext.cs:行号 182
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.GetLists() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 63
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.OneDoWork() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 112
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2014-12-19 13:20:30,416 [5] ERROR Oct.Framework - 用户 'Octopus_Framework' 登录失败。
+System.Exception: 用户 'Octopus_Framework' 登录失败。
+   在 Oct.Framework.DB.Implementation.SQLContext.ExecuteQuery(String sql) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLContext.cs:行号 183
+   在 Oct.Framework.DB.Implementation.SQLDBContext`1.Query(String where, String order) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLDBContext.cs:行号 182
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.GetLists() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 63
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.OneDoWork() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 112
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2014-12-19 13:45:04,646 [15] ERROR Oct.Framework - 用户 'Octopus_Framework' 登录失败。
+System.Exception: 用户 'Octopus_Framework' 登录失败。
+   在 Oct.Framework.DB.Implementation.SQLContext.ExecuteQuery(String sql) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLContext.cs:行号 183
+   在 Oct.Framework.DB.Implementation.SQLDBContext`1.Query(String where, String order) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Implementation\SQLDBContext.cs:行号 182
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.GetLists() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 63
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.OneDoWork() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 154
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2014-12-19 13:55:15,079 [5] ERROR Oct.Framework - 未将对象引用设置到对象的实例。
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Oct.Framework.DB.Core.CurrentSessionFactory.GetCurrentSession() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\CurrentSessionFactory.cs:行号 31
+   在 Oct.Framework.DB.Core.SessionMgr.CreateSession() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\SessionMgr.cs:行号 29
+   在 Oct.Framework.DB.Core.DBContextBase.Init() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBContextBase.cs:行号 60
+   在 Oct.Framework.DB.Core.DBContextBase..ctor() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBContextBase.cs:行号 18
+   在 Oct.Framework.Entities.DbContext..ctor() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Entities\DbContext.cs:行号 12
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.GetOne(Object id) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 70
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.UpdateUnitDoc(String key, Object id) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 121
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2014-12-19 13:56:58,924 [5] ERROR Oct.Framework - 未将对象引用设置到对象的实例。
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Oct.Framework.DB.Core.CurrentSessionFactory.GetCurrentSession() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\CurrentSessionFactory.cs:行号 31
+   在 Oct.Framework.DB.Core.SessionMgr.CreateSession() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\SessionMgr.cs:行号 29
+   在 Oct.Framework.DB.Core.DBContextBase.Init() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBContextBase.cs:行号 60
+   在 Oct.Framework.DB.Core.DBContextBase..ctor() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBContextBase.cs:行号 18
+   在 Oct.Framework.Entities.DbContext..ctor() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Entities\DbContext.cs:行号 12
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.GetOne(Object id) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 70
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.UpdateUnitDoc(String key, Object id) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 121
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2014-12-19 13:57:44,276 [5] ERROR Oct.Framework - 未将对象引用设置到对象的实例。
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Oct.Framework.DB.Core.CurrentSessionFactory.GetCurrentSession() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\CurrentSessionFactory.cs:行号 31
+   在 Oct.Framework.DB.Core.SessionMgr.CreateSession() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\SessionMgr.cs:行号 29
+   在 Oct.Framework.DB.Core.DBContextBase.Init() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBContextBase.cs:行号 60
+   在 Oct.Framework.DB.Core.DBContextBase..ctor() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBContextBase.cs:行号 18
+   在 Oct.Framework.Entities.DbContext..ctor() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Entities\DbContext.cs:行号 12
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.GetOne(Object id) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 70
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.UpdateUnitDoc(String key, Object id) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 121
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2014-12-19 13:59:04,400 [5] ERROR Oct.Framework - 未将对象引用设置到对象的实例。
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Oct.Framework.DB.Core.CurrentSessionFactory.GetCurrentSession() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\CurrentSessionFactory.cs:行号 31
+   在 Oct.Framework.DB.Core.SessionMgr.CreateSession() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\SessionMgr.cs:行号 29
+   在 Oct.Framework.DB.Core.DBContextBase.Init() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBContextBase.cs:行号 60
+   在 Oct.Framework.DB.Core.DBContextBase..ctor() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBContextBase.cs:行号 18
+   在 Oct.Framework.Entities.DbContext..ctor() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Entities\DbContext.cs:行号 12
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.GetOne(Object id) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 70
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.UpdateUnitDoc(String key, Object id) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 121
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2014-12-19 13:59:54,214 [5] ERROR Oct.Framework - 未将对象引用设置到对象的实例。
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Oct.Framework.DB.Core.CurrentSessionFactory.GetCurrentSession() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\CurrentSessionFactory.cs:行号 31
+   在 Oct.Framework.DB.Core.SessionMgr.CreateSession() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\SessionMgr.cs:行号 29
+   在 Oct.Framework.DB.Core.DBContextBase.Init() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBContextBase.cs:行号 60
+   在 Oct.Framework.DB.Core.DBContextBase..ctor() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBContextBase.cs:行号 18
+   在 Oct.Framework.Entities.DbContext..ctor() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Entities\DbContext.cs:行号 12
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.GetOne(Object id) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 70
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.UpdateUnitDoc(String key, Object id) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 121
+
+----------------------footer--------------------------

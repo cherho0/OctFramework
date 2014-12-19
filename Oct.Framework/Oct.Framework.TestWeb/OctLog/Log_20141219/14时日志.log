@@ -1,0 +1,44 @@
+
+----------------------header--------------------------
+2014-12-19 14:00:50,601 [6] ERROR Oct.Framework - 未将对象引用设置到对象的实例。
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Oct.Framework.DB.Core.CurrentSessionFactory.GetCurrentSession() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\CurrentSessionFactory.cs:行号 31
+   在 Oct.Framework.DB.Core.SessionMgr.CreateSession() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\SessionMgr.cs:行号 29
+   在 Oct.Framework.DB.Core.DBContextBase.Init() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBContextBase.cs:行号 60
+   在 Oct.Framework.DB.Core.DBContextBase..ctor() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBContextBase.cs:行号 18
+   在 Oct.Framework.Entities.DbContext..ctor() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Entities\DbContext.cs:行号 12
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.GetOne(Object id) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 70
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.UpdateUnitDoc(String key, Object id) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 121
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2014-12-19 14:02:51,363 [11] ERROR Oct.Framework - Lock obtain timed out: NativeFSLock@D:\project\Oct.Frame\Oct.Framework\Oct.Framework.TestWeb\TestIndex\write.lock
+Lucene.Net.Store.LockObtainFailedException: Lock obtain timed out: NativeFSLock@D:\project\Oct.Frame\Oct.Framework\Oct.Framework.TestWeb\TestIndex\write.lock
+   在 Lucene.Net.Store.Lock.Obtain(Int64 lockWaitTimeout)
+   在 Lucene.Net.Index.IndexWriter.Init(Directory d, Analyzer a, Boolean create, Boolean closeDir, IndexDeletionPolicy deletionPolicy, Boolean autoCommit, Int32 maxFieldLength, IndexingChain indexingChain, IndexCommit commit)
+   在 Lucene.Net.Index.IndexWriter..ctor(Directory d, Analyzer a, Boolean create, MaxFieldLength mfl)
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.OneDoWork() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 151
+2014-12-19 14:02:59,279 [5] ERROR Oct.Framework - 未将对象引用设置到对象的实例。
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Oct.Framework.DB.Core.CurrentSessionFactory.Bind(ISession session) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\CurrentSessionFactory.cs:行号 20
+   在 Oct.Framework.DB.Core.SessionMgr.CreateSession() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\SessionMgr.cs:行号 34
+   在 Oct.Framework.DB.Core.DBContextBase.Init() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBContextBase.cs:行号 60
+   在 Oct.Framework.DB.Core.DBContextBase..ctor() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.DB\Core\DBContextBase.cs:行号 18
+   在 Oct.Framework.Entities.DbContext..ctor() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Entities\DbContext.cs:行号 12
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.GetOne(Object id) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 70
+   在 Oct.Framework.SearchEngine.CreateIndexTask`1.UpdateUnitDoc(String key, Object id) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SearchEngine\CreateIndexTask.cs:行号 121
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------

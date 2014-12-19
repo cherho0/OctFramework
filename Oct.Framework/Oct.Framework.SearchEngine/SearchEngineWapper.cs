@@ -132,7 +132,7 @@ namespace Oct.Framework.SearchEngine
         {
             PanGu.HighLight.SimpleHTMLFormatter simpleHTMLFormatter = new PanGu.HighLight.SimpleHTMLFormatter("<font color=\"Red\">", "</font>");
             PanGu.HighLight.Highlighter highlighter = new PanGu.HighLight.Highlighter(simpleHTMLFormatter, new Segment());
-            highlighter.FragmentSize = 100;
+            highlighter.FragmentSize = 1000;
             string bodyPreview = highlighter.GetBestFragment(keyword, body);
             if (string.IsNullOrEmpty(bodyPreview))
             {

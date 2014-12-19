@@ -65,5 +65,17 @@ namespace Oct.Framework.SearchEngine
             });
 
         }
+
+        public void DoUnitUpdate(string key, string termkey, string termvalue)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(100);
+                if (_works.ContainsKey(key))
+                {
+                    _works[key].UpdateUnitDoc(termkey, termvalue);
+                }
+            });
+        }
     }
 }

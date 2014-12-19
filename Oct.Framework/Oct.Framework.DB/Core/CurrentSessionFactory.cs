@@ -28,6 +28,10 @@ namespace Oct.Framework.DB.Core
             {
                 return _session;
             }
+            if (context.Session == null)
+            {
+                return null;
+            }
             return (ISession) context.Session[OCTSESSION];
         }
 

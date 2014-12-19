@@ -12,5 +12,7 @@ namespace Oct.Framework.SearchEngine
 
         DoWorkStyle Style { get; }
         void OneDoWork();
+
+        void UpdateUnitDoc(string key, object id);
     }
 }

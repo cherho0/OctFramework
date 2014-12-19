@@ -53,7 +53,8 @@ namespace Oct.Framework.TestWeb
                 d.Add(new Field("DD", t.DD, Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.WITH_POSITIONS_OFFSETS));
             });
             SreachTask.Start();
-            SreachTask.Do("TestIndex");
+            //SreachTask.Do("TestIndex");
+            //SreachTask.DoUnitUpdate("TestIndex", "Id", "1");
         }
 
         private void CreateMapper()

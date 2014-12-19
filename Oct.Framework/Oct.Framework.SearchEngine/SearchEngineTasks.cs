@@ -23,7 +23,7 @@ namespace Oct.Framework.SearchEngine
             _works = new ConcurrentDictionary<string, IWork>();
         }
 
-        public void AddWord<T>(string key, string indexSavePath, DoWorkStyle style, Action<T, Document> addDocAction) where T : BaseEntity<T>, new()
+        public void AddWork<T>(string key, string indexSavePath, DoWorkStyle style, Action<T, Document> addDocAction) where T : BaseEntity<T>, new()
         {
             IWork work = new CreateIndexTask<T>(indexSavePath, style, addDocAction);
             _works.TryAdd(key, work);

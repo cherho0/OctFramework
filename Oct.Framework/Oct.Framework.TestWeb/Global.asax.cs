@@ -47,7 +47,7 @@ namespace Oct.Framework.TestWeb
         private void CreateSreachIndex()
         {
             SreachTask = new SearchEngineTasks();
-            SreachTask.AddWord<TestTs>("TestIndex", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestIndex"), DoWorkStyle.PerHour, (t, d) =>
+            SreachTask.AddWork<TestTs>("TestIndex", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestIndex"), DoWorkStyle.PerHour, (t, d) =>
             {
                 d.Add(new Field("Id", t.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
                 d.Add(new Field("DD", t.DD, Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.WITH_POSITIONS_OFFSETS));

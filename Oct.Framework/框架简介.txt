@@ -7,3 +7,5 @@ SearchEngine：搜索引擎，提供索引创建，分词，和数据查询搜索等。
 Test：测试的Demo，并且有对权限的整合。
 
 使用前，请先将vs2012 升级到Update4
+
+//todo Session 过期处理

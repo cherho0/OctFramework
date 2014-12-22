@@ -87,7 +87,7 @@ namespace Oct.Framework.MvcExt.User
         /// <returns></returns>
         public bool IsLogin()
         {
-            return SessionProvider.GetSession(ConstArgs.UserSession) != null;
+            return SessionProvider.GetSession<UserBase>(ConstArgs.UserSession) != null;
         }
 
         public void LogOut()

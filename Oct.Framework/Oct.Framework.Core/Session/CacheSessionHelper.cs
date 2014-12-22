@@ -46,7 +46,7 @@ namespace Oct.Framework.Core.Session
             {
                 timeOut = HttpContext.Current.Session.Timeout;
             }
-           return CacheHelper.Set(SessionId + "_" + key, value, timeOut);
+            return CacheHelper.Set(SessionId + "_" + key, value, timeOut);
 
         }
 
@@ -57,7 +57,12 @@ namespace Oct.Framework.Core.Session
         /// <returns></returns>
         public object ReleaseObj(string key)
         {
+            var timeOut = HttpContext.Current.Session.Timeout;
             var session = CacheHelper.Get(SessionId + "_" + key);
+            if (session != null)
+            {
+                //CacheHelper.Set(SessionId + "_" + key, session, timeOut);
+            }
             return session;
         }
 
@@ -74,7 +79,12 @@ namespace Oct.Framework.Core.Session
 
         public T Get<T>(string key)
         {
+            var timeOut = HttpContext.Current.Session.Timeout;
             var session = CacheHelper.Get<T>(SessionId + "_" + key);
+            if (session != null)
+            {
+                CacheHelper.Set(SessionId + "_" + key, session, timeOut);
+            }
             return session;
         }
     }

@@ -470,17 +470,7 @@ namespace Oct.Framework.MvcExt.Extisions
             return session.AddSession(key, value, timeOut);
         }
 
-        /// <summary>
-        /// 获取session
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public static object GetSession(this IKernel knl, string key)
-        {
-            var session = Bootstrapper.GetRepository<ISessionProvider>();
-            return session.GetSession(key);
-        }
-
+        
         /// <summary>
         /// 获取session
         /// </summary>

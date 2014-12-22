@@ -33,7 +33,7 @@ namespace Oct.Framework.Core.Session
 
             //加密Ticket，变成一个加密的字符串。
             var cookieValue = FormsAuthentication.Encrypt(ticket);
-            if (cookieValue != null && cookieValue.Length>4000)
+            if (cookieValue != null && cookieValue.Length > 4000)
             {
                 throw new Exception("您要保存的数据超过cookie的最大存储空间");
             }
@@ -63,7 +63,10 @@ namespace Oct.Framework.Core.Session
                 var context = HttpContext.Current;
                 var cookie = context.Request.Cookies[key];
                 var ticket = FormsAuthentication.Decrypt(cookie.Value);
-                return JsonConvert.DeserializeObject(ticket.UserData);
+                var obj = JsonConvert.DeserializeObject(ticket.UserData);
+                var timeOut = HttpContext.Current.Session.Timeout;
+                AddSession(key, obj, timeOut);
+                return obj;
             }
             catch
             {
@@ -78,7 +81,10 @@ namespace Oct.Framework.Core.Session
                 var context = HttpContext.Current;
                 var cookie = context.Request.Cookies[key];
                 var ticket = FormsAuthentication.Decrypt(cookie.Value);
-                return JsonConvert.DeserializeObject<T>(ticket.UserData);
+                var obj = JsonConvert.DeserializeObject<T>(ticket.UserData);
+                var timeOut = HttpContext.Current.Session.Timeout;
+                AddSession(key, obj, timeOut);
+                return obj;
             }
             catch
             {

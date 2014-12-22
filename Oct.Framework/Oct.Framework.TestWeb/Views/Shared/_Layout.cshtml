@@ -1,4 +1,5 @@
-﻿@using Oct.Framework.MvcExt.User
+﻿@using Oct.Framework.MvcExt.Extisions
+@using Oct.Framework.MvcExt.User
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +60,7 @@
                         </a>
                         <ul class="dropdown-menu pull-left">
                             <li>
-                                <a href="/home/index">
+                                <a href="@Url.Action("index","home",new {area=""})">
                                     <i class="fa fa-angle-right"></i>工作台
                                 </a>
                             </li>
@@ -87,7 +88,7 @@
                                 @foreach (var a in m.Value)
                                 {
                                     <li>
-                                        <a href="@(a.Url)">
+                                        <a href="@Html.GenRouteUrl(a.Url)">
                                             <i class="fa fa-angle-right"></i>@a.Name
                                         </a>
                                     </li>

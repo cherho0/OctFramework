@@ -7,7 +7,7 @@
 //     重新生成代码，这些更改将会丢失。
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Oct.Tools.Host.Res.Temp.View
+namespace Oct.Tools.Host.Res.Temp
 {
     using System.Linq;
     using System.Text;
@@ -18,9 +18,9 @@ namespace Oct.Tools.Host.Res.Temp.View
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
+    #line 1 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public partial class Create : CreateBase
+    public partial class DTO : DTOBase
     {
 #line hidden
         /// <summary>
@@ -28,135 +28,101 @@ namespace Oct.Tools.Host.Res.Temp.View
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"@{
-    ViewBag.Title = ""Create"";
-    Layout = ""~/Views/Shared/_Modal.cshtml"";
-}
-
-@section PluginsJS {
-    <script src=""~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js""></script>
-    <script src=""~/assets/global/plugins/jquery-validation/js/additional-methods.min.js""></script>
-}
-
-@using ");
+            this.Write("using System;\r\nusing System.ComponentModel.DataAnnotations;\r\n\r\nnamespace ");
             
-            #line 16 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
+            #line 9 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.NameSpace));
             
             #line default
             #line hidden
-            this.Write(".Models;\r\n\r\n@model ");
+            this.Write("\r\n{\r\n\t[Serializable]\r\n\tpublic partial class ");
             
-            #line 18 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
+            #line 12 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
-            this.Write("DTO\r\n\r\n<div class=\"container\">\r\n    @using (Html.BeginForm(\"Create\", \"");
             
-            #line 21 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
+            #line 12 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassNameExtend));
             
             #line default
             #line hidden
-            this.Write("\", FormMethod.Post, new { @class = \"J_FormValidate\" }))\r\n    {\r\n        <div clas" +
-                    "s=\"form form-horizontal\">\r\n");
+            this.Write("\r\n\t{ \r\n\t\t#region\t属性\r\n\t\t");
             
-            #line 24 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
+            #line 15 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
 
-	foreach(FiledInfo filed in dt.FiledList) 
-	{		
+			foreach(FiledInfo filed in dt.FiledList) 
+			{		
+				var attr = new StringBuilder();
 
+				if (!filed.IsAllowNull)
+					attr.AppendFormat("\t\t[Required(ErrorMessage = \"{0}不能为空！\")]", filed.Description);
+
+				if (filed.CSharpType.ToLower() == "string")
+				{
+					if(!string.IsNullOrEmpty(attr.ToString())) 
+						attr.Append("\r\n");
+			
+					attr.AppendFormat("\t\t[StringLength({0}, ErrorMessage = \"{1}不能超过{0}个字符！\")]", filed.Length, filed.Description);
+				}
+		
             
             #line default
             #line hidden
-            this.Write("            <div class=\"form-group\">\r\n\t\t\t");
+            this.Write("\r\n\t\t/// <summary>\r\n\t\t/// ");
             
-            #line 29 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
- if (filed.IsAllowNull) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\r\n                <label class=\"col-xs-3 control-label\"><i class=\"fa fa-asterisk" +
-                    " required\"></i>\r\n\t\t\t\t");
-            
-            #line 31 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
- } else { 
+            #line 33 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(filed.GetDisplayName()));
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t <label class=\"col-xs-3 control-label\">\r\n\t\t\t\t ");
+            this.Write("\r\n\t\t/// </summary>\r\n\t\t[Display(Name = \"");
             
-            #line 33 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
+            #line 35 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(filed.GetDisplayName()));
+            
+            #line default
+            #line hidden
+            this.Write("\")]\r\n");
+            
+            #line 36 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+  if(!string.IsNullOrEmpty(attr.ToString())) { 
+            
+            #line default
+            #line hidden
+            
+            #line 37 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(attr.ToString()));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n");
+            
+            #line 38 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t");
+            this.Write("\t\tpublic ");
             
-            #line 34 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.IsNullOrEmpty(filed.Description) ? filed.Name : filed.Description));
-            
-            #line default
-            #line hidden
-            this.Write("</label>\r\n                <div class=\"col-xs-5\">\r\n");
-            
-            #line 36 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
- if (filed.IsAllowNull) { 
+            #line 39 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(filed.CSharpType + " " + filed.Name));
             
             #line default
             #line hidden
-            this.Write("\t \r\n                    @Html.TextBoxFor(p => p.");
+            this.Write("\r\n\t\t{\r\n\t\t\tget;\r\n\t\t\tset;\r\n\t\t}\r\n\t\t");
             
-            #line 37 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
-            
-            #line default
-            #line hidden
-            this.Write(", new { @class = \"form-control\" })\r\n");
-            
-            #line 38 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
- } else { 
-            
-            #line default
-            #line hidden
-            this.Write("                    @Html.TextBoxFor(p => p.");
-            
-            #line 39 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
-            
-            #line default
-            #line hidden
-            this.Write(", new { @class = \"form-control required\" })\r\n");
-            
-            #line 40 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
+            #line 44 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("                </div>\r\n                <label class=\"col-xs-4 help-inline J_Vali" +
-                    "dateMsg\"></label>\r\n            </div>\r\n");
-            
-            #line 44 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write(@"
-            <div class=""form-group"">
-                <div class=""col-xs-9 col-xs-offset-3"">
-                    <button type=""submit"" value=""新增"" class=""btn blue""><i class=""fa fa-plus""></i>&nbsp;新增</button>
-					 <a href=""/User/Home"" class=""btn default J_CloseModal""><i class=""fa fa-undo""></i>&nbsp;返  回</a>
-                </div>
-            </div>
-        </div>
-    }
-</div>
-");
+            this.Write("\r\n\t\t#endregion\t\r\n\t}\r\n}");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Host\Res\Temp\View\Create.tt"
+        #line 1 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
 
 private global::Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo _dtField;
 
@@ -225,7 +191,7 @@ if ((dtValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public class CreateBase
+    public class DTOBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

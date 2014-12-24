@@ -15,6 +15,13 @@ namespace Oct.Framework.DB.Implementation
 {
     public class SQLDBContext<T> : IDBContext<T> where T : BaseEntity<T>, new()
     {
+        public ISession Session { get; private set; }
+
+        public SQLDBContext(ISession session)
+        {
+            Session = session;
+        }
+
         /// <summary>
         ///     新增一个对象
         /// </summary>
@@ -22,12 +29,11 @@ namespace Oct.Framework.DB.Implementation
         public void Add(T entity)
         {
             DbCommand cmd = CreateSqlCommand(entity.GetInsertCmd());
-            ISession session = CurrentSessionFactory.GetCurrentSession();
             if (entity.IsIdentityPk)
             {
                 object v = null;
                 cmd.CommandText += "; SELECT @@IDENTITY ";
-                var ds = session.ExecCmd(cmd);
+                var ds = Session.ExecCmd(cmd);
                 if (ds.Tables.Count == 0)
                     return;
 
@@ -39,7 +45,7 @@ namespace Oct.Framework.DB.Implementation
             }
             else
             {
-                session.AddCommands(cmd);
+                Session.AddCommands(cmd);
             }
         }
 
@@ -54,8 +60,7 @@ namespace Oct.Framework.DB.Implementation
                 throw new Exception("您提供的关键字有可能危害数据库，已阻止执行");
             }
             DbCommand cmd = CreateSqlCommand(entity.GetUpdateCmd(where, paras));
-            ISession session = CurrentSessionFactory.GetCurrentSession();
-            session.AddCommands(cmd, entity);
+            Session.AddCommands(cmd, entity);
         }
 
         /// <summary>
@@ -66,8 +71,7 @@ namespace Oct.Framework.DB.Implementation
         {
             string cmdtext = entity.GetDelSQL();
             var cmd = new SqlCommand(cmdtext);
-            ISession session = CurrentSessionFactory.GetCurrentSession();
-            session.AddCommands(cmd);
+            Session.AddCommands(cmd);
         }
 
         public void Delete(object pk)
@@ -75,9 +79,7 @@ namespace Oct.Framework.DB.Implementation
             var entity = new T();
             string cmdtext = entity.GetDelSQL(pk);
             var cmd = new SqlCommand(cmdtext);
-
-            ISession session = CurrentSessionFactory.GetCurrentSession();
-            session.AddCommands(cmd);
+            Session.AddCommands(cmd);
         }
 
         public void Delete(string @where = "", IDictionary<string, object> paras = null)
@@ -96,8 +98,7 @@ namespace Oct.Framework.DB.Implementation
                     cmd.Parameters.Add(new SqlParameter(para.Key, para.Value));
                 }
             }
-            ISession session = CurrentSessionFactory.GetCurrentSession();
-            session.AddCommands(cmd);
+            Session.AddCommands(cmd);
         }
 
         /// <summary>
@@ -109,7 +110,7 @@ namespace Oct.Framework.DB.Implementation
         {
             var entity = new T();
             string sql = entity.GetModelSQL(pk);
-            var sqlContext = Bootstrapper.GetRepository<ISQLContext>();
+            ISQLContext sqlContext = new SQLContext(Session);
             DataSet ds = sqlContext.ExecuteQuery(sql);
             if (ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
             {
@@ -136,7 +137,7 @@ namespace Oct.Framework.DB.Implementation
             {
                 sql += " order by " + order;
             }
-            var sqlContext = Bootstrapper.GetRepository<ISQLContext>();
+            ISQLContext sqlContext = new SQLContext(Session);
             var paramters = new List<SqlParameter>();
             if (paras != null)
             {
@@ -178,7 +179,7 @@ namespace Oct.Framework.DB.Implementation
             {
                 sql += " order by " + order;
             }
-            var sqlContext = Bootstrapper.GetRepository<ISQLContext>();
+            ISQLContext sqlContext = new SQLContext(Session);
             DataSet ds = sqlContext.ExecuteQuery(sql);
             if (ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
             {
@@ -220,7 +221,7 @@ namespace Oct.Framework.DB.Implementation
             }
 
             var entities = new List<T>();
-            var sqlContext = Bootstrapper.GetRepository<ISQLContext>();
+            ISQLContext sqlContext = new SQLContext(Session);
             var entity = new T();
             string sql = entity.GetQuerySQL(@where);
 
@@ -262,7 +263,7 @@ namespace Oct.Framework.DB.Implementation
                 throw new Exception("您提供的关键字有可能危害数据库，已阻止执行");
             }
             var entities = new List<T>();
-            var sqlContext = Bootstrapper.GetRepository<ISQLContext>();
+            ISQLContext sqlContext = new SQLContext(Session);
             var entity = new T();
             string sql = entity.GetQuerySQL(@where);
 
@@ -307,7 +308,7 @@ namespace Oct.Framework.DB.Implementation
             var sql = entity.GetQuerySQL(h.SqlWhere);
             var paramters = h.Paras;
 
-            var sqlContext = Bootstrapper.GetRepository<ISQLContext>();
+            ISQLContext sqlContext = new SQLContext(Session);
             var ds = sqlContext.ExecuteQuery(sql, paramters.ToArray());
 
             if (ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
@@ -334,7 +335,7 @@ namespace Oct.Framework.DB.Implementation
             h.ResolveExpression(func);
             var paramters = h.Paras;
             var sql = entity.GetQuerySQL(h.SqlWhere);
-            var sqlContext = Bootstrapper.GetRepository<ISQLContext>();
+            ISQLContext sqlContext = new SQLContext(Session);
             total = sqlContext.GetResult<int>(string.Format("SELECT COUNT(1) FROM ({0}) a", sql), h.GetParameters());
 
             int start = (pageIndex - 1) * pageSize;

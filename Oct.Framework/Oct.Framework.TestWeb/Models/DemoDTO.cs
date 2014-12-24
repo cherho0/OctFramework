@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
 namespace Oct.Framework.TestWeb.Models
 {
-    public enum TestEnum
+    public class DemoDTO
     {
-        [Description("OK")]
-        Ok=1,
-         [Description("buOK")]
-        buOk=2
+        public string EnumDDL { get; set; }
+
+        public string DemoTime { get; set; }
     }
 }

@@ -7,6 +7,8 @@ namespace Oct.Framework.DB.Interface
 {
     public interface IDBContext<T> where T : BaseEntity<T>, new()
     {
+        ISession Session { get; }
+
         /// <summary>
         ///     新增一条数据
         /// </summary>

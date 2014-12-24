@@ -18,7 +18,7 @@ namespace Oct.Framework.MvcExt.Filter
 
             var hasuser = LoginHelper.Instance.IsLogin();
 
-            if (!hasuser)
+            if (!hasuser)   
             {
                 filterContext.Result = new HttpUnauthorizedResult();
             }

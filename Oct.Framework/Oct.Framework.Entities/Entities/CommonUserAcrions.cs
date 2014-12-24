@@ -139,7 +139,7 @@ namespace Oct.Framework.Entities.Entities
 
         public override string GetQuerySQL(string @where = "")
         {
-            var sql = @" select
+            var sql = @" select distinct 
 	m.Name MenuName,
 	a.CategoryName,
 	a.Name,
@@ -147,7 +147,7 @@ namespace Oct.Framework.Entities.Entities
 	a.IsLog, 
 	a.IsVisible, 
 	a.Operation, 
-	a.Sort
+	a.Sort,m.Sort as msort
 from 
 Common_UserRole ur
 	inner join Common_RoleAction ra on ur.RoleId = ra.RoleId

@@ -6,6 +6,8 @@ namespace Oct.Framework.DB.Core
     {
         private readonly string _connStr = string.Empty;
 
+        public ISession Session { get; private set; }
+
         public SessionMgr(string connstr)
         {
             _connStr = connstr;
@@ -13,26 +15,18 @@ namespace Oct.Framework.DB.Core
 
         public ISession GetCurrentSession()
         {
-            ISession session = CurrentSessionFactory.GetCurrentSession();
-
-            if (session == null)
+            if (Session == null)
             {
-                session = CurrentSessionFactory.OpenSession(_connStr);
-                CurrentSessionFactory.Bind(session);
+                Session = CurrentSessionFactory.OpenSession(_connStr);
             }
 
-            return session;
+            return Session;
         }
 
         public void CreateSession()
         {
-            ISession session = CurrentSessionFactory.GetCurrentSession();
 
-            if (session == null)
-            {
-                session = CurrentSessionFactory.OpenSession(_connStr);
-                CurrentSessionFactory.Bind(session);
-            }
+            Session = CurrentSessionFactory.OpenSession(_connStr);
         }
     }
 }

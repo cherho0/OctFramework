@@ -7,6 +7,8 @@ namespace Oct.Framework.DB.Interface
 {
     public interface ISQLContext
     {
+        ISession Session { get; }
+
         /// <summary>
         ///     获取单个结果值，查询数量，查询某个字段值等等
         /// </summary>

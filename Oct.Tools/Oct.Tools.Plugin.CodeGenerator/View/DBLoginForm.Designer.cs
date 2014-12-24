@@ -90,7 +90,7 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(250, 21);
             this.txtPassword.TabIndex = 4;
-            this.txtPassword.Text = "SdJ31#*@kjsS";
+            this.txtPassword.Text = "AIS!913819JA";
             // 
             // txtAccount
             // 
@@ -98,7 +98,7 @@
             this.txtAccount.Name = "txtAccount";
             this.txtAccount.Size = new System.Drawing.Size(250, 21);
             this.txtAccount.TabIndex = 3;
-            this.txtAccount.Text = "octsa";
+            this.txtAccount.Text = "Octopus_erp";
             // 
             // txtDBName
             // 

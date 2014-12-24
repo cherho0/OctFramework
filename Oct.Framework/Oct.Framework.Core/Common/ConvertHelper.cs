@@ -102,6 +102,22 @@ namespace Oct.Framework.Core.Common
             return value ? "是" : "否";
         }
 
+        
+        public static string ToYYYYMMDDString(this DateTime value)
+        {
+            return value.ToString("yyyy-MM-dd");
+        }
+
+        /// <summary>
+        /// 空或无
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string ToYYYYMMDDHHmmssString(this DateTime value)
+        {
+            return value.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
         /// <summary>
         /// 空或无
         /// </summary>

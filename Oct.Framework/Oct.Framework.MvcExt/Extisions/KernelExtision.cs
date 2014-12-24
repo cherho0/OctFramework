@@ -22,6 +22,7 @@ using Oct.Framework.Core.Session;
 using Oct.Framework.Core.Xml;
 using Oct.Framework.DB.Base;
 using Oct.Framework.DB.Interface;
+using Oct.Framework.Entities;
 using Oct.Framework.MvcExt.Base;
 using Oct.Framework.MvcExt.User;
 
@@ -42,7 +43,8 @@ namespace Oct.Framework.MvcExt.Extisions
           string where,
             Func<T, SelectListItem> select, bool addall = false) where T : BaseEntity<T>, new()
         {
-            var repo = Bootstrapper.GetRepository<IDBContext<T>>();
+            DbContext context = new DbContext();
+            var repo = context.GetContext<T>();
             var data = repo.Query(where).Select(select).ToList();
             if (addall)
             {
@@ -65,7 +67,8 @@ namespace Oct.Framework.MvcExt.Extisions
           string where, IDictionary<string, object> paras,
             Func<T, SelectListItem> select, bool addall = false) where T : BaseEntity<T>, new()
         {
-            var repo = Bootstrapper.GetRepository<IDBContext<T>>();
+            DbContext context = new DbContext();
+            var repo = context.GetContext<T>();
             var data = repo.Query(where, paras).Select(select).ToList();
             if (addall)
             {

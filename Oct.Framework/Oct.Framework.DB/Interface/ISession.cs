@@ -7,7 +7,7 @@ using Oct.Framework.DB.Base;
 
 namespace Oct.Framework.DB.Interface
 {
-    internal interface ISession : IDisposable
+    public interface ISession : IDisposable
     {
         string ConnString { get; }
 
@@ -15,7 +15,7 @@ namespace Oct.Framework.DB.Interface
 
         SqlTransaction Transaction { get; }
 
-        void CreateSession();
+        ISession CreateSession();
 
         void AddCommands(IDbCommand cmd, IEntity entity = null);
 

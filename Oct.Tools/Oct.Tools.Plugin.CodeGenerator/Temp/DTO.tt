@@ -30,9 +30,9 @@ namespace <#= dt.NameSpace #>
 		#>
 
 		/// <summary>
-		/// <#= string.IsNullOrEmpty(filed.Description) ? filed.Name : filed.Description #>
+		/// <#= filed.GetDisplayName() #>
 		/// </summary>
-		[Display(Name = "<#= string.IsNullOrEmpty(filed.Description) ? filed.Name : filed.Description #>")]
+		[Display(Name = "<#= filed.GetDisplayName() #>")]
 <#  if(!string.IsNullOrEmpty(attr.ToString())) { #>
 <#= attr.ToString() #>
 <# } #>

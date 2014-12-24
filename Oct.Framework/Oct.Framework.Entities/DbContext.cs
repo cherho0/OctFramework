@@ -2,6 +2,7 @@
 using Oct.Framework.Core.IOC;
 using Oct.Framework.DB;
 using Oct.Framework.DB.Core;
+using Oct.Framework.DB.Implementation;
 using Oct.Framework.DB.Interface;
 using Oct.Framework.Entities.Entities;
 
@@ -31,7 +32,7 @@ namespace Oct.Framework.Entities
         {
             get
             {
-                return Bootstrapper.GetRepository<IDBContext<TestTs>>();
+                return new SQLDBContext<TestTs>(Session);
             }
         }
 
@@ -39,17 +40,15 @@ namespace Oct.Framework.Entities
         {
             get
             {
-                return Bootstrapper.GetRepository<IDBContext<UcUserMsg>>();
+                return new SQLDBContext<UcUserMsg>(Session);
             }
         }
-
-
 
         public IDBContext<CommonUserRole> CommonUserRoleContext
         {
             get
             {
-                return Bootstrapper.GetRepository<IDBContext<CommonUserRole>>();
+                return new SQLDBContext<CommonUserRole>(Session);
             }
         }
 
@@ -57,7 +56,7 @@ namespace Oct.Framework.Entities
         {
             get
             {
-                return Bootstrapper.GetRepository<IDBContext<CommonUser>>();
+                return new SQLDBContext<CommonUser>(Session);
             }
         }
 
@@ -65,7 +64,7 @@ namespace Oct.Framework.Entities
         {
             get
             {
-                return Bootstrapper.GetRepository<IDBContext<CommonRoleInfo>>();
+                return new SQLDBContext<CommonRoleInfo>(Session);
             }
         }
 
@@ -73,7 +72,7 @@ namespace Oct.Framework.Entities
         {
             get
             {
-                return Bootstrapper.GetRepository<IDBContext<CommonRoleAction>>();
+                return new SQLDBContext<CommonRoleAction>(Session);
             }
         }
 
@@ -81,7 +80,7 @@ namespace Oct.Framework.Entities
         {
             get
             {
-                return Bootstrapper.GetRepository<IDBContext<CommonMenuActions>>();
+                return new SQLDBContext<CommonMenuActions>(Session);
             }
         }
 
@@ -89,7 +88,7 @@ namespace Oct.Framework.Entities
         {
             get
             {
-                return Bootstrapper.GetRepository<IDBContext<CommonMenuInfo>>();
+                return new SQLDBContext<CommonMenuInfo>(Session);
             }
         }
 
@@ -97,7 +96,7 @@ namespace Oct.Framework.Entities
         {
             get
             {
-                return Bootstrapper.GetRepository<IDBContext<CommonActionInfo>>();
+                return new SQLDBContext<CommonActionInfo>(Session);
             }
         }
 
@@ -105,7 +104,7 @@ namespace Oct.Framework.Entities
         {
             get
             {
-                return Bootstrapper.GetRepository<IDBContext<CommonUserAcrions>>();
+                return new SQLDBContext<CommonUserAcrions>(Session);
             }
         }
     }

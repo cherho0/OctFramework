@@ -5,7 +5,4 @@ MessageQueue：是消息队列，将来做秒杀或者抢单，抢座等活动都会用到。
 MVC：MVC的基本框架要使用的基类和过滤器
 SearchEngine：搜索引擎，提供索引创建，分词，和数据查询搜索等。
 Test：测试的Demo，并且有对权限的整合。
-
 使用前，请先将vs2012 升级到Update4
-
-//todo Session 过期处理

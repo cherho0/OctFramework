@@ -10,6 +10,7 @@
 
 
 @using Oct.Framework.MvcExt.HtmlInput
+@using Oct.Framework.TestWeb.Areas.Premission.Models
 @using Oct.Framework.TestWeb.Code
 @model Oct.Framework.TestWeb.Areas.Premission.Models.CommonUserDTO
 
@@ -41,7 +42,7 @@
             <div class="form-group">
                 <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i>状态</label>
                 <div class="col-xs-5">
-                    @(Html.DropDownListFor(p => p.Status, EnumDropDownList.GetEnumValuesAndDsc<Status>(false), new { @class = "form-control required" }))
+                    @(Html.DropDownListEnumFor<CommonUserDTO,int,Status>(p => p.Status, new { @class = "form-control required" }))
                 </div>
                 <label class="col-xs-4 help-inline J_ValidateMsg"></label>
             </div>

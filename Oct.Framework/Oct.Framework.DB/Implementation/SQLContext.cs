@@ -10,6 +10,13 @@ namespace Oct.Framework.DB.Implementation
 {
     public class SQLContext : ISQLContext
     {
+        public ISession Session { get; private set; }
+
+        public SQLContext(ISession session)
+        {
+            Session = session;
+        }
+
         public T GetResult<T>(string sql)
         {
             if (SQLWordFilte.CheckSql(sql))
@@ -28,7 +35,7 @@ namespace Oct.Framework.DB.Implementation
 
                 object v = ds.Tables[0].Rows[0][0];
 
-                return (T) Convert.ChangeType(v, typeof (T));
+                return (T)Convert.ChangeType(v, typeof(T));
             }
             catch (Exception)
             {
@@ -54,7 +61,7 @@ namespace Oct.Framework.DB.Implementation
 
                 object v = ds.Tables[0].Rows[0][0];
 
-                return (T) Convert.ChangeType(v, typeof (T));
+                return (T)Convert.ChangeType(v, typeof(T));
             }
             catch (Exception)
             {
@@ -131,7 +138,7 @@ namespace Oct.Framework.DB.Implementation
             foreach (DataRow r in ds.Tables[0].Rows)
             {
                 object v = r[0];
-                yield return (T) Convert.ChangeType(v, typeof (T));
+                yield return (T)Convert.ChangeType(v, typeof(T));
             }
         }
 
@@ -141,22 +148,20 @@ namespace Oct.Framework.DB.Implementation
             {
                 throw new Exception("您提供的关键字有可能危害数据库，已阻止执行");
             }
-            ISession session = CurrentSessionFactory.GetCurrentSession();
             var cmd = new SqlCommand(sql);
-            session.AddCommands(cmd);
-            int rows = session.Commit();
+            Session.AddCommands(cmd);
+            int rows = Session.Commit();
             return rows;
         }
 
         public int ExecuteSQLs(List<string> sqls)
         {
-            ISession session = CurrentSessionFactory.GetCurrentSession();
             foreach (string sql in sqls)
             {
                 var cmd = new SqlCommand(sql);
-                session.AddCommands(cmd);
+                Session.AddCommands(cmd);
             }
-            int rows = session.Commit();
+            int rows = Session.Commit();
             return rows;
         }
 
@@ -166,13 +171,12 @@ namespace Oct.Framework.DB.Implementation
             {
                 throw new Exception("您提供的关键字有可能危害数据库，已阻止执行");
             }
-            ISession session = CurrentSessionFactory.GetCurrentSession();
             try
             {
-                session.Open();
+                Session.Open();
                 var ds = new DataSet();
                 var cmd = new SqlCommand(sql);
-                cmd.Connection = session.Connection;
+                cmd.Connection = Session.Connection;
                 var command = new SqlDataAdapter(cmd);
 
                 command.Fill(ds);
@@ -194,14 +198,13 @@ namespace Oct.Framework.DB.Implementation
             {
                 throw new Exception("您提供的关键字有可能危害数据库，已阻止执行");
             }
-            ISession session = CurrentSessionFactory.GetCurrentSession();
             try
             {
-                session.Open();
+                Session.Open();
                 var ds = new DataSet();
                 var cmd = new SqlCommand();
                 cmd = PrepareCommand(cmd, sql, cmdParms);
-                cmd.Connection = session.Connection;
+                cmd.Connection = Session.Connection;
                 var command = new SqlDataAdapter(cmd);
                 command.Fill(ds);
                 return ds;
@@ -239,7 +242,7 @@ namespace Oct.Framework.DB.Implementation
                         expando.Add(column.Caption, row[column]);
                     }
 
-                    yield return (ExpandoObject) expando;
+                    yield return (ExpandoObject)expando;
                 }
             }
         }
@@ -266,7 +269,7 @@ namespace Oct.Framework.DB.Implementation
                         expando.Add(column.Caption, row[column]);
                     }
 
-                    return (ExpandoObject) expando;
+                    return (ExpandoObject)expando;
                 }
             }
             return null;
@@ -303,12 +306,11 @@ namespace Oct.Framework.DB.Implementation
         /// <returns>SqlDataReader</returns>
         public SqlDataReader RunProcedure(string storedProcName, IDataParameter[] parameters)
         {
-            ISession session = CurrentSessionFactory.GetCurrentSession();
             try
             {
-                session.Open();
+                Session.Open();
                 SqlDataReader returnReader;
-                SqlCommand command = BuildQueryCommand(session.Connection, storedProcName, parameters);
+                SqlCommand command = BuildQueryCommand(Session.Connection, storedProcName, parameters);
                 command.CommandType = CommandType.StoredProcedure;
                 returnReader = command.ExecuteReader(CommandBehavior.CloseConnection);
                 return returnReader;
@@ -333,12 +335,11 @@ namespace Oct.Framework.DB.Implementation
         /// <returns>DataSet</returns>
         public DataSet RunProcedure(string storedProcName, IDataParameter[] parameters, string tableName)
         {
-            ISession session = CurrentSessionFactory.GetCurrentSession();
             try
             {
-                session.Open();
+                Session.Open();
                 var dataSet = new DataSet();
-                SqlCommand command = BuildQueryCommand(session.Connection, storedProcName, parameters);
+                SqlCommand command = BuildQueryCommand(Session.Connection, storedProcName, parameters);
                 command.CommandType = CommandType.StoredProcedure;
                 var sqlDA = new SqlDataAdapter();
                 sqlDA.SelectCommand = command;
@@ -357,12 +358,11 @@ namespace Oct.Framework.DB.Implementation
 
         public DataSet RunProcedure(string storedProcName, IDataParameter[] parameters, string tableName, int timeOut)
         {
-            ISession session = CurrentSessionFactory.GetCurrentSession();
             try
             {
-                session.Open();
+                Session.Open();
                 var dataSet = new DataSet();
-                SqlCommand command = BuildQueryCommand(session.Connection, storedProcName, parameters);
+                SqlCommand command = BuildQueryCommand(Session.Connection, storedProcName, parameters);
                 command.CommandType = CommandType.StoredProcedure;
                 var sqlDA = new SqlDataAdapter();
                 sqlDA.SelectCommand = command;
@@ -389,15 +389,14 @@ namespace Oct.Framework.DB.Implementation
         /// <returns></returns>
         public int RunProcedure(string storedProcName, IDataParameter[] parameters, out int rowsAffected)
         {
-            ISession session = CurrentSessionFactory.GetCurrentSession();
             try
             {
                 int result;
-                session.Open();
-                SqlCommand command = BuildIntCommand(session.Connection, storedProcName, parameters);
+                Session.Open();
+                SqlCommand command = BuildIntCommand(Session.Connection, storedProcName, parameters);
                 command.CommandType = CommandType.StoredProcedure;
                 rowsAffected = command.ExecuteNonQuery();
-                result = (int) command.Parameters["ReturnValue"].Value;
+                result = (int)command.Parameters["ReturnValue"].Value;
                 return result;
             }
             catch (SqlException ex)

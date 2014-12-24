@@ -104,7 +104,13 @@
     <Compile Include="Filter\PermissionFilter.cs" />
     <Compile Include="Filter\ViewFilter.cs" />
     <Compile Include="Filter\PerformanceFilter.cs" />
-    <Compile Include="HtmlInput\EnumDropDownList.cs" />
+    <Compile Include="HtmlInput\BootstrapTemplate.cs" />
+    <Compile Include="HtmlInput\OctAddressSelect.cs" />
+    <Compile Include="HtmlInput\OctAutoComplete.cs" />
+    <Compile Include="HtmlInput\OctDatePicker.cs" />
+    <Compile Include="HtmlInput\OctDropDownList.cs" />
+    <Compile Include="HtmlInput\OctRadioButton.cs" />
+    <Compile Include="HtmlInput\OctCheckBoxList.cs" />
     <Compile Include="OctGlobal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result\XmlResult.cs" />

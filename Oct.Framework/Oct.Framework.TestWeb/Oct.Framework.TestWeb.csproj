@@ -151,6 +151,7 @@
     <Compile Include="Areas\Premission\Models\CommonUserDTO.cs" />
     <Compile Include="Areas\Premission\Models\CommonUserRoleDTO.cs" />
     <Compile Include="Models\CurrentUser.cs" />
+    <Compile Include="Models\DemoDTO.cs" />
     <Compile Include="Models\TestE.cs" />
     <Compile Include="Models\TestTsDTO.cs" />
     <Compile Include="Models\UserInfoDTO.cs" />
@@ -561,6 +562,7 @@
     <Content Include="assets\octopus\img\home.jpg" />
     <Content Include="assets\octopus\img\logo.gif" />
     <Content Include="assets\octopus\img\logo.png" />
+    <Content Include="assets\octopus\js\address.js" />
     <Content Include="assets\octopus\js\artTemplate.js" />
     <Content Include="assets\octopus\js\common.js" />
     <Content Include="assets\octopus\js\company.js" />
@@ -705,6 +707,7 @@
     <Content Include="Views\Shared\_Modal.cshtml" />
     <Content Include="Views\Shared\Jump.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Home\Demo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

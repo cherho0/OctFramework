@@ -94,7 +94,7 @@ namespace Oct.Tools.Host.Res.Temp
             this.Write(";\r\n\r\n\t\t/// <summary>\r\n\t\t/// ");
             
             #line 40 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Entity.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.IsNullOrEmpty(filed.Description) ? filed.Name : filed.Description));
+            this.Write(this.ToStringHelper.ToStringWithCulture(filed.GetDisplayName()));
             
             #line default
             #line hidden

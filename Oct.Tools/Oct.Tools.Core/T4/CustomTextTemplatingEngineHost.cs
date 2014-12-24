@@ -2,6 +2,7 @@
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -58,9 +59,10 @@ namespace Oct.Tools.Core.T4
             {
                 return new string[]
                 {
+                    typeof(ConfigurationManager).Assembly.Location,
                     typeof(Queryable).Assembly.Location,
-                    typeof(XmlDocument).Assembly.Location,
-                    typeof(Uri).Assembly.Location
+                    typeof(Uri).Assembly.Location,
+                    typeof(XmlDocument).Assembly.Location
                 };
             }
         }

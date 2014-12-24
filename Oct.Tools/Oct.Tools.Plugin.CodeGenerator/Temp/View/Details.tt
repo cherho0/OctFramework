@@ -23,7 +23,7 @@
 
 <# } else { #>
         <div class="form-group">
-            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i><#= string.IsNullOrEmpty(filed.Description) ? filed.Name : filed.Description #></label>
+            <label class="col-xs-3 control-label"><i class="fa fa-asterisk required"></i><#= filed.GetDisplayName() #></label>
             <div class="col-xs-5 control-label">
                 @Model.<#= filed.Name #>
             </div>

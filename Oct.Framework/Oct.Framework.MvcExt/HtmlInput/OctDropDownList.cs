@@ -9,20 +9,24 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using Oct.Framework.Core.IOC;
+using Oct.Framework.DB.Base;
+using Oct.Framework.DB.Interface;
+using Oct.Framework.Entities;
 
 namespace Oct.Framework.MvcExt.HtmlInput
 {
-    public static class EnumDropDownList
+    public static class OctDropDownList
     {
         private static Dictionary<string, IList<SelectListItem>> enumCache = new Dictionary<string, IList<SelectListItem>>();
 
-        public static HtmlString DropDownListForEnum<TM, TP, TK>(this HtmlHelper<TM> helper, Expression<Func<TM, TP>> expression,
+        public static HtmlString DropDownListEnumFor<TM, TP, TK>(this HtmlHelper<TM> helper, Expression<Func<TM, TP>> expression,
            object htmlattributes = null, bool addall = false, string val = "") where TK : struct
         {
             return helper.DropDownListFor(expression, GetEnumValuesAndDsc<TK>(addall, val), htmlattributes);
         }
 
-        public static HtmlString DropDownListForEnum<K>(this HtmlHelper helper, string name,
+        public static HtmlString DropDownListEnum<K>(this HtmlHelper helper, string name,
           object htmlattributes = null, bool addall = false, string val = "") where K : struct
         {
             return helper.DropDownList(name, GetEnumValuesAndDsc<K>(addall, val), htmlattributes);
@@ -77,6 +81,57 @@ namespace Oct.Framework.MvcExt.HtmlInput
                 items.Insert(0, defitem);
             }
             return items;
+        }
+
+        /// <summary>
+        /// 通过类型获取全部结果集生成的listitem
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="helper"></param>
+        /// <param name="where"></param>
+        /// <param name="select"></param>
+        /// <param name="addall"></param>
+        /// <returns></returns>
+        public static IEnumerable<SelectListItem> GetSelectListItems<T>(this HtmlHelper helper,
+          string where,
+            Func<T, SelectListItem> select, bool addall = false) where T : BaseEntity<T>, new()
+        {
+            DbContext context = new DbContext();
+            var repo = context.GetContext<T>();
+            var data = repo.Query(where).Select(select).ToList();
+            if (addall)
+            {
+                data.Insert(0, new SelectListItem { Text = "-全部-", Value = string.Empty });
+            }
+            return data;
+        }
+
+        public static HtmlString DropDownListModel<T>(this HtmlHelper helper, string name,
+         string where,
+            Func<T, SelectListItem> select, object htmlattributes = null, bool addall = false) where T : BaseEntity<T>, new()
+        {
+            DbContext context = new DbContext();
+            var repo = context.GetContext<T>();
+            var data = repo.Query(where).Select(select).ToList();
+            if (addall)
+            {
+                data.Insert(0, new SelectListItem { Text = "-全部-", Value = string.Empty });
+            }
+            return helper.DropDownList(name,data,htmlattributes);
+        }
+
+        public static HtmlString DropDownListModelFor<T1, T2, TM>(this HtmlHelper<T1> helper, Expression<Func<T1, T2>> expression,
+        string where,
+           Func<TM, SelectListItem> select, object htmlattributes = null, bool addall = false) where TM : BaseEntity<TM>, new()
+        {
+            DbContext context = new DbContext();
+            var repo = context.GetContext<TM>();
+            var data = repo.Query(where).Select(select).ToList();
+            if (addall)
+            {
+                data.Insert(0, new SelectListItem { Text = "-全部-", Value = string.Empty });
+            }
+            return helper.DropDownListFor(expression, data, htmlattributes);
         }
     }
 }

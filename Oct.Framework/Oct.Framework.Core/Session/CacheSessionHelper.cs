@@ -41,7 +41,7 @@ namespace Oct.Framework.Core.Session
         /// <param name="value"></param>
         /// <param name="timeOut"></param>
         public bool Add(string key, object value, int timeOut = -1)
-        {
+        {   
             if (timeOut == -1)
             {
                 timeOut = HttpContext.Current.Session.Timeout;

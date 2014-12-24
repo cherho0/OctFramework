@@ -3,6 +3,7 @@ using Oct.Framework.Core;
 using Oct.Framework.Core.Common;
 using Oct.Framework.Core.IOC;
 using Oct.Framework.DB.Base;
+using Oct.Framework.DB.Implementation;
 using Oct.Framework.DB.Interface;
 
 namespace Oct.Framework.DB.Core
@@ -11,6 +12,11 @@ namespace Oct.Framework.DB.Core
     {
         private readonly string _connstr = string.Empty;
         private SessionMgr _currentSessionMgr;
+
+        protected ISession Session
+        {
+            get { return _currentSessionMgr.GetCurrentSession(); }
+        }
 
         protected DBContextBase()
         {
@@ -41,15 +47,18 @@ namespace Oct.Framework.DB.Core
 
         public ISQLContext SQLContext
         {
-            get { return Bootstrapper.GetRepository<ISQLContext>(); }
+            get
+            {
+                ISQLContext sqlContext = new SQLContext(_currentSessionMgr.GetCurrentSession());
+                return sqlContext;
+            }
         }
 
         public void Dispose()
         {
-            if (CurrentSessionFactory.GetCurrentSession() != null)
+            if (_currentSessionMgr.GetCurrentSession() != null)
             {
-                CurrentSessionFactory.GetCurrentSession().Dispose();
-                CurrentSessionFactory.Clear();
+                _currentSessionMgr.GetCurrentSession().Dispose();
             }
             _currentSessionMgr = null;
         }
@@ -67,7 +76,8 @@ namespace Oct.Framework.DB.Core
 
         public IDBContext<T> GetContext<T>() where T : BaseEntity<T>, new()
         {
-            return Bootstrapper.GetRepository<IDBContext<T>>();
+            IDBContext<T> context = new SQLDBContext<T>(_currentSessionMgr.GetCurrentSession());
+            return context;
         }
     }
 }

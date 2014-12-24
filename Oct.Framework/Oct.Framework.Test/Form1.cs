@@ -1,7 +1,9 @@
-﻿using Oct.Framework.Entities;
+﻿using System.Threading.Tasks;
+using Oct.Framework.Entities;
 using System;
 using System.Linq;
 using System.Windows.Forms;
+using Oct.Framework.Entities.Entities;
 
 namespace Oct.Framework.Test
 {
@@ -158,6 +160,26 @@ namespace Oct.Framework.Test
 
             //        //dataGridView1.DataSource = model;
             //    }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Parallel.For(0,500, x =>
+            {
+                try
+                {
+                    using (DbContext context = new DbContext())
+                    {
+                        context.TestTsContext.Add(new TestTs() { DD = "第几个" + x });
+                        context.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    
+                }
+                
+            });
         }
     }
 }

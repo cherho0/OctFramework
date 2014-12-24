@@ -42,7 +42,7 @@
 	foreach(FiledInfo filed in dt.FiledList) 
 	{		
 #>
-                    <th><#= string.IsNullOrEmpty(filed.Description) ? filed.Name : filed.Description #></th>
+                    <th><#= filed.GetDisplayName() #></th>
 <# } #>
                     <th>操作</th>
                 </tr>

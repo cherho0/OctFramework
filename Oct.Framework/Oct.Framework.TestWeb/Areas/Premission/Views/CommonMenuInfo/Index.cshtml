@@ -40,7 +40,7 @@
                             @Html.AuthedLink("修改", "Edit", "CommonMenuInfo", "btn btn-sm link j-modal", null, new { id = m.Id })
                             @Html.AuthedLink("删除", "Delete", "CommonMenuInfo", "", new { onclick = "return confirm('确认删除吗？')" }, new { id = m.Id })
 
-                            @Html.AuthedLink("功能管理", "", "CommonActionInfo", "", null, new { ModelId = m.Id })
+                            @Html.AuthedLink("功能管理", "index", "CommonActionInfo", "", null, new { ModelId = m.Id })
                         </td>
                     </tr>
                 }

@@ -37,7 +37,7 @@ namespace <#= dt.NameSpace #>
 		private <#= filed.CSharpType + nullFlag + " " + temp #>;
 
 		/// <summary>
-		/// <#= string.IsNullOrEmpty(filed.Description) ? filed.Name : filed.Description #>
+		/// <#= filed.GetDisplayName() #>
 		/// </summary>
 		public <#= filed.CSharpType + nullFlag + " " + filed.Name #>
 		{

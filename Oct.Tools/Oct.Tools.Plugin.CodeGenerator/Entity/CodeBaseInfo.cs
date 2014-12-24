@@ -171,5 +171,18 @@ namespace Oct.Tools.Plugin.CodeGenerator.Entity
         }
 
         #endregion
+
+        #region 方法
+
+        /// <summary>
+        /// 获取显示名称
+        /// </summary>
+        /// <returns></returns>
+        public string GetDisplayName()
+        {
+            return string.IsNullOrEmpty(this.Description) ? this.Name : this.Description;
+        }
+
+        #endregion
     }
 }

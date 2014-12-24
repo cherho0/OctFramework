@@ -1,0 +1,168 @@
+﻿@using Oct.Framework.Entities.Entities
+@using Oct.Framework.MvcExt.HtmlInput
+@using Oct.Framework.TestWeb.Code
+@using Oct.Framework.TestWeb.Models
+@{
+    ViewBag.Title = "Demo";
+}
+@model DemoDTO
+<h2>Demo</h2>
+
+<h3 id="btn-groups-single">枚举类型选择器</h3>
+<p>通过model 绑定</p>
+<pre>
+    @(Html.DropDownListEnumFor<DemoDTO, object, Status>(p => p.EnumDDL))
+</pre>
+<pre>@@(Html.DropDownListEnumFor&lt;DemoDTO,object,TestEnum&gt;(p=>p.EnumDDL))</pre>
+
+
+<h3 id="btn-groups-single">枚举类型选择器</h3>
+<p>通过model 绑定</p>
+<pre>
+    @(Html.DropDownListEnum<Status>("demo"))
+</pre>
+<pre>@@(Html.DropDownListEnum&lt;TestEnum>("demo"))</pre>
+
+
+<h3 id="btn-groups-single">实体下拉选择:</h3>
+<p>第一种方法：</p>
+<pre>
+    @Html.DropDownList("test1",
+        Html.GetSelectListItems<CommonUser>(" account='czy' ",
+            p => new SelectListItem()
+            {
+                Text = p.UserName,
+                Value = p.Id.ToString()
+            }, true))
+</pre>
+<pre>@@Html.DropDownList("test1",
+        Html.GetSelectListItems&lt;CommonUser>(" account='czy' ",
+        p => new SelectListItem()
+        {
+        Text = p.UserName,
+        Value = p.Id.ToString()
+        }, true))
+</pre>
+
+
+
+<p>第二种 lambda绑定</p>
+<pre>
+   @(Html.DropDownListModelFor<DemoDTO, object, CommonUser>(p => p.EnumDDL, " account='czy' ",
+   p => new SelectListItem()
+               {
+                   Text = p.UserName,
+                   Value = p.Id.ToString()
+               }))
+</pre>
+<pre>
+        @@(Html.DropDownListModelFor&lt;DemoDTO, object, CommonUser>(p => p.EnumDDL, " account='czy' ",
+            p => new SelectListItem()
+               {
+                   Text = p.UserName,
+                   Value = p.Id.ToString()
+               }))
+            </pre>
+<p>第三种 属性名称绑定</p>
+<pre>
+  @(Html.DropDownListModel<CommonUser>("name", " account='czy' ",
+        p => new SelectListItem()
+               {
+                   Text = p.UserName,
+                   Value = p.Id.ToString()
+               }))
+</pre>
+<pre>
+        @@(Html.DropDownListModel&lt;CommonUser>("name", " account='czy' ",
+    
+               p => new SelectListItem()
+               {
+                   Text = p.UserName,
+                   Value = p.Id.ToString()
+               }))
+            </pre>
+
+
+<h3 id="btn-groups-single">CheckBoxList</h3>
+<p></p>
+<pre>
+    @(Html.CheckBoxList<CommonUser>("id", "name", p => new SelectListItem()
+               {
+                   Text = p.UserName,
+                   Value = p.Id.ToString()
+               }, "721c3846-e4bd-4cc9-8f75-00080f30918a"))
+</pre>
+<pre>@@(Html.CheckBoxList&lt;CommonUser>("id", "name", p => new SelectListItem()
+               {
+                   Text = p.UserName,
+                   Value = p.Id.ToString()
+               }))</pre>
+<pre>
+    @(Html.CheckBoxListFor<DemoDTO, object, CommonUser>(p => p.EnumDDL, p => new SelectListItem()
+      {
+          Text = p.UserName,
+          Value = p.Id.ToString()
+      }))
+</pre>
+<pre>@@(Html.CheckBoxListFor&lt;DemoDTO,object,CommonUser>(p=>p.EnumDDL, p => new SelectListItem()
+               {
+                   Text = p.UserName,
+                   Value = p.Id.ToString()
+               }))
+    </pre>
+
+
+<h3 id="btn-groups-single">RadioButtonList</h3>
+<p></p>
+<pre>
+    @(Html.RadioButtonList<CommonUser>("id", "name", p => new SelectListItem()
+               {
+                   Text = p.UserName,
+                   Value = p.Id.ToString()
+               }, "721c3846-e4bd-4cc9-8f75-00080f30918a"))
+</pre>
+<pre>@@(Html.CheckBoxList&lt;CommonUser>("id", "name", p => new SelectListItem()
+               {
+                   Text = p.UserName,
+                   Value = p.Id.ToString()
+               }))</pre>
+
+<pre>
+    @(Html.RadioButtonListFor<DemoDTO, object, CommonUser>(p => p.EnumDDL, p => new SelectListItem()
+               {
+                   Text = p.UserName,
+                   Value = p.Id.ToString()
+               }))
+</pre>
+<pre>@@(Html.RadioButtonListFor&lt;DemoDTO,object,CommonUser>(p=>p.EnumDDL, p => new SelectListItem()
+               {
+                   Text = p.UserName,
+                   Value = p.Id.ToString()
+               }))</pre>
+
+
+<h3 id="btn-groups-single">DateTimePicker</h3>
+<p></p>
+<pre>
+   @Html.DatePickerFor(p=>p.DemoTime)
+</pre>
+<pre>@@Html.DatePickerFor(p=>p.DemoTime)</pre>
+<h3 id="btn-groups-single">Address</h3>
+<p></p>
+
+<h3 id="btn-groups-single">省市区三级联动</h3>
+<pre>
+   @Html.AddressSelect("proId","cityId","AreaId")
+</pre>
+<pre>@@Html.AddressSelect("proId","cityId","AreaId")</pre>
+
+<h3 id="btn-groups-single">forms</h3>
+
+   @using (Html.BeginBootstrapSreachDiv())
+   {
+       @Html.Submit()
+        @Html.Button()
+   }
+
+<pre>@@Html.AddressSelect("proId","cityId","AreaId")</pre>
+

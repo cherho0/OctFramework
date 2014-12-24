@@ -1,45 +1,49 @@
-﻿using System.Web;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Threading;
+using System.Web;
 using Oct.Framework.DB.Interface;
 
 namespace Oct.Framework.DB.Core
 {
+    /// <summary>
+    /// session 工厂类
+    /// </summary>
     internal class CurrentSessionFactory
     {
-        private const string OCTSESSION = "OCTSESSION";
+        private static ConcurrentDictionary<int, ISession> _sessions
+            = new ConcurrentDictionary<int, ISession>();
+
         private static ISession _session;
 
+        [Obsolete("已弃用")]
         public static void Bind(ISession session)
         {
-            HttpContext context = GetCurrentRequert();
-            if (context == null)
+            _sessions.TryAdd(CurThId, session);
+        }
+
+        private static int CurThId
+        {
+            get
             {
-                _session = session;
-            }
-            else
-            {
-                context.Session[OCTSESSION] = session;
+                return Thread.CurrentThread.ManagedThreadId;
             }
         }
 
-        public static ISession GetCurrentSession()
+        private static ISession GetCurrentSession()
         {
-            HttpContext context = GetCurrentRequert();
-            if (context == null)
-            {
-                return _session;
-            }
-            if (context.Session == null)
+            if (_sessions == null || !_sessions.ContainsKey(CurThId))
             {
                 return null;
             }
-            return (ISession) context.Session[OCTSESSION];
+            return _sessions[CurThId];
         }
 
         public static ISession OpenSession(string connstr)
         {
             var session = new DBSession(connstr);
-            session.CreateSession();
-            return session;
+            return session.CreateSession();
         }
 
         private static HttpContext GetCurrentRequert()
@@ -47,14 +51,11 @@ namespace Oct.Framework.DB.Core
             return HttpContext.Current;
         }
 
-        public static void Clear()
+        private static void Clear()
         {
-            _session = null;
-            HttpContext context = GetCurrentRequert();
-            if (context != null)
-            {
-                context.Session[OCTSESSION] = null;
-            }
+            ISession s;
+            _sessions.TryRemove(CurThId, out s);
+
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Oct.Framework.DB.Core
 {
     internal class DBSession : ISession
     {
+        public string SessionId;
         private bool _openConn;
 
         private readonly List<IDbCommand> _cmds;
@@ -24,6 +25,7 @@ namespace Oct.Framework.DB.Core
 
         public DBSession(string connstr)
         {
+            SessionId = Guid.NewGuid().ToString().Replace("-", "").ToLower();
             _connStr = connstr;
             _cmds = new List<IDbCommand>();
             _logs = new List<DataChangeLog>();
@@ -44,9 +46,10 @@ namespace Oct.Framework.DB.Core
             get { return _trans; }
         }
 
-        public void CreateSession()
+        public ISession CreateSession()
         {
             _conn = new SqlConnection(_connStr);
+            return this;
         }
 
         public void BeginTransaction()
@@ -151,7 +154,7 @@ namespace Oct.Framework.DB.Core
             }
             cmd.Connection = _conn;
             cmd.Transaction = _trans;
-            var command = new SqlDataAdapter((SqlCommand) cmd);
+            var command = new SqlDataAdapter((SqlCommand)cmd);
             command.Fill(ds);
             return ds;
         }
@@ -193,7 +196,6 @@ namespace Oct.Framework.DB.Core
                 _conn.Dispose();
                 _conn = null;
             }
-            CurrentSessionFactory.Clear();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.Bll
         {
             get
             {
-                return Path.Combine(Environment.CurrentDirectory, @"Res\Temp");
+                return string.Format(@"{0}\Temp", Environment.CurrentDirectory);
             }
         }
 

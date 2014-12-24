@@ -17,6 +17,7 @@ using Oct.Framework.Core.Export;
 using Oct.Framework.Core.Image;
 using Oct.Framework.Core.IOC;
 using Oct.Framework.Core.Json;
+using Oct.Framework.Core.Reflection;
 using Oct.Framework.Core.Security;
 using Oct.Framework.Core.Session;
 using Oct.Framework.Core.Xml;
@@ -473,7 +474,7 @@ namespace Oct.Framework.MvcExt.Extisions
             return session.AddSession(key, value, timeOut);
         }
 
-        
+
         /// <summary>
         /// 获取session
         /// </summary>
@@ -517,9 +518,9 @@ namespace Oct.Framework.MvcExt.Extisions
         /// 缓存权限
         /// </summary>
         /// <returns></returns>
-        public static void GetLoginUserRoles(this IKernel knl)
+        public static UserRoles GetLoginUserRoles(this IKernel knl)
         {
-            LoginHelper.Instance.GetLoginUserRoles();
+            return LoginHelper.Instance.GetLoginUserRoles();
         }
 
         /// <summary>
@@ -529,6 +530,17 @@ namespace Oct.Framework.MvcExt.Extisions
         public static PageModel CreatePageModel(this IKernel knl, int size, int index, int count)
         {
             return new PageModel() { CurrentPage = index, PageSize = size, Total = count };
+        }
+
+        /// <summary>
+        /// 获取枚举描述值
+        /// </summary>
+        /// <param name="knl"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public static string GetEnumValue(this IKernel knl, Enum e)
+        {
+            return EnumHelper.GetEnumDescription(e);
         }
     }
 }

@@ -14,6 +14,7 @@ using Oct.Framework.MvcExt.Extisions;
 using Oct.Framework.MvcExt.Filter;
 using Oct.Framework.MvcExt.User;
 using Oct.Framework.SearchEngine;
+using Oct.Framework.TestWeb.Code;
 using Oct.Framework.TestWeb.Models;
 
 namespace Oct.Framework.TestWeb.Controllers
@@ -26,6 +27,9 @@ namespace Oct.Framework.TestWeb.Controllers
         
         public ActionResult Index()
         {
+            var v = Status.Del.ToEnumString();
+            var v2 = Status2.Del.ToEnumString();
+            var v3 = Status.Del.ToEnumString();
             ViewBag.s = "我是八爪鱼快乐的一员测试分词";
             return View();
         }

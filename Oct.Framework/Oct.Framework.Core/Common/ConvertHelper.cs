@@ -1,4 +1,5 @@
 ﻿using System;
+using Oct.Framework.Core.Reflection;
 
 namespace Oct.Framework.Core.Common
 {
@@ -125,20 +126,7 @@ namespace Oct.Framework.Core.Common
         /// <returns></returns>
         public static string ToEnumString(this Enum enumValue)
         {
-            if (enumValue == null)
-            {
-                return "";
-            }
-            string str = enumValue.ToString();
-            System.Reflection.FieldInfo field = enumValue.GetType().GetField(str);
-            if (field == null)
-            {
-                return str;
-            }
-            object[] objs = field.GetCustomAttributes(typeof(System.ComponentModel.DescriptionAttribute), false);
-            if (objs == null || objs.Length == 0) return str;
-            System.ComponentModel.DescriptionAttribute da = (System.ComponentModel.DescriptionAttribute)objs[0];
-            return da.Description;
+            return EnumHelper.GetEnumDescription(enumValue);
         }
     }
 }

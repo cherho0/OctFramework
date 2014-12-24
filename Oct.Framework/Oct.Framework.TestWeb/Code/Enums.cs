@@ -25,6 +25,23 @@ namespace Oct.Framework.TestWeb.Code
 
     }
 
+
+    public enum Status2
+    {
+        //启用
+        [Description("启用2")]
+        Enable = 1,
+        //停用
+        [Description("停用2")]
+        Stop = 2,
+        //新建
+        [Description("新建2")]
+        New = 3,
+        [Description("删除2")]
+        Del = 4,
+
+    }
+
     /// <summary>
     /// 操作枚举
     /// </summary>

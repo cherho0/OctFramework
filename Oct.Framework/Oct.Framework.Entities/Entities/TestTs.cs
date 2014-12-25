@@ -1,176 +1,200 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
-using Oct.Framework.DB.Base;
+﻿using Oct.Framework.DB.Base;
 using Oct.Framework.DB.Core;
 using Oct.Framework.DB.Interface;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
+using System.Text;
 
 namespace Oct.Framework.Entities.Entities
 {
-    [Serializable]
-    public partial class TestTs : BaseEntity<TestTs>
-    {
-        #region 字段
+	[Serializable]
+	public partial class TestTs : BaseEntity<TestTs>
+	{ 
+		#region	属性
+		
+		private int _id;
 
-        private int _id;
+		/// <summary>
+		/// Id
+		/// </summary>
+		public int Id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				this.PropChanged("Id", this._id, value);
 
-        public int Id
-        {
-            get { return _id; }
-            set
-            {
-                PropChanged("Id", _id, value);
-                _id = value;
-            }
-        }
+				this._id = value;
+			}
+		}
+		
+		private string _dD;
 
-        private string _DD;
+		/// <summary>
+		/// DD
+		/// </summary>
+		public string DD
+		{
+			get
+			{
+				return this._dD;
+			}
+			set
+			{
+				this.PropChanged("DD", this._dD, value);
 
-        public string DD
-        {
-            get
-            {
-                return _DD;
-            }
-            set
-            {
-                PropChanged("DD", _DD, value);
-                _DD = value;
-            }
-        }
+				this._dD = value;
+			}
+		}
+		
+		#endregion
 
+		#region 重载
 
-        #endregion
+		public override object PkValue
+		{
+			get
+			{
+				return this.Id; 
+			}
+		}
 
-        #region 重载
+		public override string PkName
+		{
+			get
+			{
+				return "Id"; 
+			}
+		}
 
-        public override object PkValue
-        {
-            get { return Id; }
-        }
+		public override bool IsIdentityPk
+		{
+			get 
+			{
+				return true; 
+			}
+		}
 
-        public override string PkName
-        {
-            get { return "Id"; }
-        }
+		public override void SetIdentity(object v)
+		{
+			this.Id = int.Parse(v.ToString());
+		}
+		
+		public override List<string> Props
+		{
+			get
+			{
+				return new List<string>();
+			}
+		}
 
-        public override bool IsIdentityPk
-        {
-            get { return true; }
-        }
+		public override TestTs GetEntityFromDataRow(DataRow row)
+		{
+			if (row.Table.Columns.Contains("Id") && row["Id"] != null && row["Id"].ToString() != "")
+			{
+				this.Id = int.Parse(row["Id"].ToString());
+			}
+			if (row.Table.Columns.Contains("DD") && row["DD"] != null)
+			{
+				this.DD = row["DD"].ToString();
+			}
 
-        public override void SetIdentity(object v)
-        {
-            _id = int.Parse(v.ToString());
-        }
+			return this;
+		}
 
-        public override List<string> Props
-        {
-            get { return new List<string>(); }
-        }
+		public override string TableName
+		{
+			get
+			{
+				return "TestTs";
+			}
+		}
 
+		public override IOctDbCommand GetInsertCmd()
+		{
+			var sql = @"
+				INSERT INTO TestTs (
+					DD)
+				VALUES (
+					@DD)";
+			
+			DbCommand cmd = new SqlCommand();
+			var parameters = new Dictionary<string, object> {
+				{"@DD", this.DD}};
 
-        public override TestTs GetEntityFromDataRow(DataRow row)
-        {
-            if (row["Id"].ToString() != "")
-            {
-                _id = int.Parse(row["Id"].ToString());
-            }
-            if (row["DD"].ToString() != "")
-            {
-                _DD = row["DD"].ToString();
-            }
+			return new OctDbCommand(sql, parameters);
+		}
 
-            return this;
-        }
+		public override IOctDbCommand GetUpdateCmd(string @where = "", IDictionary<string, object> paras = null)
+		{
+			var sb = new StringBuilder();
+			var parameters = new Dictionary<string, object>();
+          
+			sb.Append("update " + this.TableName + " set ");
+         
+			foreach (var changedProp in this.ChangedProps)
+			{
+				sb.Append(string.Format("{0} = @{0},", changedProp.Key));
 
-        public override string TableName
-        {
-            get { return "TestTs"; }
-        }
+				parameters.Add("@" + changedProp.Key, changedProp.Value);
+			}
 
-        public override IOctDbCommand GetInsertCmd()
-        {
-            var sql = @"INSERT INTO TestTs
-           (DD
-          )
-     VALUES
-           (
-           @DD          )";
+			var sql = sb.ToString().Remove(sb.Length - 1);
+			sql += string.Format(" where {0} = '{1}'", this.PkName, this.PkValue);
 
+			if (!string.IsNullOrEmpty(@where))
+				sql += " and " + @where;
 
-            Dictionary<string, object> parameters = new Dictionary<string, object>
-            {
-            {"@DD",DD}
-            };
-            return new OctDbCommand(sql, parameters);
-        }
+			if (paras != null)
+			{
+				foreach (var p in paras)
+				{
+					parameters.Add(p.Key, p.Value);
+				}
+			}
 
-        public override IOctDbCommand GetUpdateCmd(string @where = "", IDictionary<string, object> paras = null)
-        {
-            StringBuilder sb = new StringBuilder();
-            Dictionary<string, object> parameters = new Dictionary<string, object>();
-            sb.Append("update " + TableName + " set ");
-            foreach (var changedProp in ChangedProps)
-            {
-                sb.Append(string.Format("{0}=@{0},", changedProp.Key));
-                parameters.Add("@" + changedProp.Key, changedProp.Value);
-            }
+			return new OctDbCommand(sql, parameters);
+		}
 
-            var sql = sb.ToString().Remove(sb.Length - 1);
-            sql += string.Format(" where {0}='{1}'", PkName, PkValue);
+		public override string GetDelSQL()
+		{
+			return string.Format("delete from {0} where {1} = '{2}'", this.TableName, this.PkName, this.PkValue);
+		}
 
-            if (!string.IsNullOrEmpty(@where))
-            {
-                sql += " and " + @where;
-            }
+		public override string GetDelSQL(object v, string @where = "")
+		{
+			string sql = string.Format("delete from {0} where 1 = 1 ", this.TableName);
+         
+			if (v != null)
+				sql += "and " + this.PkName + " = '" + v + "'";
+         
+			if (!string.IsNullOrEmpty(@where))
+				sql += "and " + @where;
 
-            if (paras != null)
-            {
-                foreach (var p in paras)
-                {
-                    parameters.Add(p.Key, p.Value);
-                }
-            }
+			return sql;
+		}
 
-            return new OctDbCommand(sql, parameters);
-        }
+		public override string GetModelSQL(object v)
+		{
+			return string.Format("select * from {0} where {1} = '{2}'", this.TableName, this.PkName, v);
+		}
 
-        public override string GetDelSQL()
-        {
-            return string.Format("delete from {0} where {1}='{2}'", TableName, PkName, PkValue);
-        }
+		public override string GetQuerySQL(string @where = "")
+		{
+			var sql = string.Format("select * from {0} where 1 = 1 ", this.TableName);
+           
+			if (!string.IsNullOrEmpty(@where))
+				sql += "and " + @where;
 
-        public override string GetDelSQL(object v, string @where = "")
-        {
-            string sql = string.Format("delete from {0} where 1=1 ", TableName);
-            if (v != null)
-            {
-                sql += "and " + PkName + "='" + v + "'";
-            }
-            if (!string.IsNullOrEmpty(@where))
-            {
-                sql += "and " + @where;
-            }
-            return sql;
-        }
+			return sql;
+		}
 
-        public override string GetModelSQL(object v)
-        {
-            return string.Format("select * from {0} where {1}='{2}'", TableName, PkName, v);
-        }
-
-        public override string GetQuerySQL(string @where = "")
-        {
-            var sql = string.Format("select * from {0} where 1=1 ", TableName);
-            if (!string.IsNullOrEmpty(@where))
-            {
-                sql += " and " + @where;
-            }
-            return sql;
-        }
-
-        #endregion
-    }
+		#endregion
+	}
 }

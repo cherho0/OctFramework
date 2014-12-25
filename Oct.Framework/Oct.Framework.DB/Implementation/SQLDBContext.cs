@@ -120,6 +120,45 @@ namespace Oct.Framework.DB.Implementation
         }
 
         /// <summary>
+        /// 针对个别字段查询
+        /// </summary>
+        /// <typeparam name="TP"></typeparam>
+        /// <param name="expression"></param>
+        /// <param name="pk"></param>
+        /// <returns></returns>
+        public T GetModel<TP>(Expression<Func<T, TP>> expression, object pk)
+        {
+            List<string> props = new List<string>();
+            MemberExpression body = expression.Body as MemberExpression;
+
+            if (body == null)
+            {
+                NewExpression ubody = (NewExpression)expression.Body;
+                var mn = ubody.Members;
+                foreach (var m in mn)
+                {
+                    props.Add(m.Name);
+                }
+            }
+            else
+            {
+                props.Add(body.Member.Name);
+            }
+            var entity = new T();
+            string sql = entity.GetModelSQL(pk);
+            var length = sql.IndexOf("from");
+            var cols = string.Join(",", props);
+            sql = string.Format("select {0} {1}", cols, sql.Remove(0, length));
+            ISQLContext sqlContext = new SQLContext(Session);
+            DataSet ds = sqlContext.ExecuteQuery(sql);
+            if (ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
+            {
+                return null;
+            }
+            return entity.GetEntityFromDataRow(ds.Tables[0].Rows[0]);
+        }
+
+        /// <summary>
         ///     查询一系列实体对象
         /// </summary>
         /// <param name="where"></param>
@@ -168,6 +207,34 @@ namespace Oct.Framework.DB.Implementation
         /// <returns></returns>
         public List<T> Query(string @where, string order = "")
         {
+            return Query(@where, null, "");
+        }
+
+        /// <summary>
+        ///     查询一系列实体对象
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public List<T> Query<TP>(Expression<Func<T, TP>> expression, string @where, IDictionary<string, object> paras = null, string order = "")
+        {
+            List<string> props = new List<string>();
+            MemberExpression body = expression.Body as MemberExpression;
+
+            if (body == null)
+            {
+                NewExpression ubody = (NewExpression)expression.Body;
+                var mn = ubody.Members;
+                foreach (var m in mn)
+                {
+                    props.Add(m.Name);
+                }
+            }
+            else
+            {
+                props.Add(body.Member.Name);
+            }
+
             if (SQLWordFilte.CheckKeyWord(@where))
             {
                 throw new Exception("您提供的关键字有可能危害数据库，已阻止执行");
@@ -175,12 +242,24 @@ namespace Oct.Framework.DB.Implementation
             var entities = new List<T>();
             var entity = new T();
             string sql = entity.GetQuerySQL(@where);
+            var length = sql.IndexOf("from");
+            var cols = string.Join(",", props);
+            sql = string.Format("select {0} {1}", cols, sql.Remove(0, length));
             if (!order.IsNullOrEmpty())
             {
                 sql += " order by " + order;
             }
             ISQLContext sqlContext = new SQLContext(Session);
-            DataSet ds = sqlContext.ExecuteQuery(sql);
+            var paramters = new List<SqlParameter>();
+            if (paras != null)
+            {
+                foreach (var para in paras)
+                {
+                    paramters.Add(new SqlParameter(para.Key, para.Value));
+                }
+            }
+
+            DataSet ds = sqlContext.ExecuteQuery(sql, paramters.ToArray());
             if (ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
             {
                 return null;
@@ -247,27 +326,49 @@ namespace Oct.Framework.DB.Implementation
             return entities;
         }
 
-        /// <summary>
-        ///     分页查询
-        /// </summary>
-        /// <param name="where"></param>
-        /// <param name="order"></param>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="total"></param>
-        /// <returns></returns>
-        public List<T> QueryPage(string @where, string order, int pageIndex, int pageSize, out int total)
+        public List<T> QueryPage<TP>(Expression<Func<T, TP>> expression, string @where, IDictionary<string, object> paras, string order, int pageIndex, int pageSize,
+            out int total)
         {
+
             if (SQLWordFilte.CheckKeyWord(@where))
             {
                 throw new Exception("您提供的关键字有可能危害数据库，已阻止执行");
             }
+            List<string> props = new List<string>();
+            MemberExpression body = expression.Body as MemberExpression;
+
+            if (body == null)
+            {
+                NewExpression ubody = (NewExpression)expression.Body;
+                var mn = ubody.Members;
+                foreach (var m in mn)
+                {
+                    props.Add(m.Name);
+                }
+            }
+            else
+            {
+                props.Add(body.Member.Name);
+            }
+            var parasList = new List<SqlParameter>();
+            var parasListData = new List<SqlParameter>();
+            if (paras != null)
+            {
+                foreach (var para in paras)
+                {
+                    parasList.Add(new SqlParameter(para.Key, para.Value));
+                    parasListData.Add(new SqlParameter(para.Key, para.Value));
+                }
+            }
+
             var entities = new List<T>();
             ISQLContext sqlContext = new SQLContext(Session);
             var entity = new T();
             string sql = entity.GetQuerySQL(@where);
-
-            total = sqlContext.GetResult<int>(string.Format("SELECT COUNT(1) FROM ({0}) a", sql));
+            var length = sql.IndexOf("from");
+            var cols = string.Join(",", props);
+            sql = string.Format("select {0} {1}", cols, sql.Remove(0, length));
+            total = sqlContext.GetResult<int>(string.Format("SELECT COUNT(1) FROM ({0}) a", sql), parasList.ToArray());
 
             int start = (pageIndex - 1) * pageSize;
             string rownumStr = ", ROW_NUMBER() OVER(ORDER BY " + order + ") rn";
@@ -275,7 +376,7 @@ namespace Oct.Framework.DB.Implementation
             sql = sql.ToUpper().Replace("FROM", " {0} FROM ");
             sql = string.Format(sql, rownumStr);
             sql = "SELECT TOP " + pageSize + " * FROM (" + sql + ") query WHERE rn > " + start + " ORDER BY rn";
-            DataSet ds = sqlContext.ExecuteQuery(sql);
+            DataSet ds = sqlContext.ExecuteQuery(sql, parasListData.ToArray());
 
             if (ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
             {
@@ -287,6 +388,20 @@ namespace Oct.Framework.DB.Implementation
                 entities.Add(newt.GetEntityFromDataRow(row));
             }
             return entities;
+        }
+
+        /// <summary>
+        ///     分页查询
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="order"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="total"></param>
+        /// <returns></returns>
+        public List<T> QueryPage(string @where, string order, int pageIndex, int pageSize, out int total)
+        {
+            return QueryPage(@where, null, order, pageIndex, pageSize, out total);
         }
 
         private DbCommand CreateSqlCommand(IOctDbCommand cmd)
@@ -301,7 +416,6 @@ namespace Oct.Framework.DB.Implementation
             var entity = new T();
             var entities = new List<T>();
             var h = new ExpressionHelper();
-
             //解析表达式
             h.ResolveExpression(func);
 

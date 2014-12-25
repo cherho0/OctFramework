@@ -290,9 +290,7 @@ namespace Oct.Framework.Core.Common
             var name = (expression.Arguments[0] as MemberExpression).Member.Name;
             var oper = this.GetOperator(expressiontype);
             var compName = this.SetArgument(name.ToString(), value.ToString());
-
             var result = string.Format("len({0}) {1} {2}", name, oper, compName);
-
             return result;
         }
 

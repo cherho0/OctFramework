@@ -1,4 +1,4 @@
-using Oct.Framework.DB.Base;
+﻿using Oct.Framework.DB.Base;
 using Oct.Framework.DB.Core;
 using Oct.Framework.DB.Interface;
 using System;
@@ -18,7 +18,7 @@ namespace Oct.Framework.Entities.Entities
 		private Guid _id;
 
 		/// <summary>
-		/// 
+		/// Id
 		/// </summary>
 		public Guid Id
 		{
@@ -37,7 +37,7 @@ namespace Oct.Framework.Entities.Entities
 		private Guid _actionId;
 
 		/// <summary>
-		/// 
+		/// ActionId
 		/// </summary>
 		public Guid ActionId
 		{
@@ -56,7 +56,7 @@ namespace Oct.Framework.Entities.Entities
 		private Guid _roleId;
 
 		/// <summary>
-		/// 
+		/// RoleId
 		/// </summary>
 		public Guid RoleId
 		{
@@ -75,7 +75,7 @@ namespace Oct.Framework.Entities.Entities
 		private DateTime? _createDate;
 
 		/// <summary>
-		/// 
+		/// CreateDate
 		/// </summary>
 		public DateTime? CreateDate
 		{
@@ -94,7 +94,7 @@ namespace Oct.Framework.Entities.Entities
 		private DateTime? _modifyDate;
 
 		/// <summary>
-		/// 
+		/// ModifyDate
 		/// </summary>
 		public DateTime? ModifyDate
 		{
@@ -149,23 +149,23 @@ namespace Oct.Framework.Entities.Entities
 
 		public override CommonRoleAction GetEntityFromDataRow(DataRow row)
 		{
-			if (row["Id"] != null && row["Id"].ToString() != "")
+			if (row.Table.Columns.Contains("Id") && row["Id"] != null && row["Id"].ToString() != "")
 			{
 				this.Id = new Guid(row["Id"].ToString());
 			}
-			if (row["ActionId"] != null && row["ActionId"].ToString() != "")
+			if (row.Table.Columns.Contains("ActionId") && row["ActionId"] != null && row["ActionId"].ToString() != "")
 			{
 				this.ActionId = new Guid(row["ActionId"].ToString());
 			}
-			if (row["RoleId"] != null && row["RoleId"].ToString() != "")
+			if (row.Table.Columns.Contains("RoleId") && row["RoleId"] != null && row["RoleId"].ToString() != "")
 			{
 				this.RoleId = new Guid(row["RoleId"].ToString());
 			}
-			if (row["CreateDate"] != null && row["CreateDate"].ToString() != "")
+			if (row.Table.Columns.Contains("CreateDate") && row["CreateDate"] != null && row["CreateDate"].ToString() != "")
 			{
 				this.CreateDate = DateTime.Parse(row["CreateDate"].ToString());
 			}
-			if (row["ModifyDate"] != null && row["ModifyDate"].ToString() != "")
+			if (row.Table.Columns.Contains("ModifyDate") && row["ModifyDate"] != null && row["ModifyDate"].ToString() != "")
 			{
 				this.ModifyDate = DateTime.Parse(row["ModifyDate"].ToString());
 			}

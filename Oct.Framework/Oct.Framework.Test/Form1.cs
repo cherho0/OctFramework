@@ -164,13 +164,13 @@ namespace Oct.Framework.Test
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Parallel.For(0,500, x =>
-            {
+            //Parallel.For(0,500, x =>
+           // {
                 try
                 {
                     using (DbContext context = new DbContext())
                     {
-                        context.TestTsContext.Add(new TestTs() { DD = "第几个" + x });
+                        context.TestTsContext.Add(new TestTs() { DD = "第几个" });
                         context.SaveChanges();
                     }
                 }
@@ -179,7 +179,7 @@ namespace Oct.Framework.Test
                     
                 }
                 
-            });
+           // });
         }
     }
 }

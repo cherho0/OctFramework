@@ -8,6 +8,7 @@ using Oct.Framework.MvcExt.Base;
 using Oct.Framework.MvcExt.Extisions;
 using Oct.Framework.MvcExt.User;
 using Oct.Framework.Services;
+using Oct.Framework.TestWeb.Areas.Premission.Models;
 
 namespace Oct.Framework.TestWeb.Controllers
 {
@@ -20,6 +21,10 @@ namespace Oct.Framework.TestWeb.Controllers
 
         public ActionResult Login()
         {
+            int toal;
+          var user =  DbContext.CommonUserContext
+              .QueryPage(p => new {p.UserName,p.Account},"",null,"id",1,1,out toal);
+
             return View();
         }
 

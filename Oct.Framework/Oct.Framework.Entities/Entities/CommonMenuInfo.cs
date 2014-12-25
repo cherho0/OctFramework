@@ -1,12 +1,12 @@
+﻿using Oct.Framework.DB.Base;
+using Oct.Framework.DB.Core;
+using Oct.Framework.DB.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Text;
-using Oct.Framework.DB.Base;
-using Oct.Framework.DB.Core;
-using Oct.Framework.DB.Interface;
 
 namespace Oct.Framework.Entities.Entities
 {
@@ -18,7 +18,7 @@ namespace Oct.Framework.Entities.Entities
 		private Guid _id;
 
 		/// <summary>
-		/// 
+		/// Id
 		/// </summary>
 		public Guid Id
 		{
@@ -37,7 +37,7 @@ namespace Oct.Framework.Entities.Entities
 		private string _name;
 
 		/// <summary>
-		/// 
+		/// Name
 		/// </summary>
 		public string Name
 		{
@@ -56,7 +56,7 @@ namespace Oct.Framework.Entities.Entities
 		private bool? _isAllowAnonymousAccess;
 
 		/// <summary>
-		/// 
+		/// IsAllowAnonymousAccess
 		/// </summary>
 		public bool? IsAllowAnonymousAccess
 		{
@@ -75,7 +75,7 @@ namespace Oct.Framework.Entities.Entities
 		private bool _isEnable;
 
 		/// <summary>
-		/// 
+		/// IsEnable
 		/// </summary>
 		public bool IsEnable
 		{
@@ -94,7 +94,7 @@ namespace Oct.Framework.Entities.Entities
 		private int _sort;
 
 		/// <summary>
-		/// 
+		/// Sort
 		/// </summary>
 		public int Sort
 		{
@@ -113,7 +113,7 @@ namespace Oct.Framework.Entities.Entities
 		private DateTime _createDate;
 
 		/// <summary>
-		/// 
+		/// CreateDate
 		/// </summary>
 		public DateTime CreateDate
 		{
@@ -132,7 +132,7 @@ namespace Oct.Framework.Entities.Entities
 		private DateTime? _modifyDate;
 
 		/// <summary>
-		/// 
+		/// ModifyDate
 		/// </summary>
 		public DateTime? ModifyDate
 		{
@@ -187,15 +187,15 @@ namespace Oct.Framework.Entities.Entities
 
 		public override CommonMenuInfo GetEntityFromDataRow(DataRow row)
 		{
-			if (row["Id"] != null && row["Id"].ToString() != "")
+			if (row.Table.Columns.Contains("Id") && row["Id"] != null && row["Id"].ToString() != "")
 			{
 				this.Id = new Guid(row["Id"].ToString());
 			}
-			if (row["Name"] != null)
+			if (row.Table.Columns.Contains("Name") && row["Name"] != null)
 			{
 				this.Name = row["Name"].ToString();
 			}
-			if (row["IsAllowAnonymousAccess"] != null && row["IsAllowAnonymousAccess"].ToString() != "")
+			if (row.Table.Columns.Contains("IsAllowAnonymousAccess") && row["IsAllowAnonymousAccess"] != null && row["IsAllowAnonymousAccess"].ToString() != "")
 			{
 				if ((row["IsAllowAnonymousAccess"].ToString() == "1") || (row["IsAllowAnonymousAccess"].ToString().ToLower() == "true"))
 				{
@@ -206,7 +206,7 @@ namespace Oct.Framework.Entities.Entities
 					this.IsAllowAnonymousAccess = false;
 				}
 			}
-			if (row["IsEnable"] != null && row["IsEnable"].ToString() != "")
+			if (row.Table.Columns.Contains("IsEnable") && row["IsEnable"] != null && row["IsEnable"].ToString() != "")
 			{
 				if ((row["IsEnable"].ToString() == "1") || (row["IsEnable"].ToString().ToLower() == "true"))
 				{
@@ -217,15 +217,15 @@ namespace Oct.Framework.Entities.Entities
 					this.IsEnable = false;
 				}
 			}
-			if (row["Sort"] != null && row["Sort"].ToString() != "")
+			if (row.Table.Columns.Contains("Sort") && row["Sort"] != null && row["Sort"].ToString() != "")
 			{
 				this.Sort = int.Parse(row["Sort"].ToString());
 			}
-			if (row["CreateDate"] != null && row["CreateDate"].ToString() != "")
+			if (row.Table.Columns.Contains("CreateDate") && row["CreateDate"] != null && row["CreateDate"].ToString() != "")
 			{
 				this.CreateDate = DateTime.Parse(row["CreateDate"].ToString());
 			}
-			if (row["ModifyDate"] != null && row["ModifyDate"].ToString() != "")
+			if (row.Table.Columns.Contains("ModifyDate") && row["ModifyDate"] != null && row["ModifyDate"].ToString() != "")
 			{
 				this.ModifyDate = DateTime.Parse(row["ModifyDate"].ToString());
 			}

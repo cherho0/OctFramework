@@ -1,12 +1,12 @@
+﻿using Oct.Framework.DB.Base;
+using Oct.Framework.DB.Core;
+using Oct.Framework.DB.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Text;
-using Oct.Framework.DB.Base;
-using Oct.Framework.DB.Core;
-using Oct.Framework.DB.Interface;
 
 namespace Oct.Framework.Entities.Entities
 {
@@ -18,7 +18,7 @@ namespace Oct.Framework.Entities.Entities
 		private Guid _id;
 
 		/// <summary>
-		/// 
+		/// Id
 		/// </summary>
 		public Guid Id
 		{
@@ -37,7 +37,7 @@ namespace Oct.Framework.Entities.Entities
 		private string _name;
 
 		/// <summary>
-		/// 
+		/// Name
 		/// </summary>
 		public string Name
 		{
@@ -56,7 +56,7 @@ namespace Oct.Framework.Entities.Entities
 		private string _code;
 
 		/// <summary>
-		/// 
+		/// Code
 		/// </summary>
 		public string Code
 		{
@@ -75,7 +75,7 @@ namespace Oct.Framework.Entities.Entities
 		private bool _isEnable;
 
 		/// <summary>
-		/// 
+		/// IsEnable
 		/// </summary>
 		public bool IsEnable
 		{
@@ -113,7 +113,7 @@ namespace Oct.Framework.Entities.Entities
 		private DateTime _createDate;
 
 		/// <summary>
-		/// 
+		/// CreateDate
 		/// </summary>
 		public DateTime CreateDate
 		{
@@ -132,7 +132,7 @@ namespace Oct.Framework.Entities.Entities
 		private DateTime? _modifyDate;
 
 		/// <summary>
-		/// 
+		/// ModifyDate
 		/// </summary>
 		public DateTime? ModifyDate
 		{
@@ -187,19 +187,19 @@ namespace Oct.Framework.Entities.Entities
 
 		public override CommonRoleInfo GetEntityFromDataRow(DataRow row)
 		{
-			if (row["Id"] != null && row["Id"].ToString() != "")
+			if (row.Table.Columns.Contains("Id") && row["Id"] != null && row["Id"].ToString() != "")
 			{
 				this.Id = new Guid(row["Id"].ToString());
 			}
-			if (row["Name"] != null)
+			if (row.Table.Columns.Contains("Name") && row["Name"] != null)
 			{
 				this.Name = row["Name"].ToString();
 			}
-			if (row["Code"] != null)
+			if (row.Table.Columns.Contains("Code") && row["Code"] != null)
 			{
 				this.Code = row["Code"].ToString();
 			}
-			if (row["IsEnable"] != null && row["IsEnable"].ToString() != "")
+			if (row.Table.Columns.Contains("IsEnable") && row["IsEnable"] != null && row["IsEnable"].ToString() != "")
 			{
 				if ((row["IsEnable"].ToString() == "1") || (row["IsEnable"].ToString().ToLower() == "true"))
 				{
@@ -210,7 +210,7 @@ namespace Oct.Framework.Entities.Entities
 					this.IsEnable = false;
 				}
 			}
-			if (row["IsSysDefault"] != null && row["IsSysDefault"].ToString() != "")
+			if (row.Table.Columns.Contains("IsSysDefault") && row["IsSysDefault"] != null && row["IsSysDefault"].ToString() != "")
 			{
 				if ((row["IsSysDefault"].ToString() == "1") || (row["IsSysDefault"].ToString().ToLower() == "true"))
 				{
@@ -221,11 +221,11 @@ namespace Oct.Framework.Entities.Entities
 					this.IsSysDefault = false;
 				}
 			}
-			if (row["CreateDate"] != null && row["CreateDate"].ToString() != "")
+			if (row.Table.Columns.Contains("CreateDate") && row["CreateDate"] != null && row["CreateDate"].ToString() != "")
 			{
 				this.CreateDate = DateTime.Parse(row["CreateDate"].ToString());
 			}
-			if (row["ModifyDate"] != null && row["ModifyDate"].ToString() != "")
+			if (row.Table.Columns.Contains("ModifyDate") && row["ModifyDate"] != null && row["ModifyDate"].ToString() != "")
 			{
 				this.ModifyDate = DateTime.Parse(row["ModifyDate"].ToString());
 			}

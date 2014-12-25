@@ -52,7 +52,7 @@ namespace Oct.Framework.TestWeb
                 d.Add(new Field("Id", t.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
                 d.Add(new Field("DD", t.DD, Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.WITH_POSITIONS_OFFSETS));
             });
-            SreachTask.Start();
+            //SreachTask.Start();
             //SreachTask.Do("TestIndex");
             //SreachTask.DoUnitUpdate("TestIndex", "Id", "1");
         }

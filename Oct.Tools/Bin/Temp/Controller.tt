@@ -1,0 +1,116 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="Oct.Tools.Plugin.CodeGenerator.Entity" #>
+<#@ parameter type="Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo" name="dt" #>
+using AutoMapper;
+using Microsoft.Practices.Unity;
+using Oct.Framework.Entities.Entities;
+using Oct.Framework.MvcExt.Base;
+using Oct.Framework.MvcExt.Extisions;
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
+using <#= dt.NameSpace #>.Entities;
+using <#= dt.NameSpace #>.Services;
+using <#= dt.NameSpace #>.Web.Models;
+<#
+	var pkType = string.Empty;
+	var pkName = string.Empty;
+	var pkFileds = dt.FiledList.Where(d => d.IsPk);
+
+	if (pkFileds.Count() > 0)
+	{
+		pkType = pkFileds.First().CSharpType;	 
+		pkName = pkFileds.First().Name;	 
+		pkName = pkName.Substring(0, 1).ToLower() + pkName.Substring(1, pkName.Length - 1); 
+	}
+#>
+
+namespace <#= dt.NameSpace #>
+{
+	public class <#= dt.ClassName #><#= dt.ClassNameExtend #> : BaseController
+    {
+        [Dependency]
+        public I<#= dt.ClassName #>Service <#= dt.ClassName #>Service { get; set; }
+
+        public ActionResult Index(int? page)
+        {
+            var p = page ?? 1;
+            var total = 0;
+            var models = this.<#= dt.ClassName #>Service.GetModels(p, 5, string.Empty, "<#= pkName #>", null, out total);
+            var dtos = Mapper.Map<List<<#= dt.ClassName #>DTO>>(models);
+           
+            if (dtos == null)
+                dtos = new List<<#= dt.ClassName #>DTO>();   
+		   
+            var pm = this.Kernel.CreatePageModel(5, p, total);
+
+            this.ViewBag.PM = pm;
+
+            return this.View(dtos);
+        }
+
+        public ActionResult Details(<#= pkType #> <#= pkName #>)
+        {
+            var entity = this.<#= dt.ClassName #>Service.GetModel(<#= pkName #>);
+            var model = Mapper.Map<<#= dt.ClassName #>DTO>(entity);
+
+            return this.View(model);
+        }
+
+        public ActionResult Create()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(<#= dt.ClassName #>DTO model)
+        {
+            try
+            {
+                var entity = Mapper.Map<<#= dt.ClassName #>>(model);
+
+                this.<#= dt.ClassName #>Service.Add(entity);
+
+                return this.RedirectToAction("Index");
+            }
+            catch
+            {
+                return this.View();
+            }
+        }
+
+        public ActionResult Edit(<#= pkType #> <#= pkName #>)
+        {
+            var entity = this.<#= dt.ClassName #>Service.GetModel(<#= pkName #>);
+            var model = Mapper.Map<<#= dt.ClassName #>DTO>(entity);
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(<#= dt.ClassName #>DTO model)
+        {
+            try
+            {
+                var entity = Mapper.Map<<#= dt.ClassName #>>(model);
+
+                this.<#= dt.ClassName #>Service.Modify(entity);
+
+                return this.RedirectToAction("Index");
+            }
+            catch
+            {
+                return this.View();
+            }
+        }
+
+        public ActionResult Delete(<#= pkType #> <#= pkName #>)
+        {
+            this.<#= dt.ClassName #>Service.Delete(<#= pkName #>);
+
+            return this.RedirectToAction("Index");
+        }
+    }
+}

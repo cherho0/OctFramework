@@ -1,0 +1,76 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Configuration" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="Oct.Tools.Plugin.CodeGenerator.Entity" #>
+<#@ parameter type="Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo" name="dt" #>
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+@section PluginsJS {
+    <script src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+    <script src="~/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
+}
+
+@using <#= dt.NameSpace #>.Models;
+
+@model <#= dt.ClassName #>DTO
+
+<div class="container">
+    @using (Html.BeginForm("Edit", "<#= dt.ClassName #>", FormMethod.Post, new { @class = "J_FormValidate" }))
+    {
+        <div class="form form-horizontal">
+<#
+	var ignoreFiledNames = ConfigurationManager.AppSettings["IgnoreFiledNames"].Split(',');
+
+	foreach(FiledInfo filed in dt.FiledList) 
+	{		
+        if (ignoreFiledNames.Contains(filed.Name.ToLower()))
+			continue;
+
+        if (filed.IsPk) { #>
+            @Html.HiddenFor(d => d.<#= filed.Name #>)		         
+<# } else { #>
+            <div class="form-group">
+                <#= filed.IsAllowNull ? "<label class=\"col-xs-3 control-label\">" : "<label class=\"col-xs-3 control-label\"><i class=\"fa fa-asterisk required\"></i>" #><#= filed.GetDisplayName() #></label>
+                <div class="col-xs-5">
+<# 
+	var controlHtml = new StringBuilder();
+	var requiredCssName = filed.IsAllowNull ? string.Empty : " required";
+
+	switch (filed.CSharpType.ToLower())
+	{
+		case "decimal":
+			controlHtml.AppendFormat("<input class=\"from-control input-sm{0}\" data-val=\"true\" data-val-number=\"字段 {1} 必须是一个数字。\" data-val-required=\"The {1} field is required.\" id=\"{1}\" name=\"{1}\" type=\"text\" value=\"0\">", requiredCssName, filed.Name);
+			break;
+
+		case "datetime":
+			controlHtml.AppendFormat("<input class=\"form-control input-sm{0}\" data-val=\"true\" data-val-date=\"字段 {1} 必须是日期。\" data-val-required=\"The {1} field is required.\" datadateformat=\"yyyy-mm-dd\" id=\"{1}\" name=\"{1}\" type=\"text\">", requiredCssName, filed.Name);
+			break;
+
+		case "guid":
+			controlHtml.AppendFormat("@Html.DropDownListFor(p => p.{0}, (IEnumerable<SelectListItem>)this.ViewBag.{0}s, new {2} @class = \"form-control input-sm{1}\" {3})", filed.Name, requiredCssName, "{", "}");
+			break;
+
+		default:
+			controlHtml.AppendFormat("@Html.TextBoxFor(p => p.{0}, new {2} @class = \"form-control{1}\" {3})", filed.Name, requiredCssName, "{", "}");
+			break;
+	}
+#>
+                    <#= controlHtml.ToString() #>
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+<# } #>
+<# } #>
+            <div class="form-group">
+                <div class="col-xs-9 col-xs-offset-3">
+                    <button type="submit" value="新增" class="btn blue"><i class="fa fa-plus"></i>&nbsp;新增</button>
+                    <a href="/User/Home" class="btn default J_CloseModal"><i class="fa fa-undo"></i>&nbsp;返  回</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -22,8 +22,8 @@ namespace Oct.Framework.TestWeb.Controllers
         public ActionResult Login()
         {
             int toal;
-          var user =  DbContext.CommonUserContext
-              .QueryPage(p => new {p.UserName,p.Account},"",null,"id",1,1,out toal);
+            var user = DbContext.CommonUserContext
+                .QueryPage(p => new { p.UserName, p.Account }, "", null, "id", 1, 1);
 
             return View();
         }
@@ -69,9 +69,9 @@ namespace Oct.Framework.TestWeb.Controllers
                     userActions.ForEach(p =>
                     {
                         if (p.IsVisible)
-                        usermenu.Add(p.MenuName, p.Name, p.Url);
+                            usermenu.Add(p.MenuName, p.Name, p.Url);
                     }
-                        
+
                        );
                     return usermenu;
                 });

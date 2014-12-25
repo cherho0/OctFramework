@@ -31,10 +31,9 @@ namespace Oct.Framework.TestWeb.Areas.Premission.Controllers
         {
             int p = page ?? 1;
             int total = 0;
-            List<CommonRoleInfo> models = CommonRoleInfoService.GetModels(p, 5, string.Empty, "CreateDate", null,
-                out total);
-            PageModel pm = Kernel.CreatePageModel(5, p, total);
-            var dtos = Mapper.Map<List<CommonRoleInfoDTO>>(models);
+            var models = CommonRoleInfoService.GetModels(p, 5, string.Empty, "CreateDate", null);
+            PageModel pm = Kernel.CreatePageModel(5, p, models.TotalCount);
+            var dtos = Mapper.Map<List<CommonRoleInfoDTO>>(models.Models);
             ViewBag.PM = pm;
             if (dtos == null)
             {

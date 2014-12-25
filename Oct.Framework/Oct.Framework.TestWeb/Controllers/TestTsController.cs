@@ -18,11 +18,11 @@ namespace Oct.Framework.TestWeb.Controllers
         {
             var p = page ?? 1;
             var total = 0;
-            var models = this.TestTsService.GetModels(p, 5, string.Empty, "id", null, out total);
-            var pm = Kernel.CreatePageModel(5, p, total);
+            var models = this.TestTsService.GetModels(p, 5, string.Empty, "id", null);
+            var pm = Kernel.CreatePageModel(5, p, models.TotalCount);
             this.ViewBag.PM = pm;
 
-            return this.View(models);
+            return this.View(models.Models);
         }
 
         public ActionResult Details(int id)

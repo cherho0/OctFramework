@@ -57,6 +57,7 @@
     <Compile Include="Core\DBContextBase.cs" />
     <Compile Include="Core\Enums.cs" />
     <Compile Include="Core\OctDbCommand.cs" />
+    <Compile Include="Core\PageResult.cs" />
     <Compile Include="Core\SessionMgr.cs" />
     <Compile Include="Core\CurrentSessionFactory.cs" />
     <Compile Include="Core\DBSession.cs" />

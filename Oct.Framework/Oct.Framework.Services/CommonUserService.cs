@@ -1,7 +1,8 @@
-using Oct.Framework.Entities;
-using Oct.Framework.Entities.Entities;
+﻿using Oct.Framework.Entities;
 using System;
 using System.Collections.Generic;
+using Oct.Framework.DB.Core;
+using Oct.Framework.Entities.Entities;
 
 namespace Oct.Framework.Services
 {
@@ -56,7 +57,7 @@ namespace Oct.Framework.Services
         /// <param name="where"></param>
         /// <param name="paras">参数键为@拼接的参数，值为参数值</param>
         /// <returns></returns>
-        List<CommonUser> GetModels(string where, IDictionary<string, object> paras);
+        List<CommonUser> GetModels(string where = "", IDictionary<string, object> paras = null, string order = "");
 
         /// <summary>
         /// 分页获取
@@ -68,14 +69,15 @@ namespace Oct.Framework.Services
         /// <param name="paras"> 参数键为@拼接的参数，值为参数值</param>
         /// <param name="total"></param>
         /// <returns></returns>
-        List<CommonUser> GetModels(int pageIndex, int pageSize, string where, string order, IDictionary<string, object> paras, out int total);
+        PageResult<CommonUser> GetModels(int pageIndex, int pageSize, string where, string order, IDictionary<string, object> paras);
 
         void Authorization(Guid userId, Guid[] roles);
 
         List<CommonUserAcrions> GetUserActions(string aUseridUserid, Dictionary<string, object> dictionary, string dSort);
+
     }
 
-    public class CommonUserService : BaseService, ICommonUserService
+    public partial class CommonUserService : ICommonUserService
     {
         /// <summary>
         /// 新增
@@ -84,8 +86,6 @@ namespace Oct.Framework.Services
         /// <returns></returns>
         public bool Add(CommonUser entity)
         {
-            this.Validate(entity);
-
             using (var context = new DbContext())
             {
                 context.CommonUserContext.Add(entity);
@@ -101,8 +101,6 @@ namespace Oct.Framework.Services
         /// <returns></returns>
         public bool Modify(CommonUser entity)
         {
-            this.Validate(entity);
-
             using (var context = new DbContext())
             {
                 context.CommonUserContext.Update(entity);
@@ -176,7 +174,7 @@ namespace Oct.Framework.Services
         /// <param name="where"></param>
         /// <param name="paras">参数键为@拼接的参数，值为参数值</param>
         /// <returns></returns>
-        public List<CommonUser> GetModels(string @where, IDictionary<string, object> paras)
+        public List<CommonUser> GetModels(string where = "", IDictionary<string, object> paras = null, string order = "")
         {
             using (var context = new DbContext())
             {
@@ -194,51 +192,11 @@ namespace Oct.Framework.Services
         /// <param name="paras"> 参数键为@拼接的参数，值为参数值</param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public List<CommonUser> GetModels(int pageIndex, int pageSize, string @where, string order, IDictionary<string, object> paras, out int total)
+        public PageResult<CommonUser> GetModels(int pageIndex, int pageSize, string @where, string order, IDictionary<string, object> paras)
         {
             using (var context = new DbContext())
             {
-                return context.CommonUserContext.QueryPage(where, paras, order, pageIndex, pageSize, out total);
-            }
-        }
-
-        public void Authorization(Guid userId, Guid[] roles)
-        {
-            using (var context = new DbContext())
-            {
-                context.CommonUserRoleContext.Delete("userid=@userid",
-                    new Dictionary<string, object>() { { "@userid", userId } });
-                if (roles != null)
-                {
-                    foreach (var chkRole in roles)
-                    {
-                        context.CommonUserRoleContext.Add(new CommonUserRole()
-                        {
-                            CreateDate = DateTime.Now,
-                            Id = Guid.NewGuid(),
-                            ModifyDate = null,
-                            RoleId = chkRole,
-                            UserId = userId
-                        });
-                    }
-                }
-                context.SaveChanges();
-            }
-
-        }
-
-        /// <summary>
-        /// 获取
-        /// </summary>
-        /// <param name="where"></param>
-        /// <param name="para"></param>
-        /// <param name="order"></param>
-        /// <returns></returns>
-        public List<CommonUserAcrions> GetUserActions(string where, Dictionary<string, object> para, string order)
-        {
-            using (var context = new DbContext())
-            {
-                return context.CommonUserAcrionsContext.Query(where, para, order);
+                return context.CommonUserContext.QueryPage(where, paras, order, pageIndex, pageSize);
             }
         }
     }

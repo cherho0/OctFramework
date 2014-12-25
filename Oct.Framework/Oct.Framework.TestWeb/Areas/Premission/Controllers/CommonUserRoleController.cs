@@ -21,9 +21,9 @@ namespace Oct.Framework.TestWeb.Areas.Premission.Controllers
         {
             var p = page ?? 1;
             var total = 0;
-            var models = this.CommonUserRoleService.GetModels(p, 5, string.Empty, "CreateDate", null, out total);
-            var pm = this.Kernel.CreatePageModel(5, p, total);
-            var dtos = Mapper.Map<List<CommonUserRoleDTO>>(models);
+            var models = this.CommonUserRoleService.GetModels(p, 5, string.Empty, "CreateDate", null);
+            var pm = this.Kernel.CreatePageModel(5, p, models.TotalCount);
+            var dtos = Mapper.Map<List<CommonUserRoleDTO>>(models.Models);
             this.ViewBag.PM = pm;
             if (dtos == null)
             {dtos = new List<CommonUserRoleDTO>();

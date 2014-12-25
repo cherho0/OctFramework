@@ -1,6 +1,7 @@
+﻿using Oct.Framework.Entities;
 using System;
 using System.Collections.Generic;
-using Oct.Framework.Entities;
+using Oct.Framework.DB.Core;
 using Oct.Framework.Entities.Entities;
 
 namespace Oct.Framework.Services
@@ -56,7 +57,7 @@ namespace Oct.Framework.Services
         /// <param name="where"></param>
         /// <param name="paras">参数键为@拼接的参数，值为参数值</param>
         /// <returns></returns>
-        List<CommonMenuInfo> GetModels(string where, IDictionary<string, object> paras);
+        List<CommonMenuInfo> GetModels(string where = "", IDictionary<string, object> paras = null,string order="");
 
         /// <summary>
         /// 分页获取
@@ -68,10 +69,10 @@ namespace Oct.Framework.Services
         /// <param name="paras"> 参数键为@拼接的参数，值为参数值</param>
         /// <param name="total"></param>
         /// <returns></returns>
-        List<CommonMenuInfo> GetModels(int pageIndex, int pageSize, string where, string order, IDictionary<string, object> paras, out int total);
+        PageResult<CommonMenuInfo> GetModels(int pageIndex, int pageSize, string where, string order, IDictionary<string, object> paras);
     }
 
-    public class CommonMenuInfoService : ICommonMenuInfoService
+    public partial class CommonMenuInfoService : ICommonMenuInfoService
     {
         /// <summary>
         /// 新增
@@ -168,7 +169,7 @@ namespace Oct.Framework.Services
         /// <param name="where"></param>
         /// <param name="paras">参数键为@拼接的参数，值为参数值</param>
         /// <returns></returns>
-        public List<CommonMenuInfo> GetModels(string @where, IDictionary<string, object> paras)
+        public List<CommonMenuInfo> GetModels(string where = "", IDictionary<string, object> paras = null,string order="")
         {
             using (var context = new DbContext())
             {
@@ -186,11 +187,11 @@ namespace Oct.Framework.Services
         /// <param name="paras"> 参数键为@拼接的参数，值为参数值</param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public List<CommonMenuInfo> GetModels(int pageIndex, int pageSize, string @where, string order, IDictionary<string, object> paras, out int total)
+        public PageResult<CommonMenuInfo> GetModels(int pageIndex, int pageSize, string @where, string order, IDictionary<string, object> paras)
         {
             using (var context = new DbContext())
             {
-                return context.CommonMenuInfoContext.QueryPage(where, paras, order, pageIndex, pageSize, out total);
+                return context.CommonMenuInfoContext.QueryPage(where, paras, order, pageIndex, pageSize);
             }
         }
     }

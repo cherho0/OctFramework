@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using Oct.Framework.DB.Core;
 using Oct.Framework.Entities;
 using Oct.Framework.Entities.Entities;
 using System.Collections.Generic;
@@ -68,7 +69,7 @@ namespace Oct.Framework.Services.TestTsService
         /// <param name="paras"> 参数键为@拼接的参数，值为参数值</param>
         /// <param name="total"></param>
         /// <returns></returns>
-        List<TestTs> GetModels(int pageIndex, int pageSize, string where, string order, IDictionary<string, object> paras, out int total);
+        PageResult<TestTs> GetModels(int pageIndex, int pageSize, string @where, string order, IDictionary<string, object> paras);
     }
 
     public class TestTsService : ITestTsService
@@ -182,11 +183,11 @@ namespace Oct.Framework.Services.TestTsService
         /// <param name="paras"> 参数键为@拼接的参数，值为参数值</param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public List<TestTs> GetModels(int pageIndex, int pageSize, string @where, string order, IDictionary<string, object> paras, out int total)
+        public PageResult<TestTs> GetModels(int pageIndex, int pageSize, string @where, string order, IDictionary<string, object> paras)
         {
             using (var context = new DbContext())
             {
-                return context.TestTsContext.QueryPage(where, paras, order, pageIndex, pageSize, out total);
+                return context.TestTsContext.QueryPage(where, paras, order, pageIndex, pageSize);
             }
         }
     }

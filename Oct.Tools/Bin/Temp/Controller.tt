@@ -37,14 +37,13 @@ namespace <#= dt.NameSpace #>
         public ActionResult Index(int? page)
         {
             var p = page ?? 1;
-            var total = 0;
-            var models = this.<#= dt.ClassName #>Service.GetModels(p, 5, string.Empty, "<#= pkName #>", null, out total);
-            var dtos = Mapper.Map<List<<#= dt.ClassName #>DTO>>(models);
+            var pageResult = this.<#= dt.ClassName #>Service.GetModels(p, 5, string.Empty, "<#= pkName #>", null);
+            var dtos = Mapper.Map<List<<#= dt.ClassName #>DTO>>(pageResult.Models);
            
             if (dtos == null)
                 dtos = new List<<#= dt.ClassName #>DTO>();   
 		   
-            var pm = this.Kernel.CreatePageModel(5, p, total);
+            var pm = this.Kernel.CreatePageModel(5, p, pageResult.TotalCount);
 
             this.ViewBag.PM = pm;
 

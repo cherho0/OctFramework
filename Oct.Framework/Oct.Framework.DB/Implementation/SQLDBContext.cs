@@ -281,8 +281,8 @@ namespace Oct.Framework.DB.Implementation
         /// <param name="pageSize"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public List<T> QueryPage(string @where, IDictionary<string, object> paras, string order, int pageIndex,
-            int pageSize, out int total)
+        public PageResult<T> QueryPage(string @where, IDictionary<string, object> paras, string order, int pageIndex,
+            int pageSize)
         {
             if (SQLWordFilte.CheckKeyWord(@where))
             {
@@ -304,7 +304,7 @@ namespace Oct.Framework.DB.Implementation
             var entity = new T();
             string sql = entity.GetQuerySQL(@where);
 
-            total = sqlContext.GetResult<int>(string.Format("SELECT COUNT(1) FROM ({0}) a", sql), parasList.ToArray());
+            var total = sqlContext.GetResult<int>(string.Format("SELECT COUNT(1) FROM ({0}) a", sql), parasList.ToArray());
 
             int start = (pageIndex - 1) * pageSize;
             string rownumStr = ", ROW_NUMBER() OVER(ORDER BY " + order + ") rn";
@@ -323,11 +323,10 @@ namespace Oct.Framework.DB.Implementation
                 var newt = new T();
                 entities.Add(newt.GetEntityFromDataRow(row));
             }
-            return entities;
+            return new PageResult<T>(entities, total);
         }
 
-        public List<T> QueryPage<TP>(Expression<Func<T, TP>> expression, string @where, IDictionary<string, object> paras, string order, int pageIndex, int pageSize,
-            out int total)
+        public PageResult<T> QueryPage<TP>(Expression<Func<T, TP>> expression, string @where, IDictionary<string, object> paras, string order, int pageIndex, int pageSize)
         {
 
             if (SQLWordFilte.CheckKeyWord(@where))
@@ -368,7 +367,7 @@ namespace Oct.Framework.DB.Implementation
             var length = sql.IndexOf("from");
             var cols = string.Join(",", props);
             sql = string.Format("select {0} {1}", cols, sql.Remove(0, length));
-            total = sqlContext.GetResult<int>(string.Format("SELECT COUNT(1) FROM ({0}) a", sql), parasList.ToArray());
+            var total = sqlContext.GetResult<int>(string.Format("SELECT COUNT(1) FROM ({0}) a", sql), parasList.ToArray());
 
             int start = (pageIndex - 1) * pageSize;
             string rownumStr = ", ROW_NUMBER() OVER(ORDER BY " + order + ") rn";
@@ -387,7 +386,7 @@ namespace Oct.Framework.DB.Implementation
                 var newt = new T();
                 entities.Add(newt.GetEntityFromDataRow(row));
             }
-            return entities;
+            return new PageResult<T>(entities, total);
         }
 
         /// <summary>
@@ -399,9 +398,9 @@ namespace Oct.Framework.DB.Implementation
         /// <param name="pageSize"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public List<T> QueryPage(string @where, string order, int pageIndex, int pageSize, out int total)
+        public PageResult<T> QueryPage(string @where, string order, int pageIndex, int pageSize)
         {
-            return QueryPage(@where, null, order, pageIndex, pageSize, out total);
+            return QueryPage(@where, null, order, pageIndex, pageSize);
         }
 
         private DbCommand CreateSqlCommand(IOctDbCommand cmd)

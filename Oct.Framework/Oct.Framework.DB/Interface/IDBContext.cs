@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Oct.Framework.DB.Core;
 
 namespace Oct.Framework.DB.Interface
 {
@@ -92,8 +93,7 @@ namespace Oct.Framework.DB.Interface
         /// <param name="pageSize"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        List<T> QueryPage(string where, IDictionary<string, object> paras, string order, int pageIndex, int pageSize,
-            out int total);
+        PageResult<T> QueryPage(string where, IDictionary<string, object> paras, string order, int pageIndex, int pageSize);
 
         /// <summary>
         ///     查询分页数据-部分字段
@@ -103,8 +103,7 @@ namespace Oct.Framework.DB.Interface
         /// <param name="pageSize"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        List<T> QueryPage<TP>(Expression<Func<T, TP>> expression, string where, IDictionary<string, object> paras, string order, int pageIndex, int pageSize,
-            out int total);
+        PageResult<T> QueryPage<TP>(Expression<Func<T, TP>> expression, string where, IDictionary<string, object> paras, string order, int pageIndex, int pageSize);
 
         /// <summary>
         ///     查询分页数据
@@ -114,7 +113,7 @@ namespace Oct.Framework.DB.Interface
         /// <param name="pageSize"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        List<T> QueryPage(string where, string order, int pageIndex, int pageSize, out int total);
+        PageResult<T> QueryPage(string where, string order, int pageIndex, int pageSize);
 
         /// <summary>
         /// linq查询 -- 只支持单表

@@ -20,11 +20,9 @@ namespace Oct.Framework.TestWeb.Areas.Premission.Controllers
         public ActionResult Index(int? page)
         {
             int p = page ?? 1;
-            int total = 0;
-            List<CommonMenuInfo> models = CommonMenuInfoService.GetModels(p, 5, string.Empty, "CreateDate", null,
-                out total);
-            PageModel pm = Kernel.CreatePageModel(5, p, total);
-            var dtos = Mapper.Map<List<CommonMenuInfoDTO>>(models);
+            var models = CommonMenuInfoService.GetModels(p, 5, string.Empty, "CreateDate", null);
+            PageModel pm = Kernel.CreatePageModel(5, p, models.TotalCount);
+            var dtos = Mapper.Map<List<CommonMenuInfoDTO>>(models.Models);
             ViewBag.PM = pm;
             if (dtos == null)
             {

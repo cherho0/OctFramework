@@ -6,7 +6,8 @@
 using Oct.Framework.Entities;
 using System;
 using System.Collections.Generic;
-using <#= dt.NameSpace #>.Entities;
+using Oct.Framework.DB.Core;
+using <#= dt.NameSpace #>.Entities.Entities;
 <#
 	var pkType = string.Empty;
 	var pkName = string.Empty;
@@ -20,7 +21,7 @@ using <#= dt.NameSpace #>.Entities;
 	}
 #>
 
-namespace <#= dt.NameSpace #>
+namespace <#= dt.NameSpace #>.Services
 {
 	public interface I<#= dt.ClassName #><#= dt.ClassNameExtend #>
     {
@@ -85,10 +86,10 @@ namespace <#= dt.NameSpace #>
         /// <param name="paras"> 参数键为@拼接的参数，值为参数值</param>
         /// <param name="total"></param>
         /// <returns></returns>
-        List<<#= dt.ClassName #>> GetModels(int pageIndex, int pageSize, string where, string order, IDictionary<string, object> paras, out int total);
+        PageResult<<#= dt.ClassName #>> GetModels(int pageIndex, int pageSize, string where, string order, IDictionary<string, object> paras);
     }
 
-    public class <#= dt.ClassName #><#= dt.ClassNameExtend #> : I<#= dt.ClassName #><#= dt.ClassNameExtend #>
+    public partial class <#= dt.ClassName #><#= dt.ClassNameExtend #> : I<#= dt.ClassName #><#= dt.ClassNameExtend #>
     {
         /// <summary>
         /// 新增
@@ -203,11 +204,11 @@ namespace <#= dt.NameSpace #>
         /// <param name="paras"> 参数键为@拼接的参数，值为参数值</param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public List<<#= dt.ClassName #>> GetModels(int pageIndex, int pageSize, string @where, string order, IDictionary<string, object> paras, out int total)
+        public PageResult<<#= dt.ClassName #>> GetModels(int pageIndex, int pageSize, string @where, string order, IDictionary<string, object> paras)
         {
             using (var context = new DbContext())
             {
-                return context.<#= dt.ClassName #>Context.QueryPage(where, paras, order, pageIndex, pageSize, out total);
+                return context.<#= dt.ClassName #>Context.QueryPage(where, paras, order, pageIndex, pageSize);
             }
         }
     }

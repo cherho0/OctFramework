@@ -1,6 +1,7 @@
+﻿using Oct.Framework.Entities;
 using System;
 using System.Collections.Generic;
-using Oct.Framework.Entities;
+using Oct.Framework.DB.Core;
 using Oct.Framework.Entities.Entities;
 
 namespace Oct.Framework.Services
@@ -56,15 +57,7 @@ namespace Oct.Framework.Services
         /// <param name="where"></param>
         /// <param name="paras">参数键为@拼接的参数，值为参数值</param>
         /// <returns></returns>
-        List<CommonRoleAction> GetModels(string where = "", IDictionary<string, object> paras = null);
-
-        /// <summary>
-        /// 通过条件获取对象 参数键为@拼接的参数，值为参数值
-        /// </summary>
-        /// <param name="where"></param>
-        /// <param name="paras">参数键为@拼接的参数，值为参数值</param>
-        /// <returns></returns>
-        List<CommonMenuActions> GetMenuActions(string where = "", IDictionary<string, object> paras = null, string order = "");
+        List<CommonRoleAction> GetModels(string where = "", IDictionary<string, object> paras = null, string order = "");
 
         /// <summary>
         /// 分页获取
@@ -76,12 +69,21 @@ namespace Oct.Framework.Services
         /// <param name="paras"> 参数键为@拼接的参数，值为参数值</param>
         /// <param name="total"></param>
         /// <returns></returns>
-        List<CommonRoleAction> GetModels(int pageIndex, int pageSize, string where, string order, IDictionary<string, object> paras, out int total);
+        PageResult<CommonRoleAction> GetModels(int pageIndex, int pageSize, string where, string order, IDictionary<string, object> paras);
+
+        /// <summary>
+        /// 通过条件获取对象 参数键为@拼接的参数，值为参数值
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="paras">参数键为@拼接的参数，值为参数值</param>
+        /// <returns></returns>
+        List<CommonMenuActions> GetMenuActions(string where = "", IDictionary<string, object> paras = null, string order = "");
 
         bool Authorization(Guid roleId, Guid[] actions);
+
     }
 
-    public class CommonRoleActionService : ICommonRoleActionService
+    public partial class CommonRoleActionService : ICommonRoleActionService
     {
         /// <summary>
         /// 新增
@@ -178,19 +180,11 @@ namespace Oct.Framework.Services
         /// <param name="where"></param>
         /// <param name="paras">参数键为@拼接的参数，值为参数值</param>
         /// <returns></returns>
-        public List<CommonRoleAction> GetModels(string @where = "", IDictionary<string, object> paras = null)
+        public List<CommonRoleAction> GetModels(string where = "", IDictionary<string, object> paras = null, string order = "")
         {
             using (var context = new DbContext())
             {
                 return context.CommonRoleActionContext.Query(@where, paras);
-            }
-        }
-
-        public List<CommonMenuActions> GetMenuActions(string @where = "", IDictionary<string, object> paras = null, string order = "")
-        {
-            using (var context = new DbContext())
-            {
-                return context.CommonMenuActionsContext.Query(@where, paras, order);
             }
         }
 
@@ -204,38 +198,11 @@ namespace Oct.Framework.Services
         /// <param name="paras"> 参数键为@拼接的参数，值为参数值</param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public List<CommonRoleAction> GetModels(int pageIndex, int pageSize, string @where, string order, IDictionary<string, object> paras, out int total)
+        public PageResult<CommonRoleAction> GetModels(int pageIndex, int pageSize, string @where, string order, IDictionary<string, object> paras)
         {
             using (var context = new DbContext())
             {
-                return context.CommonRoleActionContext.QueryPage(where, paras, order, pageIndex, pageSize, out total);
-            }
-        }
-
-        public bool Authorization(Guid roleId, Guid[] actions)
-        {
-            using (var context = new DbContext())
-            {
-                context.CommonRoleActionContext.Delete("roleId=@roleID", new Dictionary<string, object>()
-                {
-                   { "@roleID",roleId}
-                });
-                if (actions != null)
-                {
-                    foreach (var action in actions)
-                    {
-                        context.CommonRoleActionContext.Add(new CommonRoleAction()
-                        {
-                            ActionId = action,
-                            CreateDate = DateTime.Now,
-                            Id = Guid.NewGuid(),
-                            ModifyDate = null,
-                            RoleId = roleId
-                        });
-                    }
-                }
-
-                return context.SaveChanges() > 0;
+                return context.CommonRoleActionContext.QueryPage(where, paras, order, pageIndex, pageSize);
             }
         }
     }

@@ -43,12 +43,14 @@
     <Compile Include="CommonActionInfoService.cs" />
     <Compile Include="CommonMenuInfoService.cs" />
     <Compile Include="CommonRoleActionService.cs" />
+    <Compile Include="CommonRoleActionService.partial.cs" />
     <Compile Include="CommonRoleInfoService.cs" />
     <Compile Include="CommonUserRoleService.cs" />
     <Compile Include="CommonUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceException.cs" />
     <Compile Include="TestTsService\TestTsService.cs" />
+    <Compile Include="CommonUserService.partial.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Oct.Framework.DB\Oct.Framework.DB.csproj">

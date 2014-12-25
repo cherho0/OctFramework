@@ -29,9 +29,9 @@ namespace Oct.Framework.TestWeb.Areas.Premission.Controllers
         {
             int p = page ?? 1;
             int total = 0;
-            List<CommonUser> models = CommonUserService.GetModels(p, 5, string.Empty, "CreateDate", null, out total);
-            PageModel pm = Kernel.CreatePageModel(5, p, total);
-            var dtos = Mapper.Map<List<CommonUserDTO>>(models);
+            var models = CommonUserService.GetModels(p, 5, string.Empty, "CreateDate", null);
+            PageModel pm = Kernel.CreatePageModel(5, p, models.TotalCount);
+            var dtos = Mapper.Map<List<CommonUserDTO>>(models.Models);
             if (dtos == null)
             {
                 dtos = new List<CommonUserDTO>();
@@ -123,7 +123,7 @@ namespace Oct.Framework.TestWeb.Areas.Premission.Controllers
         {
             ViewBag.userId = userId;
             var roles = CommonRoleInfoService.GetModels();
-            var urs = CommonUserRoleService.GetModels("userid=@userid",new Dictionary<string, object>()
+            var urs = CommonUserRoleService.GetModels("userid=@userid", new Dictionary<string, object>()
             {
                 {"@userid" , userId}
             });

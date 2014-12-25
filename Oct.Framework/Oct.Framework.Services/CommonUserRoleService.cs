@@ -1,6 +1,7 @@
+﻿using Oct.Framework.Entities;
 using System;
 using System.Collections.Generic;
-using Oct.Framework.Entities;
+using Oct.Framework.DB.Core;
 using Oct.Framework.Entities.Entities;
 
 namespace Oct.Framework.Services
@@ -56,7 +57,7 @@ namespace Oct.Framework.Services
         /// <param name="where"></param>
         /// <param name="paras">参数键为@拼接的参数，值为参数值</param>
         /// <returns></returns>
-        List<CommonUserRole> GetModels(string where = "", IDictionary<string, object> paras = null);
+        List<CommonUserRole> GetModels(string where = "", IDictionary<string, object> paras = null,string order="");
 
         /// <summary>
         /// 分页获取
@@ -68,10 +69,10 @@ namespace Oct.Framework.Services
         /// <param name="paras"> 参数键为@拼接的参数，值为参数值</param>
         /// <param name="total"></param>
         /// <returns></returns>
-        List<CommonUserRole> GetModels(int pageIndex, int pageSize, string where, string order, IDictionary<string, object> paras, out int total);
+        PageResult<CommonUserRole> GetModels(int pageIndex, int pageSize, string where, string order, IDictionary<string, object> paras);
     }
 
-    public class CommonUserRoleService : ICommonUserRoleService
+    public partial class CommonUserRoleService : ICommonUserRoleService
     {
         /// <summary>
         /// 新增
@@ -168,7 +169,7 @@ namespace Oct.Framework.Services
         /// <param name="where"></param>
         /// <param name="paras">参数键为@拼接的参数，值为参数值</param>
         /// <returns></returns>
-        public List<CommonUserRole> GetModels(string @where, IDictionary<string, object> paras)
+        public List<CommonUserRole> GetModels(string where = "", IDictionary<string, object> paras = null,string order="")
         {
             using (var context = new DbContext())
             {
@@ -186,11 +187,11 @@ namespace Oct.Framework.Services
         /// <param name="paras"> 参数键为@拼接的参数，值为参数值</param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public List<CommonUserRole> GetModels(int pageIndex, int pageSize, string @where, string order, IDictionary<string, object> paras, out int total)
+        public PageResult<CommonUserRole> GetModels(int pageIndex, int pageSize, string @where, string order, IDictionary<string, object> paras)
         {
             using (var context = new DbContext())
             {
-                return context.CommonUserRoleContext.QueryPage(where, paras, order, pageIndex, pageSize, out total);
+                return context.CommonUserRoleContext.QueryPage(where, paras, order, pageIndex, pageSize);
             }
         }
     }

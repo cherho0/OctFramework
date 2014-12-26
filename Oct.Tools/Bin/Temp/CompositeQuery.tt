@@ -43,8 +43,7 @@ namespace <#= dt.NameSpace #>
 				for (int i = 0; i < dt.FiledList.Count; i++)
 				{
 					var filed = dt.FiledList[i];
-					var type = filed.CSharpType.ToLower();		
-				
+					var type = filed.CSharpType.ToLower();
 					if (type == "bool")
 					{
 						code.AppendFormat("{0}if (row.Table.Columns.Contains(\"{1}\") && row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
@@ -55,7 +54,7 @@ namespace <#= dt.NameSpace #>
 						code.Append("\t\t\t\t}\r\n");
 						code.Append("\t\t\t\telse\r\n");
 						code.Append("\t\t\t\t{\r\n");
-						code.AppendFormat("\t\t\t\t\tthis.{0} = false;\r\n", filed.Name);
+						code.AppendFormat("\t\t\t\t\tthis.{0} = false;\r\n",filed.Name);
 						code.Append("\t\t\t\t}\r\n");	
 						code.Append("\t\t\t}\r\n");	
 					}
@@ -63,35 +62,35 @@ namespace <#= dt.NameSpace #>
 					{
 						code.AppendFormat("{0}if (row.Table.Columns.Contains(\"{1}\") && row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
 						code.Append("\t\t\t{\r\n");
-						code.AppendFormat("\t\t\t\tthis.{0} = (byte[])row[\"{0}\"];\r\n", filed.Name);	
+						code.AppendFormat("\t\t\t\tthis.{0} = (byte[])row[\"{1}\"];\r\n", filed.Name,filed.Name);	
 						code.Append("\t\t\t}\r\n");	
 					}
 					else if (type == "datetime")
 					{
 						code.AppendFormat("{0}if (row.Table.Columns.Contains(\"{1}\") && row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
 						code.Append("\t\t\t{\r\n");
-						code.AppendFormat("\t\t\t\tthis.{0} = DateTime.Parse(row[\"{0}\"].ToString());\r\n", filed.Name);	
+						code.AppendFormat("\t\t\t\tthis.{0} = DateTime.Parse(row[\"{1}\"].ToString());\r\n",  filed.Name,filed.Name);	
 						code.Append("\t\t\t}\r\n");	
 					}
 					else if (type == "guid")
 					{
 						code.AppendFormat("{0}if (row.Table.Columns.Contains(\"{1}\") && row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
 						code.Append("\t\t\t{\r\n");
-						code.AppendFormat("\t\t\t\tthis.{0} = new Guid(row[\"{0}\"].ToString());\r\n", filed.Name);	
+						code.AppendFormat("\t\t\t\tthis.{0} = new Guid(row[\"{1}\"].ToString());\r\n",  filed.Name,filed.Name);	
 						code.Append("\t\t\t}\r\n");	
 					}
 					else if (type == "string")
 					{
 						code.AppendFormat("{0}if (row.Table.Columns.Contains(\"{1}\") && row[\"{1}\"] != null)\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
 						code.Append("\t\t\t{\r\n");
-						code.AppendFormat("\t\t\t\tthis.{0} = row[\"{0}\"].ToString();\r\n", filed.Name);	
+						code.AppendFormat("\t\t\t\tthis.{0} = row[\"{1}\"].ToString();\r\n",  filed.Name,filed.Name);	
 						code.Append("\t\t\t}\r\n");	
 					}
 					else if (type == "decimal" || type == "double" || type == "float" || type == "int" || type == "long")
 					{
 						code.AppendFormat("{0}if (row.Table.Columns.Contains(\"{1}\") && row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
 						code.Append("\t\t\t{\r\n");
-						code.AppendFormat("\t\t\t\tthis.{0} = {1}.Parse(row[\"{0}\"].ToString());\r\n", filed.Name, type);	
+						code.AppendFormat("\t\t\t\tthis.{0} = {1}.Parse(row[\"{2}\"].ToString());\r\n", filed.Name, type,filed.Name);	
 						code.Append("\t\t\t}\r\n");	
 					}
 				}
@@ -99,6 +98,66 @@ namespace <#= dt.NameSpace #>
 <#= code.ToString() #>
 			return this;
 		}
+
+		public override <#= dt.ClassName #> GetEntityFromDataReader(IDataReader reader)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                var name = reader.GetName(i);
+				<#
+				for (int i = 0; i < dt.FiledList.Count; i++)
+				{
+					var filed = dt.FiledList[i];
+					var type = filed.CSharpType.ToLower();	
+					#>
+if (name.ToLower() == "<#=filed.Name.ToLower()#>"  && !reader.IsDBNull(i))
+{
+<#if(type == "bool")
+{#>
+<#=filed.Name#> = reader.GetBoolean(i);
+<#}#>
+<#if(type == "byte[]")
+{#>
+<#=filed.Name#> = (byte[])reader.GetValue(i);
+<#}#>
+<#if(type == "datetime")
+{#>
+<#=filed.Name#> = reader.GetDateTime(i);
+<#}#>
+<#if(type == "guid")
+{#>
+<#=filed.Name#> = reader.GetGuid(i);
+<#}#>
+<#if(type == "string")
+{#>
+<#=filed.Name#> = reader.GetString(i);
+<#}#>
+<#if(type == "decimal")
+{#>
+<#=filed.Name#> = reader.GetDecimal(i);
+<#}#>
+<#if(type == "double")
+{#>
+<#=filed.Name#> = reader.GetDouble(i);
+<#}#>
+<#if(type == "float")
+{#>
+<#=filed.Name#> = reader.GetFloat(i);
+<#}#>
+<#if(type == "int")
+{#>
+<#=filed.Name#> = reader.GetInt32(i);
+<#}#>
+<#if(type == "long")
+{#>
+<#=filed.Name#> = reader.GetInt64(i);
+<#}#>
+ continue;
+ }
+<#}#>               
+}
+            return this;
+        }
 
 		public override string TableName
 		{
@@ -113,14 +172,26 @@ namespace <#= dt.NameSpace #>
             get { return false; }
         }
 
-        public override List<string> Props
-        {
-            get { return null; }
-        }
+        private Dictionary<string, string> _props;
+
+		public override Dictionary<string, string> Props
+	    {
+	        get {
+				if(_props == null)
+				{
+					_props = new Dictionary<string, string>();
+					<#for (int i = 0; i < dt.FiledList.Count; i++){
+					var filed = dt.FiledList[i];#>
+					_props.Add( "<#= filed.Name #>","<#= filed.Name #>");
+					<#}#>
+				}
+				return _props;			 
+			 }
+	    }
 
 		public override string GetQuerySQL(string @where = "")
 		{
-			var sql = @"<#=  dt.Sql #>  where 1=1";
+			var sql = @"<#=  dt.Sql #> where 1=1 ";
            
 			if (!string.IsNullOrEmpty(@where))
 				sql += "and " + @where;

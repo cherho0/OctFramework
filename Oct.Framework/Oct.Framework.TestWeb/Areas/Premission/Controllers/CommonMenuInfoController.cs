@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Mvc;
 using AutoMapper;
 using Microsoft.Practices.Unity;

@@ -8,6 +8,55 @@
 @model DemoDTO
 <h2>Demo</h2>
 
+<h3 id="btn-groups-single">数据查询使用</h3>
+<p>查询</p>
+<pre>
+     Stopwatch sw = new Stopwatch();
+            sw.Start();
+            //var models = DbContext.TestTsContext.Query("");
+            //10w 数据 417毫秒。0.4 秒
+            sw.Stop();
+
+            //普通linq 查询
+            var temp1 = DbContext.CommonActionInfoContext.Query(p => p.IsVisible);
+
+            //普通分页查询
+            var ss = DbContext.CommonUserContext.QueryPage("", "id", 1, 10);
+
+            //查询某对象的某些字段
+            var user = DbContext.CommonUserContext.GetModel(p => p.UserName, "57D5A932-584F-4632-929F-284D0E4165F4");
+
+            //符合查询某些字段
+            var us5 = DbContext.CommonMenuActionsContext.Query(p => p.MenuName, p => p.IsVisible == true);
+
+            //排序查询某些字段
+            var us = DbContext.CommonUserContext.QueryOrder(p => new { p.UserName, p.Account }, "", null, p => p.UserName);
+
+            //分页查询某些字段
+            var us1 = DbContext.CommonUserContext.QueryPage(p => new { p.UserName, p.Account }, "", null, p => p.UserName, 1, 10);
+
+            //linq 拼where
+            var us2 = DbContext.CommonUserContext.Query(p => p.Account == "czy");
+
+            //linq 复合查询
+            var us3 = DbContext.CommonUserAcrionsContext.Query(p => p.IsVisible == true);
+
+            //linq 排序查询
+            var us4 = DbContext.CommonUserAcrionsContext.QueryOrder(p => p.IsVisible == true, p => p.Sort);
+
+            //linq 排序查询某些字段
+            var us7 = DbContext.CommonUserAcrionsContext.QueryOrder(p => p.IsVisible == true, p => new { p.Name }, p => p.Name);
+
+            //linq 分页查询
+            var us6 = DbContext.CommonMenuActionsContext.QueryPage(p => p.IsVisible == true, p => p.Name, 1, 10);
+
+            //linq 分页查询某些字段
+            var us8 = DbContext.CommonMenuActionsContext.QueryPage(p => new { p.Name }, p => p.IsVisible == true, p => p.Name, 1, 10);
+
+            //linq 分页查询 条件判断
+            var us9 = DbContext.CommonUserAcrionsContext.QueryPage(p => p.Name != "", p => p.Name, 1, 10);
+</pre>
+
 <h3 id="btn-groups-single">枚举类型选择器</h3>
 <p>通过model 绑定</p>
 <pre>

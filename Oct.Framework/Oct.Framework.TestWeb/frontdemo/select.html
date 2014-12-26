@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet">
+    <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet">
+    <link href="/assets/global/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet">
+    <link href="/assets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet">
+    
+    <!-- BEGIN THEME STYLES -->
+    <link href="/assets/global/css/components.css" rel="stylesheet" type="text/css">
+    <link href="/assets/global/css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css">
+    <!-- <link href="/assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"> -->
+    <link href="/assets/octopus/css/octopus.css" rel="stylesheet" type="text/css">
+    <!-- END THEME STYLES -->
+</head>
+<body>
+	<div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">案例</h3>
+        </div>
+        <!-- 案例 begin -->
+        <div class="panel-body">
+            <div class="col-md-9 J_MultiLevelSelect">
+                <select class="form-control input-small pull-left" data-val="true" data-val-required="TradeItemId 字段是必需的。" id="TradeItemId" name="TradeItemId"><option value="">-全部-</option>
+                    <option value="4bab8233-d0b9-4186-8f97-31bb7a44d42a">费用2</option>
+                    <option value="8159da34-bb39-497c-b393-3a1f2aa5f01f">费用</option>
+                    <option value="3453deed-c421-472e-a601-6266af0fbd93">未知</option>
+                    <option value="4755b463-0638-4cef-a89a-73f4d4c4cc7d">其它费用</option>
+                    <option value="4951f581-fe6f-42c8-aa32-802b9749b3bd">押金</option>
+                    <option value="17da0d95-ec9f-4409-a7e2-b24c89f1833d">其它</option>
+                    <option value="0c1e8e50-c141-4a26-b7c9-e6909310f344">团款</option>
+                    <option value="acb41fc3-f87b-4e43-a07e-edcc4db3401c">内转</option>
+                </select>
+                <select class="form-control input-small pull-left" data-defaulttext="-全部-" data-jsonurl="/Common/GetTradeItemDetail" data-paramkey="id" data-val="true" data-val-required="TradeDetailId 字段是必需的。" id="TradeDetailId" name="TradeDetailId"><option value="">-全部-</option></select>
+            </div>
+        </div>
+        <!-- 案例 end -->
+        
+
+    </div>
+
+    <!-- html begin-->
+        <pre>
+            <h3 class="panel-title">html:</h3>
+            <textarea rows="20" cols="108">
+<div class="col-md-9 J_MultiLevelSelect">
+<!--J_MultiLevelSelect这个class就代表了多级联动的select组-->
+@Html.DropDownListFor(p => p.Trade,  (IEnumerable<SelectListItem>)ViewBag.TradeItem,new{@class="form-control input-small pull-left"})
+
+@Html.DropDownListFor(p => p.TradeItem,  (IEnumerable<SelectListItem>)ViewBag.TradeItemDetail,new{
+@class="form-control input-small pull-left",
+data_jsonurl = "/Common/GetTradeItemDetail",/*代表这个select的json数据来源*/
+data_textName="Text",/*option的内容是返回json中的哪个key*/
+data_valueName="Value",/*option的值是返回json中的哪个key*/
+data_defaulttext="-全部-",/*select默认显示的内容*/
+data_defaultvalue="",/*select默认显示内容时候的值*/
+data_paramKey="id",/*参数的key*/
+data_accordingto="",/*依据哪个select变化*/
+})
+</div>
+            </textarea>
+        </pre>
+                                    <!-- html end -->
+</body>
+</html>

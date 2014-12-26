@@ -53,7 +53,6 @@
     <Compile Include="Entities\CommonUserRole.cs" />
     <Compile Include="Entities\TestTs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entities\UcUserMsg.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Oct.Framework.Core\Oct.Framework.Core.csproj">

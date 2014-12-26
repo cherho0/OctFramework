@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet">
+    <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet">
+    <link href="/assets/global/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet">
+    <link href="/assets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet">
+
+     <link href="/assets/global/plugins/select2/select2.css" rel="stylesheet" />
+
+    
+    <!-- BEGIN THEME STYLES -->
+    <link href="/assets/global/css/components.css" rel="stylesheet" type="text/css">
+    <link href="/assets/global/css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css">
+    <!-- <link href="/assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"> -->
+    <link href="/assets/octopus/css/octopus.css" rel="stylesheet" type="text/css">
+    <!-- END THEME STYLES -->
+</head>
+<body>
+	<div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">案例</h3>
+        </div>
+        <!-- 案例 begin -->
+        <div class="panel-body">
+            <div class="row">
+                <label for="" class="col-md-3 control-label">公司：</label>
+                <div class="col-md-9">
+                    <input data-url="/Common/IndexJson" class="form-control input-sm J_CompanySelector  select2-offscreen" id="CompanyId" name="CompanyId" type="text" value="00000000-0000-0000-0000-000000000000" data-name="" tabindex="-1" title="">
+                </div>
+            </div>
+        </div>
+        <!-- 案例 end -->
+        
+
+    </div>
+
+    <!-- html begin-->
+    <pre>
+        <h3 class="panel-title">html:</h3>
+        <textarea rows="20" cols="108">
+<div class="row">
+    <label for="" class="col-md-3 control-label">公司：</label>
+    <div class="col-md-9">
+        @Html.CompanySelector(p => p.CompanyId)
+    </div>
+</div>
+        </textarea>
+    </pre>
+    <!-- html end -->
+
+
+   
+</body>
+<script src="/assets/global/plugins/jquery-1.11.0.min.js"></script>
+<script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+<script src="/assets/global/plugins/uniform/jquery.uniform.min.js"></script>
+<script src="/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="/assets/global/plugins/jquery-bootpag/jquery.bootpag.min.js"></script>
+<script src="/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
+<script src="/assets/global/plugins/artTemplate.js"></script>
+<script src="/assets/global/plugins/json2.js"></script>
+<script src="/assets/global/plugins/jquery.signalR-1.0.1.min.js"></script>
+<script src="/signalr/hubs"></script>
+<script src="/Scripts/jquery-jtemplates.js"></script>
+
+<!-- END CORE PLUGINS -->
+<script src="/assets/global/plugins/select2/select2.min.js"></script>
+<script src="/assets/global/plugins/select2/select2_locale_zh-CN.js"></script>
+
+<script src="/assets/global/scripts/metronic.js"></script>
+<script src="/assets/admin/layout/scripts/layout.js"></script>
+<script src="/assets/octopus/js/common.js"></script>
+</html>

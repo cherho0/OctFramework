@@ -8,6 +8,27 @@ namespace Oct.Framework.Core.Common
 {
     public class ExpressionHelper
     {
+        public static List<string> GetProps<T,TP>(Expression<Func<T, TP>> expression)
+        {
+            List<string> props = new List<string>();
+            MemberExpression body = expression.Body as MemberExpression;
+
+            if (body == null)
+            {
+                NewExpression ubody = (NewExpression)expression.Body;
+                var mn = ubody.Members;
+                foreach (var m in mn)
+                {
+                    props.Add(m.Name);
+                }
+            }
+            else
+            {
+                props.Add(body.Member.Name);
+            }
+            return props;
+        } 
+
         #region 属性
 
         public IDictionary<string, object> Argument
@@ -123,6 +144,14 @@ namespace Oct.Framework.Core.Common
         {
             if (expression is LambdaExpression)
                 return this.Resolve((expression as LambdaExpression).Body);
+
+            if (expression is MemberExpression)
+            {
+                var mem = expression as MemberExpression;
+                var constant = Expression.Constant(true);
+                return ResolveFunc(mem, constant, ExpressionType.Equal);
+
+            }
 
             //1元运算
             if (expression is UnaryExpression)

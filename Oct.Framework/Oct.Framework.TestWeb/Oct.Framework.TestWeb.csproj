@@ -631,6 +631,12 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="frontdemo\demo.html" />
+    <Content Include="frontdemo\modal.html" />
+    <Content Include="frontdemo\searchList.html" />
+    <Content Include="frontdemo\select.html" />
+    <Content Include="frontdemo\tabledata.html" />
+    <Content Include="frontdemo\temp\testModal.html" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="assets\global\plugins\bootstrap-toastr\toastr.min.js.map" />

@@ -424,99 +424,234 @@ namespace Oct.Framework.Entities.Entities
 		}
 
 		
-		public override List<string> Props
-		{
-			get
-			{
-				return new List<string>();
-			}
-		}
+		private Dictionary<string, string> _props;
+
+		public override Dictionary<string, string> Props
+	    {
+	        get {
+				if(_props == null)
+				{
+					_props = new Dictionary<string, string>();
+										_props.Add( "Id","Id");
+										_props.Add( "Account","Account");
+										_props.Add( "UserName","UserName");
+										_props.Add( "Password","Password");
+										_props.Add( "Status","Status");
+										_props.Add( "CreateDate","CreateDate");
+										_props.Add( "CreateUserId","CreateUserId");
+										_props.Add( "ModifyUserId","ModifyUserId");
+										_props.Add( "ModifyDate","ModifyDate");
+										_props.Add( "Phone","Phone");
+										_props.Add( "Email","Email");
+										_props.Add( "Fax","Fax");
+										_props.Add( "QQ","QQ");
+										_props.Add( "Address","Address");
+										_props.Add( "Gander","Gander");
+										_props.Add( "Mobile","Mobile");
+										_props.Add( "IDNumber","IDNumber");
+										_props.Add( "Avatar","Avatar");
+										_props.Add( "LastLoginDate","LastLoginDate");
+										_props.Add( "LoginCount","LoginCount");
+									}
+				return _props;			 
+			 }
+	    }
 
 		public override CommonUser GetEntityFromDataRow(DataRow row)
 		{
 			if (row.Table.Columns.Contains("Id") && row["Id"] != null && row["Id"].ToString() != "")
 			{
-				this.Id = new Guid(row["Id"].ToString());
+				this._id = new Guid(row["Id"].ToString());
 			}
 			if (row.Table.Columns.Contains("Account") && row["Account"] != null)
 			{
-				this.Account = row["Account"].ToString();
+				this._account = row["Account"].ToString();
 			}
 			if (row.Table.Columns.Contains("UserName") && row["UserName"] != null)
 			{
-				this.UserName = row["UserName"].ToString();
+				this._userName = row["UserName"].ToString();
 			}
 			if (row.Table.Columns.Contains("Password") && row["Password"] != null)
 			{
-				this.Password = row["Password"].ToString();
+				this._password = row["Password"].ToString();
 			}
 			if (row.Table.Columns.Contains("Status") && row["Status"] != null && row["Status"].ToString() != "")
 			{
-				this.Status = int.Parse(row["Status"].ToString());
+				this._status = int.Parse(row["Status"].ToString());
 			}
 			if (row.Table.Columns.Contains("CreateDate") && row["CreateDate"] != null && row["CreateDate"].ToString() != "")
 			{
-				this.CreateDate = DateTime.Parse(row["CreateDate"].ToString());
+				this._createDate = DateTime.Parse(row["CreateDate"].ToString());
 			}
 			if (row.Table.Columns.Contains("CreateUserId") && row["CreateUserId"] != null && row["CreateUserId"].ToString() != "")
 			{
-				this.CreateUserId = new Guid(row["CreateUserId"].ToString());
+				this._createUserId = new Guid(row["CreateUserId"].ToString());
 			}
 			if (row.Table.Columns.Contains("ModifyUserId") && row["ModifyUserId"] != null && row["ModifyUserId"].ToString() != "")
 			{
-				this.ModifyUserId = new Guid(row["ModifyUserId"].ToString());
+				this._modifyUserId = new Guid(row["ModifyUserId"].ToString());
 			}
 			if (row.Table.Columns.Contains("ModifyDate") && row["ModifyDate"] != null && row["ModifyDate"].ToString() != "")
 			{
-				this.ModifyDate = DateTime.Parse(row["ModifyDate"].ToString());
+				this._modifyDate = DateTime.Parse(row["ModifyDate"].ToString());
 			}
 			if (row.Table.Columns.Contains("Phone") && row["Phone"] != null)
 			{
-				this.Phone = row["Phone"].ToString();
+				this._phone = row["Phone"].ToString();
 			}
 			if (row.Table.Columns.Contains("Email") && row["Email"] != null)
 			{
-				this.Email = row["Email"].ToString();
+				this._email = row["Email"].ToString();
 			}
 			if (row.Table.Columns.Contains("Fax") && row["Fax"] != null)
 			{
-				this.Fax = row["Fax"].ToString();
+				this._fax = row["Fax"].ToString();
 			}
 			if (row.Table.Columns.Contains("QQ") && row["QQ"] != null)
 			{
-				this.QQ = row["QQ"].ToString();
+				this._qQ = row["QQ"].ToString();
 			}
 			if (row.Table.Columns.Contains("Address") && row["Address"] != null)
 			{
-				this.Address = row["Address"].ToString();
+				this._address = row["Address"].ToString();
 			}
 			if (row.Table.Columns.Contains("Gander") && row["Gander"] != null && row["Gander"].ToString() != "")
 			{
-				this.Gander = int.Parse(row["Gander"].ToString());
+				this._gander = int.Parse(row["Gander"].ToString());
 			}
 			if (row.Table.Columns.Contains("Mobile") && row["Mobile"] != null)
 			{
-				this.Mobile = row["Mobile"].ToString();
+				this._mobile = row["Mobile"].ToString();
 			}
 			if (row.Table.Columns.Contains("IDNumber") && row["IDNumber"] != null)
 			{
-				this.IDNumber = row["IDNumber"].ToString();
+				this._iDNumber = row["IDNumber"].ToString();
 			}
 			if (row.Table.Columns.Contains("Avatar") && row["Avatar"] != null)
 			{
-				this.Avatar = row["Avatar"].ToString();
+				this._avatar = row["Avatar"].ToString();
 			}
 			if (row.Table.Columns.Contains("LastLoginDate") && row["LastLoginDate"] != null && row["LastLoginDate"].ToString() != "")
 			{
-				this.LastLoginDate = DateTime.Parse(row["LastLoginDate"].ToString());
+				this._lastLoginDate = DateTime.Parse(row["LastLoginDate"].ToString());
 			}
 			if (row.Table.Columns.Contains("LoginCount") && row["LoginCount"] != null && row["LoginCount"].ToString() != "")
 			{
-				this.LoginCount = int.Parse(row["LoginCount"].ToString());
+				this._loginCount = int.Parse(row["LoginCount"].ToString());
 			}
 
 			return this;
 		}
+
+		public override CommonUser GetEntityFromDataReader(IDataReader reader)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                var name = reader.GetName(i);
+				if (name.ToLower() == "id" && !reader.IsDBNull(i))
+{
+_id = reader.GetGuid(i);
+ continue;
+}
+if (name.ToLower() == "account" && !reader.IsDBNull(i))
+{
+_account = reader.GetString(i);
+ continue;
+}
+if (name.ToLower() == "username" && !reader.IsDBNull(i))
+{
+_userName = reader.GetString(i);
+ continue;
+}
+if (name.ToLower() == "password" && !reader.IsDBNull(i))
+{
+_password = reader.GetString(i);
+ continue;
+}
+if (name.ToLower() == "status" && !reader.IsDBNull(i))
+{
+_status = reader.GetInt32(i);
+ continue;
+}
+if (name.ToLower() == "createdate" && !reader.IsDBNull(i))
+{
+_createDate = reader.GetDateTime(i);
+ continue;
+}
+if (name.ToLower() == "createuserid" && !reader.IsDBNull(i))
+{
+_createUserId = reader.GetGuid(i);
+ continue;
+}
+if (name.ToLower() == "modifyuserid" && !reader.IsDBNull(i))
+{
+_modifyUserId = reader.GetGuid(i);
+ continue;
+}
+if (name.ToLower() == "modifydate" && !reader.IsDBNull(i))
+{
+_modifyDate = reader.GetDateTime(i);
+ continue;
+}
+if (name.ToLower() == "phone" && !reader.IsDBNull(i))
+{
+_phone = reader.GetString(i);
+ continue;
+}
+if (name.ToLower() == "email" && !reader.IsDBNull(i))
+{
+_email = reader.GetString(i);
+ continue;
+}
+if (name.ToLower() == "fax" && !reader.IsDBNull(i))
+{
+_fax = reader.GetString(i);
+ continue;
+}
+if (name.ToLower() == "qq" && !reader.IsDBNull(i))
+{
+_qQ = reader.GetString(i);
+ continue;
+}
+if (name.ToLower() == "address" && !reader.IsDBNull(i))
+{
+_address = reader.GetString(i);
+ continue;
+}
+if (name.ToLower() == "gander" && !reader.IsDBNull(i))
+{
+_gander = reader.GetInt32(i);
+ continue;
+}
+if (name.ToLower() == "mobile" && !reader.IsDBNull(i))
+{
+_mobile = reader.GetString(i);
+ continue;
+}
+if (name.ToLower() == "idnumber" && !reader.IsDBNull(i))
+{
+_iDNumber = reader.GetString(i);
+ continue;
+}
+if (name.ToLower() == "avatar" && !reader.IsDBNull(i))
+{
+_avatar = reader.GetString(i);
+ continue;
+}
+if (name.ToLower() == "lastlogindate" && !reader.IsDBNull(i))
+{
+_lastLoginDate = reader.GetDateTime(i);
+ continue;
+}
+if (name.ToLower() == "logincount" && !reader.IsDBNull(i))
+{
+_loginCount = reader.GetInt32(i);
+ continue;
+}
+               
+}
+            return this;
+        }
 
 		public override string TableName
 		{

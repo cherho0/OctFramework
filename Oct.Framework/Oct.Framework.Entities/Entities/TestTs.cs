@@ -81,32 +81,59 @@ namespace Oct.Framework.Entities.Entities
 			}
 		}
 
-		public override void SetIdentity(object v)
+				public override void SetIdentity(object v)
 		{
 			this.Id = int.Parse(v.ToString());
 		}
 		
-		public override List<string> Props
-		{
-			get
-			{
-				return new List<string>();
-			}
-		}
+		private Dictionary<string, string> _props;
+
+		public override Dictionary<string, string> Props
+	    {
+	        get {
+				if(_props == null)
+				{
+					_props = new Dictionary<string, string>();
+										_props.Add( "Id","Id");
+										_props.Add( "DD","DD");
+									}
+				return _props;			 
+			 }
+	    }
 
 		public override TestTs GetEntityFromDataRow(DataRow row)
 		{
 			if (row.Table.Columns.Contains("Id") && row["Id"] != null && row["Id"].ToString() != "")
 			{
-				this.Id = int.Parse(row["Id"].ToString());
+				this._id = int.Parse(row["Id"].ToString());
 			}
 			if (row.Table.Columns.Contains("DD") && row["DD"] != null)
 			{
-				this.DD = row["DD"].ToString();
+				this._dD = row["DD"].ToString();
 			}
 
 			return this;
 		}
+
+		public override TestTs GetEntityFromDataReader(IDataReader reader)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                var name = reader.GetName(i);
+				if (name.ToLower() == "id" && !reader.IsDBNull(i))
+{
+_id = reader.GetInt32(i);
+ continue;
+}
+if (name.ToLower() == "dd" && !reader.IsDBNull(i))
+{
+_dD = reader.GetString(i);
+ continue;
+}
+               
+}
+            return this;
+        }
 
 		public override string TableName
 		{

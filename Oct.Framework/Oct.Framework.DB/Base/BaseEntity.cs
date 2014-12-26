@@ -36,7 +36,7 @@ namespace Oct.Framework.DB.Base
 
         public abstract bool IsIdentityPk { get; }
 
-        public abstract List<string> Props { get; }
+        public abstract Dictionary<string,string> Props { get; }
 
         /// <summary>
         ///     获取实体名称
@@ -50,6 +50,13 @@ namespace Oct.Framework.DB.Base
         /// <param name="row"></param>
         /// <returns></returns>
         public abstract T GetEntityFromDataRow(DataRow row);
+
+        /// <summary>
+        ///     通过datarow获取一个实体
+        /// </summary>
+        /// <param name="row"></param>
+        /// <returns></returns>
+        public abstract T GetEntityFromDataReader(IDataReader reader);
 
         /// <summary>
         ///     获取查询sql

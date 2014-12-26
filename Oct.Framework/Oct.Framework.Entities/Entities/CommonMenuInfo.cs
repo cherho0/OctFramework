@@ -177,61 +177,118 @@ namespace Oct.Framework.Entities.Entities
 		}
 
 		
-		public override List<string> Props
-		{
-			get
-			{
-				return new List<string>();
-			}
-		}
+		private Dictionary<string, string> _props;
+
+		public override Dictionary<string, string> Props
+	    {
+	        get {
+				if(_props == null)
+				{
+					_props = new Dictionary<string, string>();
+										_props.Add( "Id","Id");
+										_props.Add( "Name","Name");
+										_props.Add( "IsAllowAnonymousAccess","IsAllowAnonymousAccess");
+										_props.Add( "IsEnable","IsEnable");
+										_props.Add( "Sort","Sort");
+										_props.Add( "CreateDate","CreateDate");
+										_props.Add( "ModifyDate","ModifyDate");
+									}
+				return _props;			 
+			 }
+	    }
 
 		public override CommonMenuInfo GetEntityFromDataRow(DataRow row)
 		{
 			if (row.Table.Columns.Contains("Id") && row["Id"] != null && row["Id"].ToString() != "")
 			{
-				this.Id = new Guid(row["Id"].ToString());
+				this._id = new Guid(row["Id"].ToString());
 			}
 			if (row.Table.Columns.Contains("Name") && row["Name"] != null)
 			{
-				this.Name = row["Name"].ToString();
+				this._name = row["Name"].ToString();
 			}
 			if (row.Table.Columns.Contains("IsAllowAnonymousAccess") && row["IsAllowAnonymousAccess"] != null && row["IsAllowAnonymousAccess"].ToString() != "")
 			{
 				if ((row["IsAllowAnonymousAccess"].ToString() == "1") || (row["IsAllowAnonymousAccess"].ToString().ToLower() == "true"))
 				{
-					this.IsAllowAnonymousAccess = true;
+					this._isAllowAnonymousAccess = true;
 				}
 				else
 				{
-					this.IsAllowAnonymousAccess = false;
+					this._isAllowAnonymousAccess = false;
 				}
 			}
 			if (row.Table.Columns.Contains("IsEnable") && row["IsEnable"] != null && row["IsEnable"].ToString() != "")
 			{
 				if ((row["IsEnable"].ToString() == "1") || (row["IsEnable"].ToString().ToLower() == "true"))
 				{
-					this.IsEnable = true;
+					this._isEnable = true;
 				}
 				else
 				{
-					this.IsEnable = false;
+					this._isEnable = false;
 				}
 			}
 			if (row.Table.Columns.Contains("Sort") && row["Sort"] != null && row["Sort"].ToString() != "")
 			{
-				this.Sort = int.Parse(row["Sort"].ToString());
+				this._sort = int.Parse(row["Sort"].ToString());
 			}
 			if (row.Table.Columns.Contains("CreateDate") && row["CreateDate"] != null && row["CreateDate"].ToString() != "")
 			{
-				this.CreateDate = DateTime.Parse(row["CreateDate"].ToString());
+				this._createDate = DateTime.Parse(row["CreateDate"].ToString());
 			}
 			if (row.Table.Columns.Contains("ModifyDate") && row["ModifyDate"] != null && row["ModifyDate"].ToString() != "")
 			{
-				this.ModifyDate = DateTime.Parse(row["ModifyDate"].ToString());
+				this._modifyDate = DateTime.Parse(row["ModifyDate"].ToString());
 			}
 
 			return this;
 		}
+
+		public override CommonMenuInfo GetEntityFromDataReader(IDataReader reader)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                var name = reader.GetName(i);
+				if (name.ToLower() == "id" && !reader.IsDBNull(i))
+{
+_id = reader.GetGuid(i);
+ continue;
+}
+if (name.ToLower() == "name" && !reader.IsDBNull(i))
+{
+_name = reader.GetString(i);
+ continue;
+}
+if (name.ToLower() == "isallowanonymousaccess" && !reader.IsDBNull(i))
+{
+_isAllowAnonymousAccess = reader.GetBoolean(i);
+ continue;
+}
+if (name.ToLower() == "isenable" && !reader.IsDBNull(i))
+{
+_isEnable = reader.GetBoolean(i);
+ continue;
+}
+if (name.ToLower() == "sort" && !reader.IsDBNull(i))
+{
+_sort = reader.GetInt32(i);
+ continue;
+}
+if (name.ToLower() == "createdate" && !reader.IsDBNull(i))
+{
+_createDate = reader.GetDateTime(i);
+ continue;
+}
+if (name.ToLower() == "modifydate" && !reader.IsDBNull(i))
+{
+_modifyDate = reader.GetDateTime(i);
+ continue;
+}
+               
+}
+            return this;
+        }
 
 		public override string TableName
 		{

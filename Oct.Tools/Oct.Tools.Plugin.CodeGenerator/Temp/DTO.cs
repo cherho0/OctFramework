@@ -7,7 +7,7 @@
 //     重新生成代码，这些更改将会丢失。
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Oct.Tools.Host.Res.Temp
+namespace Oct.Tools.Plugin.CodeGenerator.Temp
 {
     using System.Linq;
     using System.Text;
@@ -18,7 +18,7 @@ namespace Oct.Tools.Host.Res.Temp
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+    #line 1 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\DTO.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
     public partial class DTO : DTOBase
     {
@@ -30,27 +30,27 @@ namespace Oct.Tools.Host.Res.Temp
         {
             this.Write("using System;\r\nusing System.ComponentModel.DataAnnotations;\r\n\r\nnamespace ");
             
-            #line 9 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            #line 9 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\DTO.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.NameSpace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\t[Serializable]\r\n\tpublic partial class ");
             
-            #line 12 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            #line 12 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\DTO.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             
-            #line 12 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            #line 12 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\DTO.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassNameExtend));
             
             #line default
             #line hidden
             this.Write("\r\n\t{ \r\n\t\t#region\t属性\r\n\t\t");
             
-            #line 15 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            #line 15 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\DTO.tt"
 
 			foreach(FiledInfo filed in dt.FiledList) 
 			{		
@@ -72,48 +72,48 @@ namespace Oct.Tools.Host.Res.Temp
             #line hidden
             this.Write("\r\n\t\t/// <summary>\r\n\t\t/// ");
             
-            #line 33 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            #line 33 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\DTO.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.GetDisplayName()));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t/// </summary>\r\n\t\t[Display(Name = \"");
             
-            #line 35 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            #line 35 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\DTO.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.GetDisplayName()));
             
             #line default
             #line hidden
             this.Write("\")]\r\n");
             
-            #line 36 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            #line 36 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\DTO.tt"
   if(!string.IsNullOrEmpty(attr.ToString())) { 
             
             #line default
             #line hidden
             
-            #line 37 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            #line 37 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\DTO.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(attr.ToString()));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 38 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            #line 38 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\DTO.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 39 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            #line 39 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\DTO.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.CSharpType + " " + filed.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t{\r\n\t\t\tget;\r\n\t\t\tset;\r\n\t\t}\r\n\t\t");
             
-            #line 44 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+            #line 44 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\DTO.tt"
  } 
             
             #line default
@@ -122,7 +122,7 @@ namespace Oct.Tools.Host.Res.Temp
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\DTO.tt"
+        #line 1 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\DTO.tt"
 
 private global::Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo _dtField;
 

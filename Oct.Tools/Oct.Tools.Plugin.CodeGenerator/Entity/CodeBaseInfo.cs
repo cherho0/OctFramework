@@ -90,6 +90,15 @@ namespace Oct.Tools.Plugin.CodeGenerator.Entity
         }
 
         /// <summary>
+        /// 序号
+        /// </summary>
+        public string Table
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 列名
         /// </summary>
         public string Name

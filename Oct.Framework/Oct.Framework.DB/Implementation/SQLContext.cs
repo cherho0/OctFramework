@@ -219,6 +219,46 @@ namespace Oct.Framework.DB.Implementation
             }
         }
 
+        public IDataReader ExecuteQueryReader(string sql)
+        {
+            if (SQLWordFilte.CheckSql(sql))
+            {
+                throw new Exception("您提供的关键字有可能危害数据库，已阻止执行");
+            }
+            try
+            {
+                Session.Open();
+                var cmd = new SqlCommand(sql);
+                cmd.Connection = Session.Connection;
+                return cmd.ExecuteReader();
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public IDataReader ExecuteQueryReader(string sql, params SqlParameter[] cmdParms)
+        {
+            if (SQLWordFilte.CheckSql(sql))
+            {
+                throw new Exception("您提供的关键字有可能危害数据库，已阻止执行");
+            }
+            try
+            {
+                Session.Open();
+                var cmd = new SqlCommand();
+                cmd = PrepareCommand(cmd, sql, cmdParms);
+                cmd.Connection = Session.Connection;
+                return cmd.ExecuteReader();
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+           
+        }
+
 
         public IEnumerable<ExpandoObject> ExecuteExpandoObjects(string sql)
         {

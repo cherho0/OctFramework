@@ -91,6 +91,8 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
         {
             try
             {
+
+
                 this.Table = new DataTable();
                 this.Table.Columns.Add("序号");
                 this.Table.Columns.Add("列名");

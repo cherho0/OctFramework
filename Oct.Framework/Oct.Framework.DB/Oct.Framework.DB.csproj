@@ -54,6 +54,8 @@
     <Compile Include="Base\BaseEntity.cs" />
     <Compile Include="Base\IEntity.cs" />
     <Compile Include="Core\BusinessRule.cs" />
+    <Compile Include="Core\DataReaderHelper.cs" />
+    <Compile Include="Core\DataSetHelper.cs" />
     <Compile Include="Core\DBContextBase.cs" />
     <Compile Include="Core\Enums.cs" />
     <Compile Include="Core\OctDbCommand.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Core\CurrentSessionFactory.cs" />
     <Compile Include="Core\DBSession.cs" />
     <Compile Include="Core\SQLWordFilte.cs" />
+    <Compile Include="Extisions\IDbContextExtision.cs" />
     <Compile Include="Implementation\SQLContext.cs" />
     <Compile Include="Implementation\SQLDBContext.cs" />
     <Compile Include="Interface\IDBContext.cs" />

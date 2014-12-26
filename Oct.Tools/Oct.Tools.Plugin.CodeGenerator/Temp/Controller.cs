@@ -7,7 +7,7 @@
 //     重新生成代码，这些更改将会丢失。
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Oct.Tools.Host.Res.Temp
+namespace Oct.Tools.Plugin.CodeGenerator.Temp
 {
     using System.Linq;
     using System.Text;
@@ -18,7 +18,7 @@ namespace Oct.Tools.Host.Res.Temp
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+    #line 1 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
     public partial class Controller : ControllerBase
     {
@@ -33,28 +33,28 @@ namespace Oct.Tools.Host.Res.Temp
                     "ns;\r\nusing System;\r\nusing System.Collections.Generic;\r\nusing System.Web.Mvc;\r\nus" +
                     "ing ");
             
-            #line 14 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 14 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.NameSpace));
             
             #line default
             #line hidden
             this.Write(".Entities;\r\nusing ");
             
-            #line 15 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 15 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.NameSpace));
             
             #line default
             #line hidden
             this.Write(".Services;\r\nusing ");
             
-            #line 16 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 16 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.NameSpace));
             
             #line default
             #line hidden
             this.Write(".Web.Models;\r\n");
             
-            #line 17 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 17 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
 
 	var pkType = string.Empty;
 	var pkName = string.Empty;
@@ -72,102 +72,101 @@ namespace Oct.Tools.Host.Res.Temp
             #line hidden
             this.Write("\r\nnamespace ");
             
-            #line 30 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 30 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.NameSpace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\tpublic class ");
             
-            #line 32 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 32 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             
-            #line 32 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 32 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassNameExtend));
             
             #line default
             #line hidden
             this.Write(" : BaseController\r\n    {\r\n        [Dependency]\r\n        public I");
             
-            #line 35 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 35 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write("Service ");
             
-            #line 35 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 35 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write("Service { get; set; }\r\n\r\n        public ActionResult Index(int? page)\r\n        {\r" +
-                    "\n            var p = page ?? 1;\r\n            var total = 0;\r\n            var mod" +
-                    "els = this.");
+                    "\n            var p = page ?? 1;\r\n            var pageResult = this.");
             
-            #line 41 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 40 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write("Service.GetModels(p, 5, string.Empty, \"");
             
-            #line 41 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 40 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
             #line hidden
-            this.Write("\", null, out total);\r\n            var dtos = Mapper.Map<List<");
+            this.Write("\", null);\r\n            var dtos = Mapper.Map<List<");
             
-            #line 42 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 41 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
-            this.Write("DTO>>(models);\r\n           \r\n            if (dtos == null)\r\n                dtos " +
-                    "= new List<");
+            this.Write("DTO>>(pageResult.Models);\r\n           \r\n            if (dtos == null)\r\n          " +
+                    "      dtos = new List<");
             
-            #line 45 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 44 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
-            this.Write("DTO>();   \r\n\t\t   \r\n            var pm = this.Kernel.CreatePageModel(5, p, total);" +
-                    "\r\n\r\n            this.ViewBag.PM = pm;\r\n\r\n            return this.View(dtos);\r\n  " +
-                    "      }\r\n\r\n        public ActionResult Details(");
+            this.Write("DTO>();   \r\n\t\t   \r\n            var pm = this.Kernel.CreatePageModel(5, p, pageRes" +
+                    "ult.TotalCount);\r\n\r\n            this.ViewBag.PM = pm;\r\n\r\n            return this" +
+                    ".View(dtos);\r\n        }\r\n\r\n        public ActionResult Details(");
             
-            #line 54 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 53 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkType));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 54 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 53 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
             #line hidden
             this.Write(")\r\n        {\r\n            var entity = this.");
             
-            #line 56 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 55 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write("Service.GetModel(");
             
-            #line 56 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 55 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
             #line hidden
             this.Write(");\r\n            var model = Mapper.Map<");
             
-            #line 57 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 56 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
@@ -176,7 +175,7 @@ namespace Oct.Tools.Host.Res.Temp
                     "c ActionResult Create()\r\n        {\r\n            return this.View();\r\n        }\r\n" +
                     "\r\n        [HttpPost]\r\n        public ActionResult Create(");
             
-            #line 68 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 67 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
@@ -184,14 +183,14 @@ namespace Oct.Tools.Host.Res.Temp
             this.Write("DTO model)\r\n        {\r\n            try\r\n            {\r\n                var entity" +
                     " = Mapper.Map<");
             
-            #line 72 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 71 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write(">(model);\r\n\r\n                this.");
             
-            #line 74 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 73 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
@@ -200,35 +199,35 @@ namespace Oct.Tools.Host.Res.Temp
                     "           }\r\n            catch\r\n            {\r\n                return this.View" +
                     "();\r\n            }\r\n        }\r\n\r\n        public ActionResult Edit(");
             
-            #line 84 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 83 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkType));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 84 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 83 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
             #line hidden
             this.Write(")\r\n        {\r\n            var entity = this.");
             
-            #line 86 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 85 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write("Service.GetModel(");
             
-            #line 86 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 85 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
             #line hidden
             this.Write(");\r\n            var model = Mapper.Map<");
             
-            #line 87 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 86 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
@@ -236,7 +235,7 @@ namespace Oct.Tools.Host.Res.Temp
             this.Write("DTO>(entity);\r\n\r\n            return this.View(model);\r\n        }\r\n\r\n        [Http" +
                     "Post]\r\n        public ActionResult Edit(");
             
-            #line 93 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 92 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
@@ -244,14 +243,14 @@ namespace Oct.Tools.Host.Res.Temp
             this.Write("DTO model)\r\n        {\r\n            try\r\n            {\r\n                var entity" +
                     " = Mapper.Map<");
             
-            #line 97 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 96 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write(">(model);\r\n\r\n                this.");
             
-            #line 99 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 98 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
@@ -260,28 +259,28 @@ namespace Oct.Tools.Host.Res.Temp
                     "\r\n            }\r\n            catch\r\n            {\r\n                return this.V" +
                     "iew();\r\n            }\r\n        }\r\n\r\n        public ActionResult Delete(");
             
-            #line 109 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 108 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkType));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 109 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 108 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
             #line hidden
             this.Write(")\r\n        {\r\n            this.");
             
-            #line 111 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 110 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write("Service.Delete(");
             
-            #line 111 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+            #line 110 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
@@ -290,7 +289,7 @@ namespace Oct.Tools.Host.Res.Temp
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Host\Res\Temp\Controller.tt"
+        #line 1 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller.tt"
 
 private global::Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo _dtField;
 

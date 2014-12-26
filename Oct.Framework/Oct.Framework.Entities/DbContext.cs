@@ -36,14 +36,6 @@ namespace Oct.Framework.Entities
             }
         }
 
-        public IDBContext<UcUserMsg> UserMsgContext
-        {
-            get
-            {
-                return new SQLDBContext<UcUserMsg>(Session);
-            }
-        }
-
         public IDBContext<CommonUserRole> CommonUserRoleContext
         {
             get

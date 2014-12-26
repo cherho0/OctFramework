@@ -139,39 +139,84 @@ namespace Oct.Framework.Entities.Entities
 		}
 
 		
-		public override List<string> Props
-		{
-			get
-			{
-				return new List<string>();
-			}
-		}
+		private Dictionary<string, string> _props;
+
+		public override Dictionary<string, string> Props
+	    {
+	        get {
+				if(_props == null)
+				{
+					_props = new Dictionary<string, string>();
+										_props.Add( "Id","Id");
+										_props.Add( "UserId","UserId");
+										_props.Add( "RoleId","RoleId");
+										_props.Add( "CreateDate","CreateDate");
+										_props.Add( "ModifyDate","ModifyDate");
+									}
+				return _props;			 
+			 }
+	    }
 
 		public override CommonUserRole GetEntityFromDataRow(DataRow row)
 		{
 			if (row.Table.Columns.Contains("Id") && row["Id"] != null && row["Id"].ToString() != "")
 			{
-				this.Id = new Guid(row["Id"].ToString());
+				this._id = new Guid(row["Id"].ToString());
 			}
 			if (row.Table.Columns.Contains("UserId") && row["UserId"] != null && row["UserId"].ToString() != "")
 			{
-				this.UserId = new Guid(row["UserId"].ToString());
+				this._userId = new Guid(row["UserId"].ToString());
 			}
 			if (row.Table.Columns.Contains("RoleId") && row["RoleId"] != null && row["RoleId"].ToString() != "")
 			{
-				this.RoleId = new Guid(row["RoleId"].ToString());
+				this._roleId = new Guid(row["RoleId"].ToString());
 			}
 			if (row.Table.Columns.Contains("CreateDate") && row["CreateDate"] != null && row["CreateDate"].ToString() != "")
 			{
-				this.CreateDate = DateTime.Parse(row["CreateDate"].ToString());
+				this._createDate = DateTime.Parse(row["CreateDate"].ToString());
 			}
 			if (row.Table.Columns.Contains("ModifyDate") && row["ModifyDate"] != null && row["ModifyDate"].ToString() != "")
 			{
-				this.ModifyDate = DateTime.Parse(row["ModifyDate"].ToString());
+				this._modifyDate = DateTime.Parse(row["ModifyDate"].ToString());
 			}
 
 			return this;
 		}
+
+		public override CommonUserRole GetEntityFromDataReader(IDataReader reader)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                var name = reader.GetName(i);
+				if (name.ToLower() == "id" && !reader.IsDBNull(i))
+{
+_id = reader.GetGuid(i);
+ continue;
+}
+if (name.ToLower() == "userid" && !reader.IsDBNull(i))
+{
+_userId = reader.GetGuid(i);
+ continue;
+}
+if (name.ToLower() == "roleid" && !reader.IsDBNull(i))
+{
+_roleId = reader.GetGuid(i);
+ continue;
+}
+if (name.ToLower() == "createdate" && !reader.IsDBNull(i))
+{
+_createDate = reader.GetDateTime(i);
+ continue;
+}
+if (name.ToLower() == "modifydate" && !reader.IsDBNull(i))
+{
+_modifyDate = reader.GetDateTime(i);
+ continue;
+}
+               
+}
+            return this;
+        }
 
 		public override string TableName
 		{

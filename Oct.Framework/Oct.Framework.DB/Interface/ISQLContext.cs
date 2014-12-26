@@ -78,6 +78,21 @@ namespace Oct.Framework.DB.Interface
         DataSet ExecuteQuery(string sql);
 
         /// <summary>
+        /// 查询reader
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        IDataReader ExecuteQueryReader(string sql);
+
+        /// <summary>
+        /// 查询reader
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="cmdParms"></param>
+        /// <returns></returns>
+        IDataReader ExecuteQueryReader(string sql, params SqlParameter[] cmdParms);
+
+        /// <summary>
         ///     查询一组数据的动态结果集
         /// </summary>
         /// <param name="sql"></param>

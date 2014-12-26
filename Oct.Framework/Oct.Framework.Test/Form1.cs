@@ -133,14 +133,7 @@ namespace Oct.Framework.Test
             {
                 var strs = new string[] { "cw", "syf", "czy", "xzj" };
                 int total = 0;
-                var list = context.CommonUserContext.Query(
-                    d => !d.Account.Contains("cw") && d.Status == 1 && d.CreateDate >= DateTime.Now && d.Account.Count() > 10 
-                        && d.Account.Contains("cw") && strs.Contains(d.Account),"Createdate",1,1,out total);
-
-                foreach (var item in list)
-                {
-
-                }
+               
             }
 
             //    //语句操作

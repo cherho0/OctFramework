@@ -114,7 +114,7 @@ namespace Oct.Framework.DB.Core
                             }
                             catch (Exception ex)
                             {
-                                LogsHelper.Error(ex);
+                                LogHelper.Error(ex);
                             }
 
 

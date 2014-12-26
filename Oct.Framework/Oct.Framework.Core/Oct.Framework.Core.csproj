@@ -102,7 +102,9 @@
     <Compile Include="Args\DataEventArgs!4.cs" />
     <Compile Include="Args\DataEventArgs!5.cs" />
     <Compile Include="Args\DataEventArgs.cs" />
+    <Compile Include="Common\ExtFunc.cs" />
     <Compile Include="Common\IpHelper.cs" />
+    <Compile Include="Common\RMB.cs" />
     <Compile Include="Common\Win32.cs" />
     <Compile Include="Cookie\CookieHelper.cs" />
     <Compile Include="Common\Csl.cs">
@@ -124,7 +126,7 @@
     <Compile Include="Log\BaseLog.cs" />
     <Compile Include="Log\DataChangeLog.cs" />
     <Compile Include="Log\IDbLog.cs" />
-    <Compile Include="Log\LogsHelper.cs" />
+    <Compile Include="Log\LogHelper.cs" />
     <Compile Include="Log\PerformanceLog.cs" />
     <Compile Include="Log\ViewLog.cs" />
     <Compile Include="Mail\MailHelper.cs" />

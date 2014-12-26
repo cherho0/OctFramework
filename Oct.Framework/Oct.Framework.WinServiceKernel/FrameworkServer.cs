@@ -27,7 +27,7 @@ namespace Oct.Framework.WinServiceKernel
             LoadLgcs();
             Csl.Wl("模块加载完成。");
             Csl.Wl("内核构建完成。");
-            LogsHelper.Info("内核构建完成。");
+            LogHelper.Info("内核构建完成。");
             Csl.Wl(ConsoleColor.Yellow, "输入help查看相关command操作。");
             Csl.Wl(ConsoleColor.Yellow, "输入exit退出。");
         }
@@ -45,7 +45,7 @@ namespace Oct.Framework.WinServiceKernel
             Csl.Wl("开始加载逻辑模块...");
             string assemblyFilePath = Assembly.GetExecutingAssembly().Location;
             string assemblyDirPath = Path.GetDirectoryName(assemblyFilePath);
-            LogsHelper.Info("开始加载逻辑模块..." + assemblyDirPath);
+            LogHelper.Info("开始加载逻辑模块..." + assemblyDirPath);
             _lgcs = new LogicMgr();
             var pluginName = ConfigSettingHelper.GetAppStr("PluginName");
             foreach (string file in Directory.GetFiles(assemblyDirPath))
@@ -73,7 +73,7 @@ namespace Oct.Framework.WinServiceKernel
                     {
                         _lgcs.Add(lgc);
                     }
-                    LogsHelper.Info(lgc.Name + " loading...");
+                    LogHelper.Info(lgc.Name + " loading...");
                     Csl.Wl(lgc.Name + " loading...");
                 }
             }

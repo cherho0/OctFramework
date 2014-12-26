@@ -62,7 +62,7 @@ namespace Oct.Framework.WinServiceKernel.HeartBeat
             }
             catch (Exception ex)
             {
-                LogsHelper.Error(ex);
+                LogHelper.Error(ex);
                 Csl.WlEx(ex);
             }
         }

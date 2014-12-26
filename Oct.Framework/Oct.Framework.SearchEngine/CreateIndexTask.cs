@@ -130,7 +130,7 @@ namespace Oct.Framework.SearchEngine
             }
             catch (Exception ex)
             {
-                LogsHelper.Error(ex);
+                LogHelper.Error(ex);
             }
         }
 
@@ -174,7 +174,7 @@ namespace Oct.Framework.SearchEngine
             }
             catch (Exception ex)
             {
-                LogsHelper.Error(ex);
+                LogHelper.Error(ex);
             }
         }
     }

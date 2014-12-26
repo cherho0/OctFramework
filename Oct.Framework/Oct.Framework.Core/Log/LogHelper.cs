@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Oct.Framework.Core.Log
 {
-    public class LogsHelper 
+    public class LogHelper 
     {
-        public static void Init()
-        {
-            log4net.Config.XmlConfigurator.Configure();  
-        }
+        private static bool _register;
 
         private static log4net.ILog _log;
 
@@ -25,6 +22,12 @@ namespace Oct.Framework.Core.Log
             {
                 if (_log == null)
                 {
+                    if (!_register)
+                    {
+                        _register = true;
+                        log4net.Config.XmlConfigurator.Configure();
+                    }
+
                     _log = log4net.LogManager.GetLogger("Oct.Framework");
                 }
 

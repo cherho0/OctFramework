@@ -73,7 +73,7 @@ namespace Oct.Framework.WinConsole
             if (ex != null)
             {
 
-                LogsHelper.Error(ex);
+                LogHelper.Error(ex);
                 Csl.WlEx(ex);
             }
         }

@@ -27,7 +27,7 @@ namespace Oct.Framework.WinService
             var ex = (Exception)e.ExceptionObject;
             if (ex != null)
             {
-                LogsHelper.Error(ex);
+                LogHelper.Error(ex);
             }
         }
 

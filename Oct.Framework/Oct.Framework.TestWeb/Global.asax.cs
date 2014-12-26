@@ -28,10 +28,7 @@ namespace Oct.Framework.TestWeb
     {
         protected void Application_Start()
         {
-            log4net.Config.XmlConfigurator.Configure();
             AreaRegistration.RegisterAllAreas();
-
-
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

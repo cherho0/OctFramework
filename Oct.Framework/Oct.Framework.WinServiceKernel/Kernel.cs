@@ -78,7 +78,7 @@ namespace Oct.Framework.WinServiceKernel
         {
             _trunkBeat.Start();
             Csl.Wl("程序启动成功，心跳开始执行");
-            LogsHelper.Info("程序启动成功，心跳开始执行");
+            LogHelper.Info("程序启动成功，心跳开始执行");
         }
 
         public T GetLgc<T>(string name) where T : CoreLogic

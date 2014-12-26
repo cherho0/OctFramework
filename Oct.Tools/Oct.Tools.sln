@@ -12,6 +12,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oct.Tools.Plugin.CodeGenerator", "Oct.Tools.Plugin.CodeGenerator\Oct.Tools.Plugin.CodeGenerator.csproj", "{C29CAECA-E4E3-4442-A8CB-9B4D76038BF9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oct.Tools.Host", "Oct.Tools.Host\Oct.Tools.Host.csproj", "{A0BCEFC3-0580-43B1-B9C3-8112C373FA60}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CBE4BD2D-6E4A-49BC-80AD-32E8922C8B73} = {CBE4BD2D-6E4A-49BC-80AD-32E8922C8B73}
+		{C29CAECA-E4E3-4442-A8CB-9B4D76038BF9} = {C29CAECA-E4E3-4442-A8CB-9B4D76038BF9}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oct.Tools.Plugin.HtmlGenerator", "Oct.Tools.Plugin.HtmlGenerator\Oct.Tools.Plugin.HtmlGenerator.csproj", "{CBE4BD2D-6E4A-49BC-80AD-32E8922C8B73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +37,10 @@ Global
 		{A0BCEFC3-0580-43B1-B9C3-8112C373FA60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0BCEFC3-0580-43B1-B9C3-8112C373FA60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0BCEFC3-0580-43B1-B9C3-8112C373FA60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBE4BD2D-6E4A-49BC-80AD-32E8922C8B73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBE4BD2D-6E4A-49BC-80AD-32E8922C8B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBE4BD2D-6E4A-49BC-80AD-32E8922C8B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBE4BD2D-6E4A-49BC-80AD-32E8922C8B73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,5 +49,6 @@ Global
 		{A0BCEFC3-0580-43B1-B9C3-8112C373FA60} = {80FA0B54-F0F5-4895-B244-DEF5A81A96FD}
 		{2220BEAD-48E0-425F-AC75-DC005308CA60} = {4805F9B3-6DAC-4307-B0D1-D6574B3C946A}
 		{C29CAECA-E4E3-4442-A8CB-9B4D76038BF9} = {22DEE33E-8B04-46BF-8D28-96E53E4E729F}
+		{CBE4BD2D-6E4A-49BC-80AD-32E8922C8B73} = {22DEE33E-8B04-46BF-8D28-96E53E4E729F}
 	EndGlobalSection
 EndGlobal

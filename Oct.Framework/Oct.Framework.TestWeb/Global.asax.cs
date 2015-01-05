@@ -15,6 +15,7 @@ using Oct.Framework.Core.Log;
 using Oct.Framework.DB;
 using Oct.Framework.Entities.Entities;
 using Oct.Framework.MvcExt;
+using Oct.Framework.MvcExt.User;
 using Oct.Framework.SearchEngine;
 using Oct.Framework.TestWeb.Areas.Premission.Models;
 using Oct.Framework.TestWeb.Models;
@@ -26,8 +27,11 @@ namespace Oct.Framework.TestWeb
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        public static string AppID { get; set; }
+
         protected void Application_Start()
         {
+            AppID = Guid.NewGuid().ToString();
             AreaRegistration.RegisterAllAreas();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -35,8 +39,17 @@ namespace Oct.Framework.TestWeb
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             OctGlobal.InitIOC(); //Bootstrapper.Initialise();
             CreateMapper();
-
             CreateSreachIndex();
+        }
+
+        public void Session_Start()
+        {
+            
+        }
+
+        public void Session_End()
+        {
+            LoginHelper.Instance.LogOut();
         }
 
         public static SearchEngineTasks SreachTask;
@@ -77,5 +90,7 @@ namespace Oct.Framework.TestWeb
             Mapper.CreateMap<CommonUserRoleDTO, CommonUserRole>();
             Mapper.CreateMap<CommonUserRole, CommonUserRoleDTO>();
         }
+
+        
     }
 }

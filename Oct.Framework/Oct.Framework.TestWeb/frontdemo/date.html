@@ -20,6 +20,8 @@
     <!-- <link href="/assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"> -->
     <link href="/assets/octopus/css/octopus.css" rel="stylesheet" type="text/css">
     <!-- END THEME STYLES -->
+
+    <link rel="stylesheet" href="/assets/global/plugins/jstree/dist/themes/default/style.min.css">
 </head>
 <body>
 	<div class="panel panel-primary">
@@ -28,8 +30,8 @@
         </div>
         <!-- 案例 begin -->
         <div class="panel-body">
-            <div class="panel-body">
-                <a class="btn green btn-sm j-modal" title="新增角色" href="./temp/testModal.html"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            <div class="date-picker input-daterange" data-date-format="yyyy-mm-dd">
+                <input>
             </div>
         </div>
         <!-- 案例 end -->
@@ -41,24 +43,51 @@
         <pre>
             <h3 class="panel-title">html:</h3>
             <textarea cols="108">
-警告！：标签的class必须含有j-modal以及href属性
-<a class="btn green btn-sm j-modal" title="新增角色" href="./temp/testModal.html"><i class="fa fa-plus"></i>&nbsp;新增</a>
+警告！：必须导入
+    样式文件：<link href="/assets/global/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet">
+    脚本文件：<script src="/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+<div class="date-picker input-daterange" data-date-format="yyyy-mm-dd">
+    <input>
+</div>
             </textarea>
         </pre>
-                                    <!-- html end -->
-</body>
+    <!-- html end -->
 
-<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog" id="float-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">新增角色</h4>
-            </div>
-            <div class="modal-body"></div>
-        </div>
-    </div>
-</div>
+
+
+    <!-- js begin-->
+        <pre>
+            <h3 class="panel-title">js:</h3>
+            <textarea cols="108">
+<!-- 这部分是预设置的属性 -->
+if (jQuery().datepicker) {
+    $.fn.datepicker.dates['en'] = {
+        days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
+        daysShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+        daysMin: ["日", "一", "二", "三", "四", "五", "六", "日"],
+        months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        monthsShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        today: "今日",
+        clear: "清空",
+        format: "yyyy年mm月dd日",
+        weekStart: 1
+    };
+};
+<!-- 初始化div为时间控件（注意：初始化对象是input外面的div） -->
+if (jQuery().datepicker) {
+    $('.input-daterange, .date-picker').datepicker({
+        autoclose: true,
+        clearBtn: true
+    });
+}
+            </textarea>
+        </pre>
+    <!-- js end -->
+
+
+
+</body>
     <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
     <!-- BEGIN CORE PLUGINS -->
     <!--[if lt IE 9]>
@@ -66,33 +95,9 @@
         <script src="/assets/global/plugins/respond.min.js"></script>
     <![endif]-->
     <script src="/assets/global/plugins/jquery-1.11.0.min.js"></script>
-    <script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
-    <script src="/assets/global/plugins/uniform/jquery.uniform.min.js"></script>
-    <script src="/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="/assets/global/plugins/jquery-bootpag/jquery.bootpag.min.js"></script>
-    <script src="/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
-    <script src="/assets/global/plugins/artTemplate.js"></script>
-    <script src="/assets/global/plugins/json2.js"></script>
-    <script src="/assets/global/plugins/jquery.signalR-1.0.1.min.js"></script>
-    <script src="/signalr/hubs"></script>
-    <script src="/Scripts/jquery-jtemplates.js"></script>
-
-    <!-- END CORE PLUGINS -->
-    <script src="/assets/global/plugins/select2/select2.min.js"></script>
-    <script src="/assets/global/plugins/select2/select2_locale_zh-CN.js"></script>
-
     <script src="/assets/global/scripts/metronic.js"></script>
-    <script src="/assets/admin/layout/scripts/layout.js"></script>
+    <script src="/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script src="/assets/octopus/js/common.js"></script>
-
-    <script type="text/javascript">
-        $("iframe").on("load",function () {
-            $(this).css("height",
-                $(this).contents().outerHeight()
-            );
-        });
-    </script>
 </html>
 
 

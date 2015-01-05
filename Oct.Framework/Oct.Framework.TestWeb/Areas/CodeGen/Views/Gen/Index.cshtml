@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+}
+<link rel="stylesheet" href="/assets/global/plugins/jstree/dist/themes/default/style.min.css">
+
+
+@section CustomJS{
+    <script src="/assets/global/plugins/jstree/dist/jstree.min.js"></script>
+
+    <script type="text/javascript">
+        (function () {
+            $("#Tree").on("changed.jstree", function (event, data) {
+                console.log(data.node.original.value);
+                $("#TreeNodeDetail").attr("src", '@Url.Action("ChoseEntity")?type=' + data.node.original.value);
+            });
+
+            $("iframe").on("load", function () {
+                
+                $(this).animate({
+                    height: $(this).contents().find("body").outerHeight(true)
+                }, 'fast');
+            });
+        })();
+    </script>
+}
+<div class="row">
+    <div class="col-sm-5 col-md-4 col-lg-3">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="panel-heading">
+                    <h3 class="panel-title">选择控件</h3>
+                </div>
+
+                <div id="Tree"
+                    class="J_tree"
+                    data-treeresource="/CodeGen/Gen/TreeJson"
+                    data-treeajaxtype="get"
+                    data-treeajaxparams="a=1&b=2"
+                    data-treeiconstyle="fa fa-folder icon-state-warning icon-lg"
+                    data-treeopenall="true">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-7 col-md-8 col-lg-9">
+        <iframe class="treenode-detail" src="about:blank"  frameborder="0" scrolling="no" name="TreeNodeDetail" id="TreeNodeDetail"></iframe>
+    </div>
+</div>

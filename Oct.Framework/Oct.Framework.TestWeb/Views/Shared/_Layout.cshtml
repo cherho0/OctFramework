@@ -90,6 +90,18 @@
 
                         </ul>
                     </li>
+                      <li class="classic-menu-dropdown" id="MenuItem_">
+                        <a data-hover="dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">代码生成 <span class="selected"></span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-left">
+                            <li>
+                                <a href="@Url.Action("index","Gen",new {area="CodeGen"})">
+                                    <i class="fa fa-angle-right"></i>代码生成 
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
                     @{
                         var menu = LoginHelper.Instance.GetLoginUserMenus();

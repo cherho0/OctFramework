@@ -20,6 +20,8 @@
     <!-- <link href="/assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"> -->
     <link href="/assets/octopus/css/octopus.css" rel="stylesheet" type="text/css">
     <!-- END THEME STYLES -->
+
+    <link rel="stylesheet" href="/assets/global/plugins/jstree/dist/themes/default/style.min.css">
 </head>
 <body>
 	<div class="panel panel-primary">
@@ -27,11 +29,16 @@
             <h3 class="panel-title">案例</h3>
         </div>
         <!-- 案例 begin -->
-        <div class="panel-body">
-            <div class="panel-body">
-                <a class="btn green btn-sm j-modal" title="新增角色" href="./temp/testModal.html"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            <!-- Tree box begin-->
+            <div id="Tree"
+                class="J_tree" 
+                data-treeResource="temp/tree.json"
+                data-treeAjaxType="get"
+                data-treeAjaxParams="a=1&b=2"
+                data-treeIconStyle="fa fa-folder icon-state-warning icon-lg"
+                data-treeOpenAll="true">
             </div>
-        </div>
+            <!-- Tree box end -->
         <!-- 案例 end -->
         
 
@@ -41,24 +48,24 @@
         <pre>
             <h3 class="panel-title">html:</h3>
             <textarea cols="108">
-警告！：标签的class必须含有j-modal以及href属性
-<a class="btn green btn-sm j-modal" title="新增角色" href="./temp/testModal.html"><i class="fa fa-plus"></i>&nbsp;新增</a>
+警告！：必须导入
+    样式文件：<link rel="stylesheet" href="/assets/global/plugins/jstree/dist/themes/default/style.min.css">
+    脚本文件：<script src="/assets/global/plugins/jstree/dist/jstree.min.js"></script>
+
+<!-- Tree box begin-->
+<div id="Tree"
+    class="J_tree" 
+    data-treeResource="temp/tree.json"
+    data-treeAjaxType="get"
+    data-treeAjaxParams="a=1&b=2"
+    data-treeIconStyle="fa fa-folder icon-state-warning icon-lg"
+    data-treeOpenAll="true">
+</div>
+<!-- Tree box end -->
             </textarea>
         </pre>
-                                    <!-- html end -->
+    <!-- html end -->
 </body>
-
-<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog" id="float-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">新增角色</h4>
-            </div>
-            <div class="modal-body"></div>
-        </div>
-    </div>
-</div>
     <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
     <!-- BEGIN CORE PLUGINS -->
     <!--[if lt IE 9]>
@@ -79,20 +86,11 @@
     <script src="/Scripts/jquery-jtemplates.js"></script>
 
     <!-- END CORE PLUGINS -->
-    <script src="/assets/global/plugins/select2/select2.min.js"></script>
-    <script src="/assets/global/plugins/select2/select2_locale_zh-CN.js"></script>
+    <script src="/assets/global/plugins/jstree/dist/jstree.min.js"></script>
 
     <script src="/assets/global/scripts/metronic.js"></script>
     <script src="/assets/admin/layout/scripts/layout.js"></script>
     <script src="/assets/octopus/js/common.js"></script>
-
-    <script type="text/javascript">
-        $("iframe").on("load",function () {
-            $(this).css("height",
-                $(this).contents().outerHeight()
-            );
-        });
-    </script>
 </html>
 
 

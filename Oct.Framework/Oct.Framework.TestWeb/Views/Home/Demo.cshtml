@@ -193,7 +193,7 @@
 <h3 id="btn-groups-single">DateTimePicker</h3>
 <p></p>
 <pre>
-   @Html.DatePickerFor(p=>p.DemoTime)
+   @Html.DatePickerFor(p => p.DemoTime)
 </pre>
 <pre>@@Html.DatePickerFor(p=>p.DemoTime)</pre>
 <h3 id="btn-groups-single">Address</h3>
@@ -201,17 +201,70 @@
 
 <h3 id="btn-groups-single">省市区三级联动</h3>
 <pre>
-   @Html.AddressSelect("proId","cityId","AreaId")
+   @Html.AddressSelect("proId", "cityId", "AreaId")
 </pre>
 <pre>@@Html.AddressSelect("proId","cityId","AreaId")</pre>
 
 <h3 id="btn-groups-single">forms</h3>
 
-   @using (Html.BeginBootstrapSreachDiv())
+@using (Html.BeginBootstrapSreachDiv())
+{
+    @Html.Submit("提交")
+    @Html.Button("搜索")
+}
+
+<pre>@@using (Html.BeginBootstrapSreachDiv())
+{
+    @@Html.Submit("提交")
+    @@Html.Button("搜索")
+}</pre>
+
+<h3 id="btn-groups-single">级联下拉列表框</h3>
+<pre>
+   @Html.CascadeDropDownLists("firstddl", Html.GetSelectListItemsFromEnum<Status>(),
+   new CascadeDropDown()
    {
-       @Html.Submit()
-        @Html.Button()
+       Id = "secondddl",
+       Data_jsonurl = "/home/DemoJson",
+       data_accordingto = "firstddl",
+       data_paramKey = "id",
+       data_textName = "UserName",
+       data_valueName = "Account"
    }
 
-<pre>@@Html.AddressSelect("proId","cityId","AreaId")</pre>
+   )
+</pre>
+<pre>@@Html.CascadeDropDownLists("firstddl",Html.GetSelectListItemsFromEnum&lt;Status>(),
+   new CascadeDropDown()
+   {
+       Id = "secondddl",
+       Data_jsonurl = "/home/DemoJson",
+       data_accordingto = "firstddl",
+       data_paramKey = "id",
+       data_textName = "UserName",
+       data_valueName = "Account"
+   }
+   
+   )</pre>
+<h3 id="btn-groups-single">txt验证规则</h3>
+<pre>
+ 默认规则：
+                1，不能为空：<input type="text" required="true" name="word1">
+                2，合法数字：<input type="text" number="true" class="" name="word2">
+                3，合法email：<input type="text" email="true" name="word3">
+                4，合法网站：<input type="text" url="true" name="word4">
+                5，整数：<input type="text" digits="true" name="word5">
+                6，最多可输入3个长度：<input type="text" maxlength=3 name="word6">
+                7，至少输入3个字符：<input type="text" minlength=3 name="word7">
+                8，长度在1和3之间的字符：<input type="text" rangelength="1 3" name="word8">
+                9，大小在1和3在之间的字符：<input type="text" range="1 3" name="word9">
+                10，最大为3：<input type="text" max=3 name="word10">
+                11，最小为1：<input type="text" min=1  name="word11">
+                12，输入正确的日期：<input type="text" date="true"  name="word12">
+                13，密码前后一致：<input type="password"  name="word14"> 
+                                & <input type="password"  name="word15" equalTo="[name=word14]">
 
+            
+            自定义规则：
+                14，输入正确格式的手机号码：<input type="text" name="word13" class="isPhone">
+    </pre>

@@ -105,6 +105,7 @@
     <Compile Include="Filter\ViewFilter.cs" />
     <Compile Include="Filter\PerformanceFilter.cs" />
     <Compile Include="HtmlInput\BootstrapTemplate.cs" />
+    <Compile Include="HtmlInput\CascadeDropDown.cs" />
     <Compile Include="HtmlInput\OctAddressSelect.cs" />
     <Compile Include="HtmlInput\OctAutoComplete.cs" />
     <Compile Include="HtmlInput\OctDatePicker.cs" />

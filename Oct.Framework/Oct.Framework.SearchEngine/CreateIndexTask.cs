@@ -117,14 +117,14 @@ namespace Oct.Framework.SearchEngine
                 }
                 IndexWriter writer = new IndexWriter(directory, new PanGuAnalyzer(), !isUpdate, IndexWriter.MaxFieldLength.UNLIMITED);
                 //IndexWriter把输入写入索引的时候，Lucene.net是把写入的文件用指定的分词算法将文章分词（这样检索的时候才能查的快），然后将词放入索引文件。
-
+               
                 var model = GetOne(id);
                 writer.DeleteDocuments(new Term(key, id.ToString()));
 
                 Document document = new Document();//创建一行记录
                 _addDocAction(model, document);
                 writer.AddDocument(document);
-
+                writer.Optimize();
                 writer.Close();
                 directory.Close();
             }
@@ -169,6 +169,7 @@ namespace Oct.Framework.SearchEngine
                     writer.AddDocument(document);
 
                 });
+                writer.Optimize();
                 writer.Close();
                 directory.Close();
             }

@@ -28,37 +28,66 @@
         </div>
         <!-- 案例 begin -->
         <div class="panel-body">
-            <div class="panel-body">
-                <a class="btn green btn-sm j-modal" title="新增角色" href="./temp/testModal.html"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            <!-- nav begin -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#content_1" data-toggle="tab">nav 1</a></li>
+                <li><a href="#content_2" data-toggle="tab">nav 2</a></li>
+                <li><a href="#content_3" data-toggle="tab">nav 3</a></li>
+            </ul>
+            <!-- nav end -->
+            <!-- content begin -->
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="content_1">
+                    <p>content 1</p>
+                </div>
+
+
+                <div class="tab-pane fade in" id="content_2">
+                    <p>content 2</p>
+                </div>
+                
+                <div class="tab-pane fade in" id="content_3">
+                    <p>content 3</p>
+                </div>
             </div>
+            <!-- content end -->
         </div>
         <!-- 案例 end -->
-        
-
     </div>
 
     <!-- html begin-->
         <pre>
             <h3 class="panel-title">html:</h3>
             <textarea cols="108">
-警告！：标签的class必须含有j-modal以及href属性
-<a class="btn green btn-sm j-modal" title="新增角色" href="./temp/testModal.html"><i class="fa fa-plus"></i>&nbsp;新增</a>
-            </textarea>
-        </pre>
-                                    <!-- html end -->
-</body>
+<!-- nav begin -->
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#content_1" data-toggle="tab">nav 1</a></li>
+    <li><a href="#content_2" data-toggle="tab">nav 2</a></li>
+    <li><a href="#content_3" data-toggle="tab">nav 3</a></li>
+</ul>
+<!-- nav end -->
+<!-- content begin -->
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="content_1">
+        <p>content 1</p>
+    </div>
 
-<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog" id="float-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">新增角色</h4>
-            </div>
-            <div class="modal-body"></div>
-        </div>
+
+    <div class="tab-pane fade in" id="content_2">
+        <p>content 2</p>
+    </div>
+    
+    <div class="tab-pane fade in" id="content_3">
+        <p>content 3</p>
     </div>
 </div>
+<!-- content end -->
+
+            </textarea>
+        </pre>
+    <!-- html end -->
+</body>
+
     <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
     <!-- BEGIN CORE PLUGINS -->
     <!--[if lt IE 9]>
@@ -77,10 +106,6 @@
     <script src="/assets/global/plugins/jquery.signalR-1.0.1.min.js"></script>
     <script src="/signalr/hubs"></script>
     <script src="/Scripts/jquery-jtemplates.js"></script>
-
-    <!-- END CORE PLUGINS -->
-    <script src="/assets/global/plugins/select2/select2.min.js"></script>
-    <script src="/assets/global/plugins/select2/select2_locale_zh-CN.js"></script>
 
     <script src="/assets/global/scripts/metronic.js"></script>
     <script src="/assets/admin/layout/scripts/layout.js"></script>

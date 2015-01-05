@@ -130,6 +130,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\CodeGen\CodeGenAreaRegistration.cs" />
+    <Compile Include="Areas\CodeGen\Controllers\GenController.cs" />
     <Compile Include="Areas\Premission\PremissionAreaRegistration.cs" />
     <Compile Include="Areas\Premission\Controllers\CommonActionInfoController.cs" />
     <Compile Include="Areas\Premission\Controllers\CommonMenuInfoController.cs" />
@@ -631,12 +633,17 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="frontdemo\date.html" />
     <Content Include="frontdemo\demo.html" />
     <Content Include="frontdemo\modal.html" />
+    <Content Include="frontdemo\nav-content.html" />
     <Content Include="frontdemo\searchList.html" />
     <Content Include="frontdemo\select.html" />
     <Content Include="frontdemo\tabledata.html" />
     <Content Include="frontdemo\temp\testModal.html" />
+    <Content Include="frontdemo\temp\tpl.html" />
+    <Content Include="frontdemo\tree.html" />
+    <Content Include="frontdemo\validate.html" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="assets\global\plugins\bootstrap-toastr\toastr.min.js.map" />
@@ -653,6 +660,14 @@
     <Content Include="Areas\Premission\Views\CommonUser\Index.cshtml" />
     <Content Include="Areas\Premission\Views\CommonRoleInfo\Authorization.cshtml" />
     <Content Include="Areas\Premission\Views\CommonUser\Authorization.cshtml" />
+    <Content Include="frontdemo\temp\select.json" />
+    <Content Include="frontdemo\temp\select2.json" />
+    <Content Include="frontdemo\temp\table.json" />
+    <Content Include="frontdemo\temp\tree.json" />
+    <Content Include="Areas\CodeGen\Views\Web.config" />
+    <Content Include="Areas\CodeGen\Views\Gen\Index.cshtml" />
+    <Content Include="Areas\CodeGen\Views\Gen\ChoseEntity.cshtml" />
+    <Content Include="Areas\CodeGen\Views\Gen\BindProp.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -717,6 +732,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\CodeGen\Models\" />
+    <Folder Include="Areas\CodeGen\Views\Shared\" />
     <Folder Include="Areas\Premission\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

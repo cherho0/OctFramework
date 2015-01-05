@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "BindProp";
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#groups" href="#group2">选择属性
+                </a>
+            </h4>
+        </div>
+        <div class="panel-collapse" id="group2">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="checkbox-list">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" checked="checked" id="checkall" />全选(勾选为保留)
+                        </label>
+                    </div>
+                    <div class="panel-title"></div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>属性名称</th>
+                                <th>属性类型</th>
+                                <th>展示名称</th>
+                                <th>列表展现方式</th>
+                                <th>是否搜索</th>
+                                <th>搜索展现方式</th>
+                                <th>数据源</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orderList">
+                            @foreach (dynamic p in ViewBag.props)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" checked="checked" name="IsUse" class="checkbox-list" value="@p.Name" /></td>
+                                    <td>
+                                        <input type="text" value="@p.Name" name="Prop" disabled="disabled" readonly="readonly"/>
+                                    </td>
+                                    <td>@p.Type</td>
+                                    <td>
+                                        <input type="text" value="@p.Name" name="showName"/></td>
+                                    <td>
+                                        <select name="listShow">
+
+                                            <option value="text">text</option>
+                                            @if (((string)p.Type).Contains("DateTime"))
+                                            {
+                                                <option value="datepicker" selected="selected">datepicker</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="datepicker">datepicker</option>
+                                            }
+                                            @if (((string)p.Type).Contains("Guid"))
+                                            {
+                                                <option value="dropdown" selected="selected">dropdown</option>                                                
+                                            }
+                                            else
+                                            {
+                                                <option value="dropdown">dropdown</option>           
+                                            }
+                                            @if (((string)p.Type).Contains("Int32") || ((string)p.Type).Contains("Decimal"))
+                                            {
+                                                <option value="number" selected="selected">number</option>                                             
+                                            }
+                                            else
+                                            {
+                                                <option value="number">number</option>        
+                                            }
+
+
+                                            @if (((string)p.Type).Contains("Boolean"))
+                                            {
+                                                <option value="checkbox" selected="selected">checkbox</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="checkbox">checkbox</option>
+                                            }
+                                        </select>
+
+                                    </td>
+                                    <td>
+                                        <input name="isForm" type="checkbox" /></td>
+                                    <td>
+                                        <select name="formShow">
+                                            <option value="text">text</option>
+                                            @if (((string)p.Type).Contains("DateTime"))
+                                            {
+                                                <option value="datepicker" selected="selected">datepicker</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="datepicker">datepicker</option>
+                                            }
+                                            @if (((string)p.Type).Contains("Guid"))
+                                            {
+                                                <option value="dropdown" selected="selected">dropdown</option>                                                
+                                            }
+                                            else
+                                            {
+                                                <option value="dropdown">dropdown</option>           
+                                            }
+                                            @if (((string)p.Type).Contains("Int32") || ((string)p.Type).Contains("Decimal"))
+                                            {
+                                                <option value="number" selected="selected">number</option>                                             
+                                            }
+                                            else
+                                            {
+                                                <option value="number">number</option>        
+                                            }
+
+
+                                            @if (((string)p.Type).Contains("Boolean"))
+                                            {
+                                                <option value="checkbox" selected="selected">checkbox</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="checkbox">checkbox</option>
+                                            }
+                                        </select>
+
+                                    </td>
+                                    <td>
+                                        @Html.DropDownList("dataSource", (IEnumerable<SelectListItem>)ViewBag.Ens)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section CustomJS
+{
+    <script type="text/javascript">
+        $(function () {
+            $('#checkall').on("change", function () {
+                $('.checkbox-list').each(function (key, value) {
+                    $(value).prop('checked', $('#checkall').prop('checked')).uniform();
+                });
+            });
+        });
+    </script>
+
+}

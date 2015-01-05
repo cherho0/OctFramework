@@ -44,18 +44,12 @@
  */
 var List = function() {
     return {
+        type:"post",
         dataBody: $("#DataTableBody"),
         pagination: $("#Pagination"),
         paginationInfo: $("#PaginationInfo"),
         searchForm: $("#SearchForm"),
         searchBtn: $("#SearchSubmitBtn"),
-
-        /*json数据排序*/
-        formatJsonoOptions: {
-            baseKey: "",
-            baseValue: ""
-        },
-
         pagesize: 10,
         totalRecord: 0,
         url: null,
@@ -63,6 +57,11 @@ var List = function() {
         tplUrl: null,
         tpl: null,
         helper: {},
+        /*json数据排序*/
+        formatJsonoOptions: {
+            baseKey: "",
+            baseValue: ""
+        },
         callback: function() {},
         readyHandler: function() {
             this.dataBody.empty();
@@ -75,6 +74,7 @@ var List = function() {
         },
         successHandler: function(page, result) {
             var T = this;
+            /*先查看是否有T.tplUrl属性，就取该属性；否则就自己生成tpl。*/ 
             if (!T.tpl) {
                 $.get(T.tplUrl, function(tplResult) {
                     T.tpl = tplResult;
@@ -102,15 +102,12 @@ var List = function() {
         },
         paginationHandler: function(result) {
             var T = this;
-            var maxPage = Math.ceil(result.total / T.pagesize);
+            /*如果没有total属性就去data的长度*/
+            var dataLength = totalRecord = ( result.total || result.data.length );
+            var maxPage = Math.ceil(dataLength / T.pagesize);
 
             T.pagination.toggle(maxPage > 1);
-
-            /*如果没有total属性就去data的长度*/
-            var dataLength = result.total || result.data.length;
-
             T.paginationInfo.text("总计" + dataLength + "条记录");
-
             T.pagination.bootpag({
                 next: '<i class="fa fa-angle-right"></i>',
                 prev: '<i class="fa fa-angle-left"></i>',
@@ -126,13 +123,16 @@ var List = function() {
             if (!T.url || !T.dataBody.length) return;
 
             if (!page) page = 1;
-
-            var queryString = "page=" + page + "&ps=" + T.pagesize + "&" + T.searchForm.serialize();
+            if(T.searchForm){
+                var queryString = "page=" + page + "&ps=" + T.pagesize + "&" + T.searchForm.serialize();
+            }
 
             T.searchBtn.addClass("disabled").attr("disabled", "disabled");
+
+            /*先查看是否有dataBody属性（#DataTableBody），如果没有就自己生成一个表格；如果有就在dataBody里插入数据*/ 
             $.ajax({
                 url: T.url,
-                type: "POST",
+                type: T.type,
                 data: queryString,
                 dataType: "json",
                 beforeSend: function() {
@@ -145,9 +145,6 @@ var List = function() {
 
                     /*将result排个序，如果是特殊值，均排在最后*/
                     T.forMatJson(T.formatJsonoOptions, result);
-                    /*备份json数据*/
-                    //window.document.cookie = result;
-
                     T.successHandler(page, result);
                 }
             });
@@ -187,6 +184,35 @@ var List = function() {
         }
     };
 };
+
+/*处理查询按钮*/
+;+function(){
+    var list = new List();
+
+    $.fn.extend({
+        dataToTable: function(callback){
+            /*判断*/
+            if( !$(this).hasClass("J_SearchButton") ){return;} 
+
+            /*处理list*/ 
+            list.searchBtn= $(this);
+            list.dataBody= $( $(this).data("tablebody") );
+            list.pagination= $( $(this).data("pagination") );
+            list.paginationInfo= $( $(this).data("tablepaginationinfo") );
+            list.searchForm= $( $(this).data("tablesearchform") );
+            list.url= $(this).data("tableresource");
+            list.tplUrl= $(this).data("tplurl");
+            list.pagesize = $(this).data("limit");
+            list.type=$(this).data("tableajaxtype");
+            list.pagesize = $(this).data("tabledatalimit") || 10;
+
+            /*开个口，给用户自定义list*/
+            callback(list);
+
+            list.Query();
+        }
+    });
+}(); 
 
 
 /*==========================
@@ -391,18 +417,22 @@ function getArgs(strParame) {
  * @return
  */
 if (jQuery.validator) {
+    /*默认的验证*/
     jQuery.extend(jQuery.validator.messages, {
         number: "请输入合法的数字",
         required: "该项必须填写",
         email: "E-Mail格式不正确",
         url: "请输入合法的网址",
         digits: "只能输入整数",
+        date: "输入正确的日期",
         maxlength: jQuery.validator.format("最长可输入 {0} 个字符"),
         minlength: jQuery.validator.format("最少需要输入 {0} 个字符"),
         rangelength: jQuery.validator.format("请输入 {0} 到 {1} 个字符"),
         range: jQuery.validator.format("请输入一个介于 {0} 和 {1} 之间的值"),
         max: jQuery.validator.format("请输入一个最大为{0} 的值"),
-        min: jQuery.validator.format("请输入一个最小为{0} 的值")
+        min: jQuery.validator.format("请输入一个最小为{0} 的值"),
+        isPhone: "输入正确的手机号码",
+        equalTo: "密码前后必须一致"
     });
     $(".J_FormValidate").validate({
         errorElement: "span",
@@ -418,6 +448,11 @@ if (jQuery.validator) {
         success: function(label) {
             label.closest('.form-group').removeClass('has-error'); // set success class to the control group
         }
+    });
+
+    /*自定义的方法*/
+    jQuery.validator.addMethod("isPhone",function(value,element){
+        return this.optional(element) || /(86)*0*13\d{9}/.test(value);
     });
 }
 
@@ -449,7 +484,7 @@ function makeCustomSelector(className) {
             minimumInputLength: 2,
             allowClear: true,
             ajax: {
-                url: "/views/cashflow/IndexJson.json",
+                url: "temp/select2.json",
                 dataType: 'json',
                 data: function (term, page) {
                     return {
@@ -458,7 +493,7 @@ function makeCustomSelector(className) {
                         page: page
                     };
                 },
-                type: "POST",
+                type: "GET",
                 results: function (data, page) {
                     var more = (page * 10) < data.total;
                     var d = data.data;
@@ -683,7 +718,6 @@ function renderModel(params) {
 
 /*select的多级联动*/
 ; +function () {
-    
     /*
     ===============================================================
     一个制造多级联动selecter的方法
@@ -866,3 +900,67 @@ function renderModel(params) {
     multiSelecterFactory();
     
 }();
+
+
+
+/*
+* 角色权限树形菜单
+*/
+; (function () {
+
+    function renderTree(tree){
+        $.ajax({
+            url: tree.data("treeresource"),
+            type: tree.data("treeajaxtype") || "get",
+            dataType: "json",
+            data: tree.data("treeajaxparams") || "",
+            success: function(data){
+                tree.jstree({
+                    "core": {
+                        "themes": {
+                            "responsive": false
+                        },
+                        'data': data
+                    },
+                    "types": {
+                        "default": {
+                            "icon": tree.data("treeiconstyle")
+                        }
+                    },
+                    "plugins": ["types"]
+                })
+
+                /*是否默认全部展开*/
+                if( tree.data("treeopenall") ){
+                    return tree.data("treeopenall") === "false" ? 
+                    ( 
+                        typeof tree.data("treeopenall") === "boolean" ? ( tree.jstree("open_all") ) : void 0
+                    ) 
+                    : 
+                    ( tree.jstree("open_all") );
+                }
+            }
+        });
+    };
+
+    var trees = $(".J_tree");
+    if (!trees.length) return;
+
+    $.each(trees,function(key,value){
+        renderTree( $(value) );
+    });
+
+
+    //trees.on('changed.jstree', function (e, data) {
+    //    /* change事件 */ 
+    //})
+
+    $("#ExpandAll").click(function () {
+        trees.jstree('open_all');
+        return false;
+    });
+    $("#CollapseAll").click(function () {
+        trees.jstree('close_all');
+        return false;
+    });
+})();

@@ -1,0 +1,7 @@
+<% for (var i = 0; i < data.length; i ++) { %>
+	<tr>
+	    <td><%=data[i]["account"]%></td>
+	    <td><a href="<%=data[i]["companyUrl"]%>"><%=data[i]["company"]%></a></td>
+	    <td><%=takeStatus(data[i]["isUsed"])%></td>
+	</tr>
+<% } %>

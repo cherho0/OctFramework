@@ -34,7 +34,7 @@ namespace Oct.Framework.MvcExt.HtmlInput
 
         public static IList<SelectListItem> GetEnumValuesAndDsc<T>(bool addall = true, string val = "") where T : struct
         {
-            var typename = typeof (T).ToString();
+            var typename = typeof(T).ToString();
             IList<SelectListItem> items = new List<SelectListItem>();
             if (!enumCache.ContainsKey(typename))
             {
@@ -71,7 +71,7 @@ namespace Oct.Framework.MvcExt.HtmlInput
 
             items = enumCache[typename];
 
-            if (addall && !items.Any(p=>p.Value == "-999"))
+            if (addall && !items.Any(p => p.Value == "-999"))
             {
                 var defitem = new SelectListItem()
                 {
@@ -81,6 +81,11 @@ namespace Oct.Framework.MvcExt.HtmlInput
                 items.Insert(0, defitem);
             }
             return items;
+        }
+
+        public static IEnumerable<SelectListItem> GetSelectListItemsFromEnum<T>(this HtmlHelper helper, bool addall = false, string val = "") where T : struct
+        {
+            return GetEnumValuesAndDsc<T>(addall, val);
         }
 
         /// <summary>
@@ -117,7 +122,7 @@ namespace Oct.Framework.MvcExt.HtmlInput
             {
                 data.Insert(0, new SelectListItem { Text = "-全部-", Value = string.Empty });
             }
-            return helper.DropDownList(name,data,htmlattributes);
+            return helper.DropDownList(name, data, htmlattributes);
         }
 
         public static HtmlString DropDownListModelFor<T1, T2, TM>(this HtmlHelper<T1> helper, Expression<Func<T1, T2>> expression,

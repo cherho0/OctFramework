@@ -5,6 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
+using Oct.Framework.Core.Cache;
+using Oct.Framework.Core.IOC;
+using Oct.Framework.Core.Session;
 using Oct.Framework.DB.Extisions;
 using Oct.Framework.Entities.Entities;
 using Oct.Framework.MvcExt.Base;
@@ -67,6 +70,13 @@ namespace Oct.Framework.TestWeb.Controllers
             //linq 分页查询 条件判断
             var us9 = DbContext.CommonUserAcrionsContext.QueryPage(p => p.Name != "", p => p.Name, 1, 10);
             */
+
+            var sessionprovide = Bootstrapper.GetRepository<ISessionProvider>();
+            var get = sessionprovide.GetSession<string>("ceshi");
+            if (get == null)
+            {
+                sessionprovide.AddSession("ceshi", DateTime.Now.ToString());
+            }
             return View();
         }
 

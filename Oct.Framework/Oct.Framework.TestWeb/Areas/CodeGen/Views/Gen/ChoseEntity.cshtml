@@ -1,0 +1,20 @@
+﻿@using Oct.Framework.MvcExt.HtmlInput
+@{
+    ViewBag.Title = "ChoseEntity";
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+@using (Html.BeginForm("BindProp","Gen"))
+{
+    using (Html.BeginBootstrapSreachDiv())
+    { <div class="panel-heading">
+                    <h3 class="panel-title">选择实体</h3>
+                </div>
+
+    @Html.CheckBoxList("entity", "entity", (IEnumerable<SelectListItem>)ViewBag.Ens)
+    <div style="text-align: right;">
+        @Html.Submit("下一步")
+    </div>  
+    
+    }
+}

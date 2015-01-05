@@ -5,19 +5,23 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Oct.Framework.Core.Common;
 
 namespace Oct.Framework.MvcExt.HtmlInput
 {
     public static class BootstrapTemplate
     {
-        public static MvcHtmlString Submit(this HtmlHelper helper)
+
+        public static MvcHtmlString Submit(this HtmlHelper helper, string text)
         {
-            return MvcHtmlString.Create("<button type=\"submit\" class=\"btn blue input-sm\" id=\"SubmitBtn\">&nbsp;搜  索</button>");
+            return MvcHtmlString.Create("<button type=\"submit\" class=\"btn blue input-sm\" id=\"SubmitBtn\">&nbsp;" + text + "</button>");
         }
 
-        public static MvcHtmlString Button(this HtmlHelper helper)
+        public static MvcHtmlString Button(this HtmlHelper helper, string text, string onclick = "")
         {
-            return MvcHtmlString.Create("<button type=\"submit\" class=\"btn blue input-sm\" id=\"SubmitBtn\">&nbsp;搜  索</button>");
+            return MvcHtmlString.Create("<button type=\"submit\" class=\"btn blue input-sm\" id=\"SubmitBtn\" " +
+                (onclick.IsNullOrEmpty() ? "" : "onclick=\"" + onclick + "\"")
+                + ">&nbsp" + text + "</button>");
         }
 
         public static SreachDiv BeginBootstrapSreachDiv(this HtmlHelper helper)
@@ -35,8 +39,6 @@ namespace Oct.Framework.MvcExt.HtmlInput
 
         public SreachDiv(ViewContext context)
         {
-            var sb = new StringBuilder();
-            sb.Append("");
             _context = context;
             context.Writer.Write("<div class=\"row\">");
             context.Writer.Write("<div class=\"col-xs-12\">");

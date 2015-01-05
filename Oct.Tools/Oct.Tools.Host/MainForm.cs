@@ -23,7 +23,7 @@ namespace Oct.Tools.Host
         public MainForm()
         {
             this.InitializeComponent();
-
+            
             this.IsMdiContainer = true;
         }
 

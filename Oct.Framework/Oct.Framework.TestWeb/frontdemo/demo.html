@@ -62,7 +62,10 @@
                             <li><a data-toggle="tab" href="#section2"><i class="fa fa-briefcase"></i>数据表格</a></li>
                             <li><a data-toggle="tab" href="#section3"><i class="fa fa-briefcase"></i>自动搜索</a></a></li>
                             <li><a data-toggle="tab" href="#section4"><i class="fa fa-briefcase"></i>弹窗</a></li>
-                            <li><a data-toggle="tab" href="#section4"><i class="fa fa-briefcase"></i>树</a></li>
+                            <li><a data-toggle="tab" href="#section5"><i class="fa fa-briefcase"></i>树</a></li>
+                            <li><a data-toggle="tab" href="#section6"><i class="fa fa-briefcase"></i>时间选择控件</a></li>
+                            <li><a data-toggle="tab" href="#section7"><i class="fa fa-briefcase"></i>表单验证</a></li>
+                            <li><a data-toggle="tab" href="#section8"><i class="fa fa-briefcase"></i>选项切换内容</a></li>
                         </ul>
                     </div>
                     <div class="col-md-9 well">
@@ -85,15 +88,20 @@
                                 <iframe src="modal.html" frameborder="0" width="100%"></iframe>                 
                             </div>
 
-                            <div class="tab-pane" id="section4">    
-                                <iframe src="modal.html" frameborder="0" width="100%"></iframe>                 
+                            <div class="tab-pane" id="section5">    
+                                <iframe src="tree.html" frameborder="0" width="100%"></iframe>                 
+                            </div>
+                            
+                            <div class="tab-pane" id="section6">
+                                <iframe src="date.html" frameborder="0" width="100%"></iframe>    
                             </div>
 
+                            <div class="tab-pane" id="section7">
+                                <iframe src="validate.html" frameborder="0" width="100%"></iframe>    
+                            </div>
 
-
-                            
-                            
-                            <div class="tab-pane" id="section4">
+                            <div class="tab-pane" id="section8">
+                                <iframe src="nav-content.html" frameborder="0" width="100%"></iframe>    
                             </div>
                         </div>
                     </div>
@@ -101,8 +109,6 @@
             </div>
         </div>
     </div>
-
-
     <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
     <!-- BEGIN CORE PLUGINS -->
     <!--[if lt IE 9]>
@@ -112,28 +118,22 @@
     <script src="/assets/global/plugins/jquery-1.11.0.min.js"></script>
     <script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
-    <script src="/assets/global/plugins/uniform/jquery.uniform.min.js"></script>
-    <script src="/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script src="/assets/global/plugins/jquery-bootpag/jquery.bootpag.min.js"></script>
     <script src="/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
-    <script src="/assets/global/plugins/artTemplate.js"></script>
-    <script src="/assets/global/plugins/json2.js"></script>
-    <script src="/assets/global/plugins/jquery.signalR-1.0.1.min.js"></script>
-    <script src="/Scripts/jquery-jtemplates.js"></script>
 
     <!-- END CORE PLUGINS -->
-    <script src="/assets/global/plugins/select2/select2.min.js"></script>
-    <script src="/assets/global/plugins/select2/select2_locale_zh-CN.js"></script>
-
     <script src="/assets/global/scripts/metronic.js"></script>
-    <script src="/assets/admin/layout/scripts/layout.js"></script>
-    <script src="/assets/octopus/js/common.js"></script>
+    
 
     <script type="text/javascript">
         $("iframe").on("load",function () {
-            $(this).css("height",
-                $(this).contents().outerHeight()
-            );
+            /*iframe中的textarea自适应高度*/ 
+            $.each($(this).contents().find("body textarea") , function(key,value){
+                $(value).css("height", value.scrollHeight + 5);
+            });
+
+            /*iframe自适应高度*/ 
+            $(this).css("height",$(this).contents().find("body").outerHeight(true) + 20);
         });
     </script>
 

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Web.Mvc;
 using Oct.Framework.Core.Reflection;
 
 namespace Oct.Framework.Core.Common
@@ -13,7 +16,7 @@ namespace Oct.Framework.Core.Common
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static int CInt(this string value)
+        public static int ToInt(this string value)
         {
             int result = 0;
 
@@ -28,7 +31,7 @@ namespace Oct.Framework.Core.Common
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static bool CBool(this string value)
+        public static bool ToBool(this string value)
         {
             bool result = false;
 
@@ -43,7 +46,7 @@ namespace Oct.Framework.Core.Common
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static DateTime CDateTime(this string value)
+        public static DateTime ToDateTime(this string value)
         {
             DateTime result = DateTime.MinValue;
 
@@ -58,7 +61,7 @@ namespace Oct.Framework.Core.Common
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static decimal CDecimal(this string value)
+        public static decimal ToDecimal(this string value)
         {
             decimal result = 0;
 
@@ -73,7 +76,7 @@ namespace Oct.Framework.Core.Common
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static Guid CGuid(this string value)
+        public static Guid ToGuid(this string value)
         {
             Guid result = Guid.Empty;
 
@@ -127,6 +130,24 @@ namespace Oct.Framework.Core.Common
         public static string ToEnumString(this Enum enumValue)
         {
             return EnumHelper.GetEnumDescription(enumValue);
+        }
+
+        /// <summary>
+        /// 转换为可访问的动态类型
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="anonymousList"></param>
+        /// <returns></returns>
+        public static IEnumerable<ExpandoObject> ToExpando<T>(this IEnumerable<T> anonymousList)
+        {
+            foreach (var anonymous in anonymousList)
+            {
+                IDictionary<string, object> anonymousDictionary = HtmlHelper.AnonymousObjectToHtmlAttributes(anonymous);
+                IDictionary<string, object> expando = new ExpandoObject();
+                foreach (var item in anonymousDictionary)
+                    expando.Add(item);
+                yield return (ExpandoObject)expando;
+            }
         }
     }
 }

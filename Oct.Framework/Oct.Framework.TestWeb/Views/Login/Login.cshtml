@@ -1,12 +1,22 @@
-﻿@{
+﻿@using Oct.Framework.Core.IOC
+@using Oct.Framework.Core.Session
+@using Oct.Framework.TestWeb
+@{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Modal.cshtml";
 }
+@section CustomJS
+{
+    <script></script>
 
+}
 <h2>登录</h2>
 @using (Html.BeginForm())
 {
-    
-    <input type="text" name="acc"/>
-    <input type="submit" value="login"/>
+    var sessionprovide = Bootstrapper.GetRepository<ISessionProvider>();
+    <span>session值： @(sessionprovide.GetSession<string>("ceshi"))</span>
+    <span>当前服务器ID1 : @MvcApplication.AppID</span><br/>
+    <span>当前服务器SessionID : @Session.SessionID</span><br/>
+    <input type="text" name="acc" />
+    <input type="submit" value="login" />
 }

@@ -62,6 +62,7 @@ namespace Oct.Framework.Core.Cache
         /// <returns></returns>
         bool Remove(string key);
         void RemoveAll(string cacheKeyPrefix);
+
         /// <summary>
         /// 仅redis支持
         /// </summary>

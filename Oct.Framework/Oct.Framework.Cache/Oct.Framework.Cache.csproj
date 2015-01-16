@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9FA1EBD6-3362-4225-AA78-6EB95FBFAE93}</ProjectGuid>
+    <ProjectGuid>{C13990E3-2FF4-43A7-B274-07AEB77040AE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Oct.Framework.DB</RootNamespace>
-    <AssemblyName>Oct.Framework.DB</AssemblyName>
+    <RootNamespace>Oct.Framework.Cache</RootNamespace>
+    <AssemblyName>Oct.Framework.Cache</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,13 +28,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,33 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\BaseEntity.cs" />
-    <Compile Include="Base\IEntity.cs" />
-    <Compile Include="Core\BusinessRule.cs" />
-    <Compile Include="Core\DataReaderHelper.cs" />
-    <Compile Include="Core\DataSetHelper.cs" />
-    <Compile Include="Core\DBContextBase.cs" />
-    <Compile Include="Core\Enums.cs" />
-    <Compile Include="Core\OctDbCommand.cs" />
-    <Compile Include="Core\PageResult.cs" />
-    <Compile Include="Core\SessionMgr.cs" />
-    <Compile Include="Core\CurrentSessionFactory.cs" />
-    <Compile Include="Core\DBSession.cs" />
-    <Compile Include="Core\SQLWordFilte.cs" />
-    <Compile Include="Extisions\IDbContextExtision.cs" />
-    <Compile Include="Implementation\SQLContext.cs" />
-    <Compile Include="Implementation\SQLDBContext.cs" />
-    <Compile Include="Interface\IDBContext.cs" />
-    <Compile Include="Interface\IOctDbCommand.cs" />
-    <Compile Include="Interface\ISession.cs" />
-    <Compile Include="Interface\ISQLContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Oct.Framework.Core\Oct.Framework.Core.csproj">
-      <Project>{61839D66-763D-4B91-9C3C-687B8AD40FD6}</Project>
-      <Name>Oct.Framework.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

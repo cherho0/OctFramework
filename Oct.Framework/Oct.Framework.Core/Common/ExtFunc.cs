@@ -18,7 +18,8 @@ namespace Oct.Framework.Core.Common
         /// <param name="ext">日志文件后缀名</param>
         /// <param name="key">对象主键 可为空</param>
         /// <param name="appKey">appsetting里面获取是否记录的键，为空则记录,为0 则不记录</param>
-        public static void SaveToLocalPath(this object obj, string dirpath, string name, string ext, object key = null, string appKey = "ObjLog")
+        public static void SaveToLocalPath
+            (this object obj, string dirpath, string name, string ext, object key = null, string appKey = "ObjLog")
         {
             try
             {

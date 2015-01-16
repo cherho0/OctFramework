@@ -19,7 +19,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp.View
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
+    #line 1 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
     public partial class Create : CreateBase
     {
@@ -41,21 +41,21 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp.View
 
 @using ");
             
-            #line 17 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
+            #line 17 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.NameSpace));
             
             #line default
             #line hidden
             this.Write(".Models;\r\n\r\n@model ");
             
-            #line 19 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
+            #line 19 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write("DTO\r\n\r\n<div class=\"container\">\r\n    @using (Html.BeginForm(\"Create\", \"");
             
-            #line 22 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
+            #line 22 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
@@ -63,7 +63,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp.View
             this.Write("\", FormMethod.Post, new { @class = \"J_FormValidate\" }))\r\n    {\r\n        <div clas" +
                     "s=\"form form-horizontal\">\r\n");
             
-            #line 25 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
+            #line 25 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
 
 	var ignoreFiledNames = ConfigurationManager.AppSettings["IgnoreFiledNames"].Split(',');
 
@@ -77,32 +77,33 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp.View
             #line hidden
             this.Write("            <div class=\"form-group\">\r\n                ");
             
-            #line 34 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
+            #line 34 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.IsAllowNull ? "<label class=\"col-xs-3 control-label\">" : "<label class=\"col-xs-3 control-label\"><i class=\"fa fa-asterisk required\"></i>"));
             
             #line default
             #line hidden
             
-            #line 34 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
+            #line 34 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.GetDisplayName()));
             
             #line default
             #line hidden
             this.Write("</label>\r\n                <div class=\"col-xs-5\">\r\n");
             
-            #line 36 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
+            #line 36 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
  
 	var controlHtml = new StringBuilder();
 	var requiredCssName = filed.IsAllowNull ? string.Empty : " required";
 
 	switch (filed.CSharpType.ToLower())
 	{
-		case "decimal":
-			controlHtml.AppendFormat("<input class=\"from-control input-sm{0}\" data-val=\"true\" data-val-number=\"字段 {1} 必须是一个数字。\" data-val-required=\"The {1} field is required.\" id=\"{1}\" name=\"{1}\" type=\"text\" value=\"0\">", requiredCssName, filed.Name);
+		case "bool":
+			controlHtml.AppendFormat("@Html.CheckBoxFor(p => p.{0})", filed.Name);
 			break;
 
-		case "datetime":
-			controlHtml.AppendFormat("<input class=\"form-control input-sm{0}\" data-val=\"true\" data-val-date=\"字段 {1} 必须是日期。\" data-val-required=\"The {1} field is required.\" datadateformat=\"yyyy-mm-dd\" id=\"{1}\" name=\"{1}\" type=\"text\">", requiredCssName, filed.Name);
+		case "decimal":
+		case "int":
+			controlHtml.AppendFormat("@Html.TextBoxFor(p => p.{0}, new {2} @class = \"form-control{1}\", number = true {3})", filed.Name, requiredCssName, "{", "}");
 			break;
 
 		case "guid":
@@ -119,7 +120,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp.View
             #line hidden
             this.Write("                    ");
             
-            #line 59 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
+            #line 60 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(controlHtml.ToString()));
             
             #line default
@@ -127,7 +128,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp.View
             this.Write("\r\n                </div>\r\n                <label class=\"col-xs-4 help-inline J_Va" +
                     "lidateMsg\"></label>\r\n            </div>\r\n");
             
-            #line 63 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
+            #line 64 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
  } 
             
             #line default
@@ -146,7 +147,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp.View
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "D:\Work\Code\Oct.Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
+        #line 1 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Create.tt"
 
 private global::Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo _dtField;
 

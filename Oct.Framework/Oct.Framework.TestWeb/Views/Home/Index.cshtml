@@ -1,6 +1,7 @@
 ﻿@using Oct.Framework.MvcExt.Base
 @using Oct.Framework.MvcExt.Extisions
 @using Oct.Framework.MvcExt.HtmlInput
+@using Oct.Framework.SearchEngine
 @using Oct.Framework.TestWeb.Models
 
 @{
@@ -64,12 +65,12 @@
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
             <tbody>
-                @foreach (var r in ViewBag.sret)
+                @foreach (SearchRet r in ViewBag.sret)
                 {
                     <tr>
                         <td>
-                            <span>@Html.Raw(r.Id)</span><br />
-                            <span>@Html.Raw(r.DD)</span>
+                            <span>@Html.Raw(r["Id"])</span><br />
+                            <span>@Html.Raw(r["DD"])</span>
 
                         </td>
 

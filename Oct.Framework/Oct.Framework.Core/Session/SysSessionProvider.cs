@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Oct.Framework.Core.Session
 {
-    internal class SysSessionProvider : ISessionProvider
+    public class SysSessionProvider : ISessionProvider
     {
         public bool AddSession(string key, object value)
         {

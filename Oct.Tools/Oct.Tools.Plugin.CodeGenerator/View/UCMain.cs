@@ -185,13 +185,13 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
                 };
 
                 //LoadDBInfoList
-                FileInfo file = new FileInfo(this.DBInfoConfigFilePath);
+                var file = new FileInfo(this.DBInfoConfigFilePath);
 
                 if (file.Exists)
                 {
                     using (var reader = new StreamReader(file.FullName))
                     {
-                        XmlSerializer xs = new XmlSerializer(typeof(List<DBInfo>));
+                        var xs = new XmlSerializer(typeof(List<DBInfo>));
 
                         this._dbInfoList = (List<DBInfo>)xs.Deserialize(reader);
                     }

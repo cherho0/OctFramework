@@ -20,7 +20,7 @@ using Oct.Framework.TestWeb.Models;
 
 namespace Oct.Framework.TestWeb.Controllers
 {
-
+    [LoginFilter]
     public class HomeController : BaseController
     {
         //
@@ -28,6 +28,14 @@ namespace Oct.Framework.TestWeb.Controllers
 
         public ActionResult Index()
         {
+            CacheHelper.Set("test", "test");
+            var value = CacheHelper.Get<string>("test");
+
+            var testts = DbContext.TestTsContext.GetModel(1);
+            testts.ActiveLogDataChange("test");
+            testts.DD = "ceshi1";
+            DbContext.TestTsContext.Update(testts);
+            DbContext.SaveChanges();
            /* var user = new UserBase() {Account = "test"};
             CacheHelper.Set("test", user);
             var v = CacheHelper.Get<UserBase>("test");*/

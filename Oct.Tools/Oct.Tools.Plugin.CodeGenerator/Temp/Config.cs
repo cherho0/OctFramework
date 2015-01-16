@@ -7,21 +7,17 @@
 //     重新生成代码，这些更改将会丢失。
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Oct.Tools.Plugin.CodeGenerator.Temp.View
+namespace Oct.Tools.Plugin.CodeGenerator.Temp
 {
-    using System.Configuration;
-    using System.Linq;
-    using System.Text;
-    using Oct.Tools.Plugin.CodeGenerator.Entity;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
+    #line 1 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public partial class Edit : EditBase
+    public partial class Config : ConfigBase
     {
 #line hidden
         /// <summary>
@@ -29,156 +25,132 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp.View
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"@{
-    ViewBag.Title = ""Edit"";
-    Layout = ""~/Views/Shared/_Modal.cshtml"";
-}
-
-@section PluginsJS {
-    <script src=""~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js""></script>
-    <script src=""~/assets/global/plugins/jquery-validation/js/additional-methods.min.js""></script>
-}
-
-@using ");
+            this.Write("//ServiceMapper\r\n");
             
-            #line 17 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(dt.NameSpace));
-            
-            #line default
-            #line hidden
-            this.Write(".Models;\r\n\r\n@model ");
-            
-            #line 19 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("DTO\r\n\r\n<div class=\"container\">\r\n    @using (Html.BeginForm(\"Edit\", \"");
-            
-            #line 22 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("\", FormMethod.Post, new { @class = \"J_FormValidate\" }))\r\n    {\r\n        <div clas" +
-                    "s=\"form form-horizontal\">\r\n");
-            
-            #line 25 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-
-	var ignoreFiledNames = ConfigurationManager.AppSettings["IgnoreFiledNames"].Split(',');
-
-	foreach(FiledInfo filed in dt.FiledList) 
-	{		
-        if (ignoreFiledNames.Contains(filed.Name.ToLower()))
-			continue;
-
-        if (filed.IsPk) { 
-            
-            #line default
-            #line hidden
-            this.Write("            @Html.HiddenFor(d => d.");
-            
-            #line 34 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
-            
-            #line default
-            #line hidden
-            this.Write(")\t\t         \r\n");
-            
-            #line 35 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
- } else { 
-            
-            #line default
-            #line hidden
-            this.Write("            <div class=\"form-group\">\r\n                ");
-            
-            #line 37 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(filed.IsAllowNull ? "<label class=\"col-xs-3 control-label\">" : "<label class=\"col-xs-3 control-label\"><i class=\"fa fa-asterisk required\"></i>"));
-            
-            #line default
-            #line hidden
-            
-            #line 37 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(filed.GetDisplayName()));
-            
-            #line default
-            #line hidden
-            this.Write("</label>\r\n                <div class=\"col-xs-5\">\r\n");
-            
-            #line 39 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
+            #line 4 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
  
-	var controlHtml = new StringBuilder();
-	var requiredCssName = filed.IsAllowNull ? string.Empty : " required";
-
-	switch (filed.CSharpType.ToLower())
-	{
-		case "bool":
-			controlHtml.AppendFormat("@Html.CheckBoxFor(p => p.{0})", filed.Name);
-			break;
-
-		case "decimal":
-		case "int":
-			controlHtml.AppendFormat("@Html.TextBoxFor(p => p.{0}, new {2} @class = \"form-control{1}\", number = true {3})", filed.Name, requiredCssName, "{", "}");
-			break;
-
-		case "guid":
-			controlHtml.AppendFormat("@Html.DropDownListFor(p => p.{0}, (IEnumerable<SelectListItem>)this.ViewBag.{0}s, new {2} @class = \"form-control input-sm{1}\" {3})", filed.Name, requiredCssName, "{", "}");
-			break;
-
-		default:
-			controlHtml.AppendFormat("@Html.TextBoxFor(p => p.{0}, new {2} @class = \"form-control{1}\" {3})", filed.Name, requiredCssName, "{", "}");
-			break;
-	}
-
+foreach (var item in dts)
+{ 
             
             #line default
             #line hidden
-            this.Write("                    ");
+            this.Write("container.RegisterType<I");
             
-            #line 63 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(controlHtml.ToString()));
+            #line 7 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
-            this.Write("\r\n                </div>\r\n                <label class=\"col-xs-4 help-inline J_Va" +
-                    "lidateMsg\"></label>\r\n            </div>\r\n");
+            this.Write("Service, ");
             
-            #line 67 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
+            #line 7 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item));
+            
+            #line default
+            #line hidden
+            this.Write("Service>();\r\n");
+            
+            #line 8 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
  } 
             
             #line default
             #line hidden
+            this.Write("\r\n//AutoMapper\r\n");
             
-            #line 68 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
+            #line 11 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
+ 
+foreach (var item in dts)
+{ 
+            
+            #line default
+            #line hidden
+            this.Write("Mapper.CreateMap<");
+            
+            #line 14 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item));
+            
+            #line default
+            #line hidden
+            this.Write(", ");
+            
+            #line 14 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item));
+            
+            #line default
+            #line hidden
+            this.Write("DTO>();\r\nMapper.CreateMap<");
+            
+            #line 15 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item));
+            
+            #line default
+            #line hidden
+            this.Write("DTO, ");
+            
+            #line 15 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item));
+            
+            #line default
+            #line hidden
+            this.Write(">();\r\n");
+            
+            #line 16 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
  } 
             
             #line default
             #line hidden
-            this.Write(@"            <div class=""form-group"">
-                <div class=""col-xs-9 col-xs-offset-3"">
-                    <button type=""submit"" value=""保存"" class=""btn blue""><i class=""fa fa-plus""></i>&nbsp;保存</button>
-                    <a href=""/User/Home"" class=""btn default J_CloseModal""><i class=""fa fa-undo""></i>&nbsp;返  回</a>
-                </div>
-            </div>
-        </div>
-    }
-</div>
-");
+            this.Write("\r\n//DBContext\r\n");
+            
+            #line 19 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
+ 
+foreach (var item in dts)
+{ 
+            
+            #line default
+            #line hidden
+            this.Write("public IDBContext<");
+            
+            #line 22 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item));
+            
+            #line default
+            #line hidden
+            this.Write("> ");
+            
+            #line 22 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item));
+            
+            #line default
+            #line hidden
+            this.Write("Context\r\n{\r\n\tget\r\n\t{\r\n\t\treturn new SQLDBContext<");
+            
+            #line 26 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item));
+            
+            #line default
+            #line hidden
+            this.Write(">(Session);\r\n\t}\r\n}\r\n\r\n");
+            
+            #line 30 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
+ } 
+            
+            #line default
+            #line hidden
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
+        #line 1 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Config.tt"
 
-private global::Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo _dtField;
+private global::System.Collections.Generic.List<string> _dtsField;
 
 /// <summary>
-/// Access the dt parameter of the template.
+/// Access the dts parameter of the template.
 /// </summary>
-private global::Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo dt
+private global::System.Collections.Generic.List<string> dts
 {
     get
     {
-        return this._dtField;
+        return this._dtsField;
     }
 }
 
@@ -190,31 +162,31 @@ public virtual void Initialize()
 {
     if ((this.Errors.HasErrors == false))
     {
-bool dtValueAcquired = false;
-if (this.Session.ContainsKey("dt"))
+bool dtsValueAcquired = false;
+if (this.Session.ContainsKey("dts"))
 {
-    if ((typeof(global::Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo).IsAssignableFrom(this.Session["dt"].GetType()) == false))
+    if ((typeof(global::System.Collections.Generic.List<string>).IsAssignableFrom(this.Session["dts"].GetType()) == false))
     {
-        this.Error("参数“dt”的类型“Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo”与传递到模板的数据的类型不匹配。");
+        this.Error("参数“dts”的类型“System.Collections.Generic.List<string>”与传递到模板的数据的类型不匹配。");
     }
     else
     {
-        this._dtField = ((global::Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo)(this.Session["dt"]));
-        dtValueAcquired = true;
+        this._dtsField = ((global::System.Collections.Generic.List<string>)(this.Session["dts"]));
+        dtsValueAcquired = true;
     }
 }
-if ((dtValueAcquired == false))
+if ((dtsValueAcquired == false))
 {
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("dt");
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("dts");
     if ((data != null))
     {
-        if ((typeof(global::Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo).IsAssignableFrom(data.GetType()) == false))
+        if ((typeof(global::System.Collections.Generic.List<string>).IsAssignableFrom(data.GetType()) == false))
         {
-            this.Error("参数“dt”的类型“Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo”与传递到模板的数据的类型不匹配。");
+            this.Error("参数“dts”的类型“System.Collections.Generic.List<string>”与传递到模板的数据的类型不匹配。");
         }
         else
         {
-            this._dtField = ((global::Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo)(data));
+            this._dtsField = ((global::System.Collections.Generic.List<string>)(data));
         }
     }
 }
@@ -236,7 +208,7 @@ if ((dtValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public class EditBase
+    public class ConfigBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

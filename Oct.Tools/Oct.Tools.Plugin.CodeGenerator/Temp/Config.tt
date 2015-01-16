@@ -1,0 +1,30 @@
+﻿<#@ template language="C#" #>
+<#@ parameter type="System.Collections.Generic.List<string>" name="dts" #>
+//ServiceMapper
+<# 
+foreach (var item in dts)
+{ #>
+container.RegisterType<I<#= item #>Service, <#= item #>Service>();
+<# } #>
+
+//AutoMapper
+<# 
+foreach (var item in dts)
+{ #>
+Mapper.CreateMap<<#= item #>, <#= item #>DTO>();
+Mapper.CreateMap<<#= item #>DTO, <#= item #>>();
+<# } #>
+
+//DBContext
+<# 
+foreach (var item in dts)
+{ #>
+public IDBContext<<#= item #>> <#= item #>Context
+{
+	get
+	{
+		return new SQLDBContext<<#= item #>>(Session);
+	}
+}
+
+<# } #>

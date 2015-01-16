@@ -7,7 +7,7 @@ using Oct.Framework.Core.Common;
 
 namespace Oct.Framework.Core.Session
 {
-    internal class CacheSessionProvider : ISessionProvider
+    public class CacheSessionProvider : ISessionProvider
     {
         public bool AddSession(string key, object value)
         {

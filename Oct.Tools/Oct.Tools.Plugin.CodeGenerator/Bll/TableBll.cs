@@ -184,12 +184,25 @@ namespace Oct.Tools.Plugin.CodeGenerator.Bll
         /// <returns></returns>
         public static string CodeGenerator(CodeBaseInfo codeBaseInfo, string tempPath)
         {
+            return CodeGenerator("dt", codeBaseInfo, tempPath, new string[] { typeof(CodeBaseInfo).Namespace });
+        }
+
+        /// <summary>
+        /// 代码生成
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <param name="tempPath"></param>
+        /// <param name="nameSpaces"></param>
+        /// <returns></returns>
+        public static string CodeGenerator(string key, object value, string tempPath, string[] nameSpaces)
+        {
             var temp = new FileInfo(tempPath);
 
             if (!temp.Exists)
                 throw new Exception(string.Format("模板：“{0}“不存在！", temp.Name));
 
-            var output = TemplateMgr.ProcessTemplate("dt", codeBaseInfo, temp, new string[] { typeof(CodeBaseInfo).Namespace });
+            var output = TemplateMgr.ProcessTemplate(key, value, temp, nameSpaces);
 
             return output;
         }

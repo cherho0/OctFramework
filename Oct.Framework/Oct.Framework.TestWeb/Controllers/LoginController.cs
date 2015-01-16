@@ -71,12 +71,18 @@ namespace Oct.Framework.TestWeb.Controllers
             var us9 = DbContext.CommonUserAcrionsContext.QueryPage(p => p.Name != "", p => p.Name, 1, 10);
             */
 
+            var ok1 = CacheHelper.Set("test", "test",1);
+            var bv = CacheHelper.Get<string>("test");
             var sessionprovide = Bootstrapper.GetRepository<ISessionProvider>();
             var get = sessionprovide.GetSession<string>("ceshi");
+            var ss = false;
             if (get == null)
             {
-                sessionprovide.AddSession("ceshi", DateTime.Now.ToString());
+               var ok = sessionprovide.AddSession("ceshi", DateTime.Now.ToString());
+                ss = ok;
+                get = sessionprovide.GetSession<string>("ceshi");
             }
+            Console.WriteLine(ss);
             return View();
         }
 

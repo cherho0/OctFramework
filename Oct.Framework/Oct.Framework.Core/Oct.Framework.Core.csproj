@@ -130,6 +130,9 @@
     <Compile Include="Args\DataEventArgs!4.cs" />
     <Compile Include="Args\DataEventArgs!5.cs" />
     <Compile Include="Args\DataEventArgs.cs" />
+    <Compile Include="Cache\ICacheHelper.cs" />
+    <Compile Include="Cache\MemCacheHelper.cs" />
+    <Compile Include="Cache\RedisHelper.cs" />
     <Compile Include="Common\ExtFunc.cs" />
     <Compile Include="Common\IpHelper.cs" />
     <Compile Include="Common\RMB.cs" />
@@ -143,9 +146,6 @@
     <Compile Include="Common\ExpressionHelper.cs" />
     <Compile Include="Image\ImageHelper.cs" />
     <Compile Include="IOC\Bootstrapper.cs" />
-    <Compile Include="Cache\ICacheHelper.cs" />
-    <Compile Include="Cache\MemCacheHelper.cs" />
-    <Compile Include="Cache\RedisHelper.cs" />
     <Compile Include="Common\ConfigSettingHelper.cs" />
     <Compile Include="Common\ConstArgs.cs" />
     <Compile Include="Common\ConvertHelper.cs" />

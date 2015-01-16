@@ -155,12 +155,12 @@ namespace Oct.Tools.Plugin.CodeGenerator.Properties {
         ///	[CreateDate] [datetime] NOT NULL,
         ///	[CreateUserId] [uniqueidentifier] NULL,
         ///	[ModifyUserId] [uniqueidentifier] NULL,
-        ///	[DateLastModified] [datetime] NULL,
+        ///	[ModifyDate] [datetime] NULL,
         ///	[Phone] [nvarchar](50) NULL,
         ///	[Email] [nvarchar](100) NULL,
         ///	[Fax] [nvarchar](50) NULL,
         ///	[QQ] [nvarchar](50) NULL,
-        ///	[Address] [nvarchar](1 [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///	[Address] [nvarchar](100) NU [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string E_Common_User {
             get {

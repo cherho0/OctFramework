@@ -103,6 +103,22 @@ namespace Oct.Tools.Plugin.CodeGenerator.Section
         }
 
         /// <summary>
+        /// 批量生成时是否只运行一次
+        /// </summary>
+        [ConfigurationProperty("isRanOnlyOnceByBath", IsRequired = true)]
+        public bool IsRanOnlyOnceByBath
+        {
+            get
+            {
+                return (bool)base["isRanOnlyOnceByBath"];
+            }
+            set
+            {
+                base["isRanOnlyOnceByBath"] = value;
+            }
+        }
+
+        /// <summary>
         /// 模板文件路径
         /// </summary>
         public string Path

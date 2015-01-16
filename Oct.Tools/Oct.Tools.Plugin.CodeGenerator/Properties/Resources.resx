@@ -157,7 +157,7 @@
 	[CreateDate] [datetime] NOT NULL,
 	[CreateUserId] [uniqueidentifier] NULL,
 	[ModifyUserId] [uniqueidentifier] NULL,
-	[DateLastModified] [datetime] NULL,
+	[ModifyDate] [datetime] NULL,
 	[Phone] [nvarchar](50) NULL,
 	[Email] [nvarchar](100) NULL,
 	[Fax] [nvarchar](50) NULL,
@@ -232,7 +232,7 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'状态' , @lev
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'创建时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Common_User', @level2type=N'COLUMN',@level2name=N'CreateDate'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'创建人ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Common_User', @level2type=N'COLUMN',@level2name=N'CreateUserId'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'修改人ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Common_User', @level2type=N'COLUMN',@level2name=N'ModifyUserId'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'最后修改时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Common_User', @level2type=N'COLUMN',@level2name=N'DateLastModified'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'最后修改时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Common_User', @level2type=N'COLUMN',@level2name=N'ModifyDate'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'电话' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Common_User', @level2type=N'COLUMN',@level2name=N'Phone'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'邮箱' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Common_User', @level2type=N'COLUMN',@level2name=N'Email'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'传真' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Common_User', @level2type=N'COLUMN',@level2name=N'Fax'

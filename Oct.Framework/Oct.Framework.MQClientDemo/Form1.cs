@@ -36,7 +36,7 @@ namespace Oct.Framework.MQClientDemo
             _client = new OctMQClient();
             _client.OnReceive += _client_OnReceive;
 
-            _client.Init(txtip.Text, int.Parse(txtport.Text), ClientType.Sub);
+            _client.Init(txtip.Text, int.Parse(txtport.Text), ClientType.XSub);
             var sub = (SubscriberSocket)_client.Client;
             sub.Subscribe(txtTop.Text);
             _client.StartAsyncReceive();

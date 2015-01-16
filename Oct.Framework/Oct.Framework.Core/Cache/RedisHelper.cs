@@ -8,8 +8,6 @@ namespace Oct.Framework.Core.Cache
 {
     internal class RedisHelper : ICacheHelper
     {
-
-
         #region << 静态属性 >>
 
         /// <summary>
@@ -96,8 +94,6 @@ namespace Oct.Framework.Core.Cache
 
         /// <summary>
         /// 得到用于读取的客户端对象
-        /// 创建人：胡怀清
-        /// 创建日期：2014-7-30
         /// </summary>
         /// <returns>只读客户端对象</returns>
         private IRedisClient GetReadClient()
@@ -107,8 +103,6 @@ namespace Oct.Framework.Core.Cache
 
         /// <summary>
         /// 得到用于写入的客户端对象
-        /// 创建人：胡怀清
-        /// 创建日期：2014-7-30
         /// </summary>
         /// <returns></returns>
         private IRedisClient GetWriteClient()

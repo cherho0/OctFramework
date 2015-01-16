@@ -103,6 +103,53 @@ namespace Oct.Framework.SearchEngine
 
         public void UpdateUnitDoc(string key, object id)
         {
+            FSDirectory directory = FSDirectory.Open(new DirectoryInfo(_indexSavePath), new NativeFSLockFactory());
+            try
+            {
+                //表示将创建的索引文件保存在indexPath目录下
+                bool isUpdate = IndexReader.IndexExists(directory); //)判断目录directory是否是一个索引目录
+                if (isUpdate)
+                {
+                    //如果索引目录被锁定（比如索引过程中程序异常退出），则首先解锁
+                    if (IndexWriter.IsLocked(directory)) //) 判断目录是否锁定，在对目录写之前会先把目录锁定
+                    {
+                        IndexWriter.Unlock(directory); //如果没有锁定则需要手动锁定因为。两个IndexWriter无法同时写一个索引文件
+                    }
+                }
+                IndexWriter writer = new IndexWriter(directory, new PanGuAnalyzer(), !isUpdate,
+                    IndexWriter.MaxFieldLength.UNLIMITED);
+                //IndexWriter把输入写入索引的时候，Lucene.net是把写入的文件用指定的分词算法将文章分词（这样检索的时候才能查的快），然后将词放入索引文件。
+                try
+                {
+                    var model = GetOne(id);
+                    writer.DeleteDocuments(new Term(key, id.ToString()));
+
+                    Document document = new Document(); //创建一行记录
+                    _addDocAction(model, document);
+                    writer.AddDocument(document);
+                    writer.Optimize();
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.Error(ex);
+                }
+                finally
+                {
+                    writer.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(ex);
+            }
+            finally
+            {
+                directory.Close();
+            }
+        }
+
+        public void DeleteDoc(string key, object id)
+        {
             try
             {
                 FSDirectory directory = FSDirectory.Open(new DirectoryInfo(_indexSavePath), new NativeFSLockFactory());//表示将创建的索引文件保存在indexPath目录下
@@ -117,13 +164,7 @@ namespace Oct.Framework.SearchEngine
                 }
                 IndexWriter writer = new IndexWriter(directory, new PanGuAnalyzer(), !isUpdate, IndexWriter.MaxFieldLength.UNLIMITED);
                 //IndexWriter把输入写入索引的时候，Lucene.net是把写入的文件用指定的分词算法将文章分词（这样检索的时候才能查的快），然后将词放入索引文件。
-               
-                var model = GetOne(id);
                 writer.DeleteDocuments(new Term(key, id.ToString()));
-
-                Document document = new Document();//创建一行记录
-                _addDocAction(model, document);
-                writer.AddDocument(document);
                 writer.Optimize();
                 writer.Close();
                 directory.Close();

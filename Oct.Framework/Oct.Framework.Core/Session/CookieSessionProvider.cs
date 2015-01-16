@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace Oct.Framework.Core.Session
 {
-    internal class CookieSessionProvider : ISessionProvider
+    public class CookieSessionProvider : ISessionProvider
     {
         public string SessionId
         {

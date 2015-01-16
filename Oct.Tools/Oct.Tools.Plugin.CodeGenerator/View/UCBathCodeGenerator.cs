@@ -6,6 +6,7 @@ using Oct.Tools.Plugin.CodeGenerator.Section;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -58,11 +59,6 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
             this.btnSignleToRight.Enabled = this.btnAllToRight.Enabled = this._dbInfo.TableList.Count > 0;
             this.labTargetTableCount.Text = this.labSelectedTempsCount.Text = "0";
             this.txtNameSpace.Text = TableBll.DefaultNameSpace;
-        }
-
-        private void BathCodeGeneratorForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            e.Cancel = this.bgw.IsBusy;
         }
 
         /// <summary>
@@ -245,7 +241,8 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
             {
                 foreach (var temp in tempList)
                 {
-                    var savePath = Path.Combine(this.txtOutputDirectory.Text, temp.DirName); //一个模板一个子文件夹
+                    //一个模板一个子文件夹
+                    var savePath = Path.Combine(this.txtOutputDirectory.Text, temp.DirName);
 
                     if (!Directory.Exists(savePath))
                         Directory.CreateDirectory(savePath);
@@ -272,7 +269,9 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
             var taskArg3 = new TaskArg();
             taskArg3.BeginAction = () =>
             {
-                foreach (var temp in tempList)
+                var list = tempList.Where(d => !d.IsRanOnlyOnceByBath);
+
+                foreach (var temp in list)
                 {
                     foreach (string table in tables)
                     {
@@ -289,7 +288,8 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
                             var fileName = string.IsNullOrEmpty(temp.FileName) ? codeBaseInfo.ClassName : temp.FileName;
                             fileName = string.Format("{0}{1}{2}", fileName, temp.ClassNameExtend, temp.FileNameExtend);
 
-                            var savePath = Path.Combine(this.txtOutputDirectory.Text, temp.DirName); //一个模板一个子文件夹
+                            //一个模板一个子文件夹
+                            var savePath = Path.Combine(this.txtOutputDirectory.Text, temp.DirName);
 
                             if (temp.IsCreateChildDirByTableName)
                             {
@@ -312,8 +312,43 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
                             new TaskReportProgressArg
                             {
                                 Index = index++,
-                                Count = tempList.Count * tables.Count,
+                                Count = list.Count() * tables.Count,
                                 Msg = string.Format("step3/3 生成代码{0}/{1}......", temp.Name, table)
+                            });
+                    }
+                }
+
+                index = 1;
+
+                //RanOnlyOnce
+                list = tempList.Where(d => d.IsRanOnlyOnceByBath);
+
+                foreach (var temp in list)
+                {
+                    var output = TableBll.CodeGenerator("dts", codeBaseDict.Values.Select(d => d.ClassName).ToList(), temp.Path, null);
+                    var msg = temp.Name;
+
+                    if (output.StartsWith("error："))
+                        this._failureTableList.Add(msg);
+                    else
+                    {
+                        var fileName = string.Format("{0}{1}{2}", temp.FileName, temp.ClassNameExtend, temp.FileNameExtend);
+                        var savePath = Path.Combine(this.txtOutputDirectory.Text, temp.DirName);
+
+                        savePath = Path.Combine(savePath, fileName);
+
+                        File.WriteAllText(savePath, output, Encoding.UTF8);
+
+                        this._successTableList.Add(msg);
+
+                        Thread.Sleep(1);
+
+                        TaskCenter.Instance.ReportProgress(
+                            new TaskReportProgressArg
+                            {
+                                Index = index++,
+                                Count = list.Count(),
+                                Msg = string.Format("step3/3 生成代码{0}......", temp.Name)
                             });
                     }
                 }
@@ -340,7 +375,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
 
                     this.SetContorlsEnabled(true);
 
-                    var form = new BathCodeGeneratorResult(msg, this._successTableList, this._failureTableList);
+                    var form = new BathCodeGeneratorResult(msg, this.txtOutputDirectory.Text, this._successTableList, this._failureTableList);
                     form.ShowDialog();
                 }));
             };

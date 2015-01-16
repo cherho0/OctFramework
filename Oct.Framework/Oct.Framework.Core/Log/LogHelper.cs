@@ -35,6 +35,10 @@ namespace Oct.Framework.Core.Log
             }
         }
 
+        /// <summary>
+        /// 记录信息日志
+        /// </summary>
+        /// <param name="msg"></param>
         public static void Info(string msg)
         {
             Instance.Info(msg);
@@ -45,6 +49,10 @@ namespace Oct.Framework.Core.Log
             Instance.Info(ex.Message, ex);
         }
 
+        /// <summary>
+        /// 记录错误日志
+        /// </summary>
+        /// <param name="msg"></param>
         public static void Error(string msg)
         {
             Instance.Error(msg);
@@ -60,6 +68,10 @@ namespace Oct.Framework.Core.Log
             Instance.Error(ex.Message, ex);
         }
 
+        /// <summary>
+        /// 记录调试日志
+        /// </summary>
+        /// <param name="msg"></param>
         public static void Debug(string msg)
         {
             Instance.Debug(msg);

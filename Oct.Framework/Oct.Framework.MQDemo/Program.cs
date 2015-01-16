@@ -52,7 +52,7 @@ namespace Oct.Framework.MQDemo
             {
                 case "1":
                     {
-                        _type = ServerType.Pub;
+                        _type = ServerType.XPub;
                         Create();
                         Cmd();
                     }

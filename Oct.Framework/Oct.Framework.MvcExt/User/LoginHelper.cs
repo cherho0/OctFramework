@@ -12,13 +12,10 @@ namespace Oct.Framework.MvcExt.User
     /// </summary>
     public class LoginHelper : SingleTon<LoginHelper>
     {
-        protected ICacheHelper CacheHelper { get; set; }
-
         protected ISessionProvider SessionProvider { get; set; }
 
         public LoginHelper()
         {
-            CacheHelper = Bootstrapper.GetRepository<ICacheHelper>();
             SessionProvider = Bootstrapper.GetRepository<ISessionProvider>();
         }
 

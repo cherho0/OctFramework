@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -14,6 +15,42 @@ using PanGu;
 
 namespace Oct.Framework.SearchEngine
 {
+    public enum DataType
+    {
+        dynamic,
+        dictionary
+    }
+
+    public class Rows
+    {
+        public string Name { get; set; }
+        public string Value { get; set; }
+    }
+
+    public class SearchRet
+    {
+        public List<Rows> Values { get; private set; }
+
+        public SearchRet()
+        {
+            Values = new List<Rows>();
+        }
+
+        public void Add(string key, string val)
+        {
+            Values.Add(new Rows()
+            {
+                Name = key,
+                Value = val
+            });
+        }
+
+        public string this[string key]
+        {
+            get { return Values.First(p => p.Name == key).Value; }
+        }
+    }
+
     /// <summary>
     /// 搜索引擎封装，用来查询结果集
     /// </summary>
@@ -34,9 +71,16 @@ namespace Oct.Framework.SearchEngine
         /// <summary>
         /// 请使用List<dynamic> 获取
         /// </summary>
-        public List<DynamicResult> Result { get; private set; }
+        public List<SearchRet> Result { get; private set; }
 
         public List<SortField> SortFields { get; private set; }
+
+        public DataType DataType { get; set; }
+
+        /// <summary>
+        /// 最大搜索深度
+        /// </summary>
+        public int MaxHits = 100000;
 
         /// <summary>
         /// 集合总量
@@ -59,6 +103,7 @@ namespace Oct.Framework.SearchEngine
 
         public SearchEngineWapper(string indexPath)
         {
+            DataType = DataType.dynamic;
             IndexPath = indexPath;
             Keys = new List<string>();
             PreviewKeys = new List<string>();
@@ -89,11 +134,130 @@ namespace Oct.Framework.SearchEngine
             SortFields.Add(new SortField(key, fieldType, reverse));
         }
 
+        /// <summary>
+        /// 条件查询， 可参考 http://blog.csdn.net/weizengxun/article/details/8101097
+        /// </summary>
+        /// <param name="fun"></param>
+        /// <param name="start"></param>
+        /// <param name="count"></param>
+        public void SearchCondition(Func<Query> fun, int start = 0, int count = 100)
+        {
+
+            sw.Restart();
+            Result = new List<SearchRet>();
+            FSDirectory directory = FSDirectory.Open(new DirectoryInfo(IndexPath), new NoLockFactory());
+
+            IndexReader reader = IndexReader.Open(directory, true);
+
+            //IndexSearcher需要传递一个IndexReader对象
+
+            IndexSearcher searcher = new IndexSearcher(reader);
+
+            //PhraseQuery用来进行多个关键词的检索，调用Add方法添加关键词
+            var query = fun();
+            // query.Add(query8, BooleanClause.Occur.SHOULD);
+            //PhraseQuery. SetSlop(int slop)用来设置关键词之间的最大距离，默认是0，设置了Slop以后哪怕文档中两个关键词之间没有紧挨着也能找到。
+            TopScoreDocCollector collector = TopScoreDocCollector.create(MaxHits, true);
+            searcher.Search(query, null, collector);
+            Total = collector.GetTotalHits();
+
+            ScoreDoc[] docs = collector.TopDocs(start, count).scoreDocs;
+            sw.Stop();
+            Cost = sw.Elapsed;
+            for (int i = 0; i < docs.Length; i++)
+            {
+                //取得文档的编号(主键)是Lucene.Net提供的
+                int docId = docs[i].doc;
+                Document doc = searcher.Doc(docId);
+                var fileds = doc.GetFields();
+                var ret = new SearchRet();
+                foreach (Field filed in fileds)
+                {
+                    var name = filed.Name();
+                    var val = filed.StringValue();
+                    if (PreviewKeys.Contains(name))
+                    {
+                        val = Preview(val, KeyWord);
+                    }
+                    ret.Add(name, val);
+                }
+                Result.Add(ret);
+            }
+
+        }
+
+        /// <summary>
+        /// 全词查询
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <param name="start"></param>
+        /// <param name="count"></param>
+        public void SearchAll(string keyword, int start = 0, int count = 100)
+        {
+            sw.Restart();
+            KeyWord = keyword;
+            Result = new List<SearchRet>();
+            FSDirectory directory = FSDirectory.Open(new DirectoryInfo(IndexPath), new NoLockFactory());
+
+            IndexReader reader = IndexReader.Open(directory, true);
+
+            //IndexSearcher需要传递一个IndexReader对象
+
+            IndexSearcher searcher = new IndexSearcher(reader);
+
+            //PhraseQuery用来进行多个关键词的检索，调用Add方法添加关键词
+            BooleanQuery query = new BooleanQuery();
+
+            foreach (var key in Keys)
+            {
+                PhraseQuery query1 = new PhraseQuery();
+                query1.Add(new Term(key, keyword));
+                query1.SetSlop(100);
+                query.Add(query1, BooleanClause.Occur.SHOULD);
+            }
+
+            // query.Add(query8, BooleanClause.Occur.SHOULD);
+            //PhraseQuery. SetSlop(int slop)用来设置关键词之间的最大距离，默认是0，设置了Slop以后哪怕文档中两个关键词之间没有紧挨着也能找到。
+            TopScoreDocCollector collector = TopScoreDocCollector.create(MaxHits, true);
+            searcher.Search(query, null, collector);
+            Total = collector.GetTotalHits();
+
+            ScoreDoc[] docs = collector.TopDocs(start, count).scoreDocs;
+            sw.Stop();
+            Cost = sw.Elapsed;
+            for (int i = 0; i < docs.Length; i++)
+            {
+                //取得文档的编号(主键)是Lucene.Net提供的
+                int docId = docs[i].doc;
+                Document doc = searcher.Doc(docId);
+                var fileds = doc.GetFields();
+                var ret = new SearchRet();
+                foreach (Field filed in fileds)
+                {
+                    var name = filed.Name();
+                    var val = filed.StringValue();
+                    if (PreviewKeys.Contains(name))
+                    {
+                        val = Preview(val, KeyWord);
+                    }
+                    ret.Add(name, val);
+                }
+                Result.Add(ret);
+            }
+
+        }
+
+        /// <summary>
+        /// 分词查询
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <param name="start"></param>
+        /// <param name="count"></param>
         public void Search(string keyword, int start = 0, int count = 100)
         {
             sw.Restart();
             KeyWord = keyword;
-            Result = new List<DynamicResult>();
+            Result = new List<SearchRet>();
             FSDirectory directory = FSDirectory.Open(new DirectoryInfo(IndexPath), new NoLockFactory());
 
             IndexReader reader = IndexReader.Open(directory, true);
@@ -120,8 +284,7 @@ namespace Oct.Framework.SearchEngine
 
             // query.Add(query8, BooleanClause.Occur.SHOULD);
             //PhraseQuery. SetSlop(int slop)用来设置关键词之间的最大距离，默认是0，设置了Slop以后哪怕文档中两个关键词之间没有紧挨着也能找到。
-            TopScoreDocCollector collector = TopScoreDocCollector.create(1000, true);
-
+            TopScoreDocCollector collector = TopScoreDocCollector.create(MaxHits, true);
             searcher.Search(query, null, collector);
             Total = collector.GetTotalHits();
 
@@ -134,7 +297,7 @@ namespace Oct.Framework.SearchEngine
                 int docId = docs[i].doc;
                 Document doc = searcher.Doc(docId);
                 var fileds = doc.GetFields();
-                var ret = new DynamicResult();
+                var ret = new SearchRet();
                 foreach (Field filed in fileds)
                 {
 
@@ -151,11 +314,17 @@ namespace Oct.Framework.SearchEngine
 
         }
 
+        /// <summary>
+        /// 排序分词查询
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <param name="start"></param>
+        /// <param name="count"></param>
         public void SearchOrder(string keyword, int start = 0, int count = 100)
         {
             sw.Restart();
             KeyWord = keyword;
-            Result = new List<DynamicResult>();
+            Result = new List<SearchRet>();
             FSDirectory directory = FSDirectory.Open(new DirectoryInfo(IndexPath), new NoLockFactory());
 
             IndexReader reader = IndexReader.Open(directory, true);
@@ -188,7 +357,7 @@ namespace Oct.Framework.SearchEngine
             {
                 sort.SetSort(SortFields.ToArray());
             }
-            var topdocs = searcher.Search(query, null, 1000, sort);
+            var topdocs = searcher.Search(query, null, MaxHits, sort);
             Total = topdocs.totalHits;
 
             ScoreDoc[] docs = topdocs.scoreDocs;
@@ -197,17 +366,16 @@ namespace Oct.Framework.SearchEngine
             for (int i = start; i < start + count; i++)
             {
                 //取得文档的编号(主键)是Lucene.Net提供的
-                if (i>Total-1)
+                if (i > Total - 1)
                 {
                     break;
                 }
                 int docId = docs[i].doc;
                 Document doc = searcher.Doc(docId);
                 var fileds = doc.GetFields();
-                var ret = new DynamicResult();
+                var ret = new SearchRet();
                 foreach (Field filed in fileds)
                 {
-
                     var name = filed.Name();
                     var val = filed.StringValue();
                     if (PreviewKeys.Contains(name))

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfDBInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DBInfo>
-    <Key>192.168.0.21(UAT_ERP)</Key>
-    <ConnectionString>User id=Octopus_erp;Password=AIS!913819JA;Server=192.168.0.21;database=UAT_ERP;</ConnectionString>
+    <Key>192.168.0.21(Octopus_OA)</Key>
+    <ConnectionString>User id=Octopus_OA;Password=JSHQNA*81(!13;Server=192.168.0.21;database=Octopus_OA;</ConnectionString>
   </DBInfo>
   <DBInfo>
-    <Key>192.168.2.20(Oct_Framework)</Key>
-    <ConnectionString>User id=Octopus_Framework;Password=JSJQH8819!(K;Server=192.168.2.20;database=Oct_Framework;</ConnectionString>
+    <Key>192.168.2.236(BoscHDb)</Key>
+    <ConnectionString>User id=sa;Password=wgs!2345;Server=192.168.2.236;database=BoscHDb;</ConnectionString>
+  </DBInfo>
+  <DBInfo>
+    <Key>192.168.0.21(OCTOPUS3.0_DEVELOPMENT)</Key>
+    <ConnectionString>User id=OCTOPUS3.0;Password=SLN771(!!@@4;Server=192.168.0.21;database=OCTOPUS3.0_DEVELOPMENT;</ConnectionString>
   </DBInfo>
 </ArrayOfDBInfo>

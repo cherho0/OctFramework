@@ -19,7 +19,8 @@ namespace Oct.Framework.Core.Mail
         /// <param name="subject">标题</param>
         /// <param name="body">内容</param>
         /// <returns></returns>
-        public void SendMail(string emailTo, string subject, string body, string emailServer = "http://222.92.117.190:6002/api/Email/Post")
+        public void SendMail(string emailTo, string subject, string body,
+            string emailServer = "http://222.92.117.190:6002/api/Email/Post")
         {
             bool result = false;
             string requestJson = JsonConvert.SerializeObject(new

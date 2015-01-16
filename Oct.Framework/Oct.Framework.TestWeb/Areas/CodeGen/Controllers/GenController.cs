@@ -40,7 +40,8 @@ namespace Oct.Framework.TestWeb.Areas.CodeGen.Controllers
             var clses = dll.DefinedTypes;
             var cls = clses.Where(p => entity.Contains(p.Name));
             var props = cls.SelectMany(p => p.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance));
-            var showprop = props.Where(p => !IgonProps.Contains(p.Name)).Select(p => new { p.Name, Type = p.PropertyType.ToString() });
+            var showprop =
+                props.Where(p => !IgonProps.Contains(p.Name)).Select(p => new { p.Name, Type = p.PropertyType.ToString() });
             ViewBag.props = showprop.ToExpando();
             ViewBag.Ens = clses.Where(p => !p.IsSubclassOf(typeof(DBContextBase))).Select(p => new SelectListItem
             {

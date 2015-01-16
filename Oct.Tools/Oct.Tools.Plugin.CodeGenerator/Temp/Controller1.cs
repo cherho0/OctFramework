@@ -7,9 +7,8 @@
 //     重新生成代码，这些更改将会丢失。
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Oct.Tools.Plugin.CodeGenerator.Temp.View
+namespace Oct.Tools.Plugin.CodeGenerator.Temp
 {
-    using System.Configuration;
     using System.Linq;
     using System.Text;
     using Oct.Tools.Plugin.CodeGenerator.Entity;
@@ -19,9 +18,9 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp.View
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
+    #line 1 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public partial class Edit : EditBase
+    public partial class Controller1 : Controller1Base
     {
 #line hidden
         /// <summary>
@@ -29,145 +28,228 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp.View
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"@{
-    ViewBag.Title = ""Edit"";
-    Layout = ""~/Views/Shared/_Modal.cshtml"";
-}
+            this.Write("using System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.Web.Mvc;\r\nusi" +
+                    "ng BoscH.Base;\r\nusing BoscH.DB;\r\n");
+            
+            #line 11 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
 
-@section PluginsJS {
-    <script src=""~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js""></script>
-    <script src=""~/assets/global/plugins/jquery-validation/js/additional-methods.min.js""></script>
-}
+	var pkType = string.Empty;
+	var pkName = string.Empty;
+	var pkFileds = dt.FiledList.Where(d => d.IsPk);
 
-@using ");
-            
-            #line 17 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(dt.NameSpace));
-            
-            #line default
-            #line hidden
-            this.Write(".Models;\r\n\r\n@model ");
-            
-            #line 19 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("DTO\r\n\r\n<div class=\"container\">\r\n    @using (Html.BeginForm(\"Edit\", \"");
-            
-            #line 22 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("\", FormMethod.Post, new { @class = \"J_FormValidate\" }))\r\n    {\r\n        <div clas" +
-                    "s=\"form form-horizontal\">\r\n");
-            
-            #line 25 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-
-	var ignoreFiledNames = ConfigurationManager.AppSettings["IgnoreFiledNames"].Split(',');
-
-	foreach(FiledInfo filed in dt.FiledList) 
-	{		
-        if (ignoreFiledNames.Contains(filed.Name.ToLower()))
-			continue;
-
-        if (filed.IsPk) { 
-            
-            #line default
-            #line hidden
-            this.Write("            @Html.HiddenFor(d => d.");
-            
-            #line 34 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
-            
-            #line default
-            #line hidden
-            this.Write(")\t\t         \r\n");
-            
-            #line 35 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
- } else { 
-            
-            #line default
-            #line hidden
-            this.Write("            <div class=\"form-group\">\r\n                ");
-            
-            #line 37 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(filed.IsAllowNull ? "<label class=\"col-xs-3 control-label\">" : "<label class=\"col-xs-3 control-label\"><i class=\"fa fa-asterisk required\"></i>"));
-            
-            #line default
-            #line hidden
-            
-            #line 37 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(filed.GetDisplayName()));
-            
-            #line default
-            #line hidden
-            this.Write("</label>\r\n                <div class=\"col-xs-5\">\r\n");
-            
-            #line 39 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
- 
-	var controlHtml = new StringBuilder();
-	var requiredCssName = filed.IsAllowNull ? string.Empty : " required";
-
-	switch (filed.CSharpType.ToLower())
+	if (pkFileds.Count() > 0)
 	{
-		case "bool":
-			controlHtml.AppendFormat("@Html.CheckBoxFor(p => p.{0})", filed.Name);
-			break;
-
-		case "decimal":
-		case "int":
-			controlHtml.AppendFormat("@Html.TextBoxFor(p => p.{0}, new {2} @class = \"form-control{1}\", number = true {3})", filed.Name, requiredCssName, "{", "}");
-			break;
-
-		case "guid":
-			controlHtml.AppendFormat("@Html.DropDownListFor(p => p.{0}, (IEnumerable<SelectListItem>)this.ViewBag.{0}s, new {2} @class = \"form-control input-sm{1}\" {3})", filed.Name, requiredCssName, "{", "}");
-			break;
-
-		default:
-			controlHtml.AppendFormat("@Html.TextBoxFor(p => p.{0}, new {2} @class = \"form-control{1}\" {3})", filed.Name, requiredCssName, "{", "}");
-			break;
+		pkType = pkFileds.First().CSharpType;	 
+		pkName = pkFileds.First().Name;	 
+		pkName = pkName.Substring(0, 1).ToLower() + pkName.Substring(1, pkName.Length - 1); 
 	}
 
             
             #line default
             #line hidden
-            this.Write("                    ");
+            this.Write("\r\nnamespace BoscH.Controllers\r\n{\r\n\tpublic class ");
             
-            #line 63 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(controlHtml.ToString()));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n                </div>\r\n                <label class=\"col-xs-4 help-inline J_Va" +
-                    "lidateMsg\"></label>\r\n            </div>\r\n");
-            
-            #line 67 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
- } 
+            #line 26 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             
-            #line 68 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
- } 
+            #line 26 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassNameExtend));
             
             #line default
             #line hidden
-            this.Write(@"            <div class=""form-group"">
-                <div class=""col-xs-9 col-xs-offset-3"">
-                    <button type=""submit"" value=""保存"" class=""btn blue""><i class=""fa fa-plus""></i>&nbsp;保存</button>
-                    <a href=""/User/Home"" class=""btn default J_CloseModal""><i class=""fa fa-undo""></i>&nbsp;返  回</a>
-                </div>
-            </div>
-        </div>
-    }
-</div>
-");
+            this.Write(" : BaseController\r\n    {\r\n        public ActionResult Index(int? page)\r\n        {" +
+                    "\r\n            var p = page ?? 1;            \r\n           var dtos = Entities.");
+            
+            #line 31 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("s.Skip((p - 1) * 15).Take(15).ToList();\r\n          \r\n            var pm = this.Cr" +
+                    "eatePageModel(5, p, Entities.");
+            
+            #line 33 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write(@"s.Count());
+
+            this.ViewBag.PM = pm;
+
+            return this.View(dtos);
+        }     
+
+        public ActionResult Create()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(");
+            
+            #line 46 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write(" model)\r\n        {\r\n            try\r\n            {\r\n                var entity = " +
+                    "Entities.");
+            
+            #line 50 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("s.Add(model);\r\n\r\n                 Entities.SaveChanges();\r\n                return" +
+                    " this.View(\"Jump\");\r\n            }\r\n            catch\r\n            {\r\n          " +
+                    "      return this.View();\r\n            }\r\n        }\r\n\r\n        public ActionResu" +
+                    "lt Edit(");
+            
+            #line 61 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pkType));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 61 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n        {\r\n            var entity = Entities.");
+            
+            #line 63 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("s.FirstOrDefault(p => p.");
+            
+            #line 63 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pkFileds.First().Name));
+            
+            #line default
+            #line hidden
+            this.Write(" == ");
+            
+            #line 63 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
+            
+            #line default
+            #line hidden
+            this.Write(");\r\n\r\n            return this.View(entity);\r\n        }\r\n\r\n        [HttpPost]\r\n   " +
+                    "     public ActionResult Edit(");
+            
+            #line 69 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write(" model)\r\n        {\r\n            try\r\n            {\r\n\t\t\t    var entity = Entities." +
+                    "");
+            
+            #line 73 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("s.FirstOrDefault(p => p.");
+            
+            #line 73 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pkFileds.First().Name));
+            
+            #line default
+            #line hidden
+            this.Write(" == model.");
+            
+            #line 73 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pkFileds.First().Name));
+            
+            #line default
+            #line hidden
+            this.Write(");\r\n\t\t\t\tif(entity == null){\r\n\t\t\t\treturn this.View(\"Jump\");\r\n\t\t\t\t}\r\n\t\t\t   ");
+            
+            #line 77 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+foreach(var filed in dt.FiledList){ 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t\tentity.");
+            
+            #line 78 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" = model.");
+            
+            #line 78 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n\t\t\t\t");
+            
+            #line 79 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+}
+            
+            #line default
+            #line hidden
+            this.Write("\r\n                Entities.SaveChanges();\r\n\r\n                return this.View(\"Ju" +
+                    "mp\");\r\n            }\r\n            catch\r\n            {\r\n                return t" +
+                    "his.View();\r\n            }\r\n        }\r\n\r\n        public ActionResult Delete(");
+            
+            #line 91 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pkType));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 91 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n        {\r\n              Entities.");
+            
+            #line 93 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("s.Remove(new ");
+            
+            #line 93 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("()\r\n            {\r\n                ");
+            
+            #line 95 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pkFileds.First().Name));
+            
+            #line default
+            #line hidden
+            this.Write(" = ");
+            
+            #line 95 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            });\r\n            Entities.SaveChanges();\r\n\r\n            return this" +
+                    ".RedirectToAction(\"Index\");\r\n        }\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\View\Edit.tt"
+        #line 1 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Controller1.tt"
 
 private global::Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo _dtField;
 
@@ -236,7 +318,7 @@ if ((dtValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public class EditBase
+    public class Controller1Base
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

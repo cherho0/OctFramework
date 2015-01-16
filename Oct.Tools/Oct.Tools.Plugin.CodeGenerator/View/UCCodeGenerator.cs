@@ -105,7 +105,12 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
                 this._codeBaseInfo.ClassName = this.txtClassName.Text;
                 this._codeBaseInfo.ClassNameExtend = this.labClassNameExtend.Text;
 
-                var output = TableBll.CodeGenerator(this._codeBaseInfo, this._selectedTemp.Path);
+                var output = string.Empty;
+
+                if (this._selectedTemp.IsRanOnlyOnceByBath) //RanOnlyOnce
+                    output = TableBll.CodeGenerator("dts", new List<string> { this._codeBaseInfo.ClassName }, this._selectedTemp.Path, null);
+                else
+                    output = TableBll.CodeGenerator(this._codeBaseInfo, this._selectedTemp.Path);
 
                 if (output.StartsWith("error："))
                     MessageUnity.ShowErrorMsg(output);
@@ -126,7 +131,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
 
         public void SaveFile()
         {
-            string code = this.txtCode.Text;
+            var code = this.txtCode.Text;
 
             if (string.IsNullOrEmpty(code))
                 return;

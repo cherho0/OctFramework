@@ -29,7 +29,11 @@ namespace Oct.Framework.MvcExt.Filter
             //权限验证通过了，记录view日志
 
             string controllerName = filterContext.RouteData.Values["controller"].ToString();
-            string area = filterContext.RouteData.DataTokens["area"].ToString();
+            var area = "";
+            if (filterContext.RouteData.DataTokens["area"] != null)
+            {
+                area = filterContext.RouteData.DataTokens["area"].ToString();
+            }
             string actionName = filterContext.RouteData.Values["action"].ToString();
             var ok = roles.CheckRole(controllerName, actionName,area);
             if (!ok)

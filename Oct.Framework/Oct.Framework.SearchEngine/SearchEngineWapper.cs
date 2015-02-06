@@ -47,7 +47,7 @@ namespace Oct.Framework.SearchEngine
 
         public string this[string key]
         {
-            get { return Values.First(p => p.Name == key).Value; }
+            get { return Values.First(p => p.Name == key.Trim()).Value; }
         }
     }
 

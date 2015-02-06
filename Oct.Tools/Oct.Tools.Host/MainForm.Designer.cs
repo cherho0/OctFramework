@@ -94,7 +94,7 @@
             this.MinimumSize = new System.Drawing.Size(900, 600);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Oct.Framework.ToolsApp.Host";
+            this.Text = "Oct.Tools";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Oct.Framework.Core.Reflection;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Web.Mvc;
-using Oct.Framework.Core.Reflection;
 
 namespace Oct.Framework.Core.Common
 {
@@ -106,10 +106,29 @@ namespace Oct.Framework.Core.Common
             return value ? "是" : "否";
         }
 
-        
         public static string ToYYYYMMDDString(this DateTime value)
         {
             return value.ToString("yyyy-MM-dd");
+        }
+
+        /// <summary>
+        /// 获取一天的开始时间
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string ToBeginTimeByOneDay(this DateTime value)
+        {
+            return value.ToString("yyyy-MM-dd 00:00:00");
+        }
+
+        /// <summary>
+        /// 获取一天的结束时间
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string ToEndTimeByOneDay(this DateTime value)
+        {
+            return value.ToString("yyyy-MM-dd 23:59:59");
         }
 
         /// <summary>
@@ -148,6 +167,18 @@ namespace Oct.Framework.Core.Common
                     expando.Add(item);
                 yield return (ExpandoObject)expando;
             }
+        }
+
+        /// <summary>
+        /// DateTime时间格式转换为Unix时间戳格式
+        /// </summary>
+        /// <param name="time"> DateTime时间格式</param>
+        /// <returns>Unix时间戳格式</returns>
+        public static int ConvertDateTimeInt(this DateTime time)
+        {
+            var startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+
+            return (int)(time - startTime).TotalSeconds;
         }
     }
 }

@@ -173,6 +173,13 @@ namespace Oct.Tools.Plugin.CodeGenerator.Bll
         /// <returns></returns>
         public static string GetClassName(string tableName)
         {
+            var prefixs = ConfigurationManager.AppSettings["ToFilterTableNamePrefix"].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var item in prefixs)
+            {
+                tableName = tableName.Replace(item, string.Empty);
+            }
+
             return tableName.Replace("-", string.Empty).Replace("_", string.Empty);
         }
 

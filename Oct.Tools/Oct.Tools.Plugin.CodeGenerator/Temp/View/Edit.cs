@@ -157,7 +157,6 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp.View
             this.Write(@"            <div class=""form-group"">
                 <div class=""col-xs-9 col-xs-offset-3"">
                     <button type=""submit"" value=""保存"" class=""btn blue""><i class=""fa fa-plus""></i>&nbsp;保存</button>
-                    <a href=""/User/Home"" class=""btn default J_CloseModal""><i class=""fa fa-undo""></i>&nbsp;返  回</a>
                 </div>
             </div>
         </div>

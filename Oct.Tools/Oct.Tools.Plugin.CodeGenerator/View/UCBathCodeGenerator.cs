@@ -53,12 +53,19 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
 
         private void BathCodeGeneratorForm_Load(object sender, System.EventArgs e)
         {
-            //InitializeControls
-            this.lbSourceTable.Items.AddRange(this._dbInfo.TableList.ToArray());
-            this.btnSignleToLeft.Enabled = this.btnAllToLeft.Enabled = false;
-            this.btnSignleToRight.Enabled = this.btnAllToRight.Enabled = this._dbInfo.TableList.Count > 0;
-            this.labTargetTableCount.Text = this.labSelectedTempsCount.Text = "0";
-            this.txtNameSpace.Text = TableBll.DefaultNameSpace;
+            try
+            {
+                //InitializeControls
+                this.lbSourceTable.Items.AddRange(this._dbInfo.TableList.ToArray());
+                this.btnSignleToLeft.Enabled = this.btnAllToLeft.Enabled = false;
+                this.btnSignleToRight.Enabled = this.btnAllToRight.Enabled = this._dbInfo.TableList.Count > 0;
+                this.labTargetTableCount.Text = this.labSelectedTempsCount.Text = "0";
+                this.txtNameSpace.Text = TableBll.DefaultNameSpace;
+            }
+            catch (Exception ex)
+            {
+                MessageUnity.ShowErrorMsg(ex.Message);
+            }
         }
 
         /// <summary>
@@ -68,64 +75,81 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
         /// <param name="e"></param>
         private void btnMove_Click(object sender, System.EventArgs e)
         {
-            var menuItem = ((Button)sender);
-
-            switch (menuItem.Text)
+            try
             {
-                case ">":
-                    if (this.lbSourceTable.SelectedItem != null)
-                    {
-                        var item = this.lbSourceTable.SelectedItem;
+                var menuItem = ((Button)sender);
 
-                        this.lbTargetTable.Items.Add(item);
+                switch (menuItem.Text)
+                {
+                    case ">":
+                        if (this.lbSourceTable.SelectedItems != null)
+                        {
+                            var items = this.lbSourceTable.SelectedItems;
 
-                        this.lbSourceTable.Items.Remove(item);
+                            for (int i = 0; i < items.Count; i++)
+                            {
+                                this.lbTargetTable.Items.Add(items[i]);
 
-                        if (this.lbSourceTable.SelectedIndex < this.lbSourceTable.Items.Count - 1)
-                            this.lbSourceTable.SelectedIndex = this.lbSourceTable.SelectedIndex + 1;
-                    }
-                    break;
+                                this.lbSourceTable.Items.Remove(items[i]);
 
-                case ">>":
-                    if (this.lbSourceTable.Items.Count > 0)
-                    {
-                        this.lbTargetTable.Items.AddRange(this.lbSourceTable.Items);
+                                i--;
+                            }
 
-                        this.lbSourceTable.Items.Clear();
-                    }
-                    break;
+                            if (this.lbSourceTable.SelectedIndex < this.lbSourceTable.Items.Count - 1)
+                                this.lbSourceTable.SelectedIndex = this.lbSourceTable.SelectedIndex + 1;
+                        }
+                        break;
 
-                case "<":
-                    if (this.lbTargetTable.SelectedItem != null)
-                    {
-                        var item = this.lbTargetTable.SelectedItem;
+                    case ">>":
+                        if (this.lbSourceTable.Items.Count > 0)
+                        {
+                            this.lbTargetTable.Items.AddRange(this.lbSourceTable.Items);
 
-                        this.lbSourceTable.Items.Add(item);
+                            this.lbSourceTable.Items.Clear();
+                        }
+                        break;
 
-                        this.lbTargetTable.Items.Remove(item);
+                    case "<":
+                        if (this.lbTargetTable.SelectedItems != null)
+                        {
+                            var items = this.lbTargetTable.SelectedItems;
 
-                        if (this.lbTargetTable.SelectedIndex < this.lbTargetTable.Items.Count - 1)
-                            this.lbTargetTable.SelectedIndex = this.lbTargetTable.SelectedIndex + 1;
-                    }
-                    break;
+                            for (int i = 0; i < items.Count; i++)
+                            {
+                                this.lbSourceTable.Items.Add(items[i]);
 
-                case "<<":
-                    if (this.lbTargetTable.Items.Count > 0)
-                    {
-                        this.lbSourceTable.Items.AddRange(this.lbTargetTable.Items);
+                                this.lbTargetTable.Items.Remove(items[i]);
 
-                        this.lbTargetTable.Items.Clear();
-                    }
-                    break;
+                                i--;
+                            }
 
-                default:
-                    break;
+                            if (this.lbTargetTable.SelectedIndex < this.lbTargetTable.Items.Count - 1)
+                                this.lbTargetTable.SelectedIndex = this.lbTargetTable.SelectedIndex + 1;
+                        }
+                        break;
+
+                    case "<<":
+                        if (this.lbTargetTable.Items.Count > 0)
+                        {
+                            this.lbSourceTable.Items.AddRange(this.lbTargetTable.Items);
+
+                            this.lbTargetTable.Items.Clear();
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+
+                this.btnSignleToRight.Enabled = this.btnAllToRight.Enabled = this.lbSourceTable.Items.Count > 0;
+                this.btnSignleToLeft.Enabled = this.btnAllToLeft.Enabled = this.lbTargetTable.Items.Count > 0;
+
+                this.labTargetTableCount.Text = this.lbTargetTable.Items.Count.ToString();
             }
-
-            this.btnSignleToRight.Enabled = this.btnAllToRight.Enabled = this.lbSourceTable.Items.Count > 0;
-            this.btnSignleToLeft.Enabled = this.btnAllToLeft.Enabled = this.lbTargetTable.Items.Count > 0;
-
-            this.labTargetTableCount.Text = this.lbTargetTable.Items.Count.ToString();
+            catch (Exception ex)
+            {
+                MessageUnity.ShowErrorMsg(ex.Message);
+            }
         }
 
         /// <summary>
@@ -135,11 +159,18 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
         /// <param name="e"></param>
         private void btnSelectOutputDirectory_Click(object sender, System.EventArgs e)
         {
-            var fbd = new FolderBrowserDialog();
-            var result = fbd.ShowDialog();
+            try
+            {
+                var fbd = new FolderBrowserDialog();
+                var result = fbd.ShowDialog();
 
-            if (result == DialogResult.OK)
-                this.txtOutputDirectory.Text = fbd.SelectedPath;
+                if (result == DialogResult.OK)
+                    this.txtOutputDirectory.Text = fbd.SelectedPath;
+            }
+            catch (Exception ex)
+            {
+                MessageUnity.ShowErrorMsg(ex.Message);
+            }
         }
 
         /// <summary>
@@ -375,7 +406,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
 
                     this.SetContorlsEnabled(true);
 
-                    var form = new BathCodeGeneratorResult(msg, this.txtOutputDirectory.Text, this._successTableList, this._failureTableList);
+                    var form = new BathCodeGeneratorResultForm(msg, this.txtOutputDirectory.Text, this._successTableList, this._failureTableList);
                     form.ShowDialog();
                 }));
             };

@@ -57,7 +57,7 @@ namespace Oct.Framework.TestWeb.Controllers
             wapper.AddKey("DD");
             wapper.AddPreviewKey("DD");
             wapper.AddSort("Id", SearchEngineWapper.INT,true);
-            wapper.SearchOrder(segment, (page - 1) * 10, 10);
+            wapper.Search(segment, (page - 1) * 10, 10);
 
             var sret = wapper.Result;
             var rets = segment.Segment();

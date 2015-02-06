@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Security.Policy;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Oct.Framework.Core.ApiData
 {
@@ -15,11 +11,14 @@ namespace Oct.Framework.Core.ApiData
         /// </summary>
         /// <param name="url"></param>
         /// <param name="data"></param>
+        /// <param name="contentType"></param>
         /// <returns></returns>
-        public static string PostData(string url, string data)
+        public static string PostData(string url, string data, string contentType = "application/x-www-form-urlencoded")
         {
             WebClient wc = new WebClient();
-            wc.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            wc.Encoding = Encoding.UTF8;
+            wc.Headers.Add("Content-Type", contentType);
+
             return wc.UploadString(url, "post", data);
         }
 
@@ -31,6 +30,7 @@ namespace Oct.Framework.Core.ApiData
         public static string GetData(string url)
         {
             WebClient wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;
             return wc.DownloadString(url);
         }
 
@@ -42,6 +42,7 @@ namespace Oct.Framework.Core.ApiData
         public static void DownLoadFile(string url, string savePath)
         {
             WebClient wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;
             wc.DownloadFile(new Uri(url), savePath);
         }
 
@@ -53,7 +54,7 @@ namespace Oct.Framework.Core.ApiData
         public static void UpLoadFile(string url, string filePath)
         {
             WebClient wc = new WebClient();
-
+            wc.Encoding = Encoding.UTF8;
             wc.UploadFile(url, filePath);
         }
     }

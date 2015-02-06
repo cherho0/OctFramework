@@ -150,7 +150,6 @@ namespace Oct.Framework.Core.Common
                 var mem = expression as MemberExpression;
                 var constant = Expression.Constant(true);
                 return ResolveFunc(mem, constant, ExpressionType.Equal);
-
             }
 
             //1元运算
@@ -168,6 +167,12 @@ namespace Oct.Framework.Core.Common
                     var constant = Expression.Constant(false);
 
                     return this.ResolveFunc(unary.Operand, constant, ExpressionType.Equal);
+                }
+
+                if (unary.Operand is ConstantExpression)
+                {
+                    var v = unary.Operand as ConstantExpression;
+                    return v.Value.ToString();
                 }
 
                 expression = unary.Operand;
@@ -199,6 +204,23 @@ namespace Oct.Framework.Core.Common
 
                     return this.ResolveFunc(binary.Left, value, binary.NodeType);
                 }
+
+                if (binary.Left is MemberExpression && binary.Right is UnaryExpression )
+                {
+                    if (((UnaryExpression)binary.Right).Operand is ConstantExpression)
+                    {
+                        return this.ResolveFunc(binary.Left, binary.Right, binary.NodeType);
+                    }
+
+                    if (((UnaryExpression)binary.Right).Operand is MemberExpression)
+                    {
+                        var lambda = Expression.Lambda(binary.Right);
+                        var fn = lambda.Compile();
+                        var value = Expression.Constant(fn.DynamicInvoke(null), binary.Right.Type);
+                        return this.ResolveFunc(binary.Left, value, binary.NodeType);
+                    }
+                   
+                }
             }
 
             //静态或实例方法
@@ -215,7 +237,7 @@ namespace Oct.Framework.Core.Common
             if (body == null)
                 throw new Exception(string.Format("无法解析{0}", expression));
 
-            var left = this.Resolve(body.Left);
+            var left = this.Resolve(body.Left);            
             var oper = this.GetOperator(body.NodeType);
             var right = this.Resolve(body.Right);
 
@@ -227,7 +249,15 @@ namespace Oct.Framework.Core.Common
         private string ResolveFunc(Expression left, Expression right, ExpressionType expressiontype)
         {
             var name = (left as MemberExpression).Member.Name;
-            var value = (right as ConstantExpression).Value;
+            object value = "";
+            if (right is ConstantExpression)
+            {
+                value = (right as ConstantExpression).Value;
+            }
+            if (right is UnaryExpression)
+            {
+                value =((ConstantExpression) (right as UnaryExpression).Operand).Value;
+            }
             var oper = this.GetOperator(expressiontype);
             var compName = this.SetArgument(name, value.ToString());
 

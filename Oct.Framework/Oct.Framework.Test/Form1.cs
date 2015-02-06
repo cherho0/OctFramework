@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Oct.Framework.Core.Log;
 using Oct.Framework.Entities;
 using System;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Oct.Framework.Test
         public Form1()
         {
             InitializeComponent();
+            LogHelper.Info("ss");
         }
 
         private void button1_Click(object sender, EventArgs e)

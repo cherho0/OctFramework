@@ -18,7 +18,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+    #line 1 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
     public partial class CompositeQuery : CompositeQueryBase
     {
@@ -33,40 +33,40 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
                     "a;\r\nusing System.Data.Common;\r\nusing System.Data.SqlClient;\r\nusing System.Text;\r" +
                     "\n\r\nnamespace ");
             
-            #line 16 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 16 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.NameSpace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\t[Serializable]\r\n\tpublic partial class ");
             
-            #line 19 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 19 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             
-            #line 19 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 19 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassNameExtend));
             
             #line default
             #line hidden
             this.Write(" : BaseEntity<");
             
-            #line 19 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 19 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             
-            #line 19 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 19 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassNameExtend));
             
             #line default
             #line hidden
             this.Write(">\r\n\t{ \r\n\t\t#region\t属性\r\n\t\t");
             
-            #line 22 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 22 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 
 			foreach(FiledInfo filed in dt.FiledList) 
 			{		
@@ -76,28 +76,28 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
             #line hidden
             this.Write("\r\n\t\tpublic ");
             
-            #line 27 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 27 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.CSharpType + " " + filed.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t{\r\n\t\t\tget;\r\n\t\t\tset;\r\n\t\t}\r\n\t\t");
             
-            #line 32 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 32 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n\t\t#endregion\r\n\r\n\t\t#region 重载\r\n\r\n\t\tpublic override ");
             
-            #line 38 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 38 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write(" GetEntityFromDataRow(DataRow row)\r\n\t\t{\r\n\t\t\t");
             
-            #line 40 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 40 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 		
 				var code = new StringBuilder();
 
@@ -160,14 +160,14 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
             #line default
             #line hidden
             
-            #line 98 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 98 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(code.ToString()));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\treturn this;\r\n\t\t}\r\n\r\n\t\tpublic override ");
             
-            #line 102 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 102 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
@@ -176,7 +176,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
                     " 0; i < reader.FieldCount; i++)\r\n            {\r\n                var name = reade" +
                     "r.GetName(i);\r\n\t\t\t\t");
             
-            #line 107 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 107 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 
 				for (int i = 0; i < dt.FiledList.Count; i++)
 				{
@@ -188,215 +188,215 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
             #line hidden
             this.Write("if (name.ToLower() == \"");
             
-            #line 113 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 113 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("\"  && !reader.IsDBNull(i))\r\n{\r\n");
             
-            #line 115 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 115 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 if(type == "bool")
 {
             
             #line default
             #line hidden
             
-            #line 117 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 117 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
             
             #line default
             #line hidden
             this.Write(" = reader.GetBoolean(i);\r\n");
             
-            #line 118 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 118 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 }
             
             #line default
             #line hidden
             
-            #line 119 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 119 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 if(type == "byte[]")
 {
             
             #line default
             #line hidden
             
-            #line 121 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 121 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
             
             #line default
             #line hidden
             this.Write(" = (byte[])reader.GetValue(i);\r\n");
             
-            #line 122 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 122 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 }
             
             #line default
             #line hidden
             
-            #line 123 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 123 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 if(type == "datetime")
 {
             
             #line default
             #line hidden
             
-            #line 125 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 125 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
             
             #line default
             #line hidden
             this.Write(" = reader.GetDateTime(i);\r\n");
             
-            #line 126 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 126 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 }
             
             #line default
             #line hidden
             
-            #line 127 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 127 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 if(type == "guid")
 {
             
             #line default
             #line hidden
             
-            #line 129 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 129 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
             
             #line default
             #line hidden
             this.Write(" = reader.GetGuid(i);\r\n");
             
-            #line 130 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 130 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 }
             
             #line default
             #line hidden
             
-            #line 131 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 131 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 if(type == "string")
 {
             
             #line default
             #line hidden
             
-            #line 133 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 133 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
             
             #line default
             #line hidden
             this.Write(" = reader.GetString(i);\r\n");
             
-            #line 134 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 134 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 }
             
             #line default
             #line hidden
             
-            #line 135 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 135 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 if(type == "decimal")
 {
             
             #line default
             #line hidden
             
-            #line 137 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 137 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
             
             #line default
             #line hidden
             this.Write(" = reader.GetDecimal(i);\r\n");
             
-            #line 138 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 138 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 }
             
             #line default
             #line hidden
             
-            #line 139 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 139 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 if(type == "double")
 {
             
             #line default
             #line hidden
             
-            #line 141 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 141 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
             
             #line default
             #line hidden
             this.Write(" = reader.GetDouble(i);\r\n");
             
-            #line 142 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 142 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 }
             
             #line default
             #line hidden
             
-            #line 143 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 143 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 if(type == "float")
 {
             
             #line default
             #line hidden
             
-            #line 145 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 145 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
             
             #line default
             #line hidden
             this.Write(" = reader.GetFloat(i);\r\n");
             
-            #line 146 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 146 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 }
             
             #line default
             #line hidden
             
-            #line 147 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 147 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 if(type == "int")
 {
             
             #line default
             #line hidden
             
-            #line 149 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 149 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
             
             #line default
             #line hidden
             this.Write(" = reader.GetInt32(i);\r\n");
             
-            #line 150 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 150 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 }
             
             #line default
             #line hidden
             
-            #line 151 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 151 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 if(type == "long")
 {
             
             #line default
             #line hidden
             
-            #line 153 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 153 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
             
             #line default
             #line hidden
             this.Write(" = reader.GetInt64(i);\r\n");
             
-            #line 154 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 154 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 }
             
             #line default
             #line hidden
             this.Write(" continue;\r\n }\r\n");
             
-            #line 157 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 157 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 }
             
             #line default
@@ -404,31 +404,46 @@ if(type == "long")
             this.Write("               \r\n}\r\n            return this;\r\n        }\r\n\r\n\t\tpublic override stri" +
                     "ng TableName\r\n\t\t{\r\n\t\t\tget\r\n\t\t\t{\r\n\t\t\t\treturn \"");
             
-            #line 166 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 166 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
-            this.Write(@""";
-			}
-		}
-
-		 public override bool IsIdentityPk
-        {
-            get { return false; }
-        }
-
-        private Dictionary<string, string> _props;
-
-		public override Dictionary<string, string> Props
-	    {
-	        get {
-				if(_props == null)
-				{
-					_props = new Dictionary<string, string>();
-					");
+            this.Write("\";\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\t public override bool IsIdentityPk\r\n        {\r\n            get" +
+                    " { return false; }\r\n        }\r\n\r\n\t\t#region 重载\r\n\r\n\t\t\t");
             
-            #line 183 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 177 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+
+			var pkName = string.Empty;
+			var pkFileds = dt.FiledList.Where(d => d.IsPk);
+
+			if (pkFileds.Count() > 0)
+				pkName = pkFileds.First().Name;	 
+
+		
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\tpublic override object PkValue\r\n\t\t{\r\n\t\t\tget\r\n\t\t\t{\r\n\t\t\t\treturn this.");
+            
+            #line 190 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
+            
+            #line default
+            #line hidden
+            this.Write("; \r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\tpublic override string PkName\r\n\t\t{\r\n\t\t\tget\r\n\t\t\t{\r\n\t\t\t\treturn \"" +
+                    "");
+            
+            #line 198 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
+            
+            #line default
+            #line hidden
+            this.Write("\"; \r\n\t\t\t}\r\n\t\t}\r\n\r\n        private Dictionary<string, string> _props;\r\n\r\n\t\tpublic " +
+                    "override Dictionary<string, string> Props\r\n\t    {\r\n\t        get {\r\n\t\t\t\tif(_props" +
+                    " == null)\r\n\t\t\t\t{\r\n\t\t\t\t\t_props = new Dictionary<string, string>();\r\n\t\t\t\t\t");
+            
+            #line 210 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 for (int i = 0; i < dt.FiledList.Count; i++){
 					var filed = dt.FiledList[i];
             
@@ -436,21 +451,21 @@ for (int i = 0; i < dt.FiledList.Count; i++){
             #line hidden
             this.Write("\t\t\t\t\t_props.Add( \"");
             
-            #line 185 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 212 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
             
             #line default
             #line hidden
             this.Write("\",\"");
             
-            #line 185 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 212 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
             
             #line default
             #line hidden
             this.Write("\");\r\n\t\t\t\t\t");
             
-            #line 186 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 213 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 }
             
             #line default
@@ -458,7 +473,7 @@ for (int i = 0; i < dt.FiledList.Count; i++){
             this.Write("\t\t\t\t}\r\n\t\t\t\treturn _props;\t\t\t \r\n\t\t\t }\r\n\t    }\r\n\r\n\t\tpublic override string GetQuery" +
                     "SQL(string @where = \"\")\r\n\t\t{\r\n\t\t\tvar sql = @\"");
             
-            #line 194 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+            #line 221 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.Sql));
             
             #line default
@@ -468,7 +483,7 @@ for (int i = 0; i < dt.FiledList.Count; i++){
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
+        #line 1 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\CompositeQuery.tt"
 
 private global::Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo _dtField;
 

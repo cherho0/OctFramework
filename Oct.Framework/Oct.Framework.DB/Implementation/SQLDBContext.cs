@@ -112,13 +112,17 @@ namespace Oct.Framework.DB.Implementation
             string sql = entity.GetModelSQL(pk);
             ISQLContext sqlContext = new SQLContext(Session);
             var reader = sqlContext.ExecuteQueryReader(sql);
-            reader.Read();
-             entity = entity.GetEntityFromDataReader(reader);
+            var read = reader.Read();
+            if (!read)
+            {
+                return null;
+            }
+            entity = entity.GetEntityFromDataReader(reader);
             reader.Close();
             reader.Dispose();
             return entity;
         }
-       
+
         /// <summary>
         ///     查询一系列实体对象
         /// </summary>
@@ -202,7 +206,7 @@ namespace Oct.Framework.DB.Implementation
 
 
             sql = "SELECT TOP " + pageSize + " * FROM (" + sql + ") query WHERE rn > " + start + " ORDER BY rn";
-          
+
             var reader = sqlContext.ExecuteQueryReader(sql, parasListData.ToArray());
             var entities = DataReaderHelper.ReaderToList<T>(reader);
             return new PageResult<T>(entities, total);
@@ -220,6 +224,18 @@ namespace Oct.Framework.DB.Implementation
         public PageResult<T> QueryPage(string @where, string order, int pageIndex, int pageSize)
         {
             return QueryPage(@where, null, order, pageIndex, pageSize);
+        }
+
+        public List<T> Query(string where, string order = "", params object[] paras)
+        {
+            var scalarBuiler = WhereHelper.CreateScalarWhere(where, paras);
+            return Query(scalarBuiler.Where, scalarBuiler.Paras, order);
+        }
+
+        public PageResult<T> QueryPage(string where, string order, int pageIndex, int pageSize, params object[] paras)
+        {
+            var scalarBuiler = WhereHelper.CreateScalarWhere(where, paras);
+            return QueryPage(scalarBuiler.Where, scalarBuiler.Paras, order, pageIndex, pageSize);
         }
 
         private DbCommand CreateSqlCommand(IOctDbCommand cmd)

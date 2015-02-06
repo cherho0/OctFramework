@@ -6,7 +6,7 @@ using ServiceStack.Redis;
 
 namespace Oct.Framework.Core.Cache
 {
-    internal class RedisHelper : ICacheHelper
+    public class RedisHelper : ICacheHelper
     {
         #region << 静态属性 >>
 
@@ -64,6 +64,7 @@ namespace Oct.Framework.Core.Cache
         {
             get
             {
+                
                 if (null == _RedisClientManager)
                 {
                     _RedisClientManager = CreateManager(WriteClientHosts, ReadClientHosts);
@@ -136,11 +137,35 @@ namespace Oct.Framework.Core.Cache
             }
         }
 
+        public List<string> GetAllKey()
+        {
+            using (IRedisClient client = GetReadClient())
+            {
+                return client.GetAllKeys();
+            }
+        }
+
+        public List<string> GetAllKey(string cacheKeyPrefix)
+        {
+            using (IRedisClient client = GetReadClient())
+            {
+               return client.SearchKeys("*" + cacheKeyPrefix + "*");
+            }
+        }
+
         public List<T> GetAll<T>(string cacheKeyPrefix)
         {
             using (IRedisClient client = GetReadClient())
             {
                 var keys = client.SearchKeys("*" + cacheKeyPrefix + "*");
+                return client.GetValues<T>(keys);
+            }
+        }
+
+        public List<T> GetAll<T>(List<string> keys)
+        {
+            using (IRedisClient client = GetReadClient())
+            {
                 return client.GetValues<T>(keys);
             }
         }
@@ -186,6 +211,25 @@ namespace Oct.Framework.Core.Cache
                 {
                     client.Remove(key);
                 }
+            }
+        }
+
+        public void RemoveAll(List<string> keys)
+        {
+            using (IRedisClient client = GetWriteClient())
+            {
+                foreach (var key in keys)
+                {
+                    client.Remove(key);
+                }
+            }
+        }
+
+        public void FlushAll()
+        {
+            using (IRedisClient client = GetWriteClient())
+            {
+                client.FlushAll();
             }
         }
 

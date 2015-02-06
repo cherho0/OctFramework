@@ -11,32 +11,14 @@ namespace Oct.Framework.Core.Reflection
         }
         public CDATA(string xml)
         {
-            this._outerXml = xml;
+            this.OuterXml = xml;
         }
-        private string _outerXml;
-        public string OuterXml
-        {
-            get
-            {
-                return _outerXml;
-            }
-        }
-        private string _innerXml;
+
+        public string OuterXml { get; set; }
         public string InnerXml
-        {
-            get
-            {
-                return _innerXml;
-            }
-        }
-        private string _innerSourceXml;
+        { get; set; }
         public string InnerSourceXml
-        {
-            get
-            {
-                return _innerXml;
-            }
-        }
+        { get; set; }
         XmlSchema IXmlSerializable.GetSchema()
         {
             return null;
@@ -52,12 +34,12 @@ namespace Oct.Framework.Core.Reflection
             {
                 s = s.Substring(startTag.Length, s.LastIndexOf(endTag) - startTag.Length);
             }
-            this._innerSourceXml = s;
-            this._innerXml = s.Trim(trims);
+            this.InnerSourceXml = s;
+            this.InnerXml = s.Trim(trims);
         }
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            writer.WriteCData(this._outerXml);
+            writer.WriteCData(this.OuterXml);
         }
     }
 }

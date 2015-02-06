@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,12 +10,15 @@ using Microsoft.Practices.Unity;
 using Oct.Framework.Core.Cache;
 using Oct.Framework.Core.IOC;
 using Oct.Framework.Core.Session;
+using Oct.Framework.DB.Core;
 using Oct.Framework.DB.Extisions;
 using Oct.Framework.Entities.Entities;
 using Oct.Framework.MvcExt.Base;
 using Oct.Framework.MvcExt.Extisions;
 using Oct.Framework.MvcExt.User;
 using Oct.Framework.Services;
+using Oct.Framework.TestWeb.Code;
+
 namespace Oct.Framework.TestWeb.Controllers
 {
     public class LoginController : BaseController
@@ -25,6 +30,36 @@ namespace Oct.Framework.TestWeb.Controllers
 
         public ActionResult Login()
         {
+
+           //var models = Kernel.GetEnumModels<OperationEnum>(1,2);
+
+            //拼参数demo
+            string where = "";
+            var paras = new List<object>();
+            if (false)
+            {
+                where += " id=?";
+                paras.Add(1);
+            }
+            if (true)
+            {
+                where += " dd like ?";
+                paras.Add("%的%");
+            }
+
+           // var ret = DbContext.TestTsContext.Query(where, "", paras.ToArray());
+            IDictionary<string, object> dic = new Dictionary<string, object>() { { "@dd", 1 } };
+
+            var vss = DbContext.SQLContext.ExecuteQuery("select * from testts where id=@dd  ", dic);
+
+            //var json = Kernel.SerializeObject(vss.Models);
+            
+           // var ok11 = CacheHelper.Set("test", vss.Models);
+            //var v = CacheHelper.Get<IEnumerable<ExpandoObject>>("test");
+           // var ds = Kernel.DeserializeObject<DataSet>(v);
+           // var allkeys = CacheHelper.GetAll<string>("test");
+           // CacheHelper.RemoveAll("test");
+           // var v1 = CacheHelper.Get("test");
             /*Stopwatch sw = new Stopwatch();
             sw.Start();
             //var models = DbContext.TestTsContext.Query("");
@@ -70,7 +105,16 @@ namespace Oct.Framework.TestWeb.Controllers
             //linq 分页查询 条件判断
             var us9 = DbContext.CommonUserAcrionsContext.QueryPage(p => p.Name != "", p => p.Name, 1, 10);
             */
+            //var pr = DbContext.SQLContext.ExecutePageExpandoObjects("select * from testts", null, "id", 1, 10);
 
+            /*foreach (dynamic model in pr.Models)
+            {
+                var id = model.Id;
+                var name = model.DD;
+
+                var sss = "22222";
+            }
+            */
             var ok1 = CacheHelper.Set("test", "test",1);
             var bv = CacheHelper.Get<string>("test");
             var sessionprovide = Bootstrapper.GetRepository<ISessionProvider>();
@@ -82,6 +126,8 @@ namespace Oct.Framework.TestWeb.Controllers
                 ss = ok;
                 get = sessionprovide.GetSession<string>("ceshi");
             }
+
+            DbContext.SaveChanges();
             Console.WriteLine(ss);
             return View();
         }

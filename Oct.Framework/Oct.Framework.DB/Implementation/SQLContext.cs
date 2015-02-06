@@ -89,9 +89,9 @@ namespace Oct.Framework.DB.Implementation
 
                 return v;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
+                throw new Exception(ex.Message + "\r\n" + sql);
             }
         }
 
@@ -115,9 +115,9 @@ namespace Oct.Framework.DB.Implementation
 
                 return v;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
+                throw new Exception(ex.Message + "\r\n" + sql);
             }
         }
 
@@ -163,6 +163,84 @@ namespace Oct.Framework.DB.Implementation
             }
             int rows = Session.Commit();
             return rows;
+        }
+
+        public DataSet ExecuteQuery(string sql, params object[] paras)
+        {
+            if (paras != null && paras.Length > 0 && paras[0] is IDictionary<string, object>)
+            {
+                return ExecuteQueryDict(sql, (IDictionary<string, object>)paras[0]);
+            }
+            var scalarBuiler = WhereHelper.CreateScalarWhere(sql, paras);
+            return ExecuteQuery(scalarBuiler.Where, scalarBuiler.SqlParameters.ToArray());
+        }
+
+        public DataSet ExecuteQueryScalar(string sql, params object[] paras)
+        {
+            if (paras != null && paras.Length > 0 && paras[0] is IDictionary<string, object>)
+            {
+                return ExecuteQueryDict(sql, (IDictionary<string, object>)paras[0]);
+            }
+            var scalarBuiler = WhereHelper.CreateScalarWhere(sql, paras);
+            return ExecuteQuery(scalarBuiler.Where, scalarBuiler.SqlParameters.ToArray());
+        }
+
+        public DataSet ExecuteQueryDict(string sql, IDictionary<string, object> paras)
+        {
+            var parasList = new List<SqlParameter>();
+            if (paras != null)
+            {
+                foreach (var para in paras)
+                {
+                    parasList.Add(new SqlParameter(para.Key, para.Value));
+                }
+            }
+
+            return ExecuteQuery(sql, parasList.ToArray());
+        }
+
+        public DataSet ExecuteQuery(string sql, IDictionary<string, object> paras)
+        {
+            var parasList = new List<SqlParameter>();
+            if (paras != null)
+            {
+                foreach (var para in paras)
+                {
+                    parasList.Add(new SqlParameter(para.Key, para.Value));
+                }
+            }
+
+            return ExecuteQuery(sql, parasList.ToArray());
+        }
+
+        public PageResult ExecutePageQuery(string sql, IDictionary<string, object> paras, string order, int pageIndex, int pageSize)
+        {
+            var parasList = new List<SqlParameter>();
+            var parasListData = new List<SqlParameter>();
+            if (paras != null)
+            {
+                foreach (var para in paras)
+                {
+                    parasList.Add(new SqlParameter(para.Key, para.Value));
+                    parasListData.Add(new SqlParameter(para.Key, para.Value));
+                }
+            }
+            var total = GetResult<int>(string.Format("SELECT COUNT(1) FROM ({0}) a", sql), parasList.ToArray());
+
+            int start = (pageIndex - 1) * pageSize;
+            var tempsql = "select *,ROW_NUMBER() OVER(ORDER BY " + order + ") rn from ({0}) a ";
+            sql = string.Format(tempsql, sql);
+
+            sql = "SELECT TOP " + pageSize + " * FROM (" + sql + ") query WHERE rn > " + start + " ORDER BY rn";
+
+            var ds = ExecuteQuery(sql, parasListData.ToArray());
+            return new PageResult(ds, total);
+        }
+
+        public PageResult ExecutePageQuery(string sql, string order, int pageIndex, int pageSize, params object[] paras)
+        {
+            var scalarBuiler = WhereHelper.CreateScalarWhere(sql, paras);
+            return ExecutePageQuery(scalarBuiler.Where, scalarBuiler.Paras, order, pageIndex, pageSize);
         }
 
         public DataSet ExecuteQuery(string sql)
@@ -211,7 +289,7 @@ namespace Oct.Framework.DB.Implementation
             }
             catch (SqlException ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "\r\n" + sql);
             }
             finally
             {
@@ -234,7 +312,7 @@ namespace Oct.Framework.DB.Implementation
             }
             catch (SqlException ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "\r\n" + sql);
             }
         }
 
@@ -254,9 +332,9 @@ namespace Oct.Framework.DB.Implementation
             }
             catch (SqlException ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "\r\n" + sql);
             }
-           
+
         }
 
 
@@ -287,6 +365,69 @@ namespace Oct.Framework.DB.Implementation
             }
         }
 
+        public IEnumerable<ExpandoObject> ExecuteExpandoObjects(string sql, params object[] paras)
+        {
+            var scalarBuiler = WhereHelper.CreateScalarWhere(sql, paras);
+            return ExecuteExpandoObjects(scalarBuiler.Where, scalarBuiler.SqlParameters);
+        }
+
+        public ExPageResult ExecutePageExpandoObjects(string sql, string order, int pageIndex, int pageSize, params object[] paras)
+        {
+            var scalarBuiler = WhereHelper.CreateScalarWhere(sql, paras);
+            return ExecutePageExpandoObjects(scalarBuiler.Where, scalarBuiler.Paras, order, pageIndex, pageSize);
+        }
+
+        public IEnumerable<ExpandoObject> ExecuteExpandoObjects(string sql, params SqlParameter[] cmdParms)
+        {
+            if (SQLWordFilte.CheckSql(sql))
+            {
+                throw new Exception("您提供的关键字有可能危害数据库，已阻止执行");
+            }
+            DataSet ds = ExecuteQuery(string.Format(sql), cmdParms);
+            if (ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
+            {
+                yield break;
+            }
+
+            foreach (DataTable table in ds.Tables)
+            {
+                foreach (DataRow row in table.Rows)
+                {
+                    IDictionary<string, object> expando = new ExpandoObject();
+                    foreach (DataColumn column in table.Columns)
+                    {
+                        expando.Add(column.Caption, row[column]);
+                    }
+
+                    yield return (ExpandoObject)expando;
+                }
+            }
+        }
+
+        public ExPageResult ExecutePageExpandoObjects(string sql, IDictionary<string, object> paras, string order, int pageIndex, int pageSize)
+        {
+            var parasList = new List<SqlParameter>();
+            var parasListData = new List<SqlParameter>();
+            if (paras != null)
+            {
+                foreach (var para in paras)
+                {
+                    parasList.Add(new SqlParameter(para.Key, para.Value));
+                    parasListData.Add(new SqlParameter(para.Key, para.Value));
+                }
+            }
+            var total = GetResult<int>(string.Format("SELECT COUNT(1) FROM ({0}) a", sql), parasList.ToArray());
+
+            int start = (pageIndex - 1) * pageSize;
+            var tempsql = "select *,ROW_NUMBER() OVER(ORDER BY " + order + ") rn from ({0}) a ";
+            sql = string.Format(tempsql, sql);
+
+            sql = "SELECT TOP " + pageSize + " * FROM (" + sql + ") query WHERE rn > " + start + " ORDER BY rn";
+
+            var ds = ExecuteExpandoObjects(sql, parasListData.ToArray());
+            return new ExPageResult(ds, total);
+        }
+
         public ExpandoObject ExecuteExpandoObject(string sql)
         {
             if (SQLWordFilte.CheckSql(sql))
@@ -294,6 +435,31 @@ namespace Oct.Framework.DB.Implementation
                 throw new Exception("您提供的关键字有可能危害数据库，已阻止执行");
             }
             DataSet ds = ExecuteQuery(string.Format(sql));
+            if (ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
+            {
+                return null;
+            }
+
+            foreach (DataTable table in ds.Tables)
+            {
+                foreach (DataRow row in table.Rows)
+                {
+                    IDictionary<string, object> expando = new ExpandoObject();
+                    foreach (DataColumn column in table.Columns)
+                    {
+                        expando.Add(column.Caption, row[column]);
+                    }
+
+                    return (ExpandoObject)expando;
+                }
+            }
+            return null;
+        }
+
+        public ExpandoObject ExecuteExpandoObject(string sql, params object[] paras)
+        {
+            var scalarBuiler = WhereHelper.CreateScalarWhere(sql, paras);
+            DataSet ds = ExecuteQuery(scalarBuiler.Where, paras);
             if (ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
             {
                 return null;

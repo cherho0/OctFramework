@@ -1,6 +1,6 @@
 ﻿namespace Oct.Tools.Plugin.CodeGenerator.View
 {
-    partial class BathCodeGeneratorResult
+    partial class BathCodeGeneratorResultForm
     {
         /// <summary>
         /// Required designer variable.

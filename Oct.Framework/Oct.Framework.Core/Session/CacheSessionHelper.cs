@@ -61,7 +61,7 @@ namespace Oct.Framework.Core.Session
             var session = CacheHelper.Get(SessionId + "_" + key);
             if (session != null)
             {
-                //CacheHelper.Set(SessionId + "_" + key, session, timeOut);
+                CacheHelper.Set(SessionId + "_" + key, session, timeOut);
             }
             return session;
         }

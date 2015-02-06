@@ -43,6 +43,8 @@ namespace Oct.Framework.SearchEngine
             if (handler != null) handler(this, e);
         }
 
+
+
         private string _indexSavePath;
 
         private DoWorkStyle _style;
@@ -65,12 +67,16 @@ namespace Oct.Framework.SearchEngine
             }
         }
 
-        private T GetOne(object id)
+        private T GetOne(string key, object id)
         {
             using (var dbContext = new DbContext())
             {
-                var model = dbContext.GetContext<T>().GetModel(id);
-                return model;
+                var models = dbContext.GetContext<T>().Query(" " + key + "=?", "", id);
+                if (models.Count > 0)
+                {
+                    return models[0];
+                }
+                return null;
             }
         }
 
@@ -121,12 +127,17 @@ namespace Oct.Framework.SearchEngine
                 //IndexWriter把输入写入索引的时候，Lucene.net是把写入的文件用指定的分词算法将文章分词（这样检索的时候才能查的快），然后将词放入索引文件。
                 try
                 {
-                    var model = GetOne(id);
+                    var model = GetOne(key, id);
                     writer.DeleteDocuments(new Term(key, id.ToString()));
 
-                    Document document = new Document(); //创建一行记录
-                    _addDocAction(model, document);
-                    writer.AddDocument(document);
+
+                    if (model != null)
+                    {
+                        Document document = new Document(); //创建一行记录
+                        _addDocAction(model, document);
+                        writer.AddDocument(document);
+                    }
+
                     writer.Optimize();
                 }
                 catch (Exception ex)
@@ -198,15 +209,6 @@ namespace Oct.Framework.SearchEngine
                 {
                     Document document = new Document();//创建一行记录
                     _addDocAction(p, document);
-                    /*document.Add(new Field("pTitle", p.Title, Field.Store.YES, Field.Index.ANALYZED));
-                    document.Add(new Field("pBrandName", p.BrandName, Field.Store.YES, Field.Index.ANALYZED));
-                    document.Add(new Field("pResume", p.Resume, Field.Store.YES, Field.Index.ANALYZED, Lucene.Net.Documents.Field.TermVector.WITH_POSITIONS_OFFSETS));
-                    document.Add(new Field("pTopClassify", p.TopClassify, Field.Store.YES, Field.Index.ANALYZED));
-                    document.Add(new Field("pFloorClassify", p.FloorClassify, Field.Store.YES, Field.Index.ANALYZED));
-                    document.Add(new Field("pID", p.ID.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    document.Add(new Field("pLogoPath", p.LogoPath, Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    document.Add(new Field("pFloorResume", p.FloorResume, Field.Store.YES, Field.Index.ANALYZED));
-                    document.Add(new Field("pTopResume", p.TopResume, Field.Store.YES, Field.Index.ANALYZED));*/
                     writer.AddDocument(document);
 
                 });

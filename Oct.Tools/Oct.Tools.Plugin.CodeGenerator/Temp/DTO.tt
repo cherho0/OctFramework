@@ -6,7 +6,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace <#= dt.NameSpace #>
+namespace <#= dt.NameSpace #>.Models
 {
 	[Serializable]
 	public partial class <#= dt.ClassName #><#= dt.ClassNameExtend #>
@@ -25,7 +25,8 @@ namespace <#= dt.NameSpace #>
 					if(!string.IsNullOrEmpty(attr.ToString())) 
 						attr.Append("\r\n");
 			
-					attr.AppendFormat("\t\t[StringLength({0}, ErrorMessage = \"{1}不能超过{0}个字符！\")]", filed.Length, filed.Description);
+					if(filed.Length != -1)
+						attr.AppendFormat("\t\t[StringLength({0}, ErrorMessage = \"{1}不能超过{0}个字符！\")]", filed.Length, filed.Description);
 				}
 		#>
 

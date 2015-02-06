@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,30 @@ namespace Oct.Framework.DB.Core
         public int TotalCount { get; private set; }
 
         public PageResult(List<T> models, int total)
+        {
+            Models = models;
+            TotalCount = total;
+        }
+    }
+
+    public class PageResult
+    {
+        public DataSet Models { get; private set; }
+        public int TotalCount { get; private set; }
+
+        public PageResult(DataSet models, int total)
+        {
+            Models = models;
+            TotalCount = total;
+        }
+    }
+
+    public class ExPageResult
+    {
+        public IEnumerable<ExpandoObject> Models { get; private set; }
+        public int TotalCount { get; private set; }
+
+        public ExPageResult(IEnumerable<ExpandoObject> models, int total)
         {
             Models = models;
             TotalCount = total;

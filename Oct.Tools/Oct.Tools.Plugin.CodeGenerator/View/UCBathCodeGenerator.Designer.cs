@@ -61,6 +61,7 @@
             this.lbSourceTable.ItemHeight = 12;
             this.lbSourceTable.Location = new System.Drawing.Point(3, 20);
             this.lbSourceTable.Name = "lbSourceTable";
+            this.lbSourceTable.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbSourceTable.Size = new System.Drawing.Size(180, 244);
             this.lbSourceTable.TabIndex = 2;
             // 
@@ -140,6 +141,7 @@
             this.lbTargetTable.ItemHeight = 12;
             this.lbTargetTable.Location = new System.Drawing.Point(277, 20);
             this.lbTargetTable.Name = "lbTargetTable";
+            this.lbTargetTable.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbTargetTable.Size = new System.Drawing.Size(180, 244);
             this.lbTargetTable.TabIndex = 3;
             // 

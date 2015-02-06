@@ -35,13 +35,21 @@ namespace Oct.Framework.Core.Session
 
         public void Clear(string key)
         {
-            HttpContext.Current.Session.Remove(key);
+            if (HttpContext.Current != null)
+            {
+                HttpContext.Current.Session.Remove(key);
+            }
+
         }
 
         public void ClearAll()
         {
-            HttpContext.Current.Session.Clear();
-            HttpContext.Current.Session.Abandon();
+
+            if (HttpContext.Current != null)
+            {
+                HttpContext.Current.Session.Clear();
+                HttpContext.Current.Session.Abandon();
+            }
         }
     }
 }

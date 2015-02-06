@@ -17,6 +17,11 @@ namespace Oct.Framework.MongoDB
         //private 
         private MongoDatabase _db;
 
+        public MongoDbRepository()
+        {
+            this._dbName = ConfigSettingHelper.GetAppStr("MongoDBName");
+        }
+
         public MongoDbRepository(string dbName = "OctFramework")
         {
             _dbName = dbName;

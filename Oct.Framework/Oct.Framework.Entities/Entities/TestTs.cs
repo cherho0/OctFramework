@@ -15,12 +15,12 @@ namespace Oct.Framework.Entities.Entities
 	{ 
 		#region	属性
 		
-		private int _id;
+		private int? _id;
 
 		/// <summary>
 		/// Id
 		/// </summary>
-		public int Id
+		public int? Id
 		{
 			get
 			{

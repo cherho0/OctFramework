@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Oct.Framework.Core.Common;
 
 namespace Oct.Framework.Core.Session
@@ -37,6 +38,11 @@ namespace Oct.Framework.Core.Session
         public void ClearAll()
         {
             CacheSessionHelper.Instance.ClearAll();
+            if (HttpContext.Current != null)
+            {
+                HttpContext.Current.Session.Clear();
+                HttpContext.Current.Session.Abandon();
+            }
         }
     }
 }

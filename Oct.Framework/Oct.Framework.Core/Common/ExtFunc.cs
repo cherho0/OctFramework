@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Oct.Framework.Core.Log;
+using System;
 using System.Configuration;
 using System.IO;
 using System.Text;
-using Newtonsoft.Json;
-using Oct.Framework.Core.Log;
 
 namespace Oct.Framework.Core.Common
 {
@@ -51,6 +51,27 @@ namespace Oct.Framework.Core.Common
             }
         }
 
+        /// <summary>
+        /// 获取异常的描述消息
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <returns></returns>
+        public static string GetErrorMessage(this Exception ex)
+        {
+            if (ex.InnerException == null)
+                return ex.Message;
 
+            Exception innerEx = ex.InnerException;
+
+            while (innerEx != null)
+            {
+                if (innerEx.InnerException == null)
+                    break;
+
+                innerEx = innerEx.InnerException;
+            }
+
+            return innerEx.Message;
+        }
     }
 }

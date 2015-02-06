@@ -28,13 +28,29 @@ namespace Oct.Framework.Core.Cache
         object Get(string key);
 
         /// <summary>
+        ///获取全部key
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cacheKeyPrefix"></param>
+        /// <returns></returns>
+        List<string> GetAllKey();
+
+        /// <summary>
+        ///获取这个前缀的全部key
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cacheKeyPrefix"></param>
+        /// <returns></returns>
+        List<string> GetAllKey(string cacheKeyPrefix);
+
+        /// <summary>
         /// 获取一系列对象
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="cacheKeyPrefix"></param>
         /// <returns></returns>
         List<T> GetAll<T>(string cacheKeyPrefix);
-
+        List<T> GetAll<T>(List<string> keys);
         /// <summary>
         /// 添加对象
         /// </summary>
@@ -62,7 +78,8 @@ namespace Oct.Framework.Core.Cache
         /// <returns></returns>
         bool Remove(string key);
         void RemoveAll(string cacheKeyPrefix);
-
+        void RemoveAll(List<string> keys);
+        void FlushAll();
         /// <summary>
         /// 仅redis支持
         /// </summary>

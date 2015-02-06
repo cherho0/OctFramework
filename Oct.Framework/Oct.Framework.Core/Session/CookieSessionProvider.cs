@@ -101,11 +101,21 @@ namespace Oct.Framework.Core.Session
                 cookie.Expires = DateTime.Now.AddYears(-3);
                 HttpContext.Current.Response.Cookies.Add(cookie);
             }
+            if (HttpContext.Current != null)
+            {
+                HttpContext.Current.Session.Clear();
+                HttpContext.Current.Session.Abandon();
+            }
         }
 
         public void ClearAll()
         {
             HttpContext.Current.Response.Cookies.Clear();
+            if (HttpContext.Current != null)
+            {
+                HttpContext.Current.Session.Clear();
+                HttpContext.Current.Session.Abandon();
+            }
         }
     }
 }

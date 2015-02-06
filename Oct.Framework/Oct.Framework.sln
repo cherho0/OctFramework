@@ -69,6 +69,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oct.Framework.Cache", "Oct.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oct.Framework.Session", "Oct.Framework.Session\Oct.Framework.Session.csproj", "{B25662E7-5827-4E59-ABD8-B5D7C484FDF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oct.Framework.WinService.Test", "Oct.Framework.WinService.Test\Oct.Framework.WinService.Test.csproj", "{38393CAA-A857-482F-818E-0775511978EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oct.Framework.CreateKey", "Oct.Framework.CreateKey\Oct.Framework.CreateKey.csproj", "{DB75086B-AD31-412A-85FD-BD65FB44DF69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -155,6 +159,14 @@ Global
 		{B25662E7-5827-4E59-ABD8-B5D7C484FDF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B25662E7-5827-4E59-ABD8-B5D7C484FDF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B25662E7-5827-4E59-ABD8-B5D7C484FDF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38393CAA-A857-482F-818E-0775511978EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38393CAA-A857-482F-818E-0775511978EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38393CAA-A857-482F-818E-0775511978EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38393CAA-A857-482F-818E-0775511978EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB75086B-AD31-412A-85FD-BD65FB44DF69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB75086B-AD31-412A-85FD-BD65FB44DF69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB75086B-AD31-412A-85FD-BD65FB44DF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB75086B-AD31-412A-85FD-BD65FB44DF69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -183,5 +195,7 @@ Global
 		{359467D2-B0AF-4D8D-ACA6-2D9C65AAFD6C} = {054F7CFB-2B45-4454-AB3E-4B2D660E999F}
 		{25F46748-E859-4F09-8932-F57252F011D0} = {054F7CFB-2B45-4454-AB3E-4B2D660E999F}
 		{9F9BF536-4217-421C-932D-DD27D53EFCE3} = {054F7CFB-2B45-4454-AB3E-4B2D660E999F}
+		{38393CAA-A857-482F-818E-0775511978EE} = {054F7CFB-2B45-4454-AB3E-4B2D660E999F}
+		{DB75086B-AD31-412A-85FD-BD65FB44DF69} = {054F7CFB-2B45-4454-AB3E-4B2D660E999F}
 	EndGlobalSection
 EndGlobal

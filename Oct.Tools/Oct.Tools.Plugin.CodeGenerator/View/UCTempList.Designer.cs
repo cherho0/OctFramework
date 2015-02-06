@@ -46,6 +46,7 @@
             this.tvTemp.TabIndex = 0;
             this.tvTemp.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.tvTemp_AfterCheck);
             this.tvTemp.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTemp_AfterSelect);
+            this.tvTemp.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tvTemp_MouseClick);
             // 
             // imageList1
             // 

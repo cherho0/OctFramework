@@ -21,8 +21,11 @@ namespace Oct.Framework.Core.Xml
         {
             using (StringUTF8Writer sw = new StringUTF8Writer())
             {
+                XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                //Add an empty namespace and empty value
+                ns.Add("", "");
                 XmlSerializer xz = new XmlSerializer(o.GetType());
-                xz.Serialize(sw, o);
+                xz.Serialize(sw, o, ns);
                 return sw.ToString();
             }
         }
@@ -38,8 +41,11 @@ namespace Oct.Framework.Core.Xml
         {
             using (StringEncodingWriter sw = new StringEncodingWriter(encoding))
             {
+                XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                //Add an empty namespace and empty value
+                ns.Add("", "");
                 XmlSerializer xz = new XmlSerializer(o.GetType());
-                xz.Serialize(sw, o);
+                xz.Serialize(sw, o,ns);
                 return sw.ToString();
             }
         }

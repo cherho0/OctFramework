@@ -57,6 +57,7 @@
     <Compile Include="Core\CurrentSessionFactory.cs" />
     <Compile Include="Core\DBSession.cs" />
     <Compile Include="Core\SQLWordFilte.cs" />
+    <Compile Include="Core\WhereHelper.cs" />
     <Compile Include="Extisions\IDbContextExtision.cs" />
     <Compile Include="Implementation\SQLContext.cs" />
     <Compile Include="Implementation\SQLDBContext.cs" />

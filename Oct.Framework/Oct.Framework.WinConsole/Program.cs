@@ -18,7 +18,6 @@ namespace Oct.Framework.WinConsole
             AppDomain.CurrentDomain.UnhandledException += CurrentDomainUnhandledException;
             Server = new FrameworkServer();
             Server.Start();
-
             Cmd();
         }
 

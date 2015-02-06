@@ -23,7 +23,7 @@ using <#= dt.NameSpace #>.Entities.Entities;
 
 namespace <#= dt.NameSpace #>.Services
 {
-	public interface I<#= dt.ClassName #><#= dt.ClassNameExtend #>
+    public partial interface I<#= dt.ClassName #><#= dt.ClassNameExtend #>
     {
         /// <summary>
         /// 新增
@@ -72,9 +72,10 @@ namespace <#= dt.NameSpace #>.Services
         /// 通过条件获取对象 参数键为@拼接的参数，值为参数值
         /// </summary>
         /// <param name="where"></param>
+        /// <param name="order"></param>
         /// <param name="paras">参数键为@拼接的参数，值为参数值</param>
         /// <returns></returns>
-        List<<#= dt.ClassName #>> GetModels(string where = "", IDictionary<string, object> paras = null,string order="");
+        List<<#= dt.ClassName #>> GetModels(string where = "", string order = "", params object[] paras);
 
         /// <summary>
         /// 分页获取
@@ -83,10 +84,9 @@ namespace <#= dt.NameSpace #>.Services
         /// <param name="pageSize"></param>
         /// <param name="where"></param>
         /// <param name="order"></param>
-        /// <param name="paras"> 参数键为@拼接的参数，值为参数值</param>
-        /// <param name="total"></param>
+        /// <param name="paras"></param>
         /// <returns></returns>
-        PageResult<<#= dt.ClassName #>> GetModels(int pageIndex, int pageSize, string where, string order, IDictionary<string, object> paras);
+        PageResult<<#= dt.ClassName #>> GetModels(int pageIndex, int pageSize, string where, string order, params object[] paras);
     }
 
     public partial class <#= dt.ClassName #><#= dt.ClassNameExtend #> : I<#= dt.ClassName #><#= dt.ClassNameExtend #>
@@ -100,9 +100,9 @@ namespace <#= dt.NameSpace #>.Services
         {
             using (var context = new DbContext())
             {
-		context.<#= dt.ClassName #>Context.Add(entity);
+                context.<#= dt.ClassName #>Context.Add(entity);
                 
-		return context.SaveChanges() > 0;
+                return context.SaveChanges() > 0;
             }
         }
 
@@ -115,9 +115,9 @@ namespace <#= dt.NameSpace #>.Services
         {
             using (var context = new DbContext())
             {
-		context.<#= dt.ClassName #>Context.Update(entity);
+                context.<#= dt.ClassName #>Context.Update(entity);
                 
-		return context.SaveChanges() > 0;
+                return context.SaveChanges() > 0;
             }
         }
 
@@ -130,9 +130,9 @@ namespace <#= dt.NameSpace #>.Services
         {
             using (var context = new DbContext())
             {
-		context.<#= dt.ClassName #>Context.Delete(entity);
+                context.<#= dt.ClassName #>Context.Delete(entity);
                 
-		return context.SaveChanges() > 0;
+                return context.SaveChanges() > 0;
             }
         }
 
@@ -145,9 +145,9 @@ namespace <#= dt.NameSpace #>.Services
         {
             using (var context = new DbContext())
             {
-		context.<#= dt.ClassName #>Context.Delete(<#= pkName #>);
+                context.<#= dt.ClassName #>Context.Delete(<#= pkName #>);
                 
-		return context.SaveChanges() > 0;
+                return context.SaveChanges() > 0;
             }
         }
 
@@ -161,9 +161,9 @@ namespace <#= dt.NameSpace #>.Services
         {
             using (var context = new DbContext())
             {
-		context.<#= dt.ClassName #>Context.Delete(@where, paras);
+                context.<#= dt.ClassName #>Context.Delete(@where, paras);
                 
-		return context.SaveChanges() > 0;
+                return context.SaveChanges() > 0;
             }
         }
 
@@ -180,35 +180,19 @@ namespace <#= dt.NameSpace #>.Services
             }
         }
 
-        /// <summary>
-        /// 通过条件获取对象 参数键为@拼接的参数，值为参数值
-        /// </summary>
-        /// <param name="where"></param>
-        /// <param name="paras">参数键为@拼接的参数，值为参数值</param>
-        /// <returns></returns>
-        public List<<#= dt.ClassName #>> GetModels(string where = "", IDictionary<string, object> paras = null,string order="")
+        public List<<#= dt.ClassName #>> GetModels(string @where = "", string order = "", params object[] paras)
         {
             using (var context = new DbContext())
             {
-                return context.<#= dt.ClassName #>Context.Query(@where, paras);
+                return context.<#= dt.ClassName #>Context.Query(@where, order, paras);
             }
         }
 
-        /// <summary>
-        /// 分页获取
-        /// </summary>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="where"></param>
-        /// <param name="order"></param>
-        /// <param name="paras"> 参数键为@拼接的参数，值为参数值</param>
-        /// <param name="total"></param>
-        /// <returns></returns>
-        public PageResult<<#= dt.ClassName #>> GetModels(int pageIndex, int pageSize, string @where, string order, IDictionary<string, object> paras)
+        public PageResult<<#= dt.ClassName #>> GetModels(int pageIndex, int pageSize, string @where, string order, params object[] paras)
         {
             using (var context = new DbContext())
             {
-                return context.<#= dt.ClassName #>Context.QueryPage(where, paras, order, pageIndex, pageSize);
+                return context.<#= dt.ClassName #>Context.QueryPage(@where, order, pageIndex, pageSize, paras);
             }
         }
     }

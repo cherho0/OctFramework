@@ -22,7 +22,11 @@ namespace Oct.Framework.MvcExt.Extisions
             string attr = ""
             )
         {
-            var area = helper.ViewContext.RouteData.DataTokens["area"].ToString();
+            var area = "";
+            if (helper.ViewContext.RouteData.DataTokens["area"] != null)
+            {
+                area = helper.ViewContext.RouteData.DataTokens["area"].ToString();
+            }
             var enablePermission = ConfigSettingHelper.GetAppStr<bool>("EnablePermission");
             if (enablePermission)
             {
@@ -65,7 +69,11 @@ namespace Oct.Framework.MvcExt.Extisions
             object routeAttributes)
         {
             var enablePermission = ConfigSettingHelper.GetAppStr<bool>("EnablePermission");
-            var area = helper.ViewContext.RouteData.DataTokens["area"].ToString();
+            var area = "";
+            if (helper.ViewContext.RouteData.DataTokens["area"] != null)
+            {
+                area = helper.ViewContext.RouteData.DataTokens["area"].ToString();
+            }
             if (enablePermission)
             {
                 var roles = LoginHelper.Instance.GetLoginUserRoles();

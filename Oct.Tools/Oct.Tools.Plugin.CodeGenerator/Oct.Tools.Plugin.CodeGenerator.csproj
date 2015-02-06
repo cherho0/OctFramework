@@ -74,8 +74,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Temp\Service.cs">
-      <DependentUpon>Service.tt</DependentUpon>
+    <Compile Include="Temp\GenServices.cs">
+      <DependentUpon>GenServices.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -104,8 +104,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Temp\Controller1.cs">
-      <DependentUpon>Controller1.tt</DependentUpon>
+    <Compile Include="Temp\CustomerService.cs">
+      <DependentUpon>CustomerService.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -115,11 +115,11 @@
     <Compile Include="View\UCBathCodeGenerator.Designer.cs">
       <DependentUpon>UCBathCodeGenerator.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\BathCodeGeneratorResult.cs">
+    <Compile Include="View\BathCodeGeneratorResultForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\BathCodeGeneratorResult.Designer.cs">
-      <DependentUpon>BathCodeGeneratorResult.cs</DependentUpon>
+    <Compile Include="View\BathCodeGeneratorResultForm.Designer.cs">
+      <DependentUpon>BathCodeGeneratorResultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Bll\TableBll.cs" />
     <Compile Include="Dal\TableDal.cs" />
@@ -159,8 +159,8 @@
     <EmbeddedResource Include="View\UCBathCodeGenerator.resx">
       <DependentUpon>UCBathCodeGenerator.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\BathCodeGeneratorResult.resx">
-      <DependentUpon>BathCodeGeneratorResult.cs</DependentUpon>
+    <EmbeddedResource Include="View\BathCodeGeneratorResultForm.resx">
+      <DependentUpon>BathCodeGeneratorResultForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\CompositeQueryForm.resx">
       <DependentUpon>CompositeQueryForm.cs</DependentUpon>
@@ -216,9 +216,9 @@
       <LastGenOutput>Entity.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Temp\Service.tt">
+    <Content Include="Temp\GenServices.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>Service.cs</LastGenOutput>
+      <LastGenOutput>GenServices.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Temp\View\Create.tt">
@@ -248,9 +248,9 @@
       <Parameters>&lt;%3fxml version="1.0" encoding="utf-16"%3f&gt;
 &lt;ArrayOfParameterStorage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Parameters>
     </Content>
-    <Content Include="Temp\Controller1.tt">
+    <Content Include="Temp\CustomerService.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>Controller1.cs</LastGenOutput>
+      <LastGenOutput>CustomerService.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -542,5 +542,17 @@ namespace Oct.Framework.MvcExt.Extisions
         {
             return EnumHelper.GetEnumDescription(e);
         }
+
+        /// <summary>
+        /// index 为0 获取全部 为页数 获取相关页
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="index"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        public static EnumPageResult<EnumModel> GetEnumModels<T>(this IKernel knl, int index = 0, int size = 15) where T : struct
+        {
+            return EnumHelper.GetEnumModels<T>(index, size);
+        }
     }
 }

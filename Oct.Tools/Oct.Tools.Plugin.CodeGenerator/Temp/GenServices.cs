@@ -18,9 +18,9 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+    #line 1 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public partial class Service : ServiceBase
+    public partial class GenServices : GenServicesBase
     {
 #line hidden
         /// <summary>
@@ -31,14 +31,14 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
             this.Write("using Oct.Framework.Entities;\r\nusing System;\r\nusing System.Collections.Generic;\r\n" +
                     "using Oct.Framework.DB.Core;\r\nusing ");
             
-            #line 10 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 10 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.NameSpace));
             
             #line default
             #line hidden
             this.Write(".Entities.Entities;\r\n");
             
-            #line 11 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 11 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
 
 	var pkType = string.Empty;
 	var pkName = string.Empty;
@@ -56,20 +56,20 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
             #line hidden
             this.Write("\r\nnamespace ");
             
-            #line 24 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 24 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.NameSpace));
             
             #line default
             #line hidden
-            this.Write(".Services\r\n{\r\n\tpublic interface I");
+            this.Write(".Services\r\n{\r\n    public partial interface I");
             
-            #line 26 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 26 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             
-            #line 26 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 26 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassNameExtend));
             
             #line default
@@ -78,7 +78,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
                     "// <param name=\"entity\"></param>\r\n        /// <returns></returns>\r\n        bool " +
                     "Add(");
             
-            #line 33 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 33 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
@@ -87,7 +87,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
                     "   /// <param name=\"entity\"></param>\r\n        /// <returns></returns>\r\n        b" +
                     "ool Modify(");
             
-            #line 40 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 40 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
@@ -96,7 +96,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
                     ">\r\n        /// <param name=\"entity\"></param>\r\n        /// <returns></returns>\r\n " +
                     "       bool Delete(");
             
-            #line 47 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 47 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
@@ -104,21 +104,21 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
             this.Write(" entity);\r\n\r\n        /// <summary>\r\n        /// 根据主键删除\r\n        /// </summary>\r\n " +
                     "       /// <param name=\"");
             
-            #line 52 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 52 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
             #line hidden
             this.Write("\"></param>\r\n        /// <returns></returns>\r\n        bool Delete(");
             
-            #line 54 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 54 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkType));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 54 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 54 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
@@ -138,42 +138,49 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
         /// </summary>
         /// <param name=""");
             
-            #line 67 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 67 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
             #line hidden
             this.Write("\"></param>\r\n        /// <returns></returns>\r\n        ");
             
-            #line 69 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 69 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write(" GetModel(");
             
-            #line 69 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 69 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkType));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 69 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 69 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
             #line hidden
-            this.Write(");\r\n\r\n        /// <summary>\r\n        /// 通过条件获取对象 参数键为@拼接的参数，值为参数值\r\n        /// <" +
-                    "/summary>\r\n        /// <param name=\"where\"></param>\r\n        /// <param name=\"pa" +
-                    "ras\">参数键为@拼接的参数，值为参数值</param>\r\n        /// <returns></returns>\r\n        List<");
+            this.Write(@");
+
+        /// <summary>
+        /// 通过条件获取对象 参数键为@拼接的参数，值为参数值
+        /// </summary>
+        /// <param name=""where""></param>
+        /// <param name=""order""></param>
+        /// <param name=""paras"">参数键为@拼接的参数，值为参数值</param>
+        /// <returns></returns>
+        List<");
             
-            #line 77 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 78 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
-            this.Write(@"> GetModels(string where = """", IDictionary<string, object> paras = null,string order="""");
+            this.Write(@"> GetModels(string where = """", string order = """", params object[] paras);
 
         /// <summary>
         /// 分页获取
@@ -182,39 +189,38 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
         /// <param name=""pageSize""></param>
         /// <param name=""where""></param>
         /// <param name=""order""></param>
-        /// <param name=""paras""> 参数键为@拼接的参数，值为参数值</param>
-        /// <param name=""total""></param>
+        /// <param name=""paras""></param>
         /// <returns></returns>
         PageResult<");
             
-            #line 89 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 89 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
-            this.Write("> GetModels(int pageIndex, int pageSize, string where, string order, IDictionary<" +
-                    "string, object> paras);\r\n    }\r\n\r\n    public partial class ");
+            this.Write("> GetModels(int pageIndex, int pageSize, string where, string order, params objec" +
+                    "t[] paras);\r\n    }\r\n\r\n    public partial class ");
             
-            #line 92 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 92 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             
-            #line 92 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 92 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassNameExtend));
             
             #line default
             #line hidden
             this.Write(" : I");
             
-            #line 92 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 92 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             
-            #line 92 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 92 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassNameExtend));
             
             #line default
@@ -223,22 +229,22 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
                     "// <param name=\"entity\"></param>\r\n        /// <returns></returns>\r\n        publi" +
                     "c bool Add(");
             
-            #line 99 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 99 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write(" entity)\r\n        {\r\n            using (var context = new DbContext())\r\n         " +
-                    "   {\r\n\t\tcontext.");
+                    "   {\r\n                context.");
             
-            #line 103 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 103 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write(@"Context.Add(entity);
                 
-		return context.SaveChanges() > 0;
+                return context.SaveChanges() > 0;
             }
         }
 
@@ -249,22 +255,22 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
         /// <returns></returns>
         public bool Modify(");
             
-            #line 114 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 114 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write(" entity)\r\n        {\r\n            using (var context = new DbContext())\r\n         " +
-                    "   {\r\n\t\tcontext.");
+                    "   {\r\n                context.");
             
-            #line 118 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 118 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write(@"Context.Update(entity);
                 
-		return context.SaveChanges() > 0;
+                return context.SaveChanges() > 0;
             }
         }
 
@@ -275,60 +281,60 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
         /// <returns></returns>
         public bool Delete(");
             
-            #line 129 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 129 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write(" entity)\r\n        {\r\n            using (var context = new DbContext())\r\n         " +
-                    "   {\r\n\t\tcontext.");
+                    "   {\r\n                context.");
             
-            #line 133 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 133 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
-            this.Write("Context.Delete(entity);\r\n                \r\n\t\treturn context.SaveChanges() > 0;\r\n " +
-                    "           }\r\n        }\r\n\r\n        /// <summary>\r\n        /// 根据主键删除\r\n        //" +
-                    "/ </summary>\r\n        /// <param name=\"");
+            this.Write("Context.Delete(entity);\r\n                \r\n                return context.SaveCha" +
+                    "nges() > 0;\r\n            }\r\n        }\r\n\r\n        /// <summary>\r\n        /// 根据主键" +
+                    "删除\r\n        /// </summary>\r\n        /// <param name=\"");
             
-            #line 142 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 142 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
             #line hidden
             this.Write("\"></param>\r\n        /// <returns></returns>\r\n        public bool Delete(");
             
-            #line 144 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 144 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkType));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 144 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 144 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
             #line hidden
-            this.Write(")\r\n        {\r\n            using (var context = new DbContext())\r\n            {\r\n\t" +
-                    "\tcontext.");
+            this.Write(")\r\n        {\r\n            using (var context = new DbContext())\r\n            {\r\n " +
+                    "               context.");
             
-            #line 148 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 148 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write("Context.Delete(");
             
-            #line 148 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 148 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
             #line hidden
             this.Write(@");
                 
-		return context.SaveChanges() > 0;
+                return context.SaveChanges() > 0;
             }
         }
 
@@ -342,39 +348,39 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
         {
             using (var context = new DbContext())
             {
-		context.");
+                context.");
             
-            #line 164 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 164 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
-            this.Write("Context.Delete(@where, paras);\r\n                \r\n\t\treturn context.SaveChanges() " +
-                    "> 0;\r\n            }\r\n        }\r\n\r\n        /// <summary>\r\n        /// 通过主键获取一个对象\r" +
-                    "\n        /// </summary>\r\n        /// <param name=\"");
+            this.Write("Context.Delete(@where, paras);\r\n                \r\n                return context." +
+                    "SaveChanges() > 0;\r\n            }\r\n        }\r\n\r\n        /// <summary>\r\n        /" +
+                    "// 通过主键获取一个对象\r\n        /// </summary>\r\n        /// <param name=\"");
             
-            #line 173 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 173 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
             #line hidden
             this.Write("\"></param>\r\n        /// <returns></returns>\r\n        public ");
             
-            #line 175 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 175 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write(" GetModel(");
             
-            #line 175 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 175 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkType));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 175 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 175 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
@@ -382,80 +388,57 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
             this.Write(")\r\n        {\r\n            using (var context = new DbContext())\r\n            {\r\n " +
                     "               return context.");
             
-            #line 179 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 179 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write("Context.GetModel(");
             
-            #line 179 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 179 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
             #line hidden
-            this.Write(@");
-            }
-        }
-
-        /// <summary>
-        /// 通过条件获取对象 参数键为@拼接的参数，值为参数值
-        /// </summary>
-        /// <param name=""where""></param>
-        /// <param name=""paras"">参数键为@拼接的参数，值为参数值</param>
-        /// <returns></returns>
-        public List<");
+            this.Write(");\r\n            }\r\n        }\r\n\r\n        public List<");
             
-            #line 189 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 183 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
-            this.Write("> GetModels(string where = \"\", IDictionary<string, object> paras = null,string or" +
-                    "der=\"\")\r\n        {\r\n            using (var context = new DbContext())\r\n         " +
-                    "   {\r\n                return context.");
+            this.Write("> GetModels(string @where = \"\", string order = \"\", params object[] paras)\r\n      " +
+                    "  {\r\n            using (var context = new DbContext())\r\n            {\r\n         " +
+                    "       return context.");
             
-            #line 193 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 187 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
-            this.Write(@"Context.Query(@where, paras);
-            }
-        }
-
-        /// <summary>
-        /// 分页获取
-        /// </summary>
-        /// <param name=""pageIndex""></param>
-        /// <param name=""pageSize""></param>
-        /// <param name=""where""></param>
-        /// <param name=""order""></param>
-        /// <param name=""paras""> 参数键为@拼接的参数，值为参数值</param>
-        /// <param name=""total""></param>
-        /// <returns></returns>
-        public PageResult<");
+            this.Write("Context.Query(@where, order, paras);\r\n            }\r\n        }\r\n\r\n        public " +
+                    "PageResult<");
             
-            #line 207 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 191 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
-            this.Write("> GetModels(int pageIndex, int pageSize, string @where, string order, IDictionary" +
-                    "<string, object> paras)\r\n        {\r\n            using (var context = new DbConte" +
-                    "xt())\r\n            {\r\n                return context.");
+            this.Write("> GetModels(int pageIndex, int pageSize, string @where, string order, params obje" +
+                    "ct[] paras)\r\n        {\r\n            using (var context = new DbContext())\r\n     " +
+                    "       {\r\n                return context.");
             
-            #line 211 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+            #line 195 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
-            this.Write("Context.QueryPage(where, paras, order, pageIndex, pageSize);\r\n            }\r\n    " +
-                    "    }\r\n    }\r\n}\r\n");
+            this.Write("Context.QueryPage(@where, order, pageIndex, pageSize, paras);\r\n            }\r\n   " +
+                    "     }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Service.tt"
+        #line 1 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\GenServices.tt"
 
 private global::Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo _dtField;
 
@@ -524,7 +507,7 @@ if ((dtValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public class ServiceBase
+    public class GenServicesBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

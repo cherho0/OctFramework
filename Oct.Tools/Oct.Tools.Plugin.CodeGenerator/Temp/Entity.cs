@@ -18,7 +18,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+    #line 1 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
     public partial class Entity : EntityBase
     {
@@ -33,40 +33,40 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
                     "a;\r\nusing System.Data.Common;\r\nusing System.Data.SqlClient;\r\nusing System.Text;\r" +
                     "\n\r\nnamespace ");
             
-            #line 16 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 16 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.NameSpace));
             
             #line default
             #line hidden
-            this.Write("\r\n{\r\n\t[Serializable]\r\n\tpublic partial class ");
+            this.Write(".Entities\r\n{\r\n\t[Serializable]\r\n\tpublic partial class ");
             
-            #line 19 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 19 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             
-            #line 19 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 19 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassNameExtend));
             
             #line default
             #line hidden
             this.Write(" : BaseEntity<");
             
-            #line 19 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 19 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             
-            #line 19 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 19 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassNameExtend));
             
             #line default
             #line hidden
             this.Write(">\r\n\t{ \r\n\t\t#region\t属性\r\n\t\t");
             
-            #line 22 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 22 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 
 			var pkName = string.Empty;
 			var pkFileds = dt.FiledList.Where(d => d.IsPk);
@@ -86,56 +86,56 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
             #line hidden
             this.Write("\r\n\t\tprivate ");
             
-            #line 37 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 37 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.CSharpType + nullFlag + " " + temp));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\n\t\t/// <summary>\r\n\t\t/// ");
             
-            #line 40 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 40 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.GetDisplayName()));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t/// </summary>\r\n\t\tpublic ");
             
-            #line 42 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 42 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.CSharpType + nullFlag + " " + filed.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t{\r\n\t\t\tget\r\n\t\t\t{\r\n\t\t\t\treturn this.");
             
-            #line 46 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 46 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(temp));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\t\t}\r\n\t\t\tset\r\n\t\t\t{\r\n\t\t\t\tthis.PropChanged(\"");
             
-            #line 50 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 50 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
             
             #line default
             #line hidden
             this.Write("\", this.");
             
-            #line 50 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 50 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(temp));
             
             #line default
             #line hidden
             this.Write(", value);\r\n\r\n\t\t\t\tthis.");
             
-            #line 52 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 52 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(temp));
             
             #line default
             #line hidden
             this.Write(" = value;\r\n\t\t\t}\r\n\t\t}\r\n\t\t");
             
-            #line 55 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 55 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
  } 
             
             #line default
@@ -143,7 +143,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
             this.Write("\r\n\t\t#endregion\r\n\r\n\t\t#region 重载\r\n\r\n\t\tpublic override object PkValue\r\n\t\t{\r\n\t\t\tget\r\n" +
                     "\t\t\t{\r\n\t\t\t\treturn this.");
             
-            #line 65 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 65 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
@@ -151,7 +151,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
             this.Write("; \r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\tpublic override string PkName\r\n\t\t{\r\n\t\t\tget\r\n\t\t\t{\r\n\t\t\t\treturn \"" +
                     "");
             
-            #line 73 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 73 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pkName));
             
             #line default
@@ -159,28 +159,28 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
             this.Write("\"; \r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\tpublic override bool IsIdentityPk\r\n\t\t{\r\n\t\t\tget \r\n\t\t\t{\r\n\t\t\t\tre" +
                     "turn ");
             
-            #line 81 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 81 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((identifyFileds.Count() > 0).ToString().ToLower()));
             
             #line default
             #line hidden
             this.Write("; \r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\t");
             
-            #line 85 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 85 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
  if (identifyFileds.Count() > 0) { 
             
             #line default
             #line hidden
             this.Write("\t\tpublic override void SetIdentity(object v)\r\n\t\t{\r\n\t\t\tthis.");
             
-            #line 88 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 88 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(identifyFileds.First().Name));
             
             #line default
             #line hidden
             this.Write(" = int.Parse(v.ToString());\r\n\t\t}\r\n\t\t");
             
-            #line 90 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 90 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
  } 
             
             #line default
@@ -189,7 +189,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.Temp
                     "ring, string> Props\r\n\t    {\r\n\t        get {\r\n\t\t\t\tif(_props == null)\r\n\t\t\t\t{\r\n\t\t\t\t" +
                     "\t_props = new Dictionary<string, string>();\r\n\t\t\t\t\t");
             
-            #line 100 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 100 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 for (int i = 0; i < dt.FiledList.Count; i++){
 					var filed = dt.FiledList[i];
             
@@ -197,35 +197,35 @@ for (int i = 0; i < dt.FiledList.Count; i++){
             #line hidden
             this.Write("\t\t\t\t\t_props.Add( \"");
             
-            #line 102 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 102 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
             
             #line default
             #line hidden
             this.Write("\",\"");
             
-            #line 102 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 102 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name));
             
             #line default
             #line hidden
             this.Write("\");\r\n\t\t\t\t\t");
             
-            #line 103 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 103 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 }
             
             #line default
             #line hidden
             this.Write("\t\t\t\t}\r\n\t\t\t\treturn _props;\t\t\t \r\n\t\t\t }\r\n\t    }\r\n\r\n\t\tpublic override ");
             
-            #line 109 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 109 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             this.Write(" GetEntityFromDataRow(DataRow row)\r\n\t\t{\r\n\t\t\t");
             
-            #line 111 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 111 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 		
 				var code = new StringBuilder();
 
@@ -289,14 +289,14 @@ for (int i = 0; i < dt.FiledList.Count; i++){
             #line default
             #line hidden
             
-            #line 170 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 170 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(code.ToString()));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\treturn this;\r\n\t\t}\r\n\r\n\t\tpublic override ");
             
-            #line 174 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 174 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
@@ -305,7 +305,7 @@ for (int i = 0; i < dt.FiledList.Count; i++){
                     " 0; i < reader.FieldCount; i++)\r\n            {\r\n                var name = reade" +
                     "r.GetName(i);\r\n\t\t\t\t");
             
-            #line 179 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 179 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 
 				for (int i = 0; i < dt.FiledList.Count; i++)
 				{
@@ -318,215 +318,215 @@ for (int i = 0; i < dt.FiledList.Count; i++){
             #line hidden
             this.Write("if (name.ToLower() == \"");
             
-            #line 186 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 186 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("\" && !reader.IsDBNull(i))\r\n{\r\n");
             
-            #line 188 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 188 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 if(type == "bool")
 {
             
             #line default
             #line hidden
             
-            #line 190 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 190 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(temp));
             
             #line default
             #line hidden
             this.Write(" = reader.GetBoolean(i);\r\n");
             
-            #line 191 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 191 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 }
             
             #line default
             #line hidden
             
-            #line 192 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 192 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 if(type == "byte[]")
 {
             
             #line default
             #line hidden
             
-            #line 194 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 194 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(temp));
             
             #line default
             #line hidden
             this.Write(" = (byte[])reader.GetValue(i);\r\n");
             
-            #line 195 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 195 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 }
             
             #line default
             #line hidden
             
-            #line 196 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 196 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 if(type == "datetime")
 {
             
             #line default
             #line hidden
             
-            #line 198 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 198 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(temp));
             
             #line default
             #line hidden
             this.Write(" = reader.GetDateTime(i);\r\n");
             
-            #line 199 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 199 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 }
             
             #line default
             #line hidden
             
-            #line 200 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 200 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 if(type == "guid")
 {
             
             #line default
             #line hidden
             
-            #line 202 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 202 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(temp));
             
             #line default
             #line hidden
             this.Write(" = reader.GetGuid(i);\r\n");
             
-            #line 203 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 203 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 }
             
             #line default
             #line hidden
             
-            #line 204 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 204 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 if(type == "string")
 {
             
             #line default
             #line hidden
             
-            #line 206 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 206 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(temp));
             
             #line default
             #line hidden
             this.Write(" = reader.GetString(i);\r\n");
             
-            #line 207 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 207 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 }
             
             #line default
             #line hidden
             
-            #line 208 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 208 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 if(type == "decimal")
 {
             
             #line default
             #line hidden
             
-            #line 210 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 210 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(temp));
             
             #line default
             #line hidden
             this.Write(" = reader.GetDecimal(i);\r\n");
             
-            #line 211 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 211 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 }
             
             #line default
             #line hidden
             
-            #line 212 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 212 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 if(type == "double")
 {
             
             #line default
             #line hidden
             
-            #line 214 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 214 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(temp));
             
             #line default
             #line hidden
             this.Write(" = reader.GetDouble(i);\r\n");
             
-            #line 215 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 215 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 }
             
             #line default
             #line hidden
             
-            #line 216 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 216 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 if(type == "float")
 {
             
             #line default
             #line hidden
             
-            #line 218 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 218 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(temp));
             
             #line default
             #line hidden
             this.Write(" = reader.GetFloat(i);\r\n");
             
-            #line 219 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 219 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 }
             
             #line default
             #line hidden
             
-            #line 220 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 220 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 if(type == "int")
 {
             
             #line default
             #line hidden
             
-            #line 222 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 222 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(temp));
             
             #line default
             #line hidden
             this.Write(" = reader.GetInt32(i);\r\n");
             
-            #line 223 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 223 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 }
             
             #line default
             #line hidden
             
-            #line 224 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 224 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 if(type == "long")
 {
             
             #line default
             #line hidden
             
-            #line 226 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 226 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(temp));
             
             #line default
             #line hidden
             this.Write(" = reader.GetInt64(i);\r\n");
             
-            #line 227 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 227 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 }
             
             #line default
             #line hidden
             this.Write(" continue;\r\n}\r\n");
             
-            #line 230 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 230 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 }
             
             #line default
@@ -534,14 +534,14 @@ if(type == "long")
             this.Write("               \r\n}\r\n            return this;\r\n        }\r\n\r\n\t\tpublic override stri" +
                     "ng TableName\r\n\t\t{\r\n\t\t\tget\r\n\t\t\t{\r\n\t\t\t\treturn \"");
             
-            #line 239 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 239 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.TableName));
             
             #line default
             #line hidden
             this.Write("\";\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\tpublic override IOctDbCommand GetInsertCmd()\r\n\t\t{\r\n\t\t\t");
             
-            #line 245 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 245 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 			
 				var sql1 = new StringBuilder(string.Format("\r\n\t\t\t\tINSERT INTO {0} (\r\n", dt.TableName));
 				var sql2 = new StringBuilder("\r\n\t\t\t\tVALUES (\r\n");
@@ -566,14 +566,14 @@ if(type == "long")
             #line hidden
             this.Write("var sql = @\"");
             
-            #line 264 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 264 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(sql1.ToString() + sql2.ToString()));
             
             #line default
             #line hidden
             this.Write("\";\r\n\t\t\t\r\n\t\t\tDbCommand cmd = new SqlCommand();\r\n");
             
-            #line 267 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+            #line 267 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(paramStr.ToString()));
             
             #line default
@@ -604,7 +604,7 @@ if(type == "long")
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
+        #line 1 "D:\Work\Code\OCT_Framework\Oct.Tools\Oct.Tools.Plugin.CodeGenerator\Temp\Entity.tt"
 
 private global::Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo _dtField;
 

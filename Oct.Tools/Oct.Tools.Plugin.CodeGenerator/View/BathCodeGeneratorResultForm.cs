@@ -6,11 +6,11 @@ using System.Windows.Forms;
 
 namespace Oct.Tools.Plugin.CodeGenerator.View
 {
-    public partial class BathCodeGeneratorResult : Form
+    public partial class BathCodeGeneratorResultForm : Form
     {
         #region 构造函数
 
-        public BathCodeGeneratorResult(string msg, string outputDirectory, List<string> successTableList, List<string> failureTableList)
+        public BathCodeGeneratorResultForm(string msg, string outputDirectory, List<string> successTableList, List<string> failureTableList)
         {
             this.InitializeComponent();
 

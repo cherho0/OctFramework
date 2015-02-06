@@ -66,7 +66,6 @@
             <div class="form-group">
                 <div class="col-xs-9 col-xs-offset-3">
                     <button type="submit" value="新增" class="btn blue"><i class="fa fa-plus"></i>&nbsp;新增</button>
-                    <a href="/User/Home" class="btn default J_CloseModal"><i class="fa fa-undo"></i>&nbsp;返  回</a>
                 </div>
             </div>
         </div>

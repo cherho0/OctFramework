@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Net;
 using Enyim.Caching;
+using Enyim.Caching.Configuration;
 using Enyim.Caching.Memcached;
 
 namespace Oct.Framework.Core.Cache
@@ -8,11 +11,13 @@ namespace Oct.Framework.Core.Cache
     internal class MemCacheHelper : ICacheHelper
     {
         private MemcachedClient mc = null;
-
+        MemcachedClientSection DefaultSettings = (ConfigurationManager.GetSection("enyim.com/memcached") as MemcachedClientSection);
         public MemCacheHelper()
         {
             try
             {
+
+               
                 mc = new MemcachedClient();
             }
             catch (Exception ex)
@@ -50,9 +55,24 @@ namespace Oct.Framework.Core.Cache
             return mc.Get(key);
         }
 
+        public List<string> GetAllKey()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> GetAllKey(string cacheKeyPrefix)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<T> GetAll<T>(string cacheKeyPrefix)
         {
             return null;
+        }
+
+        public List<T> GetAll<T>(List<string> keys)
+        {
+            throw new NotImplementedException();
         }
 
         public bool Set<T>(string key, T value)
@@ -99,8 +119,19 @@ namespace Oct.Framework.Core.Cache
 
         public void RemoveAll(string cacheKeyPrefix)
         {
-
+            var s = mc.Stats();
         }
+
+        public void RemoveAll(List<string> keys)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FlushAll()
+        {
+            mc.FlushAll();
+        }
+
 
         public void Save()
         {

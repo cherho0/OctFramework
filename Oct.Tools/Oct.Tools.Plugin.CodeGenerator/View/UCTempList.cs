@@ -218,5 +218,23 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
         }
 
         #endregion
+
+        private void tvTemp_MouseClick(object sender, MouseEventArgs e)
+        {
+
+            var node = tvTemp.GetNodeAt(e.Location);
+            if (node == null || node.Tag == null)
+                return;
+
+            var temp = SectionMgr.GetTempElement(node.Text);
+
+            if (temp == null)
+                MessageUnity.ShowWarningMsg(string.Format("{0} 获取不到对应的配置信息！", node.Text));
+            else
+            {
+                if (this.SelectedTempEvent != null)
+                    this.SelectedTempEvent(sender, temp);
+            }
+        }
     }
 }

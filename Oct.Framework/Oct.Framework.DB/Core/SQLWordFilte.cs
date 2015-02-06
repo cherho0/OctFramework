@@ -6,9 +6,10 @@ namespace Oct.Framework.DB.Core
     {
         public static bool CheckKeyWord(string sWord)
         {
+            return false;
             //过滤关键字 \(|char
             string StrKeyWord =
-                @"select|insert|delete|from|count\(|drop table|update|truncate\(|mid\(|xp_cmdshell|exec master|netlocalgroup administrators|:|net user";
+                @"(|drop table|update|truncate\(|mid\(|xp_cmdshell|exec master|netlocalgroup administrators|:|net user";
             //过滤关键字符
             string StrRegex = @"[-|;|,|/|\(|\)|\[|\]|}|{|%|*|!|']";
             if (Regex.IsMatch(sWord, StrKeyWord, RegexOptions.IgnoreCase))

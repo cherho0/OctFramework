@@ -60,7 +60,7 @@
                         </a>
                         <ul class="dropdown-menu pull-left">
                             <li>
-                                <a href="@Url.Action("index","home",new {area=""})">
+                                <a href="@Url.Action("index", "home", new { area = "" })">
                                     <i class="fa fa-angle-right"></i>工作台
                                 </a>
                             </li>
@@ -68,17 +68,31 @@
                                 <a href="/home/inbox">
                                     <i class="fa fa-angle-right"></i>我的消息
                                 </a>
+                                <ul class="dropdown-menu pull-left">
+                                    <li>
+                                        <a href="@Url.Action("index", "home", new { area = "" })">
+                                            <i class="fa fa-angle-right"></i>工作台
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/home/inbox">
+                                            <i class="fa fa-angle-right"></i>我的消息
+                                        </a>
+
+                                    </li>
+
+                                </ul>
                             </li>
 
                         </ul>
                     </li>
-                     <li class="classic-menu-dropdown" id="MenuItem_">
+                    <li class="classic-menu-dropdown" id="MenuItem_">
                         <a data-hover="dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">Demo <span class="selected"></span>
                             <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu pull-left">
                             <li>
-                                <a href="@Url.Action("demo","home",new {area=""})">
+                                <a href="@Url.Action("demo", "home", new { area = "" })">
                                     <i class="fa fa-angle-right"></i>后台demo 
                                 </a>
                             </li>
@@ -90,13 +104,13 @@
 
                         </ul>
                     </li>
-                      <li class="classic-menu-dropdown" id="MenuItem_">
+                    <li class="classic-menu-dropdown" id="MenuItem_">
                         <a data-hover="dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">代码生成 <span class="selected"></span>
                             <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu pull-left">
                             <li>
-                                <a href="@Url.Action("index","Gen",new {area="CodeGen"})">
+                                <a href="@Url.Action("index", "Gen", new { area = "CodeGen" })">
                                     <i class="fa fa-angle-right"></i>代码生成 
                                 </a>
                             </li>

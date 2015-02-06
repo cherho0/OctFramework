@@ -85,5 +85,25 @@ namespace Oct.Framework.DB.Interface
         /// <param name="total"></param>
         /// <returns></returns>
         PageResult<T> QueryPage(string where, string order, int pageIndex, int pageSize);
+
+        //匿名查询
+      
+        /// <summary>
+        ///     通过where 匿名查询 where 条件使用 condition1=? and condition2=?
+        /// </summary>
+        /// <param name="where"></param>
+        /// <returns></returns>
+        List<T> Query(string where, string order = "", params object[] paras);
+
+        /// <summary>
+        ///     查询分页数据  匿名查询 where 条件使用   condition1=? and condition2=?  1,2,3,4,5,
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        PageResult<T> QueryPage(string where, string order, int pageIndex, int pageSize,params object[] paras);
+        
         }
 }

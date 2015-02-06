@@ -42,12 +42,13 @@
 
 	switch (filed.CSharpType.ToLower())
 	{
-		case "decimal":
-			controlHtml.AppendFormat("<input class=\"from-control input-sm{0}\" data-val=\"true\" data-val-number=\"字段 {1} 必须是一个数字。\" data-val-required=\"The {1} field is required.\" id=\"{1}\" name=\"{1}\" type=\"text\" value=\"0\">", requiredCssName, filed.Name);
+		case "bool":
+			controlHtml.AppendFormat("@Html.CheckBoxFor(p => p.{0})", filed.Name);
 			break;
 
-		case "datetime":
-			controlHtml.AppendFormat("<input class=\"form-control input-sm{0}\" data-val=\"true\" data-val-date=\"字段 {1} 必须是日期。\" data-val-required=\"The {1} field is required.\" datadateformat=\"yyyy-mm-dd\" id=\"{1}\" name=\"{1}\" type=\"text\">", requiredCssName, filed.Name);
+		case "decimal":
+		case "int":
+			controlHtml.AppendFormat("@Html.TextBoxFor(p => p.{0}, new {2} @class = \"form-control{1}\", number = true {3})", filed.Name, requiredCssName, "{", "}");
 			break;
 
 		case "guid":
@@ -67,8 +68,7 @@
 <# } #>
             <div class="form-group">
                 <div class="col-xs-9 col-xs-offset-3">
-                    <button type="submit" value="新增" class="btn blue"><i class="fa fa-plus"></i>&nbsp;新增</button>
-                    <a href="/User/Home" class="btn default J_CloseModal"><i class="fa fa-undo"></i>&nbsp;返  回</a>
+                    <button type="submit" value="保存" class="btn blue"><i class="fa fa-plus"></i>&nbsp;保存</button>
                 </div>
             </div>
         </div>

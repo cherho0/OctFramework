@@ -17,19 +17,20 @@ using <#= dt.NameSpace #>.Web.Models;
 <#
 	var pkType = string.Empty;
 	var pkName = string.Empty;
+	var pkName2 = string.Empty;
 	var pkFileds = dt.FiledList.Where(d => d.IsPk);
 
 	if (pkFileds.Count() > 0)
 	{
 		pkType = pkFileds.First().CSharpType;	 
-		pkName = pkFileds.First().Name;	 
+		pkName = pkName2 = pkFileds.First().Name;	 
 		pkName = pkName.Substring(0, 1).ToLower() + pkName.Substring(1, pkName.Length - 1); 
 	}
 #>
 
-namespace <#= dt.NameSpace #>
+namespace <#= dt.NameSpace #>.Controller
 {
-	public class <#= dt.ClassName #><#= dt.ClassNameExtend #> : BaseController
+    public class <#= dt.ClassName #><#= dt.ClassNameExtend #> : BaseController
     {
         [Dependency]
         public I<#= dt.ClassName #>Service <#= dt.ClassName #>Service { get; set; }
@@ -37,15 +38,14 @@ namespace <#= dt.NameSpace #>
         public ActionResult Index(int? page)
         {
             var p = page ?? 1;
-            var pageResult = this.<#= dt.ClassName #>Service.GetModels(p, 5, string.Empty, "<#= pkName #>", null);
-            var dtos = Mapper.Map<List<<#= dt.ClassName #>DTO>>(pageResult.Models);
-           
-            if (dtos == null)
-                dtos = new List<<#= dt.ClassName #>DTO>();   
-		   
-            var pm = this.Kernel.CreatePageModel(5, p, pageResult.TotalCount);
+            var models = this.<#= dt.ClassName #>Service.GetModels(p, 5, string.Empty, "<#= pkName2 #>", null);
+            var pm = this.Kernel.CreatePageModel(5, p, models.TotalCount);
+            var dtos = Mapper.Map<List<<#= dt.ClassName #>DTO>>(models.Models);
 
             this.ViewBag.PM = pm;
+
+            if (dtos == null)
+                dtos = new List<<#= dt.ClassName #>DTO>();
 
             return this.View(dtos);
         }
@@ -66,18 +66,11 @@ namespace <#= dt.NameSpace #>
         [HttpPost]
         public ActionResult Create(<#= dt.ClassName #>DTO model)
         {
-            try
-            {
-                var entity = Mapper.Map<<#= dt.ClassName #>>(model);
+            var entity = Mapper.Map<<#= dt.ClassName #>>(model);
 
-                this.<#= dt.ClassName #>Service.Add(entity);
+            this.<#= dt.ClassName #>Service.Add(entity);
 
-                return this.RedirectToAction("Index");
-            }
-            catch
-            {
-                return this.View();
-            }
+            return this.View("jump");
         }
 
         public ActionResult Edit(<#= pkType #> <#= pkName #>)
@@ -91,18 +84,22 @@ namespace <#= dt.NameSpace #>
         [HttpPost]
         public ActionResult Edit(<#= dt.ClassName #>DTO model)
         {
-            try
-            {
-                var entity = Mapper.Map<<#= dt.ClassName #>>(model);
+            var entity = this.<#= dt.ClassName #>Service.GetModel(model.<#= pkName2 #>);
+<#
+	var editCode = new StringBuilder();
 
-                this.<#= dt.ClassName #>Service.Modify(entity);
+	foreach(FiledInfo filed in dt.FiledList) 
+	{		
+        if (filed.IsPk)
+			continue;
 
-                return this.RedirectToAction("Index");
-            }
-            catch
-            {
-                return this.View();
-            }
+		editCode.AppendFormat("            entity.{0} = model.{0};\r\n", filed.Name);
+    }
+#>
+<#= editCode.ToString() #>
+            this.<#= dt.ClassName #>Service.Modify(entity);
+
+            return this.View("jump");
         }
 
         public ActionResult Delete(<#= pkType #> <#= pkName #>)

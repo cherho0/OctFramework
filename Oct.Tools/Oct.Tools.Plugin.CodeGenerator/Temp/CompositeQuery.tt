@@ -172,6 +172,33 @@ if (name.ToLower() == "<#=filed.Name.ToLower()#>"  && !reader.IsDBNull(i))
             get { return false; }
         }
 
+		#region 重载
+
+			<#
+			var pkName = string.Empty;
+			var pkFileds = dt.FiledList.Where(d => d.IsPk);
+
+			if (pkFileds.Count() > 0)
+				pkName = pkFileds.First().Name;	 
+
+		#>
+
+		public override object PkValue
+		{
+			get
+			{
+				return this.<#= pkName #>; 
+			}
+		}
+
+		public override string PkName
+		{
+			get
+			{
+				return "<#= pkName #>"; 
+			}
+		}
+
         private Dictionary<string, string> _props;
 
 		public override Dictionary<string, string> Props

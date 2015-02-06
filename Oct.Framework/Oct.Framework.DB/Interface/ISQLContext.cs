@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Dynamic;
+using Oct.Framework.DB.Core;
 
 namespace Oct.Framework.DB.Interface
 {
@@ -66,9 +67,43 @@ namespace Oct.Framework.DB.Interface
         ///     执行查询，返回dataset
         /// </summary>
         /// <param name="sql"></param>
-        /// <param name="cmdParms"></param>
+        /// <param name="paras"></param>
         /// <returns></returns>
+        DataSet ExecuteQuery(string sql, IDictionary<string, object> paras);
+        DataSet ExecuteQueryDict(string sql, IDictionary<string, object> paras);
+
         DataSet ExecuteQuery(string sql, params SqlParameter[] cmdParms);
+
+        /// <summary>
+        ///     执行查询，返回dataset
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="paras"></param>
+        /// <returns></returns>
+        DataSet ExecuteQuery(string sql, params object[] paras);
+        DataSet ExecuteQueryScalar(string sql, params object[] paras);
+
+        /// <summary>
+        ///     执行查询，返回dataset
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="paras"></param>
+        /// <param name="order"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        PageResult ExecutePageQuery(string sql, IDictionary<string, object> paras, string order, int pageIndex, int pageSize);
+
+        /// <summary>
+        ///     执行查询，返回dataset
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="paras"></param>
+        /// <param name="order"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        PageResult ExecutePageQuery(string sql, string order, int pageIndex, int pageSize, params object[] paras);
 
         /// <summary>
         ///     执行查询，返回dataset
@@ -76,6 +111,7 @@ namespace Oct.Framework.DB.Interface
         /// <param name="sql"></param>
         /// <returns></returns>
         DataSet ExecuteQuery(string sql);
+
 
         /// <summary>
         /// 查询reader
@@ -100,13 +136,33 @@ namespace Oct.Framework.DB.Interface
         /// <returns></returns>
         IEnumerable<ExpandoObject> ExecuteExpandoObjects(string sql);
 
+        IEnumerable<ExpandoObject> ExecuteExpandoObjects(string sql, params object[] cmdParms);
+
         /// <summary>
-        ///     查询一组数据的动态结果
+        ///     执行查询，返回dataset
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="paras"></param>
+        /// <param name="order"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        ExPageResult ExecutePageExpandoObjects(string sql, string order, int pageIndex, int pageSize, params object[] cmdParms);
+
+        /// <summary>
+        ///     查询一个数据的动态结果
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="objs"></param>
         /// <returns></returns>
         ExpandoObject ExecuteExpandoObject(string sql);
+        /// <summary>
+        ///     查询一个数据的动态结果
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="objs"></param>
+        /// <returns></returns>
+        ExpandoObject ExecuteExpandoObject(string sql, params object[] cmdParms);
 
         /// <summary>
         ///     执行存储过程返回reader

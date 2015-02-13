@@ -14,7 +14,10 @@ namespace Oct.Framework.Core.Session
     {
         public string SessionId
         {
-            get { return HttpContext.Current.Session.SessionID; }
+            get
+            {
+                return HttpContext.Current.Session.SessionID;
+            }
         }
 
         public object this[string key]

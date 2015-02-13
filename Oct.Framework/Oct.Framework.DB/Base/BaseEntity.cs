@@ -168,25 +168,6 @@ namespace Oct.Framework.DB.Base
                 OldValue = oldval,
                 NewValue = newval
             };
-            if (log.OldValue is DateTime)
-            {
-                log.OldValue = ((DateTime)log.OldValue).ToString("yyyy-MM-dd HH:mm:ss");
-            }
-
-            if (log.NewValue is DateTime)
-            {
-                log.NewValue = ((DateTime)log.NewValue).ToString("yyyy-MM-dd HH:mm:ss");
-            }
-
-            if (log.OldValue is bool)
-            {
-                log.OldValue = (bool)log.OldValue ? "是" : "否";
-            }
-
-            if (log.NewValue is bool)
-            {
-                log.NewValue = (bool)log.NewValue ? "是" : "否";
-            }
             _oLog.Add(log);
         }
 

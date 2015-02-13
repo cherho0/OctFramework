@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Oct.Framework.Core.Common;
 using Oct.Framework.DB.Base;
+using Oct.Framework.DB.Composite;
 using Oct.Framework.DB.Core;
 using Oct.Framework.DB.Implementation;
 using Oct.Framework.DB.Interface;
@@ -69,7 +70,7 @@ namespace Oct.Framework.DB.Extisions
             return DataReaderHelper.ReaderToList<T>(reader);
         }
 
-        public static List<T> QueryOrder<T, TP, TO>(this IDBContext<T> context, Expression<Func<T, bool>> func, Expression<Func<T, TP>> expression, 
+        public static List<T> QueryOrder<T, TP, TO>(this IDBContext<T> context, Expression<Func<T, bool>> func, Expression<Func<T, TP>> expression,
              Expression<Func<TP, TO>> orderexpression) where T : BaseEntity<T>, new()
         {
             var props = ExpressionHelper.GetProps(expression);
@@ -155,7 +156,7 @@ namespace Oct.Framework.DB.Extisions
             return entities;
         }
 
-       
+
 
         /// <summary>
         /// linq查询 
@@ -306,11 +307,12 @@ namespace Oct.Framework.DB.Extisions
         /// <summary>
         /// linq分页查询
         /// </summary>
+        /// <param name="expression"></param>
         /// <param name="func"></param>
-        /// <param name="orderby"></param>
+        /// <param name="orderexpression"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
-        /// <param name="total"></param>
+        /// <param name="context"></param>
         /// <returns></returns>
         public static PageResult<T> QueryPage<T, TP, TO>(this IDBContext<T> context, Expression<Func<T, TP>> expression,
             Expression<Func<T, bool>> func, Expression<Func<TP, TO>> orderexpression, int pageIndex, int pageSize)
@@ -344,7 +346,10 @@ namespace Oct.Framework.DB.Extisions
 
         }
 
-      //  public static  
-
+        public static ICompositeQuery AsCompositeQuery(this ISQLContext context)
+        {
+            ICompositeQuery query = new CompositeQuery();
+            return query;
+        }
     }
 }

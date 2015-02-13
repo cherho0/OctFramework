@@ -8,7 +8,7 @@ namespace Oct.Framework.Core.Common
 {
     public class ExpressionHelper
     {
-        public static List<string> GetProps<T,TP>(Expression<Func<T, TP>> expression)
+        public static List<string> GetProps<T, TP>(Expression<Func<T, TP>> expression)
         {
             List<string> props = new List<string>();
             MemberExpression body = expression.Body as MemberExpression;
@@ -27,7 +27,7 @@ namespace Oct.Framework.Core.Common
                 props.Add(body.Member.Name);
             }
             return props;
-        } 
+        }
 
         #region 属性
 
@@ -61,7 +61,14 @@ namespace Oct.Framework.Core.Common
         /// <returns></returns>
         private string SetArgument(string name, string value)
         {
-            name = string.Format("@{0}", name);
+            if (_tblName.IsNullOrEmpty())
+            {
+                name = string.Format("@{0}", name);
+            }
+            else
+            {
+                name = string.Format("@{1}{0}", name, _tblName);
+            }
 
             string temp = name;
 
@@ -130,6 +137,20 @@ namespace Oct.Framework.Core.Common
         /// <param name="expression"></param>
         public void ResolveExpression(Expression expression)
         {
+            this.Argument = new Dictionary<string, object>();
+            this.SqlWhere = this.Resolve(expression);
+            this.Paras = this.Argument.Select(x => new SqlParameter(x.Key, x.Value)).ToArray();
+        }
+
+        private string _tblName;
+
+        /// <summary>
+        /// 解析表达式
+        /// </summary>
+        /// <param name="expression"></param>
+        public void ResolveExpression(Expression expression, string tblName)
+        {
+            _tblName = tblName;
             this.Argument = new Dictionary<string, object>();
             this.SqlWhere = this.Resolve(expression);
             this.Paras = this.Argument.Select(x => new SqlParameter(x.Key, x.Value)).ToArray();
@@ -205,7 +226,7 @@ namespace Oct.Framework.Core.Common
                     return this.ResolveFunc(binary.Left, value, binary.NodeType);
                 }
 
-                if (binary.Left is MemberExpression && binary.Right is UnaryExpression )
+                if (binary.Left is MemberExpression && binary.Right is UnaryExpression)
                 {
                     if (((UnaryExpression)binary.Right).Operand is ConstantExpression)
                     {
@@ -219,7 +240,7 @@ namespace Oct.Framework.Core.Common
                         var value = Expression.Constant(fn.DynamicInvoke(null), binary.Right.Type);
                         return this.ResolveFunc(binary.Left, value, binary.NodeType);
                     }
-                   
+
                 }
             }
 
@@ -237,11 +258,18 @@ namespace Oct.Framework.Core.Common
             if (body == null)
                 throw new Exception(string.Format("无法解析{0}", expression));
 
-            var left = this.Resolve(body.Left);            
+            var left = this.Resolve(body.Left);
             var oper = this.GetOperator(body.NodeType);
             var right = this.Resolve(body.Right);
-
-            var result = string.Format("({0} {1} {2})", left, oper, right);
+            string result = "";
+            if (_tblName.IsNullOrEmpty())
+            {
+                result = string.Format("({0} {1} {2})", left, oper, right);
+            }
+            else
+            {
+                result = string.Format("({3}.{0} {1} {2})", left, oper, right, _tblName);
+            }
 
             return result;
         }
@@ -256,12 +284,21 @@ namespace Oct.Framework.Core.Common
             }
             if (right is UnaryExpression)
             {
-                value =((ConstantExpression) (right as UnaryExpression).Operand).Value;
+                value = ((ConstantExpression)(right as UnaryExpression).Operand).Value;
             }
             var oper = this.GetOperator(expressiontype);
             var compName = this.SetArgument(name, value.ToString());
 
-            var result = string.Format("({0} {1} {2})", name, oper, compName);
+            string result = "";
+
+            if (_tblName.IsNullOrEmpty())
+            {
+                result = string.Format("({0} {1} {2})", name, oper, compName);
+            }
+            else
+            {
+                result = string.Format("({3}.{0} {1} {2})", name, oper, compName, _tblName);
+            }
 
             return result;
         }
@@ -302,7 +339,15 @@ namespace Oct.Framework.Core.Common
             var oper = "like";
             var compName = this.SetArgument(name.ToString(), value.ToString());
 
-            var result = string.Format("({0} {1} {2})", name, oper, compName);
+            string result = "";
+            if (_tblName.IsNullOrEmpty())
+            {
+                result = string.Format("({0} {1} {2})", name, oper, compName);
+            }
+            else
+            {
+                result = string.Format("({3}.{0} {1} {2})", name, oper, compName, _tblName);
+            }
 
             return result;
         }
@@ -331,9 +376,15 @@ namespace Oct.Framework.Core.Common
             var name = argument2.Member.Name;
             var oper = Convert.ToBoolean(isTrue) ? "in" : " not in";
             var compName = string.Join(",", setInPara);
-
-            var result = string.Format("{0} {1} ({2})", name, oper, compName);
-
+            string result = "";
+            if (_tblName.IsNullOrEmpty())
+            {
+                result = string.Format("{0} {1} ({2})", name, oper, compName);
+            }
+            else
+            {
+                result = string.Format("{3}.{0} {1} ({2})", name, oper, compName, _tblName);
+            }
             return result;
         }
 
@@ -349,7 +400,15 @@ namespace Oct.Framework.Core.Common
             var name = (expression.Arguments[0] as MemberExpression).Member.Name;
             var oper = this.GetOperator(expressiontype);
             var compName = this.SetArgument(name.ToString(), value.ToString());
-            var result = string.Format("len({0}) {1} {2}", name, oper, compName);
+            string result = "";
+            if (_tblName.IsNullOrEmpty())
+            {
+                result = string.Format("len({0}) {1} {2}", name, oper, compName);
+            }
+            else
+            {
+                result = string.Format("len({3}.{0}) {1} {2}", name, oper, compName, _tblName);
+            }
             return result;
         }
 

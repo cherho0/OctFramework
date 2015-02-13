@@ -10,218 +10,219 @@ using System.Text;
 
 namespace Oct.Framework.Entities.Entities
 {
-	[Serializable]
-	public partial class TestTs : BaseEntity<TestTs>
-	{ 
-		#region	属性
-		
-		private int? _id;
+    [Serializable]
+    public partial class TestTs : BaseEntity<TestTs>
+    {
+        #region	属性
 
-		/// <summary>
-		/// Id
-		/// </summary>
-		public int? Id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				this.PropChanged("Id", this._id, value);
+        private int? _id;
 
-				this._id = value;
-			}
-		}
-		
-		private string _dD;
+        /// <summary>
+        /// Id
+        /// </summary>
+        public int? Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this.PropChanged("Id", this._id, value);
 
-		/// <summary>
-		/// DD
-		/// </summary>
-		public string DD
-		{
-			get
-			{
-				return this._dD;
-			}
-			set
-			{
-				this.PropChanged("DD", this._dD, value);
+                this._id = value;
+            }
+        }
 
-				this._dD = value;
-			}
-		}
-		
-		#endregion
+        private string _dD;
 
-		#region 重载
+        /// <summary>
+        /// DD
+        /// </summary>
+        public string DD
+        {
+            get
+            {
+                return this._dD;
+            }
+            set
+            {
+                this.PropChanged("DD", this._dD, value);
 
-		public override object PkValue
-		{
-			get
-			{
-				return this.Id; 
-			}
-		}
+                this._dD = value;
+            }
+        }
 
-		public override string PkName
-		{
-			get
-			{
-				return "Id"; 
-			}
-		}
+        #endregion
 
-		public override bool IsIdentityPk
-		{
-			get 
-			{
-				return true; 
-			}
-		}
+        #region 重载
 
-				public override void SetIdentity(object v)
-		{
-			this.Id = int.Parse(v.ToString());
-		}
-		
-		private Dictionary<string, string> _props;
+        public override object PkValue
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
 
-		public override Dictionary<string, string> Props
-	    {
-	        get {
-				if(_props == null)
-				{
-					_props = new Dictionary<string, string>();
-										_props.Add( "Id","Id");
-										_props.Add( "DD","DD");
-									}
-				return _props;			 
-			 }
-	    }
+        public override string PkName
+        {
+            get
+            {
+                return "Id";
+            }
+        }
 
-		public override TestTs GetEntityFromDataRow(DataRow row)
-		{
-			if (row.Table.Columns.Contains("Id") && row["Id"] != null && row["Id"].ToString() != "")
-			{
-				this._id = int.Parse(row["Id"].ToString());
-			}
-			if (row.Table.Columns.Contains("DD") && row["DD"] != null)
-			{
-				this._dD = row["DD"].ToString();
-			}
+        public override bool IsIdentityPk
+        {
+            get
+            {
+                return true;
+            }
+        }
 
-			return this;
-		}
+        public override void SetIdentity(object v)
+        {
+            this.Id = int.Parse(v.ToString());
+        }
 
-		public override TestTs GetEntityFromDataReader(IDataReader reader)
+        private Dictionary<string, string> _props;
+
+        public override Dictionary<string, string> Props
+        {
+            get
+            {
+                if (_props == null)
+                {
+                    _props = new Dictionary<string, string>();
+                    _props.Add("Id", "Id");
+                    _props.Add("DD", "DD");
+                }
+                return _props;
+            }
+        }
+
+        public override TestTs GetEntityFromDataRow(DataRow row)
+        {
+            if (row.Table.Columns.Contains("Id") && row["Id"] != null && row["Id"].ToString() != "")
+            {
+                this._id = int.Parse(row["Id"].ToString());
+            }
+            if (row.Table.Columns.Contains("DD") && row["DD"] != null)
+            {
+                this._dD = row["DD"].ToString();
+            }
+
+            return this;
+        }
+
+        public override TestTs GetEntityFromDataReader(IDataReader reader)
         {
             for (int i = 0; i < reader.FieldCount; i++)
             {
                 var name = reader.GetName(i);
-				if (name.ToLower() == "id" && !reader.IsDBNull(i))
-{
-_id = reader.GetInt32(i);
- continue;
-}
-if (name.ToLower() == "dd" && !reader.IsDBNull(i))
-{
-_dD = reader.GetString(i);
- continue;
-}
-               
-}
+                if (name.ToLower() == "id" && !reader.IsDBNull(i))
+                {
+                    _id = reader.GetInt32(i);
+                    continue;
+                }
+                if (name.ToLower() == "dd" && !reader.IsDBNull(i))
+                {
+                    _dD = reader.GetString(i);
+                    continue;
+                }
+
+            }
             return this;
         }
 
-		public override string TableName
-		{
-			get
-			{
-				return "TestTs";
-			}
-		}
+        public override string TableName
+        {
+            get
+            {
+                return "TestTs";
+            }
+        }
 
-		public override IOctDbCommand GetInsertCmd()
-		{
-			var sql = @"
+        public override IOctDbCommand GetInsertCmd()
+        {
+            var sql = @"
 				INSERT INTO TestTs (
 					DD)
 				VALUES (
 					@DD)";
-			
-			DbCommand cmd = new SqlCommand();
-			var parameters = new Dictionary<string, object> {
+
+            DbCommand cmd = new SqlCommand();
+            var parameters = new Dictionary<string, object> {
 				{"@DD", this.DD}};
 
-			return new OctDbCommand(sql, parameters);
-		}
+            return new OctDbCommand(sql, parameters);
+        }
 
-		public override IOctDbCommand GetUpdateCmd(string @where = "", IDictionary<string, object> paras = null)
-		{
-			var sb = new StringBuilder();
-			var parameters = new Dictionary<string, object>();
-          
-			sb.Append("update " + this.TableName + " set ");
-         
-			foreach (var changedProp in this.ChangedProps)
-			{
-				sb.Append(string.Format("{0} = @{0},", changedProp.Key));
+        public override IOctDbCommand GetUpdateCmd(string @where = "", IDictionary<string, object> paras = null)
+        {
+            var sb = new StringBuilder();
+            var parameters = new Dictionary<string, object>();
 
-				parameters.Add("@" + changedProp.Key, changedProp.Value);
-			}
+            sb.Append("update " + this.TableName + " set ");
 
-			var sql = sb.ToString().Remove(sb.Length - 1);
-			sql += string.Format(" where {0} = '{1}'", this.PkName, this.PkValue);
+            foreach (var changedProp in this.ChangedProps)
+            {
+                sb.Append(string.Format("{0} = @{0},", changedProp.Key));
 
-			if (!string.IsNullOrEmpty(@where))
-				sql += " and " + @where;
+                parameters.Add("@" + changedProp.Key, changedProp.Value);
+            }
 
-			if (paras != null)
-			{
-				foreach (var p in paras)
-				{
-					parameters.Add(p.Key, p.Value);
-				}
-			}
+            var sql = sb.ToString().Remove(sb.Length - 1);
+            sql += string.Format(" where {0} = '{1}'", this.PkName, this.PkValue);
 
-			return new OctDbCommand(sql, parameters);
-		}
+            if (!string.IsNullOrEmpty(@where))
+                sql += " and " + @where;
 
-		public override string GetDelSQL()
-		{
-			return string.Format("delete from {0} where {1} = '{2}'", this.TableName, this.PkName, this.PkValue);
-		}
+            if (paras != null)
+            {
+                foreach (var p in paras)
+                {
+                    parameters.Add(p.Key, p.Value);
+                }
+            }
 
-		public override string GetDelSQL(object v, string @where = "")
-		{
-			string sql = string.Format("delete from {0} where 1 = 1 ", this.TableName);
-         
-			if (v != null)
-				sql += "and " + this.PkName + " = '" + v + "'";
-         
-			if (!string.IsNullOrEmpty(@where))
-				sql += "and " + @where;
+            return new OctDbCommand(sql, parameters);
+        }
 
-			return sql;
-		}
+        public override string GetDelSQL()
+        {
+            return string.Format("delete from {0} where {1} = '{2}'", this.TableName, this.PkName, this.PkValue);
+        }
 
-		public override string GetModelSQL(object v)
-		{
-			return string.Format("select * from {0} where {1} = '{2}'", this.TableName, this.PkName, v);
-		}
+        public override string GetDelSQL(object v, string @where = "")
+        {
+            string sql = string.Format("delete from {0} where 1 = 1 ", this.TableName);
 
-		public override string GetQuerySQL(string @where = "")
-		{
-			var sql = string.Format("select * from {0} where 1 = 1 ", this.TableName);
-           
-			if (!string.IsNullOrEmpty(@where))
-				sql += "and " + @where;
+            if (v != null)
+                sql += "and " + this.PkName + " = '" + v + "'";
 
-			return sql;
-		}
+            if (!string.IsNullOrEmpty(@where))
+                sql += "and " + @where;
 
-		#endregion
-	}
+            return sql;
+        }
+
+        public override string GetModelSQL(object v)
+        {
+            return string.Format("select * from {0} where {1} = '{2}'", this.TableName, this.PkName, v);
+        }
+
+        public override string GetQuerySQL(string @where = "")
+        {
+            var sql = string.Format("select * from {0} where 1 = 1 ", this.TableName);
+
+            if (!string.IsNullOrEmpty(@where))
+                sql += "and " + @where;
+
+            return sql;
+        }
+
+        #endregion
+    }
 }

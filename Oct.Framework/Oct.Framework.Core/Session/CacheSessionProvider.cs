@@ -12,12 +12,12 @@ namespace Oct.Framework.Core.Session
     {
         public bool AddSession(string key, object value)
         {
-           return CacheSessionHelper.Instance.Add(key, value);
+            return CacheSessionHelper.Instance.Add(key, value);
         }
 
         public bool AddSession(string key, object value, int tomeOut)
         {
-          return  CacheSessionHelper.Instance.Add(key, value, tomeOut);
+            return CacheSessionHelper.Instance.Add(key, value, tomeOut);
         }
 
         public object GetSession(string key)
@@ -32,14 +32,18 @@ namespace Oct.Framework.Core.Session
 
         public void Clear(string key)
         {
-            CacheSessionHelper.Instance.Remove(key);
+            if (HttpContext.Current != null)
+            {
+                CacheSessionHelper.Instance.Remove(key);
+            }
         }
 
         public void ClearAll()
         {
-            CacheSessionHelper.Instance.ClearAll();
             if (HttpContext.Current != null)
             {
+                CacheSessionHelper.Instance.ClearAll();
+
                 HttpContext.Current.Session.Clear();
                 HttpContext.Current.Session.Abandon();
             }

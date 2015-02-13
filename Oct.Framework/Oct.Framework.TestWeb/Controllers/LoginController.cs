@@ -30,8 +30,8 @@ namespace Oct.Framework.TestWeb.Controllers
 
         public ActionResult Login()
         {
-
-           //var models = Kernel.GetEnumModels<OperationEnum>(1,2);
+            var ss11 = CacheHelper.GetAll<string>("priceModels");
+            //var models = Kernel.GetEnumModels<OperationEnum>(1,2);
 
             //拼参数demo
             string where = "";
@@ -47,19 +47,19 @@ namespace Oct.Framework.TestWeb.Controllers
                 paras.Add("%的%");
             }
 
-           // var ret = DbContext.TestTsContext.Query(where, "", paras.ToArray());
+            // var ret = DbContext.TestTsContext.Query(where, "", paras.ToArray());
             IDictionary<string, object> dic = new Dictionary<string, object>() { { "@dd", 1 } };
 
             var vss = DbContext.SQLContext.ExecuteQuery("select * from testts where id=@dd  ", dic);
 
             //var json = Kernel.SerializeObject(vss.Models);
-            
-           // var ok11 = CacheHelper.Set("test", vss.Models);
+
+            // var ok11 = CacheHelper.Set("test", vss.Models);
             //var v = CacheHelper.Get<IEnumerable<ExpandoObject>>("test");
-           // var ds = Kernel.DeserializeObject<DataSet>(v);
-           // var allkeys = CacheHelper.GetAll<string>("test");
-           // CacheHelper.RemoveAll("test");
-           // var v1 = CacheHelper.Get("test");
+            // var ds = Kernel.DeserializeObject<DataSet>(v);
+            // var allkeys = CacheHelper.GetAll<string>("test");
+            // CacheHelper.RemoveAll("test");
+            // var v1 = CacheHelper.Get("test");
             /*Stopwatch sw = new Stopwatch();
             sw.Start();
             //var models = DbContext.TestTsContext.Query("");
@@ -115,14 +115,14 @@ namespace Oct.Framework.TestWeb.Controllers
                 var sss = "22222";
             }
             */
-            var ok1 = CacheHelper.Set("test", "test",1);
+            var ok1 = CacheHelper.Set("test", "test", 1);
             var bv = CacheHelper.Get<string>("test");
             var sessionprovide = Bootstrapper.GetRepository<ISessionProvider>();
             var get = sessionprovide.GetSession<string>("ceshi");
             var ss = false;
             if (get == null)
             {
-               var ok = sessionprovide.AddSession("ceshi", DateTime.Now.ToString());
+                var ok = sessionprovide.AddSession("ceshi", DateTime.Now.ToString());
                 ss = ok;
                 get = sessionprovide.GetSession<string>("ceshi");
             }

@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Base\BaseEntity.cs" />
     <Compile Include="Base\IEntity.cs" />
+    <Compile Include="Composite\CompositeQuery.cs" />
+    <Compile Include="Composite\ICompositeQuery.cs" />
     <Compile Include="Core\BusinessRule.cs" />
     <Compile Include="Core\DataReaderHelper.cs" />
     <Compile Include="Core\DataSetHelper.cs" />
@@ -73,6 +75,7 @@
       <Name>Oct.Framework.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

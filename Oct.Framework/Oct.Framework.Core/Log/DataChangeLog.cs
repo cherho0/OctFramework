@@ -7,7 +7,7 @@ using MongoDB.Bson;
 
 namespace Oct.Framework.Core.Log
 {
-       /// <summary>
+    /// <summary>
     /// 操作数据变更日志
     /// </summary>
     [Serializable]
@@ -48,12 +48,31 @@ namespace Oct.Framework.Core.Log
             {
                 ValueLogs = new List<ValueLog>();
             }
+            if (log.OldValue is DateTime)
+            {
+                log.OldValue = ((DateTime)log.OldValue).ToString("yyyy-MM-dd HH:mm:ss");
+            }
+
+            if (log.NewValue is DateTime)
+            {
+                log.NewValue = ((DateTime)log.NewValue).ToString("yyyy-MM-dd HH:mm:ss");
+            }
+
+            if (log.OldValue is bool)
+            {
+                log.OldValue = (bool)log.OldValue ? "是" : "否";
+            }
+
+            if (log.NewValue is bool)
+            {
+                log.NewValue = (bool)log.NewValue ? "是" : "否";
+            }
             ValueLogs.Add(log);
         }
     }
 
     [Serializable]
-    public class ValueLog 
+    public class ValueLog
     {
         /// <summary>
         /// 字段名

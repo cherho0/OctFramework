@@ -29,7 +29,7 @@ namespace Oct.Framework.DB.Implementation
         public void Add(T entity)
         {
             DbCommand cmd = CreateSqlCommand(entity.GetInsertCmd());
-            var idp = EnitiesProxyHelper.GetProxyInfo<T>().IdentitesProp;
+            var idp = EntitiesProxyHelper.GetProxyInfo<T>().IdentitesProp;
             if (!string.IsNullOrEmpty(idp))
             {
                 object v = null;
@@ -43,7 +43,7 @@ namespace Oct.Framework.DB.Implementation
 
                 v = ds.Tables[0].Rows[0][0];
 
-                EnitiesProxyHelper.GetDynamicMethod<T>().SetValue(entity, idp, v.ToString().ToInt());
+                EntitiesProxyHelper.GetDynamicMethod<T>().SetValue(entity, idp, v.ToString().ToInt());
             }
             else
             {

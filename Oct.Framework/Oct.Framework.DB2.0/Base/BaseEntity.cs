@@ -29,7 +29,7 @@ namespace Oct.Framework.DB.Base
         {
             get
             {
-                var proxy = EnitiesProxyHelper.GetProxyInfo<T>();
+                var proxy = EntitiesProxyHelper.GetProxyInfo<T>();
                 if (proxy.IsCompositeQuery)
                 {
                     return string.Format(" ({0}) tab ", proxy.CompositeSql);
@@ -44,7 +44,7 @@ namespace Oct.Framework.DB.Base
 
         private string PkName
         {
-            get { return EnitiesProxyHelper.GetProxyInfo<T>().PrimaryKeys.FirstOrDefault(); }
+            get { return EntitiesProxyHelper.GetProxyInfo<T>().PrimaryKeys.FirstOrDefault(); }
         }
 
         private object PkValue
@@ -52,7 +52,7 @@ namespace Oct.Framework.DB.Base
             get
             {
                 var curObj = (T)((IEntity)this);
-                return EnitiesProxyHelper.GetDynamicMethod<T>().GetValue(curObj, PkName);
+                return EntitiesProxyHelper.GetDynamicMethod<T>().GetValue(curObj, PkName);
             }
         }
 

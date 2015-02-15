@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PWMIS.Access.Extensions</name>
+    </assembly>
+    <members>
+        <member name="M:PWMIS.AccessExtensions.AccessUility.CreateDataBase(System.String)">
+            <summary>
+            指定文件名，创建Access数据库文件，适用于32位系统的Access
+            </summary>
+            <param name="filePath"></param>
+        </member>
+        <member name="M:PWMIS.AccessExtensions.AccessUility.CreateDataBaseByConnString(System.String)">
+            <summary>
+            根据连接字符串，创建数据库文件，适用于OLEDB4.0 之后的Access数据库版本或者64位系统
+            </summary>
+            <param name="connString"></param>
+        </member>
+        <member name="M:PWMIS.AccessExtensions.AccessUility.ConfigConnectionSettings(System.String,System.String)">
+            <summary>
+            配置一个指定的连接名称，并指定Access数据库文件的名字，适用于32位系统
+            </summary>
+            <param name="connectionName"></param>
+            <param name="dbFilePath"></param>
+        </member>
+        <member name="M:PWMIS.AccessExtensions.AccessUility.ConfigConnectionSettings2(System.String,System.String)">
+            <summary>
+            配置一个指定的连接名称，并指定Access数据库文件的名字，适用于64位系统
+            </summary>
+            <param name="connectionName"></param>
+            <param name="connectionString"></param>
+        </member>
+    </members>
+</doc>

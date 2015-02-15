@@ -11,6 +11,7 @@ using DbTest.Entities;
 using Oct.Framework.DB.Composite;
 using Oct.Framework.DB.DynamicObj;
 using Oct.Framework.DB.Extisions;
+using Oct.Framework.DB.GenTable;
 
 namespace DbTest
 {
@@ -27,7 +28,7 @@ namespace DbTest
               var ss1 = context.Find    One<TestTs>(1);
               sw.Stop();
               Console.WriteLine("Nhibernate" + sw.Elapsed);*/
-            /*EnitiesProxyHelper.Register(Assembly.GetExecutingAssembly());
+            /*EntitiesProxyHelper.Register(Assembly.GetExecutingAssembly());
 
             TestTs t = new TestTs();
 
@@ -36,7 +37,7 @@ namespace DbTest
             m.EntryUpdateStack();
             m.DD = "ss1";
 
-            var id = EnitiesProxyHelper.GetDynamicMethod<TestTs>().GetValue(m, "Id");
+            var id = EntitiesProxyHelper.GetDynamicMethod<TestTs>().GetValue(m, "Id");
              
             dbContext.TestTsContext.Update(m);
 
@@ -67,18 +68,25 @@ namespace DbTest
 
             DbContext dbContext = new DbContext("User id=Octopus_Framework;Password=JSJQH8819!(K;Server=192.168.2.20;database=Oct_Framework;");
 
-            var ds = dbContext.SQLContext.AsCompositeQuery()
-                .Fetch<TestTs>()
-
-                .Fetch<DemoTable>()
-                .On<TestTs, DemoTable, int, int>(p => p.Id, p => p.Id)
-                .OnWhere<DemoTable>(p => p.Name == "chenzhiyin")
-
-                 .Fetch<DemoTable>()
+            /*  var ds = dbContext.SQLContext.AsCompositeQuery()
+                  .Fetch<TestTs>()
+                  //第一个
+                  .Fetch<DemoTable>()
                   .On<TestTs, DemoTable, int, int>(p => p.Id, p => p.Id)
-                .Query();
+                  .OnWhere<DemoTable>(p => p.Name == "chenzhiyin")
+                  //第二个
+                   .Fetch<DemoTable>()
+                    .On<TestTs, DemoTable, int, int>(p => p.Id, p => p.Id)
+                    //返回数据
+                  .Query();*/
 
-            Console.WriteLine("Oct.DB" + sw.Elapsed);
+
+            GenDb.Gen(Assembly.GetAssembly(typeof(DbContext)),dbContext.SQLContext);
+            var sql = GenTbl.Gen<TestTs>(dbContext.SQLContext);
+
+
+            Console.WriteLine("Oct.DB :" + sql);
+
             Console.ReadLine();
 
         }

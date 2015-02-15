@@ -71,7 +71,7 @@
     <Compile Include="Core\WhereHelper.cs" />
     <Compile Include="DynamicObj\ClassProxyInfo.cs" />
     <Compile Include="DynamicObj\DynamicMethod.cs" />
-    <Compile Include="DynamicObj\EnitiesProxyHelper.cs" />
+    <Compile Include="DynamicObj\EntitiesProxyHelper.cs" />
     <Compile Include="Emit\AST\CompilationContext.cs" />
     <Compile Include="Emit\AST\Helpers\AstBuildHelper.cs" />
     <Compile Include="Emit\AST\Helpers\CompilationHelper.cs" />
@@ -188,6 +188,7 @@
     <Compile Include="Emit\Utils\ReflectionUtils.cs" />
     <Compile Include="Emit\Utils\ThreadSaveCache.cs" />
     <Compile Include="Extisions\IDbContextExtision.cs" />
+    <Compile Include="GenTable\AutoGen.cs" />
     <Compile Include="Implementation\SQLContext.cs" />
     <Compile Include="Implementation\EntityContext.cs" />
     <Compile Include="Interface\IDBContext.cs" />

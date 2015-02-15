@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Text;
 
@@ -30,6 +31,11 @@ namespace Oct.Framework.DB.LightDataAccess
 		{
 			return reader.ToObject<T>(null, null, null);
 		}
+
+        public static T ToObject<T>(this IDataReader reader)
+        {
+            return ((DbDataReader)reader).ToObject<T>(null, null, null);
+        }
 
 		public static T ToObject<T>(this DbDataReader reader, string readerName)
 		{

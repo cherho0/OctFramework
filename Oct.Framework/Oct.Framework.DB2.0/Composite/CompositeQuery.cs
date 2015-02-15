@@ -29,7 +29,7 @@ namespace Oct.Framework.DB.Composite
 
         public ICompositeQuery Fetch<T>() where T : BaseEntity<T>, new()
         {
-            _tblNames.Add(EnitiesProxyHelper.GetProxyInfo<T>().TableName);
+            _tblNames.Add(EntitiesProxyHelper.GetProxyInfo<T>().TableName);
             return this;
         }
 
@@ -37,9 +37,9 @@ namespace Oct.Framework.DB.Composite
             where T1 : BaseEntity<T1>, new()
             where T2 : BaseEntity<T2>, new()
         {
-            var tbl1 = EnitiesProxyHelper.GetProxyInfo<T1>().TableName;
+            var tbl1 = EntitiesProxyHelper.GetProxyInfo<T1>().TableName;
             var prop1 = ExpressionHelper.GetProps(left)[0];
-            var tbl2 = EnitiesProxyHelper.GetProxyInfo<T2>().TableName;
+            var tbl2 = EntitiesProxyHelper.GetProxyInfo<T2>().TableName;
             var prop2 = ExpressionHelper.GetProps(right)[0];
 
             if (_firstJoin)
@@ -57,7 +57,7 @@ namespace Oct.Framework.DB.Composite
 
         public ICompositeQuery OnWhere<T>(Expression<Func<T, bool>> where) where T : BaseEntity<T>, new()
         {
-            var tblName = EnitiesProxyHelper.GetProxyInfo<T>().TableName;
+            var tblName = EntitiesProxyHelper.GetProxyInfo<T>().TableName;
             var h = new ExpressionHelper();
             //解析表达式
             h.ResolveExpression(where, tblName);

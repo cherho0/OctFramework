@@ -70,9 +70,8 @@ namespace Oct.Framework.DB.Interface
         /// <param name="paras"></param>
         /// <returns></returns>
         DataSet ExecuteQuery(string sql, IDictionary<string, object> paras);
-        DataSet ExecuteQueryDict(string sql, IDictionary<string, object> paras);
-
         DataSet ExecuteQuery(string sql, params SqlParameter[] cmdParms);
+        DataSet ExecuteQueryDict(string sql, IDictionary<string, object> paras);
 
         /// <summary>
         ///     执行查询，返回dataset
@@ -132,7 +131,6 @@ namespace Oct.Framework.DB.Interface
         ///     查询一组数据的动态结果集
         /// </summary>
         /// <param name="sql"></param>
-        /// <param name="objs"></param>
         /// <returns></returns>
         IEnumerable<ExpandoObject> ExecuteExpandoObjects(string sql);
 
@@ -142,10 +140,10 @@ namespace Oct.Framework.DB.Interface
         ///     执行查询，返回dataset
         /// </summary>
         /// <param name="sql"></param>
-        /// <param name="paras"></param>
         /// <param name="order"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
+        /// <param name="cmdParms"></param>
         /// <returns></returns>
         ExPageResult ExecutePageExpandoObjects(string sql, string order, int pageIndex, int pageSize, params object[] cmdParms);
 
@@ -153,14 +151,13 @@ namespace Oct.Framework.DB.Interface
         ///     查询一个数据的动态结果
         /// </summary>
         /// <param name="sql"></param>
-        /// <param name="objs"></param>
         /// <returns></returns>
         ExpandoObject ExecuteExpandoObject(string sql);
+
         /// <summary>
         ///     查询一个数据的动态结果
         /// </summary>
         /// <param name="sql"></param>
-        /// <param name="objs"></param>
         /// <returns></returns>
         ExpandoObject ExecuteExpandoObject(string sql, params object[] cmdParms);
 

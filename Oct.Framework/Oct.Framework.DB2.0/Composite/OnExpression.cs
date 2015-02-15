@@ -13,8 +13,8 @@ namespace Oct.Framework.DB.Composite
     {
         public OnExpression(Expression<Func<T1, TP1>> prop1, Expression<Func<T2, TP2>> prop2, Expression<Func<T2, bool>> func = null)
         {
-            var t1TableName = EnitiesProxyHelper.GetProxyInfo<T1>().TableName;
-            var t2TableName = EnitiesProxyHelper.GetProxyInfo<T2>().TableName;
+            var t1TableName = EntitiesProxyHelper.GetProxyInfo<T1>().TableName;
+            var t2TableName = EntitiesProxyHelper.GetProxyInfo<T2>().TableName;
 
             var t1Prop = ExpressionHelper.GetProps(prop1)[0];
             var t2Prop = ExpressionHelper.GetProps(prop2)[0];

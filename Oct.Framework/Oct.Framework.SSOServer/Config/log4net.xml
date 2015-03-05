@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--日志的配置开始-->
+<log4net>
+  <!--<root>
+    <level value="ALL" />
+    <appender-ref ref="rollingFile" />
+  </root>-->
+  <appender  name="rollingFile" type="log4net.Appender.RollingFileAppender,log4net" >
+    <param name="File" type="" value="OctLog\\Log_" />
+    <!--最小锁定模型以允许多个进程可以写入同一个文件-->
+    <param name="LockingModel" value="log4net.Appender.FileAppender.MinimalLock" />
+    <param name="StaticLogFileName" value="true" />
+
+    <param name="AppendToFile" value="true" />
+    <param name="RollingStyle" value="Date" />
+    <param name="DatePattern" value="yyyyMMdd/HH时日志'.log'" />
+    <param name="StaticLogFileName" value="false" />
+    <layout type="log4net.Layout.PatternLayout,log4net">
+      <param name="ConversionPattern" value="%d [%t] %-5p %c - %m%n" />
+      <param name="Header" value="
+----------------------header--------------------------
+" />
+      <param name="Footer" value="
+----------------------footer--------------------------
+" />
+    </layout>
+  </appender>
+  <appender name="consoleApp" type="log4net.Appender.ConsoleAppender,log4net">
+    <layout type="log4net.Layout.PatternLayout,log4net">
+      <param name="ConversionPattern" value="%d [%t] %-5p %c - %m%n" />
+    </layout>
+  </appender>
+  <logger name="Oct.Framework">
+    <level value="ALL" />
+    <appender-ref  ref="rollingFile" />
+  </logger>
+</log4net>
+<!--日志的配置结束-->

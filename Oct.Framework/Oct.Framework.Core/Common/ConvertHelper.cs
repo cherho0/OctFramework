@@ -27,6 +27,21 @@ namespace Oct.Framework.Core.Common
         }
 
         /// <summary>
+        /// 转换成long
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static long ToLong(this string value)
+        {
+            long result = 0;
+
+            if (long.TryParse(value, out result))
+                return result;
+
+            return result;
+        }
+
+        /// <summary>
         /// 转换成bool
         /// </summary>
         /// <param name="value"></param>

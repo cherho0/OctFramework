@@ -53,7 +53,7 @@ namespace Oct.Framework.DB.Interface
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        int ExecuteSQL(string sql);
+        void ExecuteSQL(string sql);
 
         /// <summary>
         ///     按事务执行批量SQL语句
@@ -61,7 +61,7 @@ namespace Oct.Framework.DB.Interface
         /// <param name="sql"></param>
         /// <param name="objs"></param>
         /// <returns></returns>
-        int ExecuteSQLs(List<string> sql);
+        void ExecuteSQLs(List<string> sql);
 
         /// <summary>
         ///     执行查询，返回dataset

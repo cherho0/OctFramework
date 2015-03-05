@@ -81,11 +81,11 @@ namespace DbTest
                   .Query();*/
 
 
-            GenDb.Gen(Assembly.GetAssembly(typeof(DbContext)),dbContext.SQLContext);
-            var sql = GenTbl.Gen<TestTs>(dbContext.SQLContext);
+            // GenDb.Gen(Assembly.GetAssembly(typeof(DbContext)),dbContext.SQLContext);
+            //var sql = GenTbl.Gen<TestTs>(dbContext.SQLContext);
+            var m = dbContext.TestTsContext.GetModel(1);
 
-
-            Console.WriteLine("Oct.DB :" + sql);
+            // Console.WriteLine("Oct.DB :" + sql);
 
             Console.ReadLine();
 

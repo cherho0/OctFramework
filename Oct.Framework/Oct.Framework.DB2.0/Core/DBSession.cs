@@ -48,6 +48,9 @@ namespace Oct.Framework.DB.Core
             return this;
         }
 
+        /// <summary>
+        /// 开始事务
+        /// </summary>
         public void BeginTransaction()
         {
             if (_trans == null)
@@ -56,6 +59,10 @@ namespace Oct.Framework.DB.Core
             }
         }
 
+        /// <summary>
+        /// 提交
+        /// </summary>
+        /// <returns></returns>
         public int Commit()
         {
             int execCount = 0;
@@ -102,6 +109,11 @@ namespace Oct.Framework.DB.Core
             return execCount;
         }
 
+        /// <summary>
+        /// 执行command
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
         public DataSet ExecCmd(IDbCommand cmd)
         {
             var ds = new DataSet();
@@ -121,6 +133,9 @@ namespace Oct.Framework.DB.Core
             return ds;
         }
 
+        /// <summary>
+        /// 打开链接
+        /// </summary>
         public void Open()
         {
             if (!_openConn)
@@ -130,6 +145,10 @@ namespace Oct.Framework.DB.Core
             }
         }
 
+        /// <summary>
+        /// 添加命令
+        /// </summary>
+        /// <param name="cmd"></param>
         public void AddCommands(IDbCommand cmd)
         {
             if (cmd.CommandText.IsNullOrEmpty())
@@ -139,6 +158,9 @@ namespace Oct.Framework.DB.Core
             _cmds.Add(cmd);
         }
 
+        /// <summary>
+        /// 释放
+        /// </summary>
         public void Dispose()
         {
             if (_trans != null)

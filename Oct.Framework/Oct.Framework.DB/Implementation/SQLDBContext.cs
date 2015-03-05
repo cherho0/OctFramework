@@ -115,6 +115,8 @@ namespace Oct.Framework.DB.Implementation
             var read = reader.Read();
             if (!read)
             {
+                reader.Close();
+                reader.Dispose();
                 return null;
             }
             entity = entity.GetEntityFromDataReader(reader);

@@ -1,0 +1,142 @@
+
+----------------------header--------------------------
+2015-03-04 16:16:55,640 [10] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:03,566 [13] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:03,580 [8] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:03,602 [10] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:03,614 [15] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:03,625 [8] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:03,637 [13] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:03,651 [10] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:03,662 [15] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:03,677 [8] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:06,453 [12] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:06,475 [10] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:06,507 [8] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:06,523 [13] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:06,537 [10] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:06,552 [15] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:06,564 [8] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:06,576 [12] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:06,590 [10] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34
+2015-03-04 16:17:06,603 [8] ERROR Oct.Framework - 远程服务器返回错误: (404) 未找到。
+System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   在 System.Net.WebClient.DownloadString(Uri address)
+   在 System.Net.WebClient.DownloadString(String address)
+   在 Oct.Framework.Core.ApiData.ApiDataHelper.GetData(String url) 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.Core\ApiData\ApiDataHelper.cs:行号 34
+   在 Oct.Framework.SSO.Client.SsoClient.GetUser() 位置 d:\project\Oct.Frame\Oct.Framework\Oct.Framework.SSO\Client\SsoClient.cs:行号 34

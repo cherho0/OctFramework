@@ -142,7 +142,7 @@ namespace Oct.Framework.DB.Implementation
             }
         }
 
-        public int ExecuteSQL(string sql)
+        public void ExecuteSQL(string sql)
         {
             if (SQLWordFilte.CheckSql(sql))
             {
@@ -150,19 +150,19 @@ namespace Oct.Framework.DB.Implementation
             }
             var cmd = new SqlCommand(sql);
             Session.AddCommands(cmd);
-            int rows = Session.Commit();
-            return rows;
+            // int rows = Session.Commit();
+            //return rows;
         }
 
-        public int ExecuteSQLs(List<string> sqls)
+        public void ExecuteSQLs(List<string> sqls)
         {
             foreach (string sql in sqls)
             {
                 var cmd = new SqlCommand(sql);
                 Session.AddCommands(cmd);
             }
-            int rows = Session.Commit();
-            return rows;
+            //int rows = Session.Commit();
+            // return rows;
         }
 
         public DataSet ExecuteQuery(string sql, params object[] paras)

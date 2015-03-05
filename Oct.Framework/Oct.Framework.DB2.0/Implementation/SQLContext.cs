@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Dynamic;
+using System.Linq;
 using Oct.Framework.DB.Core;
 using Oct.Framework.DB.Interface;
 
@@ -142,7 +143,7 @@ namespace Oct.Framework.DB.Implementation
             }
         }
 
-        public int ExecuteSQL(string sql)
+        public void ExecuteSQL(string sql)
         {
             if (SQLWordFilte.CheckSql(sql))
             {
@@ -150,19 +151,24 @@ namespace Oct.Framework.DB.Implementation
             }
             var cmd = new SqlCommand(sql);
             Session.AddCommands(cmd);
-            int rows = Session.Commit();
-            return rows;
+            //int rows = Session.Commit();
+            //return rows;
         }
 
-        public int ExecuteSQLs(List<string> sqls)
+        /// <summary>
+        /// 执行系列sql语句
+        /// </summary>
+        /// <param name="sqls"></param>
+        /// <returns></returns>
+        public void ExecuteSQLs(List<string> sqls)
         {
             foreach (string sql in sqls)
             {
                 var cmd = new SqlCommand(sql);
                 Session.AddCommands(cmd);
             }
-            int rows = Session.Commit();
-            return rows;
+            //int rows = Session.Commit();
+            //return rows;
         }
 
         public DataSet ExecuteQuery(string sql, params object[] paras)
@@ -190,10 +196,7 @@ namespace Oct.Framework.DB.Implementation
             var parasList = new List<SqlParameter>();
             if (paras != null)
             {
-                foreach (var para in paras)
-                {
-                    parasList.Add(new SqlParameter(para.Key, para.Value));
-                }
+                parasList.AddRange(paras.Select(para => new SqlParameter(para.Key, para.Value)));
             }
 
             return ExecuteQuery(sql, parasList.ToArray());
@@ -204,10 +207,7 @@ namespace Oct.Framework.DB.Implementation
             var parasList = new List<SqlParameter>();
             if (paras != null)
             {
-                foreach (var para in paras)
-                {
-                    parasList.Add(new SqlParameter(para.Key, para.Value));
-                }
+                parasList.AddRange(paras.Select(para => new SqlParameter(para.Key, para.Value)));
             }
 
             return ExecuteQuery(sql, parasList.ToArray());
@@ -253,8 +253,7 @@ namespace Oct.Framework.DB.Implementation
             {
                 Session.Open();
                 var ds = new DataSet();
-                var cmd = new SqlCommand(sql);
-                cmd.Connection = Session.Connection;
+                var cmd = new SqlCommand(sql) {Connection = Session.Connection};
                 var command = new SqlDataAdapter(cmd);
 
                 command.Fill(ds);
@@ -263,10 +262,6 @@ namespace Oct.Framework.DB.Implementation
             catch (SqlException ex)
             {
                 throw new Exception(ex.Message);
-            }
-            finally
-            {
-                //session.Connection.Close();
             }
         }
 
@@ -291,10 +286,6 @@ namespace Oct.Framework.DB.Implementation
             {
                 throw new Exception(ex.Message + "\r\n" + sql);
             }
-            finally
-            {
-                //session.Connection.Close();
-            }
         }
 
         public IDataReader ExecuteQueryReader(string sql)
@@ -306,8 +297,7 @@ namespace Oct.Framework.DB.Implementation
             try
             {
                 Session.Open();
-                var cmd = new SqlCommand(sql);
-                cmd.Connection = Session.Connection;
+                var cmd = new SqlCommand(sql) {Connection = Session.Connection};
                 return cmd.ExecuteReader();
             }
             catch (SqlException ex)
@@ -525,10 +515,6 @@ namespace Oct.Framework.DB.Implementation
             {
                 throw ex;
             }
-            finally
-            {
-                //session.Connection.Close();
-            }
         }
 
         /// <summary>
@@ -556,10 +542,6 @@ namespace Oct.Framework.DB.Implementation
             {
                 throw ex;
             }
-            finally
-            {
-                //session.Connection.Close();
-            }
         }
 
         public DataSet RunProcedure(string storedProcName, IDataParameter[] parameters, string tableName, int timeOut)
@@ -579,10 +561,6 @@ namespace Oct.Framework.DB.Implementation
             catch (SqlException ex)
             {
                 throw ex;
-            }
-            finally
-            {
-                //session.Connection.Close();
             }
         }
 
@@ -608,10 +586,6 @@ namespace Oct.Framework.DB.Implementation
             catch (SqlException ex)
             {
                 throw ex;
-            }
-            finally
-            {
-                //session.Connection.Close();
             }
         }
 

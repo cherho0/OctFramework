@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attrbuites\AutoIncreaseAttribute.cs" />
+    <Compile Include="Attrbuites\IdentityAttribute.cs" />
     <Compile Include="Attrbuites\EntityAttrbuite.cs" />
     <Compile Include="Attrbuites\PrimaryKeyAttribute.cs" />
     <Compile Include="Attrbuites\PropertyInfoExtensions.cs" />
@@ -199,7 +199,6 @@
     <Compile Include="LightDataAccess\DataReaderToObjectMapper.cs" />
     <Compile Include="LightDataAccess\DBTools.cs" />
     <Compile Include="LightDataAccess\ObjectsChangeTracker.cs" />
-    <Compile Include="LightDataAccess\ThreadConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

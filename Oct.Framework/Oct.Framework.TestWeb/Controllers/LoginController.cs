@@ -30,6 +30,16 @@ namespace Oct.Framework.TestWeb.Controllers
 
         public ActionResult Login()
         {
+            Test.ax = 0;
+            Test.ay = 0;
+            Test.la = 2.1;
+            Test.bx = 3.1;
+            Test.by = 0;
+            Test.lb = 3.4;
+            Test.cx = 2.2;
+            Test.cy = 5.4;
+            Test.lc = 3.1;
+          var p =  Test.Get();
             var ss11 = CacheHelper.GetAll<string>("priceModels");
             //var models = Kernel.GetEnumModels<OperationEnum>(1,2);
 

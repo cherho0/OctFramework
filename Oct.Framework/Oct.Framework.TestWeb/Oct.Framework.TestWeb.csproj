@@ -143,6 +143,7 @@
     <Compile Include="Areas\Premission\Controllers\CommonUserController.cs" />
     <Compile Include="Areas\Premission\Controllers\CommonUserRoleController.cs" />
     <Compile Include="Code\Enums.cs" />
+    <Compile Include="Code\Test.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TestTsController.cs" />
@@ -786,7 +787,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>20814</DevelopmentServerPort>
+          <DevelopmentServerPort>17587</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:29858/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

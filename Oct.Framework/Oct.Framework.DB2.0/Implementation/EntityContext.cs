@@ -42,7 +42,6 @@ namespace Oct.Framework.DB.Implementation
                     return;
 
                 v = ds.Tables[0].Rows[0][0];
-
                 EntitiesProxyHelper.GetDynamicMethod<T>().SetValue(entity, idp, v.ToString().ToInt());
             }
             else
@@ -99,7 +98,12 @@ namespace Oct.Framework.DB.Implementation
             string sql = entity.GetModelSql(pk);
             ISQLContext sqlContext = new SQLContext(Session);
             var reader = sqlContext.ExecuteQueryReader(sql);
-            reader.Read();
+            if (!reader.Read())
+            {
+                reader.Close();
+                reader.Dispose();
+                return null;
+            }
             var r = ((DbDataReader)reader).ToObject<T>();
             reader.Close();
             reader.Dispose();

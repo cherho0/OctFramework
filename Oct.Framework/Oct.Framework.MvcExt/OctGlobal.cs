@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http;
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using MongoDB.Bson.Serialization;
@@ -34,7 +35,7 @@ namespace Oct.Framework.MvcExt
             container.RegisterType<ICommonRoleInfoService, CommonRoleInfoService>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
-
+           // GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
         }
 
     }

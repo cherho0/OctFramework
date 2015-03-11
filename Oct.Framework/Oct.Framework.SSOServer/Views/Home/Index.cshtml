@@ -1,5 +1,9 @@
-﻿@{
+﻿@using Oct.Framework.SSO.Entity
+@{
     ViewBag.Title = "Index";
+    var ssouer = (SsoUser)ViewBag.ssouser;
 }
 
 <h2>Passport -- 用户中心</h2>
+
+@ssouer.username

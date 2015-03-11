@@ -24,6 +24,7 @@ namespace Oct.Framework.SSO.Filter
             var userName = CookieHelper.GetCookieValue(SsoClient.UserName);
             if (!userName.IsNullOrEmpty())
             {
+                FormsAuthentication.SetAuthCookie(userName, true);
                 return;
             }
 

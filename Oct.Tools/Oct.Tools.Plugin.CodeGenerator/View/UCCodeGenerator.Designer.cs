@@ -92,14 +92,12 @@
             // dgvTableInfo
             // 
             this.dgvTableInfo.AllowUserToAddRows = false;
-            this.dgvTableInfo.AllowUserToDeleteRows = false;
             this.dgvTableInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTableInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTableInfo.Location = new System.Drawing.Point(6, 6);
             this.dgvTableInfo.Name = "dgvTableInfo";
-            this.dgvTableInfo.ReadOnly = true;
             this.dgvTableInfo.RowTemplate.Height = 23;
             this.dgvTableInfo.Size = new System.Drawing.Size(906, 366);
             this.dgvTableInfo.TabIndex = 6;

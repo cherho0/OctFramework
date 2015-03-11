@@ -97,7 +97,7 @@ namespace Oct.Framework.Core.Cache
         /// 得到用于读取的客户端对象
         /// </summary>
         /// <returns>只读客户端对象</returns>
-        private IRedisClient GetReadClient()
+        public IRedisClient GetReadClient()
         {
             return RedisClientManager.GetReadOnlyClient();
         }
@@ -106,7 +106,7 @@ namespace Oct.Framework.Core.Cache
         /// 得到用于写入的客户端对象
         /// </summary>
         /// <returns></returns>
-        private IRedisClient GetWriteClient()
+        public IRedisClient GetWriteClient()
         {
             return RedisClientManager.GetClient();
         }

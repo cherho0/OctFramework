@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="http://192.168.2.236:8888/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="http://192.168.2.236:8888/Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="http://192.168.2.236:8888/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="http://192.168.2.236:8888/Scripts/json2.js"></script>
+    <script src="http://192.168.2.236:8888/signalr/hubs"></script>
+    <script src="http://192.168.2.236:8888/Scripts/oct.im.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            octIm.init('http://192.168.2.236:8888', function () {
+                octIm.login('ny', 1);
+            });
+        });
+
+        function test() {
+            octIm.send2("ny", "ny", $('#titile').val(), $('#msg').val());
+        }
+    </script>
+</head>
+<body>
+    <div id="messages"></div>
+    <input type="text" id="msg" name="msg"/>
+     <input type="text" id="titile" name="msg"/>
+    <button onclick="test()">Test</button>
+    
+</body>
+</html>

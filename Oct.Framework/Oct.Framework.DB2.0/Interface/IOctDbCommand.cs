@@ -7,6 +7,12 @@ namespace Oct.Framework.DB.Interface
 {
     public interface IOctDbCommand
     {
+        IList<string> FromParts { get; }
+
+        IList<string> WhereParts { get; }
+
+        IList<string> OrderByParts { get; }
+
         string SqlText { get; }
 
         IDictionary<string, object> Paras { get; }

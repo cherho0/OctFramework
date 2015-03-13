@@ -6,7 +6,7 @@ using Oct.Framework.DB.Interface;
 
 namespace Oct.Framework.DB.Core
 {
-    public abstract class DBContextBase : IDisposable
+    public class DBContextBase : IDisposable
     {
         private readonly string _connstr = string.Empty;
         private SessionMgr _currentSessionMgr;
@@ -59,6 +59,7 @@ namespace Oct.Framework.DB.Core
                 _currentSessionMgr.GetCurrentSession().Dispose();
             }
             _currentSessionMgr = null;
+            CurrentSessionFactory.Clear();
         }
 
         private void Init()
@@ -69,7 +70,8 @@ namespace Oct.Framework.DB.Core
 
         public int SaveChanges()
         {
-            return _currentSessionMgr.GetCurrentSession().Commit();
+            var cout = _currentSessionMgr.GetCurrentSession().Commit();
+            return cout;
         }
 
         public IDBContext<T> GetContext<T>() where T : BaseEntity<T>, new()

@@ -238,7 +238,7 @@ namespace Oct.Framework.DB.Implementation
             return QueryPage(scalarBuiler.Where, scalarBuiler.Paras, order, pageIndex, pageSize);
         }
 
-        private DbCommand CreateSqlCommand(IOctDbCommand cmd)
+        public static DbCommand CreateSqlCommand(IOctDbCommand cmd)
         {
             DbCommand execCmd = cmd.GetDbCommand(x => x, () => new SqlCommand(),
                 x =>

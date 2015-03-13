@@ -40,6 +40,9 @@
     <Reference Include="log4net">
       <HintPath>..\ref\Castle.ActiveRecord-3.0.RC\net40cp\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Remotion.Linq">
+      <HintPath>..\ref\Remotion.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -188,6 +191,7 @@
     <Compile Include="Emit\Utils\ReflectionUtils.cs" />
     <Compile Include="Emit\Utils\ThreadSaveCache.cs" />
     <Compile Include="Extisions\IDbContextExtision.cs" />
+    <Compile Include="Extisions\IEntityExtision.cs" />
     <Compile Include="GenTable\AutoGen.cs" />
     <Compile Include="Implementation\SQLContext.cs" />
     <Compile Include="Implementation\EntityContext.cs" />
@@ -199,6 +203,26 @@
     <Compile Include="LightDataAccess\DataReaderToObjectMapper.cs" />
     <Compile Include="LightDataAccess\DBTools.cs" />
     <Compile Include="LightDataAccess\ObjectsChangeTracker.cs" />
+    <Compile Include="Linq\Commandbuilder\CommandBuilder.cs" />
+    <Compile Include="Linq\Commandbuilder\CommandParameter.cs" />
+    <Compile Include="Linq\Commandbuilder\SqlServerCommandBuilder.cs" />
+    <Compile Include="Linq\Commandbuilder\SqlServerDeleteCommandBuilder.cs" />
+    <Compile Include="Linq\Commandbuilder\SqlServerInsertCommandBuilder.cs" />
+    <Compile Include="Linq\Commandbuilder\SqlServerLimitPartsAggregator.cs" />
+    <Compile Include="Linq\Commandbuilder\SqlServerOrderByPartsCommandBuilder.cs" />
+    <Compile Include="Linq\Commandbuilder\SqlServerQueryCommandBuilder.cs" />
+    <Compile Include="Linq\Commandbuilder\SqlServerSelectPartsCommandBuilder.cs" />
+    <Compile Include="Linq\Commandbuilder\SqlServerUpdateCommandBuilder.cs" />
+    <Compile Include="Linq\Commandbuilder\SqlServerWherePartsCommandBuilder.cs" />
+    <Compile Include="Linq\Constants.cs" />
+    <Compile Include="Linq\ExpressionExtensions.cs" />
+    <Compile Include="Linq\IDbContextLinqExtision.cs" />
+    <Compile Include="Linq\SqlServerOrderByClauseVisitor.cs" />
+    <Compile Include="Linq\SqlServerQueryable.cs" />
+    <Compile Include="Linq\SqlServerQueryExecutor.cs" />
+    <Compile Include="Linq\SqlServerQueryModelVisitor.cs" />
+    <Compile Include="Linq\SqlServerSelectClauseVisitor.cs" />
+    <Compile Include="Linq\SqlServerWhereClauseVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

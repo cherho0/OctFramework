@@ -12,6 +12,7 @@ using Oct.Framework.DB.Composite;
 using Oct.Framework.DB.DynamicObj;
 using Oct.Framework.DB.Extisions;
 using Oct.Framework.DB.GenTable;
+using Oct.Framework.DB.Linq;
 
 namespace DbTest
 {
@@ -28,7 +29,8 @@ namespace DbTest
               var ss1 = context.Find    One<TestTs>(1);
               sw.Stop();
               Console.WriteLine("Nhibernate" + sw.Elapsed);*/
-            /*EntitiesProxyHelper.Register(Assembly.GetExecutingAssembly());
+            EntitiesProxyHelper.Register(Assembly.GetExecutingAssembly());
+            /*
 
             TestTs t = new TestTs();
 
@@ -83,8 +85,23 @@ namespace DbTest
 
             // GenDb.Gen(Assembly.GetAssembly(typeof(DbContext)),dbContext.SQLContext);
             //var sql = GenTbl.Gen<TestTs>(dbContext.SQLContext);
-            var m = dbContext.TestTsContext.GetModel(1);
+            // var m = dbContext.TestTsContext.GetModel(1);
 
+
+            var count = dbContext.TestTsContext.AsLinqQueryable().Count();
+            var a = dbContext.GetContext<TestTs>().AsLinqQueryable().FirstOrDefault();
+            var lis = dbContext.GetContext<TestTs>().AsLinqQueryable().ToList();
+            var order = dbContext.TestTsContext.AsLinqQueryable().Where(p => p.DD.Contains("ss")).ToList();
+            var part = dbContext.TestTsContext.AsLinqQueryable().Where(p => p.DD.Contains("ss")).ToList();
+
+            var ret = from dd in dbContext.GetContext<TestTs>().AsLinqQueryable() where dd.Id == 1 select dd;
+            
+            var rets = dbContext.TestTsContext.AsLinqQueryable().OrderBy(p => p.Id).Skip(10).Take(10).ToList();
+
+            new TestTs() { DD = "ss" }.Insert();
+            new TestTs() { DD = "ss", Id = 1 }.Update();
+            new TestTs() { Id = 1 }.Delete();
+            dbContext.SaveChanges();
             // Console.WriteLine("Oct.DB :" + sql);
 
             Console.ReadLine();

@@ -14,6 +14,19 @@ namespace Oct.Framework.DB.Core
             Paras = paras;
         }
 
+        public IList<string> FromParts { get; private set; }
+
+        public IList<string> WhereParts { get; private set; }
+
+        public IList<string> OrderByParts { get; private set; }
+
+        public OctDbCommand()
+        {
+            FromParts = new List<string>();
+            WhereParts = new List<string>();
+            OrderByParts = new List<string>();
+        }
+
         public string SqlText { get; private set; }
         public IDictionary<string, object> Paras { get; private set; }
 

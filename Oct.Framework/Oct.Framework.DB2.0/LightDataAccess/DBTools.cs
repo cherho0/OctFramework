@@ -57,6 +57,11 @@ namespace Oct.Framework.DB.LightDataAccess
 			return result;
 		}
 
+        public static IEnumerable<T> ToObjects<T>(this IDataReader reader)
+        {
+            return ((DbDataReader)reader).ToObjects<T>(null, null, null);
+        }
+
 		public static IEnumerable<T> ToObjects<T>(this DbDataReader reader)
 		{
 			return reader.ToObjects<T>(null, null, null);

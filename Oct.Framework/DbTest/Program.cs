@@ -86,12 +86,21 @@ namespace DbTest
             // GenDb.Gen(Assembly.GetAssembly(typeof(DbContext)),dbContext.SQLContext);
             //var sql = GenTbl.Gen<TestTs>(dbContext.SQLContext);
             // var m = dbContext.TestTsContext.GetModel(1);
-
-
+            sw.Start();
+            var lisss = dbContext.GetContext<TestTs>().Query();
+            sw.Stop();
+          var ss =  sw.Elapsed;
+          sw.Restart();
+          var lisss1 = dbContext.GetContext<TestTs>().Query();
+          sw.Stop();
+           ss = sw.Elapsed;
             var count = dbContext.TestTsContext.AsLinqQueryable().Count();
             var a = dbContext.GetContext<TestTs>().AsLinqQueryable().FirstOrDefault();
+            sw.Restart();
             var lis = dbContext.GetContext<TestTs>().AsLinqQueryable().ToList();
-            var order = dbContext.TestTsContext.AsLinqQueryable().Where(p => p.DD.Contains("ss")).ToList();
+            sw.Stop();
+            var qq = sw.Elapsed;
+            var order = dbContext.  TestTsContext.AsLinqQueryable().Where(p => p.DD.Contains("ss")).ToList();
             var part = dbContext.TestTsContext.AsLinqQueryable().Where(p => p.DD.Contains("ss")).ToList();
 
             var ret = from dd in dbContext.GetContext<TestTs>().AsLinqQueryable() where dd.Id == 1 select dd;

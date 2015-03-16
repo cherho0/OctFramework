@@ -139,6 +139,10 @@ namespace Oct.Framework.DB.Base
 
             foreach (var changedProp in changedProps)
             {
+                if (changedProp.name.Equals(PkName))
+                {
+                    continue;
+                }
                 sb.Append(string.Format("{0} = @{0},", changedProp.name));
 
                 parameters.Add("@" + changedProp.name, changedProp.value);

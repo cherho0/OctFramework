@@ -62,7 +62,7 @@ namespace Oct.Framework.DB.Interface
         /// </summary>
         /// <param name="where"></param>
         /// <returns></returns>
-        List<T> Query(string where, string order = "");
+        List<T> Query(string where = "", string order = "");
 
         /// <summary>
         ///     查询分页数据

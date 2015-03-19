@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Oct.Tools.Core;
+using System;
 using System.ComponentModel.Composition;
-using System.Drawing;
-using System.Data;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Oct.Tools.Core;
 
 namespace Oct.Tools.Plugin.HtmlGenerator
 {
@@ -33,7 +26,7 @@ namespace Oct.Tools.Plugin.HtmlGenerator
         {
             get
             {
-                return Path.Combine(Environment.CurrentDirectory, @"Res\Img\table.png");
+                return Path.Combine(Environment.CurrentDirectory, @"Img\table.png");
             }
         }
 

@@ -1,5 +1,7 @@
 ﻿using System.Data;
 using System.IO;
+using System.Text;
+using System.Web;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -45,6 +47,26 @@ namespace Oct.Framework.Core.Export
 
             return ms;
         }
+
+        /// <summary>
+        /// 用于Web导出
+        /// </summary>
+        /// <param name="dtSource">源DataTable</param>
+        /// <param name="strFileName">文件名</param>
+        public static void ExportByWeb(DataTable dtSource, string strFileName)
+        {
+            HttpContext curContext = HttpContext.Current;
+
+            // 设置编码和附件格式
+            curContext.Response.ContentType = "application/vnd.ms-excel";
+            curContext.Response.ContentEncoding = Encoding.UTF8;
+            curContext.Response.Charset = "";
+            curContext.Response.AppendHeader("Content-Disposition",
+                "attachment;filename=" + HttpUtility.UrlEncode(strFileName, Encoding.UTF8));
+
+            curContext.Response.BinaryWrite(RenderDataTableToExcel(dtSource));
+            curContext.Response.End();
+        } 
 
         /// <summary>
         /// 生成excel流

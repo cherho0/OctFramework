@@ -12,4 +12,8 @@
     <Key>192.168.0.21(OCTOPUS3.0_DEVELOPMENT)</Key>
     <ConnectionString>User id=OCTOPUS3.0;Password=SLN771(!!@@4;Server=192.168.0.21;database=OCTOPUS3.0_DEVELOPMENT;</ConnectionString>
   </DBInfo>
+  <DBInfo>
+    <Key>114.215.139.19(OCT_WEIXIN)</Key>
+    <ConnectionString>User id=sa;Password=wgs!2345;Server=114.215.139.19;database=OCT_WEIXIN;</ConnectionString>
+  </DBInfo>
 </ArrayOfDBInfo>

@@ -1,0 +1,81 @@
+<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="Oct.Tools.Plugin.CodeGenerator.Entity" #>
+<#@ parameter type="Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo" name="dt" #>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Oct.Framework.MvcExt.Base
+@using Oct.Framework.MvcExt.Extisions
+@using <#= dt.NameSpace #>.Models;
+
+@model List<<#= dt.ClassName #>DTO>
+<#
+	var pkName1 = string.Empty;
+	var pkName2 = string.Empty;
+	var pkFileds = dt.FiledList.Where(d => d.IsPk);
+
+	if (pkFileds.Count() > 0)
+	{
+		pkName1 = pkFileds.First().Name;	 
+		pkName2 = pkName1.Substring(0, 1).ToLower() + pkName1.Substring(1, pkName1.Length - 1); 
+	}
+#>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Index</h3>
+    </div>
+
+    <div class="panel-body">
+        @Html.AuthedLink("<i class=\"fa fa-plus\"></i>&nbsp;新增", "Create", "<#= dt.ClassName #>", "btn green btn-sm j-modal")
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+<#
+	foreach(FiledInfo filed in dt.FiledList) 
+	{		
+#>
+                    <th><#= filed.GetDisplayName() #></th>
+<# } #>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model)
+                {
+                    <tr>
+<#
+	foreach(FiledInfo filed in dt.FiledList) 
+	{		
+#>
+                        <td>@m.<#= filed.Name #></td>
+<# } #>
+                        <td>
+                            @Html.AuthedLink("<i class=\"fa fa-plus\"></i>&nbsp;查看", "Details", "<#= dt.ClassName #>", "btn btn-sm link j-modal", null, new { <#= pkName2 #> = m.<#= pkName1 #> })
+                            @Html.AuthedLink("修改", "Edit", "<#= dt.ClassName #>", "btn btn-sm link j-modal", null, new { <#= pkName2 #> = m.<#= pkName1 #> })
+                            @Html.AuthedLink("删除", "Delete", "<#= dt.ClassName #>", "", new { onclick = "return confirm('确认删除吗？')" }, new { <#= pkName2 #> = m.<#= pkName1 #> })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="panel-footer">
+
+        @{
+            var pageModel = (PageModel)ViewBag.PM;
+        }
+
+        @Html.Pager("page", pageModel.CurrentPage, pageModel.PageSize, pageModel.Total, PageMode.Numeric)
+
+    </div>
+</div>
+

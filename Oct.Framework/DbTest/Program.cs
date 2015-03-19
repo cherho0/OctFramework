@@ -8,6 +8,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using DbTest.Entities;
+using Oct.Framework.Core.Common;
+using Oct.Framework.Core.OrderNoGenter;
 using Oct.Framework.DB.Composite;
 using Oct.Framework.DB.DynamicObj;
 using Oct.Framework.DB.Extisions;
@@ -20,6 +22,8 @@ namespace DbTest
     {
         static void Main(string[] args)
         {
+           // Parallel.For(0, 10, x => Csl.Wl(NOGenter.Instance.GenOrderNo("BZY")));
+
             Stopwatch sw = new Stopwatch();
             sw.Start();
             /* EntityContext context = new EntityContext();
@@ -86,24 +90,22 @@ namespace DbTest
             // GenDb.Gen(Assembly.GetAssembly(typeof(DbContext)),dbContext.SQLContext);
             //var sql = GenTbl.Gen<TestTs>(dbContext.SQLContext);
             // var m = dbContext.TestTsContext.GetModel(1);
-            sw.Start();
-            var lisss = dbContext.GetContext<TestTs>().Query();
-            sw.Stop();
-          var ss =  sw.Elapsed;
-          sw.Restart();
-          var lisss1 = dbContext.GetContext<TestTs>().Query();
-          sw.Stop();
-           ss = sw.Elapsed;
+            var lis21 = dbContext.GetContext<UserAction>().AsLinqQueryable().ToList();
             var count = dbContext.TestTsContext.AsLinqQueryable().Count();
+           // var a = dbContext.GetContext<TestTs>().AsLinqQueryable().FirstOrDefault();
+            sw.Restart();
+            var lis = dbContext.GetContext<TestTs>().AsLinqQueryable().Select(p=>new TestTs(){ DD=p.DD}).ToList();
+            sw.Stop();
+            var ss = sw.Elapsed;
             var a = dbContext.GetContext<TestTs>().AsLinqQueryable().FirstOrDefault();
             sw.Restart();
-            var lis = dbContext.GetContext<TestTs>().AsLinqQueryable().ToList();
+            var lis1 = dbContext.GetContext<TestTs>().AsLinqQueryable().Select(p => new TestTs() { DD = p.DD }).ToList();
             sw.Stop();
             var qq = sw.Elapsed;
             var order = dbContext.  TestTsContext.AsLinqQueryable().Where(p => p.DD.Contains("ss")).ToList();
             var part = dbContext.TestTsContext.AsLinqQueryable().Where(p => p.DD.Contains("ss")).ToList();
 
-            var ret = from dd in dbContext.GetContext<TestTs>().AsLinqQueryable() where dd.Id == 1 select dd;
+            var ret = (from dd in dbContext.GetContext<TestTs>().AsLinqQueryable() where dd.Id == 12 select new TestTs(){Id = dd.Id}).ToList();
             
             var rets = dbContext.TestTsContext.AsLinqQueryable().OrderBy(p => p.Id).Skip(10).Take(10).ToList();
 

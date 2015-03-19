@@ -39,7 +39,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
         {
             get
             {
-                return Path.Combine(Environment.CurrentDirectory, @"Res\Config\DBInfo.xml");
+                return Path.Combine(Environment.CurrentDirectory, @"Config\DBInfo.xml");
             }
         }
 
@@ -61,7 +61,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
         /// </summary>
         private void SaveDBInfoList()
         {
-            string savePath = Path.Combine(Environment.CurrentDirectory, @"Res\Config");
+            var savePath = Path.Combine(Environment.CurrentDirectory, "Config");
 
             if (!Directory.Exists(savePath))
                 Directory.CreateDirectory(savePath);
@@ -391,7 +391,7 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
         {
             get
             {
-                return Path.Combine(Environment.CurrentDirectory, @"Res\Img\editor.png");
+                return Path.Combine(Environment.CurrentDirectory, @"Img\editor.png");
             }
         }
 

@@ -182,15 +182,17 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
 
         }
 
-        private void tvTemp_AfterSelect(object sender, TreeViewEventArgs e)
+        private void tvTemp_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Node.Tag == null)
+            var node = tvTemp.GetNodeAt(e.Location);
+
+            if (node == null || node.Tag == null)
                 return;
 
-            var temp = SectionMgr.GetTempElement(e.Node.Text);
+            var temp = SectionMgr.GetTempElement(node.Text);
 
             if (temp == null)
-                MessageUnity.ShowWarningMsg(string.Format("{0} 获取不到对应的配置信息！", e.Node.Text));
+                MessageUnity.ShowWarningMsg(string.Format("{0} 获取不到对应的配置信息！", node.Text));
             else
             {
                 if (this.SelectedTempEvent != null)
@@ -217,24 +219,22 @@ namespace Oct.Tools.Plugin.CodeGenerator.View
             }
         }
 
-        #endregion
-
-        private void tvTemp_MouseClick(object sender, MouseEventArgs e)
+        private void tvTemp_AfterSelect(object sender, TreeViewEventArgs e)
         {
-
-            var node = tvTemp.GetNodeAt(e.Location);
-            if (node == null || node.Tag == null)
+            if (e.Node.Tag == null)
                 return;
 
-            var temp = SectionMgr.GetTempElement(node.Text);
+            var temp = SectionMgr.GetTempElement(e.Node.Text);
 
             if (temp == null)
-                MessageUnity.ShowWarningMsg(string.Format("{0} 获取不到对应的配置信息！", node.Text));
+                MessageUnity.ShowWarningMsg(string.Format("{0} 获取不到对应的配置信息！", e.Node.Text));
             else
             {
                 if (this.SelectedTempEvent != null)
                     this.SelectedTempEvent(sender, temp);
             }
         }
+
+        #endregion
     }
 }

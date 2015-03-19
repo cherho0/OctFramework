@@ -1,0 +1,27 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="Oct.Tools.Plugin.CodeGenerator.Entity" #>
+<#@ parameter type="Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo" name="dt" #>
+using Oct.Framework.Entities;
+using System;
+using System.Collections.Generic;
+using Oct.Framework.DB.Core;
+using <#= dt.NameSpace #>.Entities.Entities;
+
+namespace <#= dt.NameSpace #>.Services
+{
+    public partial interface I<#= dt.ClassName #><#= dt.ClassNameExtend #>
+    {
+
+
+
+    }
+
+    public partial class <#= dt.ClassName #><#= dt.ClassNameExtend #> : I<#= dt.ClassName #><#= dt.ClassNameExtend #>
+    {
+
+
+
+    }
+}

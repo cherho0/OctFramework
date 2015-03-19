@@ -42,6 +42,11 @@ namespace Oct.Framework.DB.LightDataAccess
 			return reader.ToObject<T>(readerName, null, null);
 		}
 
+        public static T ToObject<T>(this DbDataReader reader, string readerName, string[] excludeFields)
+        {
+            return reader.ToObject<T>(readerName, excludeFields, null);
+        }
+
 		public static T ToObject<T>(this DbDataReader reader, string[] excludeFields)
 		{
 			return reader.ToObject<T>(null, excludeFields, null);

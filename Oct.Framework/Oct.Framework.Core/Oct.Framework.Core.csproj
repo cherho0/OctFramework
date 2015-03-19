@@ -161,6 +161,7 @@
     <Compile Include="MEF\ContainerHelper.cs" />
     <Compile Include="MEF\ExportAttribute.cs" />
     <Compile Include="MEF\ImportAttribute.cs" />
+    <Compile Include="OrderNoGenter\NOGenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\CDATA.cs" />
     <Compile Include="Reflection\DynamicResult.cs" />

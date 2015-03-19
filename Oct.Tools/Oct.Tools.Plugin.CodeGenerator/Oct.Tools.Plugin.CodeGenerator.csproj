@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Bin\</OutputPath>
+    <OutputPath>..\OctTools\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -54,61 +54,6 @@
     <Compile Include="Section\TempElement.cs" />
     <Compile Include="Section\TempElements.cs" />
     <Compile Include="Section\TempSection.cs" />
-    <Compile Include="Temp\CompositeQuery.cs">
-      <DependentUpon>CompositeQuery.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Temp\Controller.cs">
-      <DependentUpon>Controller.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Temp\DTO.cs">
-      <DependentUpon>DTO.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Temp\Entity.cs">
-      <DependentUpon>Entity.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Temp\GenServices.cs">
-      <DependentUpon>GenServices.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Temp\View\Create.cs">
-      <DependentUpon>Create.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Temp\View\Details.cs">
-      <DependentUpon>Details.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Temp\View\Edit.cs">
-      <DependentUpon>Edit.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Temp\View\Index.cs">
-      <DependentUpon>Index.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Temp\Config.cs">
-      <DependentUpon>Config.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Temp\CustomerService.cs">
-      <DependentUpon>CustomerService.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="View\UCBathCodeGenerator.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -196,63 +141,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="Temp\CompositeQuery.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>CompositeQuery.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Temp\Controller.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>Controller.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Temp\DTO.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>DTO.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Temp\Entity.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>Entity.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Temp\GenServices.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>GenServices.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="Temp\View\Create.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>Create.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Temp\View\Details.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>Details.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Temp\View\Edit.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>Edit.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Temp\View\Index.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>Index.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <Content Include="Temp\Config.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>Config.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <Parameters>&lt;%3fxml version="1.0" encoding="utf-16"%3f&gt;
-&lt;ArrayOfParameterStorage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Parameters>
-    </Content>
-    <Content Include="Temp\CustomerService.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>CustomerService.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

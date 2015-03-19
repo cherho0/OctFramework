@@ -56,6 +56,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Oct.Framework.Core\Oct.Framework.Core.csproj">
+      <Project>{61839D66-763D-4B91-9C3C-687B8AD40FD6}</Project>
+      <Name>Oct.Framework.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Oct.Framework.DB2.0\Oct.Framework.DB2.0.csproj">
       <Project>{985C505B-9B97-49ED-8A70-16B7E38C3AD1}</Project>
       <Name>Oct.Framework.DB2.0</Name>

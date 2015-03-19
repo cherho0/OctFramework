@@ -15,10 +15,12 @@ namespace Oct.Framework.DB.Linq
     public class SqlServerQueryExecutor : IQueryExecutor
     {
         protected ISQLContext provider;
+        private string _tblName;
 
-        public SqlServerQueryExecutor(ISQLContext provider)
+        public SqlServerQueryExecutor(ISQLContext provider, string tblName)
         {
             this.provider = provider;
+            _tblName = tblName;
         }
 
         #region ExecuteCollection<T>
@@ -31,17 +33,41 @@ namespace Oct.Framework.DB.Linq
         /// <returns></returns>
         public IEnumerable<T> ExecuteCollection<T>(QueryModel queryModel)
         {
-            SqlServerQueryModelVisitor queryModelVisitor = new SqlServerQueryModelVisitor();
+            SqlServerQueryModelVisitor queryModelVisitor = new SqlServerQueryModelVisitor(_tblName);
 
             var command = queryModelVisitor.Translate(queryModel);
             using (IDataReader reader = this.provider.ExecuteQueryReader(command.ToString(), command.PrepareParameter().ToArray()))
             {
+                var totalcols = ReflectionUtils.GetPublicFieldsAndProperties(typeof(T)).Select(p => p.Name).ToList();
+                var colcount = reader.FieldCount;
+                string[] cols = new string[colcount];
+                for (int i = 0; i < colcount; i++)
+                {
+                    cols[i] = reader.GetName(i);
+                }
+                for (int i = totalcols.Count - 1; i >= 0; i--)
+                {
+                    if (cols.Contains(totalcols[i]))
+                    {
+                        totalcols.Remove(totalcols[i]);
+                    }
+                }
+                var name = GetKeyName(typeof(T).FullName, totalcols);
+
                 while (reader.Read())
                 {
-                    yield return ((DbDataReader)reader).ToObject<T>();
+                    yield return ((DbDataReader)reader).ToObject<T>(name, totalcols.ToArray());
                 }
-              
             }
+        }
+
+        private string GetKeyName(string fullName, List<string> totalcols)
+        {
+            foreach (var totalcol in totalcols)
+            {
+                fullName += totalcol;
+            }
+            return Oct.Framework.Core.Security.Encypt.MD5(fullName);
         }
 
         #endregion
@@ -56,14 +82,13 @@ namespace Oct.Framework.DB.Linq
         /// <returns></returns>
         public T ExecuteScalar<T>(QueryModel queryModel)
         {
-            SqlServerQueryModelVisitor queryModelVisitor = new SqlServerQueryModelVisitor();
+            SqlServerQueryModelVisitor queryModelVisitor = new SqlServerQueryModelVisitor(_tblName);
 
             var command = queryModelVisitor.Translate(queryModel);
-            return provider.GetResult<T>(command.ToString(),command.PrepareParameter().ToArray());
+            return provider.GetResult<T>(command.ToString(), command.PrepareParameter().ToArray());
         }
 
         #endregion
-
         #region ExecuteSingle<T>
 
         /// <summary>
@@ -75,7 +100,7 @@ namespace Oct.Framework.DB.Linq
         /// <returns></returns>
         public T ExecuteSingle<T>(QueryModel queryModel, bool returnDefaultWhenEmpty = true)
         {
-            SqlServerQueryModelVisitor queryModelVisitor = new SqlServerQueryModelVisitor();
+            SqlServerQueryModelVisitor queryModelVisitor = new SqlServerQueryModelVisitor(_tblName);
 
             var command = queryModelVisitor.Translate(queryModel);
 
@@ -97,7 +122,22 @@ namespace Oct.Framework.DB.Linq
                         throw new InvalidOperationException("未查询出满足条件的任何记录。");
                     }
                 }
-                return reader.ToObject<T>();
+                var totalcols = ReflectionUtils.GetPublicFieldsAndProperties(typeof(T)).Select(p => p.Name).ToList();
+                var colcount = reader.FieldCount;
+                string[] cols = new string[colcount];
+                for (int i = 0; i < colcount; i++)
+                {
+                    cols[i] = reader.GetName(i);
+                }
+                for (int i = totalcols.Count - 1; i >= 0; i--)
+                {
+                    if (cols.Contains(totalcols[i]))
+                    {
+                        totalcols.Remove(totalcols[i]);
+                    }
+                }
+                var name = GetKeyName(typeof(T).FullName, totalcols);
+                return ((DbDataReader)reader).ToObject<T>(name, totalcols.ToArray());
             }
         }
 

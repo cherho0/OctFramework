@@ -1,4 +1,5 @@
 ﻿using System;
+using Oct.Framework.DB.DynamicObj;
 using Oct.Framework.DB.Linq.Commandbuilder;
 using Remotion.Linq;
 using Remotion.Linq.Clauses;
@@ -9,14 +10,16 @@ namespace Oct.Framework.DB.Linq
     internal class SqlServerQueryModelVisitor : QueryModelVisitorBase
     {
         protected readonly SqlServerQueryCommandBuilder commandBuilder;
-
+        private string _tblName;
         #region QueryModelVisitor
 
         /// <summary>
         /// 构造方法
         /// </summary>
-        public SqlServerQueryModelVisitor()
+        /// <param name="tblName"></param>
+        public SqlServerQueryModelVisitor(string tblName)
         {
+            _tblName = tblName;
             this.commandBuilder = new SqlServerQueryCommandBuilder();
         }
 
@@ -65,8 +68,9 @@ namespace Oct.Framework.DB.Linq
         public override void VisitMainFromClause( MainFromClause fromClause, QueryModel queryModel )
         {
             string itemName = fromClause.ItemName.Contains( "<generated>" ) ? "t" : fromClause.ItemName.ToLower();
+            var tblname = fromClause.ItemType.Name;
 
-            this.commandBuilder.FromParts.Add( string.Format( "{0}{1}{2} {3}", Constants.LeftQuote, fromClause.ItemType.Name, Constants.RightQuote, itemName ) );
+            this.commandBuilder.FromParts.Add(string.Format("{0} {1}",  _tblName, itemName));
 
             base.VisitMainFromClause( fromClause, queryModel );
         }
@@ -169,12 +173,9 @@ namespace Oct.Framework.DB.Linq
             else if( resultOperator is CountResultOperator || resultOperator is LongCountResultOperator )
             {
                 this.commandBuilder.IsCount = true;
-                //this.commandBuilder.SelectPart = "count(*)";
             }
             else if( resultOperator is FirstResultOperator || resultOperator is SingleResultOperator )
             {
-//                this.commandBuilder.LimitParts.From = 0;
-//                this.commandBuilder.LimitParts.Count = 1;
             }
             else if( resultOperator is DistinctResultOperator )
             {

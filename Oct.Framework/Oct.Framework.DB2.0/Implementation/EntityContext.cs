@@ -9,7 +9,6 @@ using Oct.Framework.DB.Base;
 using Oct.Framework.DB.Core;
 using Oct.Framework.DB.DynamicObj;
 using Oct.Framework.DB.Interface;
-using Oct.Framework.DB.LightDataAccess;
 
 namespace Oct.Framework.DB.Implementation
 {
@@ -98,17 +97,16 @@ namespace Oct.Framework.DB.Implementation
             string sql = entity.GetModelSql(pk);
             ISQLContext sqlContext = new SQLContext(Session);
             var reader = sqlContext.ExecuteQueryReader(sql);
-            if (!reader.Read())
+
+            using (reader)
             {
-                reader.Close();
-                reader.Dispose();
-                return null;
+                if (!reader.Read())
+                {
+                    return null;
+                }
+                var tuple = reader.GetDeserializerState<T>();
+                return (T)tuple.Func(reader);
             }
-            var r = ((DbDataReader)reader).ToObject<T>();
-            reader.Close();
-            reader.Dispose();
-            r.EntryUpdateStack();
-            return r;
         }
 
         /// <summary>
@@ -141,13 +139,16 @@ namespace Oct.Framework.DB.Implementation
                 }
             }
             var reader = sqlContext.ExecuteQueryReader(sql, paramters.ToArray());
-            var listdata = ((DbDataReader)reader).ToObjects<T>().ToList();
-            reader.Close();
-            reader.Dispose();
-            /*foreach (var data in listdata)
+
+            List<T> listdata = new List<T>();
+            using (reader)
             {
-                data.ClearStack();
-            }*/
+                var tuple = reader.GetDeserializerState<T>();
+                while (reader.Read())
+                {
+                    listdata.Add((T)tuple.Func(reader));
+                }
+            }
             return listdata;
         }
 
@@ -204,12 +205,20 @@ namespace Oct.Framework.DB.Implementation
             sql = "SELECT TOP " + pageSize + " * FROM (" + sql + ") query WHERE rn > " + start + " ORDER BY rn";
 
             var reader = (DbDataReader)sqlContext.ExecuteQueryReader(sql, parasListData.ToArray());
-            var entities = reader.ToObjects<T>().ToList();
+            List<T> listdata = new List<T>();
+            using (reader)
+            {
+                var tuple = reader.GetDeserializerState<T>();
+                while (reader.Read())
+                {
+                    listdata.Add((T)tuple.Func(reader));
+                }
+            }
             /*foreach (var data in entities)
             {
                 data.ClearStack();
             }*/
-            return new PageResult<T>(entities, total);
+            return new PageResult<T>(listdata, total);
         }
 
         /// <summary>

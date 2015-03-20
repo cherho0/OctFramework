@@ -90,6 +90,10 @@ namespace DbTest
             // GenDb.Gen(Assembly.GetAssembly(typeof(DbContext)),dbContext.SQLContext);
             //var sql = GenTbl.Gen<TestTs>(dbContext.SQLContext);
             // var m = dbContext.TestTsContext.GetModel(1);
+            sw.Restart();
+            var count111 = dbContext.TestTsContext.Query();
+            sw.Stop();
+
             var lis21 = dbContext.GetContext<UserAction>().AsLinqQueryable().ToList();
             var count = dbContext.TestTsContext.AsLinqQueryable().Count();
            // var a = dbContext.GetContext<TestTs>().AsLinqQueryable().FirstOrDefault();
@@ -100,6 +104,7 @@ namespace DbTest
             var a = dbContext.GetContext<TestTs>().AsLinqQueryable().FirstOrDefault();
             sw.Restart();
             var lis1 = dbContext.GetContext<TestTs>().AsLinqQueryable().Select(p => new TestTs() { DD = p.DD }).ToList();
+            var stes = dbContext.GetContext<TestTs>().AsLinqQueryable().Select(p => new { p.DD,p.Id} ).ToList();
             sw.Stop();
             var qq = sw.Elapsed;
             var order = dbContext.  TestTsContext.AsLinqQueryable().Where(p => p.DD.Contains("ss")).ToList();

@@ -72,124 +72,354 @@
     <Compile Include="Core\SessionMgr.cs" />
     <Compile Include="Core\SQLWordFilte.cs" />
     <Compile Include="Core\WhereHelper.cs" />
+    <Compile Include="Dapper\IDataReaderExtensions.cs" />
+    <Compile Include="Dapper\SqlMapper.cs" />
     <Compile Include="DynamicObj\ClassProxyInfo.cs" />
     <Compile Include="DynamicObj\DynamicMethod.cs" />
     <Compile Include="DynamicObj\EntitiesProxyHelper.cs" />
-    <Compile Include="Emit\AST\CompilationContext.cs" />
-    <Compile Include="Emit\AST\Helpers\AstBuildHelper.cs" />
-    <Compile Include="Emit\AST\Helpers\CompilationHelper.cs" />
-    <Compile Include="Emit\AST\ILCompilationException.cs" />
-    <Compile Include="Emit\AST\Interfaces\IAstAddr.cs" />
-    <Compile Include="Emit\AST\Interfaces\IAstNode.cs" />
-    <Compile Include="Emit\AST\Interfaces\IAstRef.cs" />
-    <Compile Include="Emit\AST\Interfaces\IAstRefOrAddr.cs" />
-    <Compile Include="Emit\AST\Interfaces\IAstRefOrValue.cs" />
-    <Compile Include="Emit\AST\Interfaces\IAstStackItem.cs" />
-    <Compile Include="Emit\AST\Interfaces\IAstValue.cs" />
-    <Compile Include="Emit\AST\Nodes\AstBox.cs" />
-    <Compile Include="Emit\AST\Nodes\AstCallMethod.cs" />
-    <Compile Include="Emit\AST\Nodes\AstCallMethodVoid.cs" />
-    <Compile Include="Emit\AST\Nodes\AstCastClass.cs" />
-    <Compile Include="Emit\AST\Nodes\AstComplexNode.cs" />
-    <Compile Include="Emit\AST\Nodes\AstConstantInt32.cs" />
-    <Compile Include="Emit\AST\Nodes\AstConstantNull.cs" />
-    <Compile Include="Emit\AST\Nodes\AstConstantString.cs" />
-    <Compile Include="Emit\AST\Nodes\AstExceptionHandlingBlock.cs" />
-    <Compile Include="Emit\AST\Nodes\AstExprEquals.cs" />
-    <Compile Include="Emit\AST\Nodes\AstExprIsNull.cs" />
-    <Compile Include="Emit\AST\Nodes\AstExprNot.cs" />
-    <Compile Include="Emit\AST\Nodes\AstIf.cs" />
-    <Compile Include="Emit\AST\Nodes\AstIfNull.cs" />
-    <Compile Include="Emit\AST\Nodes\AstIfTernar.cs" />
-    <Compile Include="Emit\AST\Nodes\AstIndirectRead.cs" />
-    <Compile Include="Emit\AST\Nodes\AstInitializeLocalVariable.cs" />
-    <Compile Include="Emit\AST\Nodes\AstNewNullable.cs" />
-    <Compile Include="Emit\AST\Nodes\AstNewObject.cs" />
-    <Compile Include="Emit\AST\Nodes\AstReadArgument.cs" />
-    <Compile Include="Emit\AST\Nodes\AstReadArrayItem.cs" />
-    <Compile Include="Emit\AST\Nodes\AstReadField.cs" />
-    <Compile Include="Emit\AST\Nodes\AstReadLocal.cs" />
-    <Compile Include="Emit\AST\Nodes\AstReadProperty.cs" />
-    <Compile Include="Emit\AST\Nodes\AstReadThis.cs" />
-    <Compile Include="Emit\AST\Nodes\AstReturn.cs" />
-    <Compile Include="Emit\AST\Nodes\AstReturnVoid.cs" />
-    <Compile Include="Emit\AST\Nodes\AstThrow.cs" />
-    <Compile Include="Emit\AST\Nodes\AstTypeof.cs" />
-    <Compile Include="Emit\AST\Nodes\AstUnbox.cs" />
-    <Compile Include="Emit\AST\Nodes\AstValueToAddr.cs" />
-    <Compile Include="Emit\AST\Nodes\AstWriteField.cs" />
-    <Compile Include="Emit\AST\Nodes\AstWriteLocal.cs" />
-    <Compile Include="Emit\AST\Nodes\AstWriteProperty.cs" />
-    <Compile Include="Emit\Conversion\ArraysConverter.cs" />
-    <Compile Include="Emit\Conversion\EMConvert.cs" />
-    <Compile Include="Emit\Conversion\NativeConvert.cs" />
-    <Compile Include="Emit\Conversion\NullableConverter.cs" />
-    <Compile Include="Emit\Conversion\StaticConvertersManager.cs" />
-    <Compile Include="Emit\DynamicAssemblyManager.cs" />
-    <Compile Include="Emit\EmitBuilders\BuilderUtils.cs" />
-    <Compile Include="Emit\EmitBuilders\CreateTargetInstanceBuilder.cs" />
-    <Compile Include="Emit\EmitBuilders\MappingBuilder.cs" />
-    <Compile Include="Emit\EmitBuilders\MappingOperationsProcessor.cs" />
-    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvoker.cs" />
-    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerAction_0.cs" />
-    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerAction_1.cs" />
-    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerAction_2.cs" />
-    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerAction_3.cs" />
-    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerBase.cs" />
-    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerFunc_0.cs" />
-    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerFunc_1.cs" />
-    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerFunc_2.cs" />
-    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerFunc_3.cs" />
-    <Compile Include="Emit\EmitInvoker\Methods\MethodInvoker.cs" />
-    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerAction_0.cs" />
-    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerAction_1.cs" />
-    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerAction_2.cs" />
-    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerAction_3.cs" />
-    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerBase.cs" />
-    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerFunc_0.cs" />
-    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerFunc_1.cs" />
-    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerFunc_2.cs" />
-    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerFunc_3.cs" />
-    <Compile Include="Emit\EmitMapperException.cs" />
-    <Compile Include="Emit\Mappers\CustomMapperImpl.cs" />
-    <Compile Include="Emit\Mappers\MapperForClassImpl.cs" />
-    <Compile Include="Emit\Mappers\MapperForCollectionImpl.cs" />
-    <Compile Include="Emit\Mappers\MapperPrimitiveImpl.cs" />
-    <Compile Include="Emit\Mappers\ObjectsMapperBaseImpl.cs" />
-    <Compile Include="Emit\MappingConfiguration\CustomConverterDescriptor.cs" />
-    <Compile Include="Emit\MappingConfiguration\CustomMapConfig.cs" />
-    <Compile Include="Emit\MappingConfiguration\DefaultCustomConverterProvider.cs" />
-    <Compile Include="Emit\MappingConfiguration\DefaultMapConfig.cs" />
-    <Compile Include="Emit\MappingConfiguration\ICustomConverter.cs" />
-    <Compile Include="Emit\MappingConfiguration\ICustomConverterProvider.cs" />
-    <Compile Include="Emit\MappingConfiguration\IMappingConfigurator.cs" />
-    <Compile Include="Emit\MappingConfiguration\MapConfigBase.cs" />
-    <Compile Include="Emit\MappingConfiguration\MapConfigBaseImpl.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\DestSrcReadOperation.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\DestWriteOperation.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\IComplexOperation.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\IDestOperation.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\IDestReadOperation.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\IDestWriteOperation.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\IMappingOperation.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\IReadWriteOperation.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\IRootMappingOperation.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\ISrcOperation.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\ISrcReadOperation.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\ISrcWriteOperation.cs" />
+    <Compile Include="Emit\AST\CompilationContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Helpers\AstBuildHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Helpers\CompilationHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\ILCompilationException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Interfaces\IAstAddr.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Interfaces\IAstNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Interfaces\IAstRef.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Interfaces\IAstRefOrAddr.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Interfaces\IAstRefOrValue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Interfaces\IAstStackItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Interfaces\IAstValue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstBox.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstCallMethod.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstCallMethodVoid.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstCastClass.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstComplexNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstConstantInt32.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstConstantNull.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstConstantString.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstExceptionHandlingBlock.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstExprEquals.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstExprIsNull.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstExprNot.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstIf.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstIfNull.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstIfTernar.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstIndirectRead.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstInitializeLocalVariable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstNewNullable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstNewObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstReadArgument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstReadArrayItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstReadField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstReadLocal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstReadProperty.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstReadThis.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstReturn.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstReturnVoid.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstThrow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstTypeof.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstUnbox.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstValueToAddr.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstWriteField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstWriteLocal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\AST\Nodes\AstWriteProperty.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\Conversion\ArraysConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\Conversion\EMConvert.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\Conversion\NativeConvert.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\Conversion\NullableConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\Conversion\StaticConvertersManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\DynamicAssemblyManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitBuilders\BuilderUtils.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitBuilders\CreateTargetInstanceBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitBuilders\MappingBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitBuilders\MappingOperationsProcessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvoker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerAction_0.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerAction_1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerAction_2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerAction_3.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerFunc_0.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerFunc_1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerFunc_2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Delegates\DelegateInvokerFunc_3.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Methods\MethodInvoker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerAction_0.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerAction_1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerAction_2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerAction_3.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerFunc_0.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerFunc_1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerFunc_2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitInvoker\Methods\MethodInvokerFunc_3.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\EmitMapperException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\Mappers\CustomMapperImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\Mappers\MapperForClassImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\Mappers\MapperForCollectionImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\Mappers\MapperPrimitiveImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\Mappers\ObjectsMapperBaseImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\CustomConverterDescriptor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\CustomMapConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\DefaultCustomConverterProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\DefaultMapConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\ICustomConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\ICustomConverterProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\IMappingConfigurator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MapConfigBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MapConfigBaseImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\DestSrcReadOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\DestWriteOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\IComplexOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\IDestOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\IDestReadOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\IDestWriteOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\IMappingOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\IReadWriteOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\IRootMappingOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\ISrcOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\ISrcReadOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\Interfaces\ISrcWriteOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Emit\MappingConfiguration\MappingOperations\MappingOperationDelegates.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\OperationsBlock.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\ReadWriteComplex.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\ReadWriteSimple.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\RootMappingOperation.cs" />
-    <Compile Include="Emit\MappingConfiguration\MappingOperations\SrcReadOperation.cs" />
-    <Compile Include="Emit\MappingConfiguration\MemberDescriptor.cs" />
-    <Compile Include="Emit\MappingConfiguration\TypeList.cs" />
-    <Compile Include="Emit\ObjectMapperManager.cs" />
-    <Compile Include="Emit\ObjectsMapper.cs" />
-    <Compile Include="Emit\Utils\MiscUtils.cs" />
-    <Compile Include="Emit\Utils\ReflectionUtils.cs" />
-    <Compile Include="Emit\Utils\ThreadSaveCache.cs" />
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\OperationsBlock.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\ReadWriteComplex.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\ReadWriteSimple.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\RootMappingOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MappingOperations\SrcReadOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\MemberDescriptor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\MappingConfiguration\TypeList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\ObjectMapperManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\ObjectsMapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\Utils\MiscUtils.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\Utils\ReflectionUtils.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emit\Utils\ThreadSaveCache.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Extisions\IDbContextExtision.cs" />
     <Compile Include="Extisions\IEntityExtision.cs" />
     <Compile Include="GenTable\AutoGen.cs" />
@@ -199,10 +429,6 @@
     <Compile Include="Interface\IOctDbCommand.cs" />
     <Compile Include="Interface\ISession.cs" />
     <Compile Include="Interface\ISQLContext.cs" />
-    <Compile Include="LightDataAccess\ConvertUtils.cs" />
-    <Compile Include="LightDataAccess\DataReaderToObjectMapper.cs" />
-    <Compile Include="LightDataAccess\DBTools.cs" />
-    <Compile Include="LightDataAccess\ObjectsChangeTracker.cs" />
     <Compile Include="Linq\Commandbuilder\CommandBuilder.cs" />
     <Compile Include="Linq\Commandbuilder\CommandParameter.cs" />
     <Compile Include="Linq\Commandbuilder\SqlServerCommandBuilder.cs" />
@@ -224,6 +450,7 @@
     <Compile Include="Linq\SqlServerSelectClauseVisitor.cs" />
     <Compile Include="Linq\SqlServerWhereClauseVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\ObjectsChangeTracker.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Oct.Framework.Core\Oct.Framework.Core.csproj">
@@ -234,7 +461,6 @@
   <ItemGroup>
     <None Include="Emit\MappingConfiguration\MappingOperations\Interfaces\OperationdDiagram.cd" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -12,6 +12,7 @@ using Oct.Framework.DB.DynamicObj;
 using Oct.Framework.DB.Emit.Utils;
 using Oct.Framework.DB.Implementation;
 using Oct.Framework.DB.Interface;
+using Oct.Framework.DB.Utils;
 
 namespace Oct.Framework.DB.GenTable
 {

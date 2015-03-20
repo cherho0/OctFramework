@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,7 +13,6 @@ using Oct.Framework.DB.Composite;
 using Oct.Framework.DB.Core;
 using Oct.Framework.DB.Implementation;
 using Oct.Framework.DB.Interface;
-using Oct.Framework.DB.LightDataAccess;
 
 namespace Oct.Framework.DB.Extisions
 {
@@ -46,8 +46,16 @@ namespace Oct.Framework.DB.Extisions
             }
             ISQLContext sqlContext = new SQLContext(context.Session);
             var reader = (DbDataReader)sqlContext.ExecuteQueryReader(sql, paramters.ToArray());
-            return reader.ToObjects<T>().ToList();
-
+            List<T> listdata = new List<T>();
+            using (reader)
+            {
+                var tuple = reader.GetDeserializerState<T>();
+                while (reader.Read())
+                {
+                    listdata.Add((T)tuple.Func(reader));
+                }
+            }
+            return listdata;
         }
 
         /// <summary>
@@ -71,7 +79,16 @@ namespace Oct.Framework.DB.Extisions
             var paramters = h.Paras;
             ISQLContext sqlContext = new SQLContext(context.Session);
             var reader = (DbDataReader)sqlContext.ExecuteQueryReader(sql, paramters.ToArray());
-            return reader.ToObjects<T>().ToList();
+            List<T> listdata = new List<T>();
+            using (reader)
+            {
+                var tuple = reader.GetDeserializerState<T>();
+                while (reader.Read())
+                {
+                    listdata.Add((T)tuple.Func(reader));
+                }
+            }
+            return listdata;
         }
 
         /// <summary>
@@ -107,8 +124,16 @@ namespace Oct.Framework.DB.Extisions
             sql = "SELECT TOP " + pageSize + " * FROM (" + sql + ") query WHERE rn > " + start + " ORDER BY rn";
 
             var reader = (DbDataReader)sqlContext.ExecuteQueryReader(sql, paramters.ToArray());
-            var entities= reader.ToObjects<T>().ToList();
-            return new PageResult<T>(entities, total);
+            List<T> listdata = new List<T>();
+            using (reader)
+            {
+                var tuple = reader.GetDeserializerState<T>();
+                while (reader.Read())
+                {
+                    listdata.Add((T)tuple.Func(reader));
+                }
+            }
+            return new PageResult<T>(listdata, total);
 
         }
       

@@ -4,10 +4,9 @@ using System.Data;
 using System.Data.Common;
 using System.Linq;
 using Oct.Framework.DB.Base;
-using Oct.Framework.DB.Emit.Utils;
 using Oct.Framework.DB.Implementation;
 using Oct.Framework.DB.Interface;
-using Oct.Framework.DB.LightDataAccess;
+using Oct.Framework.DB.Utils;
 using Remotion.Linq;
 
 namespace Oct.Framework.DB.Linq
@@ -38,25 +37,13 @@ namespace Oct.Framework.DB.Linq
             var command = queryModelVisitor.Translate(queryModel);
             using (IDataReader reader = this.provider.ExecuteQueryReader(command.ToString(), command.PrepareParameter().ToArray()))
             {
-                var totalcols = ReflectionUtils.GetPublicFieldsAndProperties(typeof(T)).Select(p => p.Name).ToList();
-                var colcount = reader.FieldCount;
-                string[] cols = new string[colcount];
-                for (int i = 0; i < colcount; i++)
+                using (reader)
                 {
-                    cols[i] = reader.GetName(i);
-                }
-                for (int i = totalcols.Count - 1; i >= 0; i--)
-                {
-                    if (cols.Contains(totalcols[i]))
+                    var tuple = reader.GetDeserializerState<T>();
+                    while (reader.Read())
                     {
-                        totalcols.Remove(totalcols[i]);
+                        yield return (T)tuple.Func(reader);
                     }
-                }
-                var name = GetKeyName(typeof(T).FullName, totalcols);
-
-                while (reader.Read())
-                {
-                    yield return ((DbDataReader)reader).ToObject<T>(name, totalcols.ToArray());
                 }
             }
         }
@@ -122,22 +109,9 @@ namespace Oct.Framework.DB.Linq
                         throw new InvalidOperationException("未查询出满足条件的任何记录。");
                     }
                 }
-                var totalcols = ReflectionUtils.GetPublicFieldsAndProperties(typeof(T)).Select(p => p.Name).ToList();
-                var colcount = reader.FieldCount;
-                string[] cols = new string[colcount];
-                for (int i = 0; i < colcount; i++)
-                {
-                    cols[i] = reader.GetName(i);
-                }
-                for (int i = totalcols.Count - 1; i >= 0; i--)
-                {
-                    if (cols.Contains(totalcols[i]))
-                    {
-                        totalcols.Remove(totalcols[i]);
-                    }
-                }
-                var name = GetKeyName(typeof(T).FullName, totalcols);
-                return ((DbDataReader)reader).ToObject<T>(name, totalcols.ToArray());
+
+                var tuple = reader.GetDeserializerState<T>();
+                return (T)tuple.Func(reader);
             }
         }
 

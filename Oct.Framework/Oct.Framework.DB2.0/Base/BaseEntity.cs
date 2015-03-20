@@ -10,7 +10,7 @@ using Oct.Framework.Core.Log;
 using Oct.Framework.DB.Core;
 using Oct.Framework.DB.DynamicObj;
 using Oct.Framework.DB.Interface;
-using Oct.Framework.DB.LightDataAccess;
+using Oct.Framework.DB.Utils;
 
 namespace Oct.Framework.DB.Base
 {

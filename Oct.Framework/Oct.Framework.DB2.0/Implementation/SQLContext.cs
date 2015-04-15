@@ -253,7 +253,7 @@ namespace Oct.Framework.DB.Implementation
             {
                 Session.Open();
                 var ds = new DataSet();
-                var cmd = new SqlCommand(sql) {Connection = Session.Connection};
+                var cmd = new SqlCommand(sql) { Connection = Session.Connection };
                 var command = new SqlDataAdapter(cmd);
 
                 command.Fill(ds);
@@ -297,7 +297,7 @@ namespace Oct.Framework.DB.Implementation
             try
             {
                 Session.Open();
-                var cmd = new SqlCommand(sql) {Connection = Session.Connection};
+                var cmd = new SqlCommand(sql) { Connection = Session.Connection };
                 return cmd.ExecuteReader();
             }
             catch (SqlException ex)
@@ -325,6 +325,22 @@ namespace Oct.Framework.DB.Implementation
                 throw new Exception(ex.Message + "\r\n" + sql);
             }
 
+        }
+
+
+        public List<T> ExecuteQuery<T>(string sql, params SqlParameter[] cmdParms)
+        {
+            var reader = ExecuteQueryReader(sql, cmdParms);
+            List<T> listdata = new List<T>();
+            using (reader)
+            {
+                var tuple = reader.GetDeserializerState<T>();
+                while (reader.Read())
+                {
+                    listdata.Add((T)tuple.Func(reader));
+                }
+            }
+            return listdata;
         }
 
 

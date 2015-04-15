@@ -4,7 +4,9 @@ using Oct.Tools.Core.Ioc;
 using Oct.Tools.Core.Unity;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -36,7 +38,7 @@ namespace Oct.Tools.Host
         /// </summary>
         private void LoadEditorPlugInList()
         {
-            this._editorPlugInList = ContainerHelper.GetExport<IEditorPlugIn>(Environment.CurrentDirectory);
+            this._editorPlugInList = ContainerHelper.GetExport<IEditorPlugIn>(Path.Combine(Environment.CurrentDirectory, ConfigurationManager.AppSettings["AppStartPath"]));
 
             this.labPlugInCount.Text = string.Format("加载插件数：{0}", this._editorPlugInList.Count());
 

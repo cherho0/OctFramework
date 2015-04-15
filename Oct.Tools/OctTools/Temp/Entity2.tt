@@ -1,0 +1,52 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="Oct.Tools.Plugin.CodeGenerator.Entity" #>
+<#@ parameter type="Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo" name="dt" #>
+using Oct.Framework.DB.Attrbuites;
+using Oct.Framework.DB.Base;
+
+namespace <#= dt.NameSpace #>.Entities
+{
+	[Serializable]
+	[Entity("<#= dt.TableName #>")]
+	public partial class <#= dt.ClassName #><#= dt.ClassNameExtend #> : BaseEntity<<#= dt.ClassName #><#= dt.ClassNameExtend #>>
+	{ 
+	<#
+			var pkName = string.Empty;
+			var pkFileds = dt.FiledList.Where(d => d.IsPk);
+
+			if (pkFileds.Count() > 0)
+				pkName = pkFileds.First().Name;	 
+
+			var identifyFiled = dt.FiledList.Where(d => d.IsIdentify).FirstOrDefault();	
+		#>
+
+	#region	属性
+		<#
+			foreach(FiledInfo filed in dt.FiledList) 
+			{	
+
+              
+		#>
+
+		<#
+		if (pkName == filed.Name)
+        {#>
+		 [PrimaryKey]
+        <#}	 #>
+		<#if (identifyFiled!= null && identifyFiled.Name == filed.Name)
+        {#>
+		 [Identity]
+        <#}	 #>
+		public <#= filed.CSharpType + " " + filed.Name #>
+		{
+			get;
+			set;
+		}
+
+		<# } #>
+
+		#endregion
+	}
+}

@@ -1,0 +1,73 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Configuration" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="Oct.Tools.Plugin.CodeGenerator.Entity" #>
+<#@ parameter type="Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo" name="dt" #>
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+@section PluginsJS {
+    <script src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+    <script src="~/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
+}
+
+@using <#= dt.NameSpace #>.Models;
+
+@model <#= dt.ClassName #>DTO
+
+<div class="container">
+    @using (Html.BeginForm("Create", "<#= dt.ClassName #>", FormMethod.Post, new { @class = "J_FormValidate" }))
+    {
+        <div class="form form-horizontal">
+<#
+	var ignoreFiledNames = ConfigurationManager.AppSettings["IgnoreFiledNames"].Split(',');
+
+	foreach(FiledInfo filed in dt.FiledList) 
+	{		
+        if (filed.IsPk || ignoreFiledNames.Contains(filed.Name.ToLower()))
+			continue;
+#>
+            <div class="form-group">
+                <#= filed.IsAllowNull ? "<label class=\"col-xs-3 control-label\">" : "<label class=\"col-xs-3 control-label\"><i class=\"fa fa-asterisk required\"></i>" #><#= filed.GetDisplayName() #></label>
+                <div class="col-xs-5">
+<# 
+	var controlHtml = new StringBuilder();
+	var requiredCssName = filed.IsAllowNull ? string.Empty : " required";
+
+	switch (filed.CSharpType.ToLower())
+	{
+		case "bool":
+			controlHtml.AppendFormat("@Html.CheckBoxFor(p => p.{0})", filed.Name);
+			break;
+
+		case "decimal":
+		case "int":
+			controlHtml.AppendFormat("@Html.TextBoxFor(p => p.{0}, new {2} @class = \"form-control{1}\", number = true {3})", filed.Name, requiredCssName, "{", "}");
+			break;
+
+		case "guid":
+			controlHtml.AppendFormat("@Html.DropDownListFor(p => p.{0}, (IEnumerable<SelectListItem>)this.ViewBag.{0}s, new {2} @class = \"form-control input-sm{1}\" {3})", filed.Name, requiredCssName, "{", "}");
+			break;
+
+		default:
+			controlHtml.AppendFormat("@Html.TextBoxFor(p => p.{0}, new {2} @class = \"form-control{1}\" {3})", filed.Name, requiredCssName, "{", "}");
+			break;
+	}
+#>
+                    <#= controlHtml.ToString() #>
+                </div>
+                <label class="col-xs-4 help-inline J_ValidateMsg"></label>
+            </div>
+<# } #>
+
+            <div class="form-group">
+                <div class="col-xs-9 col-xs-offset-3">
+                    <button type="submit" value="新增" class="btn blue"><i class="fa fa-plus"></i>&nbsp;新增</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

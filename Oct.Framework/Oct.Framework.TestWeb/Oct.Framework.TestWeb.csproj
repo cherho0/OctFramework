@@ -747,7 +747,7 @@
       <Name>Oct.Framework.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Oct.Framework.DB\Oct.Framework.DB.csproj">
-      <Project>{9FA1EBD6-3362-4225-AA78-6EB95FBFAE93}</Project>
+      <Project>{9fa1ebd6-3362-4225-aa78-6eb95fbfae93}</Project>
       <Name>Oct.Framework.DB</Name>
     </ProjectReference>
     <ProjectReference Include="..\Oct.Framework.Entities\Oct.Framework.Entities.csproj">

@@ -1,0 +1,231 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="Oct.Tools.Plugin.CodeGenerator.Entity" #>
+<#@ parameter type="Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo" name="dt" #>
+using Oct.Framework.DB.Base;
+using Oct.Framework.DB.Core;
+using Oct.Framework.DB.Interface;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
+using System.Text;
+
+namespace <#= dt.NameSpace #>
+{
+	[Serializable]
+	public partial class <#= dt.ClassName #><#= dt.ClassNameExtend #> : BaseEntity<<#= dt.ClassName #><#= dt.ClassNameExtend #>>
+	{ 
+		#region	属性
+		<#
+			foreach(FiledInfo filed in dt.FiledList) 
+			{		
+		#>
+
+		public <#= filed.CSharpType + " " + filed.Name #>
+		{
+			get;
+			set;
+		}
+		<# } #>
+
+		#endregion
+
+		#region 重载
+
+		public override <#= dt.ClassName #> GetEntityFromDataRow(DataRow row)
+		{
+			<#		
+				var code = new StringBuilder();
+
+				for (int i = 0; i < dt.FiledList.Count; i++)
+				{
+					var filed = dt.FiledList[i];
+					var type = filed.CSharpType.ToLower();
+					if (type == "bool")
+					{
+						code.AppendFormat("{0}if (row.Table.Columns.Contains(\"{1}\") && row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tif ((row[\"{0}\"].ToString() == \"1\") || (row[\"{0}\"].ToString().ToLower() == \"true\"))\r\n", filed.Name);
+						code.Append("\t\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\t\tthis.{0} = true;\r\n", filed.Name);
+						code.Append("\t\t\t\t}\r\n");
+						code.Append("\t\t\t\telse\r\n");
+						code.Append("\t\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\t\tthis.{0} = false;\r\n",filed.Name);
+						code.Append("\t\t\t\t}\r\n");	
+						code.Append("\t\t\t}\r\n");	
+					}
+					else if (type == "byte[]")
+					{
+						code.AppendFormat("{0}if (row.Table.Columns.Contains(\"{1}\") && row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tthis.{0} = (byte[])row[\"{1}\"];\r\n", filed.Name,filed.Name);	
+						code.Append("\t\t\t}\r\n");	
+					}
+					else if (type == "datetime")
+					{
+						code.AppendFormat("{0}if (row.Table.Columns.Contains(\"{1}\") && row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tthis.{0} = DateTime.Parse(row[\"{1}\"].ToString());\r\n",  filed.Name,filed.Name);	
+						code.Append("\t\t\t}\r\n");	
+					}
+					else if (type == "guid")
+					{
+						code.AppendFormat("{0}if (row.Table.Columns.Contains(\"{1}\") && row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tthis.{0} = new Guid(row[\"{1}\"].ToString());\r\n",  filed.Name,filed.Name);	
+						code.Append("\t\t\t}\r\n");	
+					}
+					else if (type == "string")
+					{
+						code.AppendFormat("{0}if (row.Table.Columns.Contains(\"{1}\") && row[\"{1}\"] != null)\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tthis.{0} = row[\"{1}\"].ToString();\r\n",  filed.Name,filed.Name);	
+						code.Append("\t\t\t}\r\n");	
+					}
+					else if (type == "decimal" || type == "double" || type == "float" || type == "int" || type == "long")
+					{
+						code.AppendFormat("{0}if (row.Table.Columns.Contains(\"{1}\") && row[\"{1}\"] != null && row[\"{1}\"].ToString() != \"\")\r\n", i == 0 ? string.Empty : "\t\t\t", filed.Name);	
+						code.Append("\t\t\t{\r\n");
+						code.AppendFormat("\t\t\t\tthis.{0} = {1}.Parse(row[\"{2}\"].ToString());\r\n", filed.Name, type,filed.Name);	
+						code.Append("\t\t\t}\r\n");	
+					}
+				}
+			#>
+<#= code.ToString() #>
+			return this;
+		}
+
+		public override <#= dt.ClassName #> GetEntityFromDataReader(IDataReader reader)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                var name = reader.GetName(i);
+				<#
+				for (int i = 0; i < dt.FiledList.Count; i++)
+				{
+					var filed = dt.FiledList[i];
+					var type = filed.CSharpType.ToLower();	
+					#>
+if (name.ToLower() == "<#=filed.Name.ToLower()#>"  && !reader.IsDBNull(i))
+{
+<#if(type == "bool")
+{#>
+<#=filed.Name#> = reader.GetBoolean(i);
+<#}#>
+<#if(type == "byte[]")
+{#>
+<#=filed.Name#> = (byte[])reader.GetValue(i);
+<#}#>
+<#if(type == "datetime")
+{#>
+<#=filed.Name#> = reader.GetDateTime(i);
+<#}#>
+<#if(type == "guid")
+{#>
+<#=filed.Name#> = reader.GetGuid(i);
+<#}#>
+<#if(type == "string")
+{#>
+<#=filed.Name#> = reader.GetString(i);
+<#}#>
+<#if(type == "decimal")
+{#>
+<#=filed.Name#> = reader.GetDecimal(i);
+<#}#>
+<#if(type == "double")
+{#>
+<#=filed.Name#> = reader.GetDouble(i);
+<#}#>
+<#if(type == "float")
+{#>
+<#=filed.Name#> = reader.GetFloat(i);
+<#}#>
+<#if(type == "int")
+{#>
+<#=filed.Name#> = reader.GetInt32(i);
+<#}#>
+<#if(type == "long")
+{#>
+<#=filed.Name#> = reader.GetInt64(i);
+<#}#>
+ continue;
+ }
+<#}#>               
+}
+            return this;
+        }
+
+		public override string TableName
+		{
+			get
+			{
+				return "<#= dt.ClassName #>";
+			}
+		}
+
+		 public override bool IsIdentityPk
+        {
+            get { return false; }
+        }
+
+		#region 重载
+
+			<#
+			var pkName = string.Empty;
+			var pkFileds = dt.FiledList.Where(d => d.IsPk);
+
+			if (pkFileds.Count() > 0)
+				pkName = pkFileds.First().Name;	 
+
+		#>
+
+		public override object PkValue
+		{
+			get
+			{
+				return this.<#= pkName #>; 
+			}
+		}
+
+		public override string PkName
+		{
+			get
+			{
+				return "<#= pkName #>"; 
+			}
+		}
+
+        private Dictionary<string, string> _props;
+
+		public override Dictionary<string, string> Props
+	    {
+	        get {
+				if(_props == null)
+				{
+					_props = new Dictionary<string, string>();
+					<#for (int i = 0; i < dt.FiledList.Count; i++){
+					var filed = dt.FiledList[i];#>
+					_props.Add( "<#= filed.Name #>","<#= filed.Name #>");
+					<#}#>
+				}
+				return _props;			 
+			 }
+	    }
+
+		public override string GetQuerySQL(string @where = "")
+		{
+			var sql = @"<#=  dt.Sql #> where 1=1 ";
+           
+			if (!string.IsNullOrEmpty(@where))
+				sql += "and " + @where;
+
+			return sql;
+		}
+
+		#endregion
+	}
+}

@@ -12,6 +12,7 @@ using Oct.Framework.Core.Args;
 using Oct.Framework.Core.IOC;
 using Oct.Framework.Core.Log;
 using Oct.Framework.DB.Base;
+using Oct.Framework.DB.Core;
 using Oct.Framework.DB.Interface;
 using Oct.Framework.Entities;
 
@@ -60,7 +61,7 @@ namespace Oct.Framework.SearchEngine
 
         private List<T> GetLists()
         {
-            using (var dbContext = new DbContext())
+            using (var dbContext = new DBContextBase())
             {
                 var allmodel = dbContext.GetContext<T>().Query("");
                 return allmodel;
@@ -69,7 +70,7 @@ namespace Oct.Framework.SearchEngine
 
         private T GetOne(string key, object id)
         {
-            using (var dbContext = new DbContext())
+            using (var dbContext = new DBContextBase())
             {
                 var models = dbContext.GetContext<T>().Query(" " + key + "=?", "", id);
                 if (models.Count > 0)

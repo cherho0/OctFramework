@@ -144,6 +144,7 @@
     </Compile>
     <Compile Include="Export\ExportExcel.cs" />
     <Compile Include="Common\ExpressionHelper.cs" />
+    <Compile Include="Html\HtmlHelper.cs" />
     <Compile Include="Image\ImageHelper.cs" />
     <Compile Include="IOC\Bootstrapper.cs" />
     <Compile Include="Common\ConfigSettingHelper.cs" />

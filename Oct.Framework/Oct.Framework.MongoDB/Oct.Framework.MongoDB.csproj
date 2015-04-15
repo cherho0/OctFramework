@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogEntity.cs" />
+    <Compile Include="LogHelper.Mongo.cs" />
     <Compile Include="LogMgr.cs" />
     <Compile Include="MongoDbRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -22,10 +23,20 @@ namespace DbTest
     {
         static void Main(string[] args)
         {
-           // Parallel.For(0, 10, x => Csl.Wl(NOGenter.Instance.GenOrderNo("BZY")));
+            // Parallel.For(0, 10, x => Csl.Wl(NOGenter.Instance.GenOrderNo("BZY")));
+
+
+            TestSku();
 
             Stopwatch sw = new Stopwatch();
             sw.Start();
+
+            DbTest.Oct_FrameworkEntities e = new Oct_FrameworkEntities();
+
+            var list = e.TestTs.ToList();
+
+            sw.Stop();
+            e.Dispose();
             /* EntityContext context = new EntityContext();
               var tss = context.Find<TestTs>(1);
             var ssssss=  ActiveRecordLinq.AsQueryable<TestTs>().First();
@@ -93,25 +104,24 @@ namespace DbTest
             sw.Restart();
             var count111 = dbContext.TestTsContext.Query();
             sw.Stop();
-
             var lis21 = dbContext.GetContext<UserAction>().AsLinqQueryable().ToList();
             var count = dbContext.TestTsContext.AsLinqQueryable().Count();
-           // var a = dbContext.GetContext<TestTs>().AsLinqQueryable().FirstOrDefault();
+            // var a = dbContext.GetContext<TestTs>().AsLinqQueryable().FirstOrDefault();
             sw.Restart();
-            var lis = dbContext.GetContext<TestTs>().AsLinqQueryable().Select(p=>new TestTs(){ DD=p.DD}).ToList();
+            var lis = dbContext.GetContext<TestTs>().AsLinqQueryable().Select(p => new TestTs() { DD = p.DD }).ToList();
             sw.Stop();
             var ss = sw.Elapsed;
             var a = dbContext.GetContext<TestTs>().AsLinqQueryable().FirstOrDefault();
             sw.Restart();
             var lis1 = dbContext.GetContext<TestTs>().AsLinqQueryable().Select(p => new TestTs() { DD = p.DD }).ToList();
-            var stes = dbContext.GetContext<TestTs>().AsLinqQueryable().Select(p => new { p.DD,p.Id} ).ToList();
+            var stes = dbContext.GetContext<TestTs>().AsLinqQueryable().Select(p => new { p.DD, p.Id }).ToList();
             sw.Stop();
             var qq = sw.Elapsed;
-            var order = dbContext.  TestTsContext.AsLinqQueryable().Where(p => p.DD.Contains("ss")).ToList();
+            var order = dbContext.TestTsContext.AsLinqQueryable().Where(p => p.DD.Contains("ss")).ToList();
             var part = dbContext.TestTsContext.AsLinqQueryable().Where(p => p.DD.Contains("ss")).ToList();
 
-            var ret = (from dd in dbContext.GetContext<TestTs>().AsLinqQueryable() where dd.Id == 12 select new TestTs(){Id = dd.Id}).ToList();
-            
+            var ret = (from dd in dbContext.GetContext<TestTs>().AsLinqQueryable() where dd.Id == 12 select new TestTs() { Id = dd.Id }).ToList();
+
             var rets = dbContext.TestTsContext.AsLinqQueryable().OrderBy(p => p.Id).Skip(10).Take(10).ToList();
 
             new TestTs() { DD = "ss" }.Insert();
@@ -122,6 +132,46 @@ namespace DbTest
 
             Console.ReadLine();
 
+        }
+
+
+        private static void TestSku()
+        {
+            var sku1 = new string[] { "1", "2", "3", "4", "5" };
+            var sku2 = new string[] { "a", "b", "c", "d" };
+            var sku3 = new string[] { "8", "16", "32", "64" };
+
+            var skuList = new List<string[]>
+            {
+                sku1,sku2,sku3
+            };
+
+            var ret = TestGet(skuList.ToArray(), 0);
+
+        }
+
+        private static List<string> TestGet(string[][] arr, int from)
+        {
+            if (from == arr.Length - 1)
+            {
+                List<string> strs = new List<string>();
+                for (int k = 0; k < arr[from].Length; k++)
+                {
+                    strs.Add(arr[from][k]);
+                }
+                return strs;
+            }
+            List<string> sList = new List<string>();
+            List<string> strs1 = TestGet(arr, from + 1);
+            for (int i = 0; i < strs1.Count; i++)
+            {
+                var temparr = arr[from];
+                for (int j = 0; j < temparr.Length; j++)
+                {
+                    sList.Add(strs1[i] + "," + temparr[j]);
+                }
+            }
+            return sList;
         }
     }
 }

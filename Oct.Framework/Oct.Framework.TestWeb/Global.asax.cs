@@ -52,16 +52,16 @@ namespace Oct.Framework.TestWeb
             LoginHelper.Instance.LogOut();
         }
 
-        public static SearchEngineTasks SreachTask;
+       // public static SearchEngineTasks SreachTask;
 
         private void CreateSreachIndex()
         {
-            SreachTask = new SearchEngineTasks();
-            SreachTask.AddWork<TestTs>("TestIndex", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestIndex"), DoWorkStyle.PerHour, (t, d) =>
+            //SreachTask = new SearchEngineTasks();
+           /* SreachTask.AddWork<TestTs>("TestIndex", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestIndex"), DoWorkStyle.PerHour, (t, d) =>
             {
                 d.Add(new Field("Id", t.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
                 d.Add(new Field("DD", t.DD, Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.WITH_POSITIONS_OFFSETS));
-            });
+            });*/
             //SreachTask.Start();
             //SreachTask.Do("TestIndex");
             //SreachTask.DoUnitUpdate("TestIndex", "Id", "1");

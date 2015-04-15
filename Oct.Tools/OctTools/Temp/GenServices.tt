@@ -1,0 +1,199 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="Oct.Tools.Plugin.CodeGenerator.Entity" #>
+<#@ parameter type="Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo" name="dt" #>
+using Oct.Framework.Entities;
+using System;
+using System.Collections.Generic;
+using Oct.Framework.DB.Core;
+using <#= dt.NameSpace #>.Entities.Entities;
+<#
+	var pkType = string.Empty;
+	var pkName = string.Empty;
+	var pkFileds = dt.FiledList.Where(d => d.IsPk);
+
+	if (pkFileds.Count() > 0)
+	{
+		pkType = pkFileds.First().CSharpType;	 
+		pkName = pkFileds.First().Name;	 
+		pkName = pkName.Substring(0, 1).ToLower() + pkName.Substring(1, pkName.Length - 1); 
+	}
+#>
+
+namespace <#= dt.NameSpace #>.Services
+{
+    public partial interface I<#= dt.ClassName #><#= dt.ClassNameExtend #>
+    {
+        /// <summary>
+        /// 新增
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        bool Add(<#= dt.ClassName #> entity);
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        bool Modify(<#= dt.ClassName #> entity);
+
+        /// <summary>
+        /// 根据一个实体对象删除
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        bool Delete(<#= dt.ClassName #> entity);
+
+        /// <summary>
+        /// 根据主键删除
+        /// </summary>
+        /// <param name="<#= pkName #>"></param>
+        /// <returns></returns>
+        bool Delete(<#= pkType #> <#= pkName #>);
+
+        /// <summary>
+        /// 根据条件删除 参数键为@拼接的参数，值为参数值
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="paras">参数键为@拼接的参数，值为参数值</param>
+        /// <returns></returns>
+        bool Delete(string where, IDictionary<string, object> paras);
+
+        /// <summary>
+        /// 通过主键获取一个对象
+        /// </summary>
+        /// <param name="<#= pkName #>"></param>
+        /// <returns></returns>
+        <#= dt.ClassName #> GetModel(<#= pkType #> <#= pkName #>);
+
+        /// <summary>
+        /// 通过条件获取对象 参数键为@拼接的参数，值为参数值
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="order"></param>
+        /// <param name="paras">参数键为@拼接的参数，值为参数值</param>
+        /// <returns></returns>
+        List<<#= dt.ClassName #>> GetModels(string where = "", string order = "", params object[] paras);
+
+        /// <summary>
+        /// 分页获取
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="where"></param>
+        /// <param name="order"></param>
+        /// <param name="paras"></param>
+        /// <returns></returns>
+        PageResult<<#= dt.ClassName #>> GetModels(int pageIndex, int pageSize, string where, string order, params object[] paras);
+    }
+
+    public partial class <#= dt.ClassName #><#= dt.ClassNameExtend #> : I<#= dt.ClassName #><#= dt.ClassNameExtend #>
+    {
+        /// <summary>
+        /// 新增
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public bool Add(<#= dt.ClassName #> entity)
+        {
+            using (var context = new DbContext())
+            {
+                context.<#= dt.ClassName #>Context.Add(entity);
+                
+                return context.SaveChanges() > 0;
+            }
+        }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public bool Modify(<#= dt.ClassName #> entity)
+        {
+            using (var context = new DbContext())
+            {
+                context.<#= dt.ClassName #>Context.Update(entity);
+                
+                return context.SaveChanges() > 0;
+            }
+        }
+
+        /// <summary>
+        /// 根据一个实体对象删除
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public bool Delete(<#= dt.ClassName #> entity)
+        {
+            using (var context = new DbContext())
+            {
+                context.<#= dt.ClassName #>Context.Delete(entity);
+                
+                return context.SaveChanges() > 0;
+            }
+        }
+
+        /// <summary>
+        /// 根据主键删除
+        /// </summary>
+        /// <param name="<#= pkName #>"></param>
+        /// <returns></returns>
+        public bool Delete(<#= pkType #> <#= pkName #>)
+        {
+            using (var context = new DbContext())
+            {
+                context.<#= dt.ClassName #>Context.Delete(<#= pkName #>);
+                
+                return context.SaveChanges() > 0;
+            }
+        }
+
+        /// <summary>
+        /// 根据条件删除 参数键为@拼接的参数，值为参数值
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="paras">参数键为@拼接的参数，值为参数值</param>
+        /// <returns></returns>
+        public bool Delete(string @where, IDictionary<string, object> paras)
+        {
+            using (var context = new DbContext())
+            {
+                context.<#= dt.ClassName #>Context.Delete(@where, paras);
+                
+                return context.SaveChanges() > 0;
+            }
+        }
+
+        /// <summary>
+        /// 通过主键获取一个对象
+        /// </summary>
+        /// <param name="<#= pkName #>"></param>
+        /// <returns></returns>
+        public <#= dt.ClassName #> GetModel(<#= pkType #> <#= pkName #>)
+        {
+            using (var context = new DbContext())
+            {
+                return context.<#= dt.ClassName #>Context.GetModel(<#= pkName #>);
+            }
+        }
+
+        public List<<#= dt.ClassName #>> GetModels(string @where = "", string order = "", params object[] paras)
+        {
+            using (var context = new DbContext())
+            {
+                return context.<#= dt.ClassName #>Context.Query(@where, order, paras);
+            }
+        }
+
+        public PageResult<<#= dt.ClassName #>> GetModels(int pageIndex, int pageSize, string @where, string order, params object[] paras)
+        {
+            using (var context = new DbContext())
+            {
+                return context.<#= dt.ClassName #>Context.QueryPage(@where, order, pageIndex, pageSize, paras);
+            }
+        }
+    }
+}

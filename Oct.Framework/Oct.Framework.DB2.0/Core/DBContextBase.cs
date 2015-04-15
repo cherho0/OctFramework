@@ -16,19 +16,19 @@ namespace Oct.Framework.DB.Core
             get { return _currentSessionMgr.GetCurrentSession(); }
         }
 
-        protected DBContextBase()
+        public DBContextBase()
         {
             _connstr = ConfigSettingHelper.GetConnectionStr(ConstArgs.ConnStrName);
             Init();
         }
 
-        protected DBContextBase(string connectionString)
+        public DBContextBase(string connectionString)
         {
             _connstr = connectionString;
             Init();
         }
 
-        protected DBContextBase(DBOperationType dbType)
+        public DBContextBase(DBOperationType dbType)
         {
             if (dbType == DBOperationType.Read)
             {

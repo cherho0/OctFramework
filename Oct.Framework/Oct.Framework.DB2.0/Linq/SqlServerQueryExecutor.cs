@@ -48,15 +48,6 @@ namespace Oct.Framework.DB.Linq
             }
         }
 
-        private string GetKeyName(string fullName, List<string> totalcols)
-        {
-            foreach (var totalcol in totalcols)
-            {
-                fullName += totalcol;
-            }
-            return Oct.Framework.Core.Security.Encypt.MD5(fullName);
-        }
-
         #endregion
 
         #region ExecuteScalar<T>
@@ -69,7 +60,7 @@ namespace Oct.Framework.DB.Linq
         /// <returns></returns>
         public T ExecuteScalar<T>(QueryModel queryModel)
         {
-            SqlServerQueryModelVisitor queryModelVisitor = new SqlServerQueryModelVisitor(_tblName);
+            var queryModelVisitor = new SqlServerQueryModelVisitor(_tblName);
 
             var command = queryModelVisitor.Translate(queryModel);
             return provider.GetResult<T>(command.ToString(), command.PrepareParameter().ToArray());

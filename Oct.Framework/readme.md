@@ -1,7 +1,10 @@
-Base:一些基本的方法都在里面，包括日志，缓存，Session，Cookie等等。
-DB：数据库访问，包括封装的ORM和MongoDb
+Base:一些基本的方法都在里面，包括Log4net日志,Mongo日志，Redis/Memcached缓存，
+负载均衡Session解决方案，Cookie等大多数的公用类库等。
+DB：数据库访问，包括封装的ORM和MongoDb，其中数据库方面使用Emit进行百万数据秒加载的方式。
 IM：包括cs端的即时通信技术和web端的即时通信技术的基类和demo
+SSO：提供针对互联网单点登录的解决方案。
 MessageQueue：是消息队列，将来做秒杀或者抢单，抢座等活动都会用到。
 MVC：MVC的基本框架要使用的基类和过滤器
 SearchEngine：搜索引擎，提供索引创建，分词，和数据查询搜索等。
+WinServices--Windows服务总线：基础服务运行总线，定时服务，轮训服务，呼叫服务等的支持，一键部署，插件模式快速开发
 Test：测试的Demo，并且有对权限的整合。

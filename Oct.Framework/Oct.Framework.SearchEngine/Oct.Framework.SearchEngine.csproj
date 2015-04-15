@@ -64,9 +64,9 @@
       <Project>{61839D66-763D-4B91-9C3C-687B8AD40FD6}</Project>
       <Name>Oct.Framework.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Oct.Framework.DB\Oct.Framework.DB.csproj">
-      <Project>{9FA1EBD6-3362-4225-AA78-6EB95FBFAE93}</Project>
-      <Name>Oct.Framework.DB</Name>
+    <ProjectReference Include="..\Oct.Framework.DB2.0\Oct.Framework.DB2.0.csproj">
+      <Project>{985c505b-9b97-49ed-8a70-16b7e38c3ad1}</Project>
+      <Name>Oct.Framework.DB2.0</Name>
     </ProjectReference>
     <ProjectReference Include="..\Oct.Framework.Entities\Oct.Framework.Entities.csproj">
       <Project>{DA2C1635-3011-403D-809E-C1B411A391A9}</Project>

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Oct.Framework.DB.Attrbuites;
+﻿using Oct.Framework.DB.Attrbuites;
 using Oct.Framework.DB.Base;
 
 namespace DbTest.Entities
@@ -14,6 +8,7 @@ namespace DbTest.Entities
     {
         [PrimaryKey, Identity]
         public int Id { get; set; }
+
         public string DD { get; set; }
     }
 }

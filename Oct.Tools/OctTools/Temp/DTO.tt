@@ -1,0 +1,49 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="Oct.Tools.Plugin.CodeGenerator.Entity" #>
+<#@ parameter type="Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo" name="dt" #>
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace <#= dt.NameSpace #>.Models
+{
+	[Serializable]
+	public partial class <#= dt.ClassName #><#= dt.ClassNameExtend #>
+	{ 
+		#region	属性
+		<#
+			foreach(FiledInfo filed in dt.FiledList) 
+			{		
+				var attr = new StringBuilder();
+
+				if (!filed.IsAllowNull)
+					attr.AppendFormat("\t\t[Required(ErrorMessage = \"{0}不能为空！\")]", filed.Description);
+
+				if (filed.CSharpType.ToLower() == "string")
+				{
+					if(!string.IsNullOrEmpty(attr.ToString())) 
+						attr.Append("\r\n");
+			
+					if(filed.Length != -1)
+						attr.AppendFormat("\t\t[StringLength({0}, ErrorMessage = \"{1}不能超过{0}个字符！\")]", filed.Length, filed.Description);
+				}
+		#>
+
+		/// <summary>
+		/// <#= filed.GetDisplayName() #>
+		/// </summary>
+		[Display(Name = "<#= filed.GetDisplayName() #>")]
+<#  if(!string.IsNullOrEmpty(attr.ToString())) { #>
+<#= attr.ToString() #>
+<# } #>
+		public <#= filed.CSharpType + " " + filed.Name #>
+		{
+			get;
+			set;
+		}
+		<# } #>
+
+		#endregion	
+	}
+}

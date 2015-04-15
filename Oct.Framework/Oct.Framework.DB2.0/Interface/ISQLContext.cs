@@ -128,6 +128,15 @@ namespace Oct.Framework.DB.Interface
         IDataReader ExecuteQueryReader(string sql, params SqlParameter[] cmdParms);
 
         /// <summary>
+        /// 返回实体对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="cmdParms"></param>
+        /// <returns></returns>
+        List<T> ExecuteQuery<T>(string sql, params SqlParameter[] cmdParms);
+
+        /// <summary>
         ///     查询一组数据的动态结果集
         /// </summary>
         /// <param name="sql"></param>

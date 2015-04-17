@@ -31,12 +31,12 @@ namespace DbTest
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
-            DbTest.Oct_FrameworkEntities e = new Oct_FrameworkEntities();
+           /* DbTest.Oct_FrameworkEntities e = new Oct_FrameworkEntities();
 
             var list = e.TestTs.ToList();
 
             sw.Stop();
-            e.Dispose();
+            e.Dispose();*/
             /* EntityContext context = new EntityContext();
               var tss = context.Find<TestTs>(1);
             var ssssss=  ActiveRecordLinq.AsQueryable<TestTs>().First();
@@ -84,7 +84,12 @@ namespace DbTest
              sw.Stop();*/
 
             DbContext dbContext = new DbContext("User id=Octopus_Framework;Password=JSJQH8819!(K;Server=192.168.2.20;database=Oct_Framework;");
-
+            var dd = new TestTs()
+            {
+                DD = "ss"
+            };
+            dbContext.TestTsContext.Add(dd);
+            var ddd = dd;
             /*  var ds = dbContext.SQLContext.AsCompositeQuery()
                   .Fetch<TestTs>()
                   //第一个
@@ -101,7 +106,7 @@ namespace DbTest
             // GenDb.Gen(Assembly.GetAssembly(typeof(DbContext)),dbContext.SQLContext);
             //var sql = GenTbl.Gen<TestTs>(dbContext.SQLContext);
             // var m = dbContext.TestTsContext.GetModel(1);
-            sw.Restart();
+            /*sw.Restart();
             var count111 = dbContext.TestTsContext.Query();
             sw.Stop();
             var lis21 = dbContext.GetContext<UserAction>().AsLinqQueryable().ToList();
@@ -129,7 +134,7 @@ namespace DbTest
             new TestTs() { Id = 1 }.Delete();
             dbContext.SaveChanges();
             // Console.WriteLine("Oct.DB :" + sql);
-
+            */
             Console.ReadLine();
 
         }

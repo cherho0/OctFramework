@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Data.Odbc;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,12 @@ using Oct.Framework.Core.Common;
 using Oct.Framework.Core.Log;
 using Oct.Framework.DB.Core;
 using Oct.Framework.DB.DynamicObj;
+using Oct.Framework.DB.Emit;
+using Oct.Framework.DB.Emit.MappingConfiguration;
+using Oct.Framework.DB.Emit.MappingConfiguration.MappingOperations;
+using Oct.Framework.DB.Emit.Utils;
 using Oct.Framework.DB.Interface;
+using Oct.Framework.DB.Linq;
 using Oct.Framework.DB.Utils;
 
 namespace Oct.Framework.DB.Base
@@ -56,6 +62,19 @@ namespace Oct.Framework.DB.Base
             }
         }
 
+        private string Identity
+        {
+            get
+            {
+                var idd = EntitiesProxyHelper.GetProxyInfo<T>().IdentitesProp;
+                if (idd == null)
+                {
+                    return "";
+                }
+                return idd;
+            }
+        }
+
         public void EntryUpdateStack()
         {
             var cc = _tracker.GetChanges(this);
@@ -91,34 +110,65 @@ namespace Oct.Framework.DB.Base
         ///     新增SQL
         /// </summary>
         /// <returns></returns>
-        internal IOctDbCommand GetInsertCmd()
+        internal SqlCommand GetInsertCmd()
         {
-            var changes = _tracker.GetChanges(this);
-            string insertSQl = "insert into {0} ({1}) values ({2}) ";
+            IMappingConfigurator config = new AddDbCommandsMappingConfig(
+                  null,
+                  null,
+                  "insertop_inc__exc_"
+          );
 
-            var colBuilder = new StringBuilder();
-            var valBuilder = new StringBuilder();
-            var parameters = new Dictionary<string, object>();
-            int idx = 0;
-            foreach (var changedProp in changes)
-            {
-                if (idx == changes.Length - 1)
-                {
-                    colBuilder.Append(changedProp.name + "");
-                    valBuilder.Append("@" + changedProp.name + "");
-                    parameters.Add("@" + changedProp.name, changedProp.value);
-                }
-                else
-                {
-                    colBuilder.Append(changedProp.name + ",");
-                    valBuilder.Append("@" + changedProp.name + ",");
-                    parameters.Add("@" + changedProp.name, changedProp.value);
-                }
-                idx++;
-            }
-            var sql = string.Format(insertSQl, TableName, colBuilder, valBuilder);
-            IOctDbCommand cmd = new OctDbCommand(sql, parameters);
+            var mapper = ObjectMapperManager.DefaultInstance.GetMapperImpl(
+                this.GetType(),
+                typeof(DbCommand),
+                config
+            );
+            SqlCommand cmd = new SqlCommand();
+            string[] fields = mapper.StroredObjects.OfType<SrcReadOperation>().Select(m => m.Source.MemberInfo.Name).ToArray();
+
+            var cmdStr =
+                "INSERT INTO "
+                + TableName +
+                "("
+                + fields
+                    .Select(f => f).Where(f => f != Identity)
+                    .ToCSV(",")
+                + ") VALUES ("
+                + fields
+                    .Where(f => f != Identity).Select(f => Constants.ParameterPrefix + f)
+                    .ToCSV(",")
+                + ")"
+                ;
+            cmd.CommandText = cmdStr;
+            cmd.CommandType = System.Data.CommandType.Text;
+            mapper.Map(this, cmd, null);
             return cmd;
+            /*  var changes = _tracker.GetChanges(this);
+              string insertSQl = "insert into {0} ({1}) values ({2}) ";
+
+              var colBuilder = new StringBuilder();
+              var valBuilder = new StringBuilder();
+              var parameters = new Dictionary<string, object>();
+              int idx = 0;
+              foreach (var changedProp in changes)
+              {
+                  if (idx == changes.Length - 1)
+                  {
+                      colBuilder.Append(changedProp.name + "");
+                      valBuilder.Append("@" + changedProp.name + "");
+                      parameters.Add("@" + changedProp.name, changedProp.value);
+                  }
+                  else
+                  {
+                      colBuilder.Append(changedProp.name + ",");
+                      valBuilder.Append("@" + changedProp.name + ",");
+                      parameters.Add("@" + changedProp.name, changedProp.value);
+                  }
+                  idx++;
+              }
+              var sql = string.Format(insertSQl, TableName, colBuilder, valBuilder);*/
+            //IOctDbCommand retcmd = new OctDbCommand(cmdStr, cmd.Parameters);
+            //return retcmd;
         }
 
         /// <summary>

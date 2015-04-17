@@ -52,11 +52,11 @@ namespace Oct.Framework.WinServiceKernel.HeartBeat
             _thread.Abort();
         }
 
-        public int AddWork(Action action, int delay, string lgcName)
+        public int AddWork(Action action, int delay, string lgcName, bool firstDo)
         {
             lock (_o)
             {
-                HeartWork hw = new HeartWork(action, delay, lgcName);
+                HeartWork hw = new HeartWork(action, delay, lgcName,firstDo);
                 _works.Add(hw);
                 return hw.Id;
             }

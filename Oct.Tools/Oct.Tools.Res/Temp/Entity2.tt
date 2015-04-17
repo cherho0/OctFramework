@@ -27,10 +27,12 @@ namespace <#= dt.NameSpace #>.Entities
 		<#
 			foreach(FiledInfo filed in dt.FiledList) 
 			{	
-
+				var nullFlag = filed.CommonType.IsValueType && filed.IsAllowNull ? "?": string.Empty;
               
 		#>
-
+		/// <summary>
+		/// <#= filed.GetDisplayName() #>
+		/// </summary>
 		<#
 		if (pkName == filed.Name)
         {#>
@@ -40,7 +42,7 @@ namespace <#= dt.NameSpace #>.Entities
         {#>
 		 [Identity]
         <#}	 #>
-		public <#= filed.CSharpType + " " + filed.Name #>
+		public <#= filed.CSharpType +   nullFlag + " "  + filed.Name #>
 		{
 			get;
 			set;

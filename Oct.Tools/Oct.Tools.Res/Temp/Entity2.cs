@@ -90,15 +90,22 @@ namespace Oct.Tools.Res.Temp
 
 			foreach(FiledInfo filed in dt.FiledList) 
 			{	
-
+				var nullFlag = filed.CommonType.IsValueType && filed.IsAllowNull ? "?": string.Empty;
               
 		
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t");
+            this.Write("\t\t/// <summary>\r\n\t\t/// ");
             
             #line 34 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\Entity2.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(filed.GetDisplayName()));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t/// </summary>\r\n\t\t");
+            
+            #line 36 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\Entity2.tt"
 
 		if (pkName == filed.Name)
         {
@@ -107,14 +114,14 @@ namespace Oct.Tools.Res.Temp
             #line hidden
             this.Write("\t\t [PrimaryKey]\r\n        ");
             
-            #line 38 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\Entity2.tt"
+            #line 40 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\Entity2.tt"
 }	 
             
             #line default
             #line hidden
             this.Write("\t\t");
             
-            #line 39 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\Entity2.tt"
+            #line 41 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\Entity2.tt"
 if (identifyFiled!= null && identifyFiled.Name == filed.Name)
         {
             
@@ -122,21 +129,21 @@ if (identifyFiled!= null && identifyFiled.Name == filed.Name)
             #line hidden
             this.Write("\t\t [Identity]\r\n        ");
             
-            #line 42 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\Entity2.tt"
+            #line 44 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\Entity2.tt"
 }	 
             
             #line default
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 43 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\Entity2.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(filed.CSharpType + " " + filed.Name));
+            #line 45 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\Entity2.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(filed.CSharpType +   nullFlag + " "  + filed.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t{\r\n\t\t\tget;\r\n\t\t\tset;\r\n\t\t}\r\n\r\n\t\t");
             
-            #line 49 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\Entity2.tt"
+            #line 51 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\Entity2.tt"
  } 
             
             #line default

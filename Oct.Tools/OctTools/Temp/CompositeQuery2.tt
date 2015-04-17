@@ -3,6 +3,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="Oct.Tools.Plugin.CodeGenerator.Entity" #>
 <#@ parameter type="Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo" name="dt" #>
+using System;
 using Oct.Framework.DB.Attrbuites;
 using Oct.Framework.DB.Base;
 

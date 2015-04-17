@@ -3,6 +3,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="Oct.Tools.Plugin.CodeGenerator.Entity" #>
 <#@ parameter type="Oct.Tools.Plugin.CodeGenerator.Entity.CodeBaseInfo" name="dt" #>
+using System;
 using Oct.Framework.DB.Attrbuites;
 using Oct.Framework.DB.Base;
 
@@ -26,10 +27,12 @@ namespace <#= dt.NameSpace #>.Entities
 		<#
 			foreach(FiledInfo filed in dt.FiledList) 
 			{	
-
+				var nullFlag = filed.CommonType.IsValueType && filed.IsAllowNull ? "?": string.Empty;
               
 		#>
-
+		/// <summary>
+		/// <#= filed.GetDisplayName() #>
+		/// </summary>
 		<#
 		if (pkName == filed.Name)
         {#>
@@ -39,7 +42,7 @@ namespace <#= dt.NameSpace #>.Entities
         {#>
 		 [Identity]
         <#}	 #>
-		public <#= filed.CSharpType + " " + filed.Name #>
+		public <#= filed.CSharpType +   nullFlag + " "  + filed.Name #>
 		{
 			get;
 			set;

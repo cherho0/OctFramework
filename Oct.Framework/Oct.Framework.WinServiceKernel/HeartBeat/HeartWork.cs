@@ -15,6 +15,7 @@ namespace Oct.Framework.WinServiceKernel.HeartBeat
         private string _logicName;
         private long _lastCostTime;
         private Stopwatch _sw;
+        private bool _firstDo;
 
         //最后一次消耗时间
         public long LastCostTime
@@ -28,8 +29,9 @@ namespace Oct.Framework.WinServiceKernel.HeartBeat
             get { return _sw.ElapsedMilliseconds; }
         }
 
-        public HeartWork(Action action, int dotime, string logicName = "")
+        public HeartWork(Action action, int dotime, string logicName = "", bool firstDo = false)
         {
+            _firstDo = firstDo;
             _id = Seed.Instance.NewId();
             _action = action;
             _baseTime = dotime;
@@ -48,6 +50,14 @@ namespace Oct.Framework.WinServiceKernel.HeartBeat
                 if (dealtime == DateTime.MinValue)
                 {
                     dealtime = DateTime.Now;
+                    if (_firstDo)
+                    {
+                        _sw.Restart();
+                        _action();
+                        _sw.Stop();
+                        _lastCostTime = _sw.ElapsedMilliseconds;
+                        _sw.Reset();
+                    }
                     return;
                 }
                 if ((DateTime.Now - dealtime).TotalMilliseconds >= _baseTime)

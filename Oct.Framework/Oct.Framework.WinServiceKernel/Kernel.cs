@@ -49,9 +49,9 @@ namespace Oct.Framework.WinServiceKernel
             return _trunkBeat.Count;
         }
 
-        public int AddTimer(Action action, int delay, string lgcName = "")
+        public int AddTimer(Action action, int delay, string lgcName = "",bool firstDo = false)
         {
-            return _trunkBeat.AddWork(action, delay, lgcName);
+            return _trunkBeat.AddWork(action, delay, lgcName,firstDo);
         }
 
         public int LgcTaskCount(string lgcName)

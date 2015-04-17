@@ -28,49 +28,50 @@ namespace Oct.Tools.Res.Temp
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using Oct.Framework.DB.Attrbuites;\r\nusing Oct.Framework.DB.Base;\r\n\r\nnamespace ");
+            this.Write("using System;\r\nusing Oct.Framework.DB.Attrbuites;\r\nusing Oct.Framework.DB.Base;\r\n" +
+                    "\r\nnamespace ");
             
-            #line 9 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
+            #line 10 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.NameSpace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\t[Serializable]\r\n\t [Entity(@\"");
             
-            #line 12 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
+            #line 13 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.Sql));
             
             #line default
             #line hidden
             this.Write("\",true)]\r\n\tpublic partial class ");
             
-            #line 13 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
+            #line 14 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             
-            #line 13 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
+            #line 14 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassNameExtend));
             
             #line default
             #line hidden
             this.Write(" : BaseEntity<");
             
-            #line 13 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
+            #line 14 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassName));
             
             #line default
             #line hidden
             
-            #line 13 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
+            #line 14 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dt.ClassNameExtend));
             
             #line default
             #line hidden
             this.Write(">\r\n\t{ \r\n\t\r\n\t\t\t");
             
-            #line 16 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
+            #line 17 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
 
 			var pkName = string.Empty;
 			var pkFileds = dt.FiledList.Where(d => d.IsPk);
@@ -84,7 +85,7 @@ namespace Oct.Tools.Res.Temp
             #line hidden
             this.Write("\r\n\t\t#region\t属性\r\n\t\t");
             
-            #line 26 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
+            #line 27 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
 
 			foreach(FiledInfo filed in dt.FiledList) 
 			{		
@@ -94,7 +95,7 @@ namespace Oct.Tools.Res.Temp
             #line hidden
             this.Write("\t\t");
             
-            #line 30 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
+            #line 31 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
 
 		if (pkName == filed.Name)
         {
@@ -103,21 +104,21 @@ namespace Oct.Tools.Res.Temp
             #line hidden
             this.Write("\t\t [PrimaryKey]\r\n        ");
             
-            #line 34 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
+            #line 35 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
 }	 
             
             #line default
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 35 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
+            #line 36 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.CSharpType + " " + filed.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t{\r\n\t\t\tget;\r\n\t\t\tset;\r\n\t\t}\r\n\t\t");
             
-            #line 40 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
+            #line 41 "D:\project\Oct.Frame\Oct.Tools\Oct.Tools.Res\Temp\CompositeQuery2.tt"
  } 
             
             #line default

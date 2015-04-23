@@ -83,10 +83,18 @@ namespace Oct.Framework.DB.Core
                     }
                     foreach (IDbCommand dbCommand in _cmds)
                     {
-                        dbCommand.Connection = _conn;
-                        dbCommand.Transaction = _trans;
-                        int rows = dbCommand.ExecuteNonQuery();
-                        execCount += rows;
+                        try
+                        {
+                            dbCommand.Connection = _conn;
+                            dbCommand.Transaction = _trans;
+                            int rows = dbCommand.ExecuteNonQuery();
+                            execCount += rows;
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new Exception("sql:" + dbCommand.CommandText, ex);
+                        }
+
                     }
                     _trans.Commit();
                 }

@@ -15,7 +15,7 @@ namespace Oct.Framework.Core.Security
         public static string MD5(string str)
         {
             //Î¢Èímd5·½·¨²Î¿¼return FormsAuthentication.HashPasswordForStoringInConfigFile(str, "md5");
-            byte[] b = Encoding.Default.GetBytes(str);
+            byte[] b = Encoding.UTF8.GetBytes(str);
             b = new MD5CryptoServiceProvider().ComputeHash(b);
             string ret = "";
             for (int i = 0; i < b.Length; i++)

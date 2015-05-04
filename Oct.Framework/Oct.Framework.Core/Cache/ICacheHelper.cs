@@ -77,8 +77,22 @@ namespace Oct.Framework.Core.Cache
         /// <param name="key"></param>
         /// <returns></returns>
         bool Remove(string key);
+
+        /// <summary>
+        /// 移除这个前缀的所有对象
+        /// </summary>
+        /// <param name="cacheKeyPrefix"></param>
         void RemoveAll(string cacheKeyPrefix);
+
+        /// <summary>
+        /// 移除所有对象
+        /// </summary>
+        /// <param name="keys"></param>
         void RemoveAll(List<string> keys);
+
+        /// <summary>
+        /// 全部删除
+        /// </summary>
         void FlushAll();
         /// <summary>
         /// 仅redis支持

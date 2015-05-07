@@ -53,22 +53,22 @@ namespace Oct.Framework.TestWeb.Controllers
                 return Index();
             }
             var page = p ?? 1;
-            var wapper = new SearchEngineWapper(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestIndex"));
-            wapper.AddKey("DD");
-            wapper.AddPreviewKey("DD");
-            wapper.AddSort("Id", SearchEngineWapper.INT,true);
-            wapper.Search(segment, (page - 1) * 10, 10);
+            /* var wapper = new SearchEngineWapper(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestIndex"));
+             wapper.AddKey("DD");
+             wapper.AddPreviewKey("DD");
+             wapper.AddSort("Id", SearchEngineWapper.INT,true);
+             wapper.Search(segment, (page - 1) * 10, 10);
 
-            var sret = wapper.Result;
-            var rets = segment.Segment();
-            var ret = string.Join(";", rets);
-            ViewBag.s = segment;
-            ViewBag.sr = ret;
-            ViewBag.sret = sret;
-            ViewBag.Cost = wapper.Cost.ToString();
-
-            var pm = Kernel.CreatePageModel(10, page, wapper.Total);
-            ViewBag.Pm = pm;
+             var sret = wapper.Result;
+             var rets = segment.Segment();
+             var ret = string.Join(";", rets);
+             ViewBag.s = segment;
+             ViewBag.sr = ret;
+             ViewBag.sret = sret;
+             ViewBag.Cost = wapper.Cost.ToString();
+          
+             var pm = Kernel.CreatePageModel(10, page, wapper.Total); 
+            ViewBag.Pm = pm; */
             return View();
         }
 

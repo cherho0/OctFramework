@@ -54,6 +54,7 @@
     <Compile Include="CreateIndexTask.cs" />
     <Compile Include="DoWorkStyle.cs" />
     <Compile Include="IWork.cs" />
+    <Compile Include="LuceneFactory.cs" />
     <Compile Include="PanGuSegment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchEngineTasks.cs" />
